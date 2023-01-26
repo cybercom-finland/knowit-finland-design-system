@@ -1,11 +1,61 @@
 import React from 'react';
-import './button.css';
+import styled from 'styled-components';
+import { variant } from 'styled-system';
+import { colors, spacing, typography } from '../shared/styles';
 
+/**
+ * Internal component styling
+ */
+const ButtonComponent = styled.button<Omit<ButtonProps, 'label'>>`
+  font-family: ${typography.font};
+  font-weight: ${typography.weight};
+  border: 0;
+  border-radius: ${spacing.borderRadius};
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  ${variant({
+    prop: 'size',
+    variants: {
+      medium: {
+        fontSize: typography.size.medium, padding: spacing.padding.medium
+      },
+      large: {
+        fontSize: typography.size.large, padding: spacing.padding.large
+      },
+      small: {
+        fontSize: typography.size.small, padding: spacing.padding.small
+      }
+    }
+  })}
+  ${({ backgroundColor }) => variant({
+    variants: {
+      primary: {
+        color: 'white', backgroundColor: backgroundColor || colors.primary.main
+      },
+      default: {
+        color: '#333', backgroundColor: backgroundColor || "transparent", boxShadow: 'rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset'
+      }
+    }
+  })}
+`;
+
+/**
+ * Internal default properties
+ */
+ButtonComponent.defaultProps = {
+  size: 'medium',
+  variant: 'default'
+}
+
+/**
+ * External properties
+ */
 interface ButtonProps {
   /**
    * Is this the principal call to action on the page?
    */
-  primary?: boolean;
+  variant?: 'primary' | 'default'
   /**
    * What background color to use
    */
@@ -25,24 +75,17 @@ interface ButtonProps {
 }
 
 /**
- * Primary UI component for user interaction
+ * Exported component
  */
 export const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
   label,
   ...props
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
   return (
-    <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
+    <ButtonComponent
       {...props}
     >
       {label}
-    </button>
-  );
+    </ButtonComponent>
+  )
 };
