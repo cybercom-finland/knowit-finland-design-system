@@ -30,9 +30,13 @@ export const bodyStyles = css`
     font-weight: ${typography.weight.bold};
     line-height: ${typography.lineHeight.heading4};
   }
-  caption, label {
+  caption {
     font-size: ${typography.size.caption};
     line-height: ${typography.lineHeight.caption};
+  }
+  label {
+    font-size: ${typography.size.paragraph2};
+    line-height: ${typography.lineHeight.paragraph2};
   }
   p {
     font-size: ${typography.size.paragraph};
