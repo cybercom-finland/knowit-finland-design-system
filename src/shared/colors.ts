@@ -7,7 +7,7 @@ export const colors = {
     digitalBlack900: '#18090E',
     sand: '#E4E1DB',
     pebble: '#F1F0ED',
-    white: '#FFFFFF'
+    white: '#FFFFFF',
   },
   additional: {
     forest: '#4B6455',
@@ -15,7 +15,7 @@ export const colors = {
     mint: '#DBEEDE',
     leather: '#7C3647',
     flamingo: '#FAC0B1',
-    melon: '#FCDFD8'
+    melon: '#FCDFD8',
   },
   semantic: {
     success: '#55C436',
@@ -29,6 +29,6 @@ export const colors = {
     danger800: '#A01B1B',
     info: '#0047FF',
     info200: '#B5C9FF',
-    info800: '#001C64'
-  }
+    info800: '#001C64',
+  },
 };

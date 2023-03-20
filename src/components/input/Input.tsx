@@ -51,7 +51,8 @@ const InputBase = styled.input<InputProps>`
   &:hover {
     border-width: 2px;
   }
-  &:active, &:focus {
+  &:active,
+  &:focus {
     border-width: 3px;
     outline: none;
   }
@@ -60,15 +61,19 @@ const InputBase = styled.input<InputProps>`
     border-width: 1px !important;
     color: ${colors.base.digitalBlack300};
   }
-  ${({ error }) => error && css`border-color: ${colors.semantic.danger} !important;`}
+  ${({ error }) =>
+    error &&
+    css`
+      border-color: ${colors.semantic.danger} !important;
+    `}
 `;
 
 /**
  * Internal default properties
  */
 InputBase.defaultProps = {
-  type: 'text'
-}
+  type: 'text',
+};
 
 const FilledInput = styled(InputBase)`
   background: ${colors.base.pebble};
@@ -84,13 +89,18 @@ const OutlinedInput = styled(InputBase)`
 /**
  * Label and helper text component
  */
-const Label = styled.label<{ disabled?: boolean; error?: boolean; }>`
+const Label = styled.label<{ disabled?: boolean; error?: boolean }>`
   margin: ${spacing([0.75, 0])};
   display: block;
-  ${({ disabled, error }) => error
-    ? css`color: ${colors.semantic.danger};`
-    : disabled
-      ? css`color: ${colors.base.digitalBlack300};`
+  ${({ disabled, error }) =>
+    error
+      ? css`
+          color: ${colors.semantic.danger};
+        `
+      : disabled
+      ? css`
+          color: ${colors.base.digitalBlack300};
+        `
       : ''}
 `;
 
@@ -113,7 +123,14 @@ interface WrapperProps {
  */
 const Wrapper = styled.div<WrapperProps>`
   margin: ${({ margin }) => spacing(margin)};
-  ${({ width }) => width ? css`width: ${width}px;` : css`flex: 1;`};
+  ${({ width }) =>
+    width
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          flex: 1;
+        `};
 `;
 
 /**
@@ -155,9 +172,17 @@ export const Input = ({
   }
   return (
     <Wrapper margin={margin} width={width}>
-      {label && <Label disabled={disabled} error={error}>{label}</Label>}
-      <InputComponent disabled={disabled} error={error} {...props}/>
-      {helperText && <Label disabled={disabled} error={error}>{helperText}</Label>}
+      {label && (
+        <Label disabled={disabled} error={error}>
+          {label}
+        </Label>
+      )}
+      <InputComponent disabled={disabled} error={error} {...props} />
+      {helperText && (
+        <Label disabled={disabled} error={error}>
+          {helperText}
+        </Label>
+      )}
     </Wrapper>
-  )
+  );
 };

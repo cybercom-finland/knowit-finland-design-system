@@ -20,7 +20,7 @@ export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
   placeholder: 'Default input',
-  width: 370
+  width: 370,
 };
 
 export const WithText = Template.bind({});
@@ -29,5 +29,5 @@ WithText.args = {
   placeholder: 'Input with text',
   label: 'Label text',
   helperText: 'Helper text',
-  width: 370
+  width: 370,
 };

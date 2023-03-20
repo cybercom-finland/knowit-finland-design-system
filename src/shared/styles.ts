@@ -8,7 +8,10 @@ export const spacing = (value: number | number[] | undefined): string => {
     return '0';
   }
   if (Array.isArray(value)) {
-    return value.slice(0,4).map(v => `${v * 0.5}rem`).join(' ');
+    return value
+      .slice(0, 4)
+      .map((v) => `${v * 0.5}rem`)
+      .join(' ');
   }
   return `${value * 0.5}rem`;
 };
@@ -30,7 +33,7 @@ export const typography = {
     heading1: '70px',
     heading2: '40px',
     heading3: '32px',
-    heading4: '26px'
+    heading4: '26px',
   },
   lineHeight: {
     caption: '16px',
@@ -39,6 +42,6 @@ export const typography = {
     heading1: '80px',
     heading2: '46px',
     heading3: '37px',
-    heading4: '30px'
-  }
+    heading4: '30px',
+  },
 };

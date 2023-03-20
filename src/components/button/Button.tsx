@@ -37,19 +37,19 @@ const ButtonBase = styled.button<InnerProps>`
       medium: {
         padding: spacing(2),
         fontSize: typography.size.paragraph2,
-        lineHeight: typography.lineHeight.paragraph2
+        lineHeight: typography.lineHeight.paragraph2,
       },
       large: {
         padding: spacing(2),
         fontSize: typography.size.paragraph,
-        lineHeight: typography.lineHeight.paragraph
+        lineHeight: typography.lineHeight.paragraph,
       },
       small: {
         padding: spacing(1.5),
         fontSize: typography.size.caption,
-        lineHeight: typography.lineHeight.caption
-      }
-    }
+        lineHeight: typography.lineHeight.caption,
+      },
+    },
   })}
 `;
 ButtonBase.defaultProps = {
@@ -60,7 +60,8 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
   border: none;
   color: ${colors.base.white};
   background-color: ${colors.base.digitalBlack900};
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: ${colors.base.digitalBlack};
   }
   &:disabled {
@@ -71,9 +72,10 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
 
 const OutlinedButton = styled(ButtonBase)<InnerProps>`
   color: ${colors.base.digitalBlack900};
-  background-color: ${colors.base.white};;
+  background-color: ${colors.base.white};
   border: 2px solid ${colors.base.digitalBlack900};
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     border-width: 3px;
   }
   &:disabled {
@@ -86,7 +88,9 @@ const TextButton = styled(ButtonBase)<InnerProps>`
   border: none;
   color: ${colors.base.digitalBlack900};
   background-color: transparent;
-  &:hover, &:focus, &:active {
+  &:hover,
+  &:focus,
+  &:active {
     border-bottom: 2px solid ${colors.base.digitalBlack};
     color: ${colors.base.digitalBlack};
   }
@@ -102,7 +106,7 @@ interface Props extends InnerProps {
   /**
    * Layout variant of the button
    */
-  variant?: 'filled' | 'outlined' | 'text'
+  variant?: 'filled' | 'outlined' | 'text';
   /**
    * Button label text
    */
@@ -149,5 +153,5 @@ export const Button = ({
       {label}
       {endIcon}
     </ButtonComponent>
-  )
+  );
 };

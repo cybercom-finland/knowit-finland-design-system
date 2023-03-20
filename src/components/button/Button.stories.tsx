@@ -8,8 +8,7 @@ export default {
   title: 'Example/Button',
   component: Button,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-  },
+  argTypes: {},
 } as ComponentMeta<typeof Button>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -37,7 +36,7 @@ Text.args = {
 export const Disabled = Template.bind({});
 Disabled.args = {
   text: 'Button',
-  disabled: true
+  disabled: true,
 };
 
 export const Large = Template.bind({});

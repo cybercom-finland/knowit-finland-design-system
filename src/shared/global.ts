@@ -2,10 +2,13 @@ import { createGlobalStyle, css } from 'styled-components';
 import { colors, typography } from '.';
 
 export const bodyStyles = css`
-  font-family: "${typography.font}", sans-serif;
+  font-family: '${typography.font}', sans-serif;
   color: ${colors.base.digitalBlack};
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     margin: 0;
     padding: 0;
   }
