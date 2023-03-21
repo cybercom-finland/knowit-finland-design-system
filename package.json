@@ -8,14 +8,11 @@
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.9",
     "styled-system": "^5.1.5",
-    "typescript": "^4.9.4",
     "web-vitals": "^3.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "lint:eslint": "eslint --fix src",
+    "lint:prettier": "prettier --write \"src/**/*.tsx\" --loglevel warn ",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -78,6 +75,6 @@
     "prettier": "^2.8.6",
     "prop-types": "^15.8.1",
     "storybook-addon-designs": "^6.3.1",
-    "webpack": "^5.76.2"
+    "typescript": "^4.9.5"
   }
 }
