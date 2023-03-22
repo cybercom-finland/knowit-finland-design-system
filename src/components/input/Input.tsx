@@ -109,10 +109,6 @@ const Label = styled.label<{ disabled?: boolean; error?: boolean }>`
  */
 interface WrapperProps {
   /**
-   * Margin as defined spacing
-   */
-  margin?: number | number[];
-  /**
    * Wrapper width in px, if undefined the component takes width of containing element
    */
   width?: number;
@@ -122,7 +118,6 @@ interface WrapperProps {
  * Wrap all components with div
  */
 const Wrapper = styled.div<WrapperProps>`
-  margin: ${({ margin }) => spacing(margin)};
   ${({ width }) =>
     width
       ? css`
@@ -157,7 +152,6 @@ export const Input = ({
   helperText,
   disabled,
   error,
-  margin,
   width,
   ...props
 }: Props) => {
@@ -171,7 +165,7 @@ export const Input = ({
       break;
   }
   return (
-    <Wrapper margin={margin} width={width}>
+    <Wrapper width={width}>
       {label && (
         <Label disabled={disabled} error={error}>
           {label}
