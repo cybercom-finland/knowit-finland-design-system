@@ -1,5 +1,5 @@
-import { Button } from './button/Button';
-import { Input } from './input/Input';
-import { Typography } from './typography/Typography';
+import { Button } from './Button/Button';
+import { Input } from './Input/Input';
+import { Typography } from './Typography/Typography';
 
 export { Button, Input, Typography };

@@ -15,10 +15,6 @@ interface InnerProps {
    * How large should the button be?
    */
   size?: 'small' | 'medium' | 'large';
-  /**
-   * Margin as defined spacing
-   */
-  margin?: number | number[];
 }
 
 /**
@@ -30,7 +26,6 @@ const ButtonBase = styled.button<InnerProps>`
   cursor: pointer;
   display: inline-block;
   line-height: 1;
-  margin: ${({ margin }) => spacing(margin)};
   ${variant({
     prop: 'size',
     variants: {
