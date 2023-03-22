@@ -21,6 +21,24 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
+/**
+ * Outlined
+ */
+export const Outlined = Template.bind({});
+Outlined.args = {
+  variant: 'outlined',
+};
+
+Outlined.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16265&t=mzQvfJTebebtBWNj-4',
+  },
+};
+
+/**
+ * Filled
+ */
 export const Filled = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Filled.args = {
@@ -30,22 +48,13 @@ Filled.args = {
 Filled.parameters = {
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=375-3586&t=4qVg8unLTxXuh6Ql-4',
+    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16264&t=mzQvfJTebebtBWNj-4',
   },
 };
 
-export const Outlined = Template.bind({});
-Outlined.args = {
-  variant: 'outlined',
-};
-
-Outlined.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=375-3590&t=mzQvfJTebebtBWNj-4',
-  },
-};
-
+/**
+ * Text
+ */
 export const Text = Template.bind({});
 Text.args = {
   variant: 'text',
@@ -54,6 +63,6 @@ Text.args = {
 Text.parameters = {
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=375-3594&t=mzQvfJTebebtBWNj-4',
+    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16266&t=mzQvfJTebebtBWNj-4',
   },
 };
