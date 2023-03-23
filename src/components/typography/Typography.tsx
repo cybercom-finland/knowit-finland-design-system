@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { spacing, typography } from '../../shared';
+import { typography } from '../../shared';
 
 /**
  * Internal properties for styles
@@ -14,10 +14,6 @@ interface InnerProps {
    * Color of text
    */
   color?: string;
-  /**
-   * Margin as defined spacing
-   */
-  margin?: number | number[];
 }
 
 /**
@@ -25,34 +21,27 @@ interface InnerProps {
  */
 const CaptionComponent = styled.caption<InnerProps>`
   color: ${({ color }) => color || 'inherit'};
-  margin: ${({ margin }) => spacing(margin)};
   text-align: ${({ align }) => align};
 `;
 const HeaderComponent1 = styled.h1<InnerProps>`
-  margin: ${({ margin }) => spacing(margin)};
   text-align: ${({ align }) => align};
 `;
 const HeaderComponent2 = styled.h2<InnerProps>`
-  margin: ${({ margin }) => spacing(margin)};
   text-align: ${({ align }) => align};
 `;
 const HeaderComponent3 = styled.h3<InnerProps>`
-  margin: ${({ margin }) => spacing(margin)};
   text-align: ${({ align }) => align};
 `;
 const HeaderComponent4 = styled.h4<InnerProps>`
-  margin: ${({ margin }) => spacing(margin)};
   text-align: ${({ align }) => align};
 `;
 const ParagraphComponent1 = styled.p<InnerProps>`
   color: ${({ color }) => color || 'inherit'};
-  margin: ${({ margin }) => spacing(margin)};
   text-align: ${({ align }) => align};
 `;
 const ParagraphComponent2 = styled.p<InnerProps>`
   font-size: ${typography.size.paragraph2};
   line-height: ${typography.lineHeight.paragraph2};
-  margin: ${({ margin }) => spacing(margin)};
   text-align: ${({ align }) => align};
 `;
 
