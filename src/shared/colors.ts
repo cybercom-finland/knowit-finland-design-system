@@ -1,13 +1,12 @@
 export const colors = {
   base: {
     digitalBlack: '#333333',
+    digitalBlack100: '#F1F0ED',
     digitalBlack200: '#E4E1DB',
     digitalBlack300: '#C1C1C1',
     digitalBlack400: '#848484',
     digitalBlack900: '#18090E',
-    sand: '#E4E1DB',
-    pebble: '#F1F0ED',
-    white: '#FFFFFF',
+    neutral: '#FFFFFF',
   },
   additional: {
     forest: '#4B6455',
@@ -16,6 +15,7 @@ export const colors = {
     leather: '#7C3647',
     flamingo: '#FAC0B1',
     melon: '#FCDFD8',
+    clay: '#A5B1AA',
   },
   semantic: {
     success: '#55C436',

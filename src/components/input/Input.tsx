@@ -76,13 +76,13 @@ InputBase.defaultProps = {
 };
 
 const FilledInput = styled(InputBase)`
-  background: ${colors.base.pebble};
+  background: ${colors.base.digitalBlack100};
 `;
 
 const OutlinedInput = styled(InputBase)`
-  background: ${colors.base.white};
+  background: ${colors.base.neutral};
   &:disabled {
-    background: ${colors.base.sand};
+    background: ${colors.base.digitalBlack200};
   }
 `;
 

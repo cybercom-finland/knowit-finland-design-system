@@ -25,6 +25,7 @@ const ButtonBase = styled.button<InnerProps>`
   font-weight: ${typography.weight.regular};
   cursor: pointer;
   display: inline-block;
+  box-sizing: border-box;
   line-height: 1;
   ${variant({
     prop: 'size',
@@ -45,7 +46,7 @@ const ButtonBase = styled.button<InnerProps>`
         lineHeight: typography.lineHeight.caption,
       },
     },
-  })}
+  })};
 `;
 ButtonBase.defaultProps = {
   size: 'medium',
@@ -53,7 +54,7 @@ ButtonBase.defaultProps = {
 
 const FilledButton = styled(ButtonBase)<InnerProps>`
   border: none;
-  color: ${colors.base.white};
+  color: ${colors.base.neutral};
   background-color: ${colors.base.digitalBlack900};
   &:hover,
   &:focus {
@@ -67,30 +68,38 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
 
 const OutlinedButton = styled(ButtonBase)<InnerProps>`
   color: ${colors.base.digitalBlack900};
-  background-color: ${colors.base.white};
+  background-color: ${colors.base.neutral};
   border: 2px solid ${colors.base.digitalBlack900};
-  &:hover,
-  &:focus {
+  &:focus-visible,
+  &:hover:not(:disabled) {
     border-width: 3px;
+    margin: -1px;
+  }
+  &:active {
+    border-color: ${colors.base.digitalBlack400};
   }
   &:disabled {
     color: ${colors.base.digitalBlack300};
-    border: 2px solid ${colors.base.digitalBlack300};
+    border-color: ${colors.base.digitalBlack300};
+    cursor: default;
   }
 `;
 
 const TextButton = styled(ButtonBase)<InnerProps>`
-  border: none;
   color: ${colors.base.digitalBlack900};
   background-color: transparent;
-  &:hover,
-  &:focus,
-  &:active {
-    border-bottom: 2px solid ${colors.base.digitalBlack};
-    color: ${colors.base.digitalBlack};
+  border: none;
+  border-bottom: 2px solid transparent;
+  &:focus-visible,
+  &:hover:not(:disabled):not(:active) {
+    border-color: ${colors.base.digitalBlack900};
+  }
+  &:active:not(:disabled) {
+    border-color: ${colors.base.digitalBlack400};
   }
   &:disabled {
     color: ${colors.base.digitalBlack300};
+    cursor: default;
   }
 `;
 
