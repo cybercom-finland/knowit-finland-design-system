@@ -8,11 +8,11 @@ import { colors, spacing, typography } from '../../shared';
  */
 interface InnerProps {
   /**
-   * Is button action prevented?
+   * Disable button
    */
   disabled?: boolean;
   /**
-   * How large should the button be?
+   * Button size
    */
   size?: 'small' | 'medium' | 'large';
 }
@@ -52,20 +52,30 @@ ButtonBase.defaultProps = {
   size: 'medium',
 };
 
+/**
+ * Filled variant
+ */
 const FilledButton = styled(ButtonBase)<InnerProps>`
   border: none;
   color: ${colors.base.neutral};
   background-color: ${colors.base.digitalBlack900};
-  &:hover,
-  &:focus {
+  &:focus-visible,
+  &:hover:not(:disabled):not(:active) {
     background-color: ${colors.base.digitalBlack};
+  }
+  &:active:not(:disabled) {
+    background-color: ${colors.base.digitalBlack400};
   }
   &:disabled {
     background-color: ${colors.base.digitalBlack300};
     color: ${colors.base.digitalBlack200};
+    cursor: default;
   }
 `;
 
+/**
+ * Outlined variant
+ */
 const OutlinedButton = styled(ButtonBase)<InnerProps>`
   color: ${colors.base.digitalBlack900};
   background-color: ${colors.base.neutral};
@@ -75,7 +85,7 @@ const OutlinedButton = styled(ButtonBase)<InnerProps>`
     border-width: 3px;
     margin: -1px;
   }
-  &:active {
+  &:active:not(:disabled) {
     border-color: ${colors.base.digitalBlack400};
   }
   &:disabled {
@@ -85,6 +95,9 @@ const OutlinedButton = styled(ButtonBase)<InnerProps>`
   }
 `;
 
+/**
+ * Text variant
+ */
 const TextButton = styled(ButtonBase)<InnerProps>`
   color: ${colors.base.digitalBlack900};
   background-color: transparent;
@@ -104,7 +117,7 @@ const TextButton = styled(ButtonBase)<InnerProps>`
 `;
 
 /**
- * External properties
+ * Button properties
  */
 interface Props extends InnerProps {
   /**
@@ -124,7 +137,7 @@ interface Props extends InnerProps {
    */
   endIcon?: React.ReactNode;
   /**
-   * Event handlers passed from internal component
+   * OnClick event handler
    */
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
