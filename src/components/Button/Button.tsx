@@ -1,8 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import { colors, spacing, typography } from '../../shared';
 
+type Size = 'small' | 'medium' | 'large';
+type Variant = 'filled' | 'outlined' | 'text';
 /**
  * Internal properties for styles
  */
@@ -14,8 +16,59 @@ interface InnerProps {
   /**
    * Button size
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: Size;
 }
+
+/**
+ * Button properties
+ */
+interface Props extends InnerProps {
+  /**
+   * Layout variant of the button
+   */
+  variant?: Variant;
+  /**
+   * Button label text
+   */
+  text: string;
+  /**
+   * Optional icon before the text
+   */
+  startIcon?: React.ReactNode;
+  /**
+   * Optional icon after the text
+   */
+  endIcon?: React.ReactNode;
+  /**
+   * OnClick event handler
+   */
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const calculateSizes = (props: InnerProps, borderSize?: number) => {
+  return css`
+    ${variant({
+      prop: 'size',
+      variants: {
+        medium: {
+          padding: spacing(2),
+          fontSize: typography.size.paragraph2,
+          lineHeight: typography.lineHeight.paragraph2,
+        },
+        large: {
+          padding: spacing(2),
+          fontSize: typography.size.paragraph,
+          lineHeight: typography.lineHeight.paragraph,
+        },
+        small: {
+          padding: spacing(1.5),
+          fontSize: typography.size.caption,
+          lineHeight: typography.lineHeight.caption,
+        },
+      },
+    })};
+  `;
+};
 
 /**
  * Internal component styling
@@ -27,26 +80,6 @@ const ButtonBase = styled.button<InnerProps>`
   display: inline-block;
   box-sizing: border-box;
   line-height: 1;
-  ${variant({
-    prop: 'size',
-    variants: {
-      medium: {
-        padding: spacing(2),
-        fontSize: typography.size.paragraph2,
-        lineHeight: typography.lineHeight.paragraph2,
-      },
-      large: {
-        padding: spacing(2),
-        fontSize: typography.size.paragraph,
-        lineHeight: typography.lineHeight.paragraph,
-      },
-      small: {
-        padding: spacing(1.5),
-        fontSize: typography.size.caption,
-        lineHeight: typography.lineHeight.caption,
-      },
-    },
-  })};
 `;
 ButtonBase.defaultProps = {
   size: 'medium',
@@ -56,6 +89,7 @@ ButtonBase.defaultProps = {
  * Filled variant
  */
 const FilledButton = styled(ButtonBase)<InnerProps>`
+  ${calculateSizes}
   border: none;
   color: ${colors.base.neutral};
   background-color: ${colors.base.digitalBlack900};
@@ -77,16 +111,19 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
  * Outlined variant
  */
 const OutlinedButton = styled(ButtonBase)<InnerProps>`
+  ${(props) => calculateSizes(props, 3)}
   color: ${colors.base.digitalBlack900};
   background-color: ${colors.base.neutral};
-  border: 2px solid ${colors.base.digitalBlack900};
+  border: 3px solid ${colors.base.digitalBlack900};
   &:focus-visible,
   &:hover:not(:disabled) {
-    border-width: 3px;
-    margin: -1px;
+    color: ${colors.base.digitalBlack};
+    border-color: ${colors.base.digitalBlack};
+    background-color: ${colors.base.digitalBlack100};
   }
   &:active:not(:disabled) {
     border-color: ${colors.base.digitalBlack400};
+    background-color: ${colors.base.digitalBlack100};
   }
   &:disabled {
     color: ${colors.base.digitalBlack300};
@@ -99,13 +136,15 @@ const OutlinedButton = styled(ButtonBase)<InnerProps>`
  * Text variant
  */
 const TextButton = styled(ButtonBase)<InnerProps>`
+  ${(props) => calculateSizes(props, 3)}
   color: ${colors.base.digitalBlack900};
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
   &:focus-visible,
   &:hover:not(:disabled):not(:active) {
-    border-color: ${colors.base.digitalBlack900};
+    color: ${colors.base.digitalBlack};
+    border-color: ${colors.base.digitalBlack};
   }
   &:active:not(:disabled) {
     border-color: ${colors.base.digitalBlack400};
@@ -115,32 +154,6 @@ const TextButton = styled(ButtonBase)<InnerProps>`
     cursor: default;
   }
 `;
-
-/**
- * Button properties
- */
-interface Props extends InnerProps {
-  /**
-   * Layout variant of the button
-   */
-  variant?: 'filled' | 'outlined' | 'text';
-  /**
-   * Button label text
-   */
-  text: string;
-  /**
-   * Optional icon before the text
-   */
-  startIcon?: React.ReactNode;
-  /**
-   * Optional icon after the text
-   */
-  endIcon?: React.ReactNode;
-  /**
-   * OnClick event handler
-   */
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
 
 /**
  * Exported component
