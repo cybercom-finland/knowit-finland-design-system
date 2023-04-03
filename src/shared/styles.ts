@@ -1,24 +1,24 @@
 // 1rem = 16px
 export const baseSize = 16;
 // 1 spacing unit = 8px
-export const scalingFactor = 8;
+export const spacingUnitScalingFactor = 8;
 
 /**
  * Method for consistent spacing in CSS margins and paddings.
  * Supports both single numeric value and number array.
  * Limits array length to 4 values internally.
+ * @param value Given value in spacing units
+ * @returns Spacing as rem units
  */
 export const spacing = (value?: number | number[]): string => {
-  if (!value) {
-    return '0';
-  }
+  const pxToRemScale = spacingUnitScalingFactor / baseSize;
   if (Array.isArray(value)) {
     return value
       .slice(0, 4)
-      .map((v) => `${(v * scalingFactor) / baseSize}rem`)
+      .map((v) => `${v * pxToRemScale}rem`)
       .join(' ');
   }
-  return `${(value * scalingFactor) / baseSize}rem`;
+  return !value ? '0' : `${value * pxToRemScale}rem`;
 };
 
 /**
@@ -26,11 +26,8 @@ export const spacing = (value?: number | number[]): string => {
  * @param valueInPx Given value in pixels
  * @returns Value converted to spacing unit
  */
-export const convertToSpacingUnit = (valueInPx?: number) => {
-  if (!valueInPx) {
-    return 0;
-  }
-  return valueInPx / scalingFactor;
+export const convertToSpacingUnit = (valueInPx?: number): number => {
+  return !valueInPx ? 0 : valueInPx / spacingUnitScalingFactor;
 };
 
 /**
@@ -38,11 +35,8 @@ export const convertToSpacingUnit = (valueInPx?: number) => {
  * @param valueInPx Given value in pixels
  * @returns Value converted to rem
  */
-export const pxToRem = (valueInPx?: number) => {
-  if (!valueInPx) {
-    return 0;
-  }
-  return `${valueInPx / baseSize}rem`;
+export const pxToRem = (valueInPx?: number): string => {
+  return !valueInPx ? '0' : `${valueInPx / baseSize}rem`;
 };
 
 /**
