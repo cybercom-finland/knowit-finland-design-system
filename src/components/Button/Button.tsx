@@ -1,10 +1,38 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
-import { colors, spacing, typography } from '../../shared';
+import {
+  colors,
+  spacing,
+  convertToSpacingUnit,
+  pxToRem,
+  typography,
+  Size,
+  Variant,
+} from 'shared';
 
-type Size = 'small' | 'medium' | 'large';
-type Variant = 'filled' | 'outlined' | 'text';
+/**
+ * Various dimensions of button component
+ */
+const buttonDimensions = {
+  borderWidth: 3,
+  small: {
+    fontSize: pxToRem(14),
+    lineHeight: pxToRem(16),
+    spacing: 1.5,
+  },
+  medium: {
+    fontSize: pxToRem(18),
+    lineHeight: pxToRem(21),
+    spacing: 2,
+  },
+  large: {
+    fontSize: pxToRem(22),
+    lineHeight: pxToRem(25),
+    spacing: 2,
+  },
+};
+
 /**
  * Internal properties for styles
  */
@@ -45,25 +73,37 @@ interface Props extends InnerProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
+/**
+ * Helper function to calculate correct sizes for padding, font size and lineHeight
+ * @param props mandatory button props
+ * @param borderSize Border width if specified
+ * @returns modified css
+ */
 const calculateSizes = (props: InnerProps, borderSize?: number) => {
   return css`
     ${variant({
       prop: 'size',
       variants: {
+        small: {
+          padding: spacing(
+            buttonDimensions.small.spacing - convertToSpacingUnit(borderSize)
+          ),
+          fontSize: buttonDimensions.small.fontSize,
+          lineHeight: buttonDimensions.small.lineHeight,
+        },
         medium: {
-          padding: spacing(2),
-          fontSize: typography.size.paragraph2,
-          lineHeight: typography.lineHeight.paragraph2,
+          padding: spacing(
+            buttonDimensions.medium.spacing - convertToSpacingUnit(borderSize)
+          ),
+          fontSize: buttonDimensions.medium.fontSize,
+          lineHeight: buttonDimensions.medium.lineHeight,
         },
         large: {
-          padding: spacing(2),
-          fontSize: typography.size.paragraph,
-          lineHeight: typography.lineHeight.paragraph,
-        },
-        small: {
-          padding: spacing(1.5),
-          fontSize: typography.size.caption,
-          lineHeight: typography.lineHeight.caption,
+          padding: spacing(
+            buttonDimensions.large.spacing - convertToSpacingUnit(borderSize)
+          ),
+          fontSize: buttonDimensions.large.fontSize,
+          lineHeight: buttonDimensions.large.lineHeight,
         },
       },
     })};
@@ -93,13 +133,16 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
   border: none;
   color: ${colors.base.neutral};
   background-color: ${colors.base.digitalBlack900};
+
   &:focus-visible,
   &:hover:not(:disabled):not(:active) {
     background-color: ${colors.base.digitalBlack};
   }
+
   &:active:not(:disabled) {
     background-color: ${colors.base.digitalBlack400};
   }
+
   &:disabled {
     background-color: ${colors.base.digitalBlack300};
     color: ${colors.base.digitalBlack200};
@@ -111,20 +154,24 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
  * Outlined variant
  */
 const OutlinedButton = styled(ButtonBase)<InnerProps>`
-  ${(props) => calculateSizes(props, 3)}
+  ${(props) => calculateSizes(props, buttonDimensions.borderWidth)}
   color: ${colors.base.digitalBlack900};
   background-color: ${colors.base.neutral};
-  border: 3px solid ${colors.base.digitalBlack900};
+  border: ${pxToRem(buttonDimensions.borderWidth)} solid
+    ${colors.base.digitalBlack900};
+
   &:focus-visible,
   &:hover:not(:disabled) {
     color: ${colors.base.digitalBlack};
     border-color: ${colors.base.digitalBlack};
     background-color: ${colors.base.digitalBlack100};
   }
+
   &:active:not(:disabled) {
     border-color: ${colors.base.digitalBlack400};
     background-color: ${colors.base.digitalBlack100};
   }
+
   &:disabled {
     color: ${colors.base.digitalBlack300};
     border-color: ${colors.base.digitalBlack300};
@@ -136,19 +183,46 @@ const OutlinedButton = styled(ButtonBase)<InnerProps>`
  * Text variant
  */
 const TextButton = styled(ButtonBase)<InnerProps>`
-  ${(props) => calculateSizes(props, 3)}
+  ${(props) => calculateSizes(props)}
   color: ${colors.base.digitalBlack900};
   background-color: transparent;
   border: none;
-  border-bottom: 3px solid transparent;
+  border-bottom: ${pxToRem(buttonDimensions.borderWidth)} solid transparent;
+  ${variant({
+    prop: 'size',
+    /* Override bottom padding */
+    variants: {
+      small: {
+        paddingBottom: spacing(
+          buttonDimensions.small.spacing -
+            convertToSpacingUnit(buttonDimensions.borderWidth)
+        ),
+      },
+      medium: {
+        paddingBottom: spacing(
+          buttonDimensions.medium.spacing -
+            convertToSpacingUnit(buttonDimensions.borderWidth)
+        ),
+      },
+      large: {
+        paddingBottom: spacing(
+          buttonDimensions.large.spacing -
+            convertToSpacingUnit(buttonDimensions.borderWidth)
+        ),
+      },
+    },
+  })};
+
   &:focus-visible,
   &:hover:not(:disabled):not(:active) {
     color: ${colors.base.digitalBlack};
-    border-color: ${colors.base.digitalBlack};
+    border-bottom-color: ${colors.base.digitalBlack};
   }
+
   &:active:not(:disabled) {
-    border-color: ${colors.base.digitalBlack400};
+    border-bottom-color: ${colors.base.digitalBlack400};
   }
+
   &:disabled {
     color: ${colors.base.digitalBlack300};
     cursor: default;
