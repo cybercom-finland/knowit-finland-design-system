@@ -137,7 +137,7 @@ export const Input = ({
       InputComponent = OutlinedInput;
       break;
   }
-  const id = generateRandomString(5);
+  const id = generateRandomString(5); // randomized part for id to avoid duplicates with multiple inputs
   return (
     <Wrapper width={width}>
       {label && (
