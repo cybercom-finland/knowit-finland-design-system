@@ -1,6 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { colors, spacing, typography } from '../../shared';
+
+import {
+  colors,
+  spacing,
+  typography,
+  generateRandomString,
+} from '../../shared';
+import { Label } from '../Label';
+import { Wrapper, WrapperProps } from '../Wrapper';
 
 /**
  * Internal properties for styles
@@ -40,13 +48,14 @@ interface InputProps {
  * Internal component styling
  */
 const InputBase = styled.input<InputProps>`
+  box-sizing: border-box;
   border: 1px solid ${colors.base.digitalBlack};
   border-radius: 4px;
+  display: block;
   font-family: ${typography.font};
   font-size: ${typography.size.paragraph2};
   font-weight: ${typography.weight.regular};
   padding: ${spacing([2.5, 1.5])};
-  display: block;
   width: 100%;
   &:hover {
     border-width: 2px;
@@ -66,6 +75,12 @@ const InputBase = styled.input<InputProps>`
     css`
       border-color: ${colors.semantic.danger} !important;
     `}
+  &::placeholder {
+    color: ${colors.base.digitalBlack400};
+  }
+  &::placeholder:disabled {
+    color: ${colors.base.digitalBlack300};
+  }
 `;
 
 /**
@@ -84,48 +99,6 @@ const OutlinedInput = styled(InputBase)`
   &:disabled {
     background: ${colors.base.digitalBlack200};
   }
-`;
-
-/**
- * Label and helper text component
- */
-const Label = styled.label<{ disabled?: boolean; error?: boolean }>`
-  margin: ${spacing([0.75, 0])};
-  display: block;
-  ${({ disabled, error }) =>
-    error
-      ? css`
-          color: ${colors.semantic.danger};
-        `
-      : disabled
-      ? css`
-          color: ${colors.base.digitalBlack300};
-        `
-      : ''}
-`;
-
-/**
- * Properties of wrapper div of whole component
- */
-interface WrapperProps {
-  /**
-   * Wrapper width in px, if undefined the component takes width of containing element
-   */
-  width?: number;
-}
-
-/**
- * Wrap all components with div
- */
-const Wrapper = styled.div<WrapperProps>`
-  ${({ width }) =>
-    width
-      ? css`
-          width: ${width}px;
-        `
-      : css`
-          flex: 1;
-        `};
 `;
 
 /**
@@ -164,19 +137,38 @@ export const Input = ({
       InputComponent = OutlinedInput;
       break;
   }
+  const id = generateRandomString(5); // randomized part for id to avoid duplicates with multiple inputs
   return (
     <Wrapper width={width}>
       {label && (
-        <Label disabled={disabled} error={error}>
+        <Label
+          bold
+          disabled={disabled}
+          error={error}
+          htmlFor={`input-${id}`}
+          id={`label-${id}`}
+        >
           {label}
         </Label>
       )}
-      <InputComponent disabled={disabled} error={error} {...props} />
       {helperText && (
-        <Label disabled={disabled} error={error}>
+        <Label
+          disabled={disabled}
+          error={error}
+          htmlFor={`input-${id}`}
+          id={`helper-${id}`}
+        >
           {helperText}
         </Label>
       )}
+      <InputComponent
+        disabled={disabled}
+        error={error}
+        id={`input-${id}`}
+        aria-labelledby={label && `label-${id}`}
+        aria-describedby={helperText && `helper-${id}`}
+        {...props}
+      />
     </Wrapper>
   );
 };
