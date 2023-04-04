@@ -6,7 +6,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-scripts": "5.0.1",
     "styled-components": "^5.3.9",
     "styled-system": "^5.1.5",
     "web-vitals": "^3.3.0"
@@ -52,7 +51,6 @@
     "@storybook/addon-essentials": "^7.0.2",
     "@storybook/addon-interactions": "^7.0.2",
     "@storybook/addon-links": "^7.0.2",
-    "@storybook/addon-mdx-gfm": "^7.0.2",
     "@storybook/jest": "^0.1.0",
     "@storybook/node-logger": "^7.0.2",
     "@storybook/preset-create-react-app": "^7.0.2",
@@ -78,6 +76,7 @@
     "eslint-plugin-storybook": "^0.6.11",
     "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
+    "react-scripts": "^5.0.1",
     "storybook": "^7.0.2",
     "storybook-addon-designs": "^7.0.0-beta.2",
     "typescript": "^5.0.3"
