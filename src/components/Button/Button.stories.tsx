@@ -1,6 +1,8 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import { within, userEvent } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 
 import { Button } from './Button';
 
@@ -65,4 +67,39 @@ Text.parameters = {
     type: 'figma',
     url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16266&t=mzQvfJTebebtBWNj-4',
   },
+};
+
+/**
+ * Clicked
+ */
+export const Clicked = Template.bind({});
+Clicked.args = {
+  variant: 'outlined',
+  onClick: () => {
+    alert('Button clicked');
+  },
+};
+
+Clicked.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+  await userEvent.click(canvas.getByRole('button'));
+};
+
+/**
+ * Disabled
+ */
+export const Disabled = Template.bind({});
+Disabled.args = {
+  variant: 'outlined',
+  disabled: true,
+};
+
+Disabled.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+  await userEvent.click(canvas.getByRole('button'));
+  expect(canvas.getByRole('button')).toBeDisabled();
 };

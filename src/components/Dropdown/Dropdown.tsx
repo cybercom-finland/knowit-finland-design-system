@@ -141,7 +141,7 @@ export const Dropdown = ({
           {helperText}
         </Label>
       )}
-      <InputWrapper>
+      <InputWrapper data-testid="custom-element">
         <MdKeyboardArrowDown
           style={{
             fontSize: typography.size.paragraph2,

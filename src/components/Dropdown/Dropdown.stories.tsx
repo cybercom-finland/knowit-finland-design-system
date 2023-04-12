@@ -3,6 +3,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import { Dropdown, Option } from './Dropdown';
+import { within, userEvent } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -58,3 +60,36 @@ Outlined.parameters = {
     url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16258&t=mzQvfJTebebtBWNj-4',
   },
 };
+
+const SecondTemplate: ComponentStory<typeof Dropdown> = (args) => (
+  <Dropdown {...args} />
+);
+
+/**
+ * Outlined
+ */
+export const OutlinedSelected = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Outlined.args = {
+  variant: 'outlined',
+};
+
+OutlinedSelected.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16258&t=mzQvfJTebebtBWNj-4',
+  },
+};
+
+OutlinedSelected.play = async ({ canvasElement }) => {
+  const dropdown = within(canvasElement).getByTestId('custom-element');
+  // open dropdown
+  userEvent.click(dropdown);
+  // select option
+  const option = within(dropdown).getByText('Two');
+  userEvent.click(option);
+  // expect(dropdown).toHaveValue('Two');
+};
+// const option = within(dropdown).getByText('One');
+// userEvent.click(option);
+// expect(dropdown).toHaveValue('1');

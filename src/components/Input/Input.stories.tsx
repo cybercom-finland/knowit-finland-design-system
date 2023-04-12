@@ -1,6 +1,8 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import { within, userEvent } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 
 import { Input } from './Input';
 
@@ -124,4 +126,26 @@ FilledEndIcon.parameters = {
     type: 'figma',
     url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16263&t=mzQvfJTebebtBWNj-4',
   },
+};
+
+/**
+ * OutlinedWithInput
+ */
+export const OutlinedWithInput = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+OutlinedWithInput.args = {
+  variant: 'outlined',
+};
+
+OutlinedWithInput.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16258&t=mzQvfJTebebtBWNj-4',
+  },
+};
+
+OutlinedWithInput.play = async ({ canvasElement }) => {
+  const input = within(canvasElement).getByRole('textbox');
+  userEvent.type(input, 'Hello Knowit!');
+  expect(input).toHaveValue('Hello Knowit!');
 };
