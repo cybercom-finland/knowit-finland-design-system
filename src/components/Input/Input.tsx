@@ -6,9 +6,22 @@ import {
   spacing,
   typography,
   generateRandomString,
+  convertToSpacingUnit,
+  pxToRem,
 } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
+
+/**
+ * Input dimensions
+ */
+const inputDimensions = {
+  verticalSpacing: 2.5,
+  horizontalSpacing: 1.5,
+  border: 1,
+  boderHover: 2,
+  boderActive: 3,
+};
 
 /**
  * Internal properties for styles
@@ -49,31 +62,43 @@ interface InputProps {
  */
 const InputBase = styled.input<InputProps>`
   box-sizing: border-box;
-  border: 1px solid ${colors.base.digitalBlack};
+  border: ${pxToRem(inputDimensions.border)} solid ${colors.base.digitalBlack};
   border-radius: 4px;
   display: block;
   font-family: ${typography.font};
   font-size: ${typography.size.paragraph2};
   font-weight: ${typography.weight.regular};
-  padding: ${spacing([2.5, 1.5])};
+  padding: ${spacing([
+    inputDimensions.verticalSpacing - convertToSpacingUnit(1),
+    inputDimensions.horizontalSpacing - convertToSpacingUnit(1),
+  ])};
   width: 100%;
-  &:hover {
-    border-width: 2px;
+
+  &:hover:not(:disabled) {
+    border-width: ${pxToRem(inputDimensions.boderHover)};
+    padding: ${spacing([
+      inputDimensions.verticalSpacing - convertToSpacingUnit(2),
+      inputDimensions.horizontalSpacing - convertToSpacingUnit(2),
+    ])};
   }
-  &:active,
-  &:focus {
-    border-width: 3px;
+  &:active:not(:disabled),
+  &:focus-visible {
+    border-width: ${pxToRem(inputDimensions.boderActive)};
     outline: none;
+    padding: ${spacing([
+      inputDimensions.verticalSpacing - convertToSpacingUnit(3),
+      inputDimensions.horizontalSpacing - convertToSpacingUnit(3),
+    ])};
   }
   &:disabled {
     border-color: ${colors.base.digitalBlack300};
-    border-width: 1px !important;
+    border-width: ${pxToRem(inputDimensions.border)};
     color: ${colors.base.digitalBlack300};
   }
   ${({ error }) =>
     error &&
     css`
-      border-color: ${colors.semantic.danger} !important;
+      border-color: ${colors.semantic.danger};
     `}
   &::placeholder {
     color: ${colors.base.digitalBlack400};
