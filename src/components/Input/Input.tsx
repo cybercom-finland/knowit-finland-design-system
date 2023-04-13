@@ -8,6 +8,7 @@ import {
   generateRandomString,
   convertToSpacingUnit,
   pxToRem,
+  SelectVariant,
 } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
@@ -26,7 +27,7 @@ const inputDimensions = {
 /**
  * Internal properties for styles
  */
-interface InputProps {
+export interface InputBaseProps {
   /**
    * Controlled input value
    */
@@ -44,68 +45,79 @@ interface InputProps {
    */
   error?: boolean;
   /**
-   * Change event handler passed from internal component
+   * Input layout variant
    */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  variant?: SelectVariant;
   /**
-   * Mouse click event handler passed from internal component
+   * Input label text
    */
-  onClick?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
+  label?: string;
   /**
-   * Blur event handler passed from internal component
+   * Additional helper text below input
    */
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  helperText?: string;
 }
+
+/**
+ * Styles for base input
+ * @returns CSS for input base
+ */
+export const baseInputStyles = () => {
+  return css`
+    box-sizing: border-box;
+    border: ${pxToRem(inputDimensions.border)} solid ${colors.base.digitalBlack};
+    border-radius: 4px;
+    display: block;
+    font-family: ${typography.font};
+    font-size: ${typography.size.paragraph2};
+    font-weight: ${typography.weight.regular};
+    padding: ${spacing([
+      inputDimensions.verticalSpacing - convertToSpacingUnit(1),
+      inputDimensions.horizontalSpacing - convertToSpacingUnit(1),
+    ])};
+    width: 100%;
+
+    &:hover:not(:disabled) {
+      border-width: ${pxToRem(inputDimensions.boderHover)};
+      padding: ${spacing([
+        inputDimensions.verticalSpacing - convertToSpacingUnit(2),
+        inputDimensions.horizontalSpacing - convertToSpacingUnit(2),
+      ])};
+    }
+    &:active:not(:disabled),
+    &:focus-visible {
+      border-width: ${pxToRem(inputDimensions.boderActive)};
+      outline: none;
+      padding: ${spacing([
+        inputDimensions.verticalSpacing - convertToSpacingUnit(3),
+        inputDimensions.horizontalSpacing - convertToSpacingUnit(3),
+      ])};
+    }
+    &:disabled {
+      border-color: ${colors.base.digitalBlack300};
+      border-width: ${pxToRem(inputDimensions.border)};
+      color: ${colors.base.digitalBlack300};
+    }
+
+    &::placeholder {
+      color: ${colors.base.digitalBlack400};
+    }
+    &::placeholder:disabled {
+      color: ${colors.base.digitalBlack300};
+    }
+  `;
+};
 
 /**
  * Internal component styling
  */
-const InputBase = styled.input<InputProps>`
-  box-sizing: border-box;
-  border: ${pxToRem(inputDimensions.border)} solid ${colors.base.digitalBlack};
-  border-radius: 4px;
-  display: block;
-  font-family: ${typography.font};
-  font-size: ${typography.size.paragraph2};
-  font-weight: ${typography.weight.regular};
-  padding: ${spacing([
-    inputDimensions.verticalSpacing - convertToSpacingUnit(1),
-    inputDimensions.horizontalSpacing - convertToSpacingUnit(1),
-  ])};
-  width: 100%;
-
-  &:hover:not(:disabled) {
-    border-width: ${pxToRem(inputDimensions.boderHover)};
-    padding: ${spacing([
-      inputDimensions.verticalSpacing - convertToSpacingUnit(2),
-      inputDimensions.horizontalSpacing - convertToSpacingUnit(2),
-    ])};
-  }
-  &:active:not(:disabled),
-  &:focus-visible {
-    border-width: ${pxToRem(inputDimensions.boderActive)};
-    outline: none;
-    padding: ${spacing([
-      inputDimensions.verticalSpacing - convertToSpacingUnit(3),
-      inputDimensions.horizontalSpacing - convertToSpacingUnit(3),
-    ])};
-  }
-  &:disabled {
-    border-color: ${colors.base.digitalBlack300};
-    border-width: ${pxToRem(inputDimensions.border)};
-    color: ${colors.base.digitalBlack300};
-  }
+const InputBase = styled.input<InputBaseProps>`
+  ${baseInputStyles}
   ${({ error }) =>
     error &&
     css`
       border-color: ${colors.semantic.danger};
     `}
-  &::placeholder {
-    color: ${colors.base.digitalBlack400};
-  }
-  &::placeholder:disabled {
-    color: ${colors.base.digitalBlack300};
-  }
 `;
 
 /**
@@ -129,23 +141,26 @@ const OutlinedInput = styled(InputBase)`
 /**
  * External properties
  */
-interface Props extends InputProps, WrapperProps {
+interface Props extends InputBaseProps, WrapperProps {
   /**
-   * Input layout variant
+   * Change event handler passed from internal component
    */
-  variant?: 'outlined' | 'filled';
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
-   * Input label text
+   * Mouse click event handler passed from internal component
    */
-  label?: string;
+  onClick?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
   /**
-   * Additional helper text below input
+   * Blur event handler passed from internal component
    */
-  helperText?: string;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * Input component
+ */
 export const Input = ({
-  variant = 'filled',
+  variant = 'outlined',
   label,
   helperText,
   disabled,

@@ -10,50 +10,19 @@ import {
 } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
-
-interface BaseProps {
-  disabled?: boolean;
-  error?: boolean;
-  value?: string | number;
-  onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
+import { InputBaseProps, baseInputStyles } from 'components/Input';
 
 /**
  * Main component
  */
-const SelectBase = styled.select<BaseProps>`
-  box-sizing: border-box;
-  border: 1px solid ${colors.base.digitalBlack};
-  border-radius: 4px;
-  color: ${colors.base.digitalBlack};
-  display: block;
-  font-family: ${typography.font};
-  font-size: ${typography.size.paragraph2};
-  font-weight: ${typography.weight.regular};
-  padding: ${spacing([2.5, 1.5])};
-  width: 100%;
+const SelectBase = styled.select<InputBaseProps>`
+  ${baseInputStyles}
   ${({ error }) =>
     error
       ? css`
           border-color: ${colors.semantic.danger800} !important;
         `
       : ''}
-  &:hover {
-    border-width: 2px;
-  }
-  &:active,
-  &:focus {
-    border-width: 3px;
-    outline: none;
-  }
-  &:disabled {
-    border-color: ${colors.base.digitalBlack300};
-    border-width: 1px !important;
-    color: ${colors.base.digitalBlack300};
-  }
-  &::placeholder:not(:disabled) {
-    color: ${colors.base.digitalBlack400};
-  }
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -84,19 +53,39 @@ const DropdownOption = styled.option`
   line-height: ${typography.size.paragraph2};
 `;
 
+/**
+ * Dropdown option
+ */
 export interface Option {
+  /**
+   * Option label
+   */
   label?: string;
+  /**
+   * Option value
+   */
   value: string | number;
 }
 
-interface Props extends BaseProps, WrapperProps {
-  label?: string;
-  helperText?: string;
-  placeholder?: string;
+/**
+ * Dropsdown component properties
+ */
+interface Props extends InputBaseProps, WrapperProps {
+  /**
+   * Dropdown options
+   */
   options: Option[];
-  variant: 'filled' | 'outlined';
+  /**
+   * On select event handler
+   * @param e event
+   * @returns -
+   */
+  onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
+/**
+ * Dropdown component
+ */
 export const Dropdown = ({
   label,
   helperText,
@@ -105,7 +94,7 @@ export const Dropdown = ({
   margin,
   width,
   options,
-  variant,
+  variant = 'outlined',
   ...props
 }: Props) => {
   let SelectComponent;
@@ -117,7 +106,10 @@ export const Dropdown = ({
       SelectComponent = OutlinedSelect;
       break;
   }
-  const id = generateRandomString(5); // randomized part for id to avoid duplicates with multiple inputs
+
+  // randomized part for id to avoid duplicates with multiple inputs
+  const id = generateRandomString(5);
+
   return (
     <Wrapper margin={margin} width={width}>
       {label && (
