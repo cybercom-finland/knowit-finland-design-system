@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import { Dropdown, Option } from './Dropdown';
@@ -20,7 +20,7 @@ export default {
     options: [],
   },
   decorators: [withDesign],
-} as ComponentMeta<typeof Dropdown>;
+} as Meta<typeof Dropdown>;
 
 const TemplateOptions: Option[] = [
   { label: 'One', value: 1 },
@@ -30,7 +30,7 @@ const TemplateOptions: Option[] = [
 ];
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Dropdown> = (args) => {
+const Template: StoryFn<typeof Dropdown> = (args) => {
   const [current, setCurrent] = useState<number | undefined>(undefined);
   const { options, value, onSelect, ...props } = args;
   return (
