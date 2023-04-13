@@ -70,17 +70,17 @@ Text.parameters = {
 };
 
 /**
- * Clicked
+ * Outlined button clicked
  */
-export const Clicked = Template.bind({});
-Clicked.args = {
+export const OutlinedButtonClicked = Template.bind({});
+OutlinedButtonClicked.args = {
   variant: 'outlined',
   onClick: () => {
     alert('Button clicked');
   },
 };
 
-Clicked.play = async ({ canvasElement }) => {
+OutlinedButtonClicked.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
@@ -88,15 +88,15 @@ Clicked.play = async ({ canvasElement }) => {
 };
 
 /**
- * Disabled
+ * Outlined button disabled
  */
-export const Disabled = Template.bind({});
-Disabled.args = {
+export const OutlinedButtonDisabled = Template.bind({});
+OutlinedButtonDisabled.args = {
   variant: 'outlined',
   disabled: true,
 };
 
-Disabled.play = async ({ canvasElement }) => {
+OutlinedButtonDisabled.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
