@@ -17,12 +17,6 @@ import { InputBaseProps, baseInputStyles } from 'components/Input';
  */
 const SelectBase = styled.select<InputBaseProps>`
   ${baseInputStyles}
-  ${({ error }) =>
-    error
-      ? css`
-          border-color: ${colors.semantic.danger800} !important;
-        `
-      : ''}
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;

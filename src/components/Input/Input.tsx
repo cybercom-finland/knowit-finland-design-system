@@ -62,10 +62,11 @@ export interface InputBaseProps {
  * Styles for base input
  * @returns CSS for input base
  */
-export const baseInputStyles = () => {
+export const baseInputStyles = (props: InputBaseProps) => {
   return css`
     box-sizing: border-box;
-    border: ${pxToRem(inputDimensions.border)} solid ${colors.base.digitalBlack};
+    border: ${pxToRem(inputDimensions.border)} solid
+      ${!props.error ? colors.base.digitalBlack : colors.semantic.danger};
     border-radius: 4px;
     display: block;
     font-family: ${typography.font};
@@ -113,11 +114,6 @@ export const baseInputStyles = () => {
  */
 const InputBase = styled.input<InputBaseProps>`
   ${baseInputStyles}
-  ${({ error }) =>
-    error &&
-    css`
-      border-color: ${colors.semantic.danger};
-    `}
 `;
 
 /**
