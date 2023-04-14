@@ -23,6 +23,7 @@ interface LabelProps {
  * Label and helper text component
  */
 export const Label = styled.label<LabelProps>`
+  pointer-events: none;
   margin: ${spacing([0.75, 0])};
   display: block;
   font-weight: ${({ bold }) =>

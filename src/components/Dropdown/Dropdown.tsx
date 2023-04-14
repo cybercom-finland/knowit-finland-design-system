@@ -21,7 +21,8 @@ import {
  * Main component
  */
 const SelectBase = styled.select<InputBaseProps>`
-  ${baseInputStyles}
+  ${baseInputStyles};
+  cursor: pointer;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -80,6 +81,19 @@ interface Props extends InputBaseProps, WrapperProps {
 }
 
 /**
+ * Dropdown arrow component
+ */
+const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
+  font-size: ${typography.size.paragraph2};
+  position: absolute;
+  right: ${spacing(1.5)};
+  pointer-events: none;
+  z-index: 100;
+  color: ${(props) =>
+    props.disabled ? colors.base.digitalBlack300 : 'inherit'};
+`;
+
+/**
  * Dropdown component
  */
 export const Dropdown = ({
@@ -130,16 +144,7 @@ export const Dropdown = ({
         </Label>
       )}
       <InputWrapper>
-        <MdKeyboardArrowDown
-          style={{
-            fontSize: typography.size.paragraph2,
-            position: 'absolute',
-            right: spacing(1.5),
-            pointerEvents: 'none',
-            zIndex: '100',
-            color: disabled ? colors.base.digitalBlack300 : 'inherit',
-          }}
-        />
+        <DropdownArrow disabled={disabled} />
         <SelectComponent
           disabled={disabled}
           error={error}
