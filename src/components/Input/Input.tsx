@@ -78,7 +78,7 @@ export const baseInputStyles = (props: InputBaseProps) => {
     ])};
     width: 100%;
 
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled):not(:active):not(:focus-visible) {
       border-width: ${pxToRem(inputDimensions.boderHover)};
       padding: ${spacing([
         inputDimensions.verticalSpacing - convertToSpacingUnit(2),
