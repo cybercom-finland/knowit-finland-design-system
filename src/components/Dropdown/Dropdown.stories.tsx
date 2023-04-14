@@ -55,6 +55,6 @@ Outlined.args = {
 Outlined.parameters = {
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16258&t=mzQvfJTebebtBWNj-4',
+    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1111-15653&t=WWUciBENbi01DgPO-4',
   },
 };

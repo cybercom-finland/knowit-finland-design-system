@@ -1,16 +1,21 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import {
-  colors,
   spacing,
   typography,
   generateRandomString,
+  colors,
 } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
-import { InputBaseProps, baseInputStyles } from 'components/Input';
+import {
+  FilledInputStyles,
+  InputBaseProps,
+  OutlinedInputStyles,
+  baseInputStyles,
+} from 'components/Input';
 
 /**
  * Main component
@@ -23,14 +28,11 @@ const SelectBase = styled.select<InputBaseProps>`
 `;
 
 const FilledSelect = styled(SelectBase)`
-  background-color: ${colors.base.digitalBlack100};
+  ${FilledInputStyles};
 `;
 
 const OutlinedSelect = styled(SelectBase)`
-  background-color: ${colors.base.neutral};
-  &:disabled {
-    background-color: ${colors.base.digitalBlack100};
-  }
+  ${OutlinedInputStyles}
 `;
 
 const InputWrapper = styled.div`
@@ -135,6 +137,7 @@ export const Dropdown = ({
             right: spacing(1.5),
             pointerEvents: 'none',
             zIndex: '100',
+            color: disabled ? colors.base.digitalBlack300 : 'inherit',
           }}
         />
         <SelectComponent

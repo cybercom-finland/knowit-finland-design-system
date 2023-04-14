@@ -117,6 +117,25 @@ const InputBase = styled.input<InputBaseProps>`
 `;
 
 /**
+ * Filled input styles
+ * @returns CSS for filled input styles
+ */
+export const FilledInputStyles = () => {
+  return css`
+    background: ${colors.base.digitalBlack100};
+  `;
+};
+
+export const OutlinedInputStyles = () => {
+  return css`
+    background: ${colors.base.neutral};
+    &:disabled {
+      background: ${colors.base.digitalBlack200};
+    }
+  `;
+};
+
+/**
  * Internal default properties
  */
 InputBase.defaultProps = {
@@ -124,14 +143,11 @@ InputBase.defaultProps = {
 };
 
 const FilledInput = styled(InputBase)`
-  background: ${colors.base.digitalBlack100};
+  ${FilledInputStyles};
 `;
 
 const OutlinedInput = styled(InputBase)`
-  background: ${colors.base.neutral};
-  &:disabled {
-    background: ${colors.base.digitalBlack200};
-  }
+  ${OutlinedInputStyles}
 `;
 
 /**
