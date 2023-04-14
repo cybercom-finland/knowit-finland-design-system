@@ -4,6 +4,7 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    '@storybook/addon-coverage',
     '@storybook/preset-create-react-app',
     '@storybook/addon-a11y',
     '@storybook/addon-mdx-gfm',
