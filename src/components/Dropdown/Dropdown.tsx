@@ -1,73 +1,39 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import {
-  colors,
   spacing,
   typography,
   generateRandomString,
+  colors,
 } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
-
-interface BaseProps {
-  disabled?: boolean;
-  error?: boolean;
-  value?: string | number;
-  onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
+import {
+  FilledInputStyles,
+  InputBaseProps,
+  OutlinedInputStyles,
+  baseInputStyles,
+} from 'components/Input';
 
 /**
  * Main component
  */
-const SelectBase = styled.select<BaseProps>`
-  box-sizing: border-box;
-  border: 1px solid ${colors.base.digitalBlack};
-  border-radius: 4px;
-  color: ${colors.base.digitalBlack};
-  display: block;
-  font-family: ${typography.font};
-  font-size: ${typography.size.paragraph2};
-  font-weight: ${typography.weight.regular};
-  padding: ${spacing([2.5, 1.5])};
-  width: 100%;
-  ${({ error }) =>
-    error
-      ? css`
-          border-color: ${colors.semantic.danger800} !important;
-        `
-      : ''}
-  &:hover {
-    border-width: 2px;
-  }
-  &:active,
-  &:focus {
-    border-width: 3px;
-    outline: none;
-  }
-  &:disabled {
-    border-color: ${colors.base.digitalBlack300};
-    border-width: 1px !important;
-    color: ${colors.base.digitalBlack300};
-  }
-  &::placeholder:not(:disabled) {
-    color: ${colors.base.digitalBlack400};
-  }
+const SelectBase = styled.select<InputBaseProps>`
+  ${baseInputStyles};
+  cursor: pointer;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
 `;
 
 const FilledSelect = styled(SelectBase)`
-  background-color: ${colors.base.digitalBlack100};
+  ${FilledInputStyles};
 `;
 
 const OutlinedSelect = styled(SelectBase)`
-  background-color: ${colors.base.neutral};
-  &:disabled {
-    background-color: ${colors.base.digitalBlack100};
-  }
+  ${OutlinedInputStyles}
 `;
 
 const InputWrapper = styled.div`
@@ -84,19 +50,52 @@ const DropdownOption = styled.option`
   line-height: ${typography.size.paragraph2};
 `;
 
+/**
+ * Dropdown option
+ */
 export interface Option {
+  /**
+   * Option label
+   */
   label?: string;
+  /**
+   * Option value
+   */
   value: string | number;
 }
 
-interface Props extends BaseProps, WrapperProps {
-  label?: string;
-  helperText?: string;
-  placeholder?: string;
+/**
+ * Dropsdown component properties
+ */
+interface Props extends InputBaseProps, WrapperProps {
+  /**
+   * Dropdown options
+   */
   options: Option[];
-  variant: 'filled' | 'outlined';
+  /**
+   * On select event handler
+   * @param e event
+   * @returns -
+   */
+  onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
+/**
+ * Dropdown arrow component
+ */
+const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
+  font-size: ${typography.size.paragraph2};
+  position: absolute;
+  right: ${spacing(1.5)};
+  pointer-events: none;
+  z-index: 100;
+  color: ${(props) =>
+    props.disabled ? colors.base.digitalBlack300 : 'inherit'};
+`;
+
+/**
+ * Dropdown component
+ */
 export const Dropdown = ({
   label,
   helperText,
@@ -105,7 +104,7 @@ export const Dropdown = ({
   margin,
   width,
   options,
-  variant,
+  variant = 'outlined',
   ...props
 }: Props) => {
   let SelectComponent;
@@ -117,7 +116,10 @@ export const Dropdown = ({
       SelectComponent = OutlinedSelect;
       break;
   }
-  const id = generateRandomString(5); // randomized part for id to avoid duplicates with multiple inputs
+
+  // randomized part for id to avoid duplicates with multiple inputs
+  const id = generateRandomString(5);
+
   return (
     <Wrapper margin={margin} width={width}>
       {label && (
@@ -142,15 +144,7 @@ export const Dropdown = ({
         </Label>
       )}
       <InputWrapper>
-        <MdKeyboardArrowDown
-          style={{
-            fontSize: typography.size.paragraph2,
-            position: 'absolute',
-            right: spacing(1.5),
-            pointerEvents: 'none',
-            zIndex: '100',
-          }}
-        />
+        <DropdownArrow disabled={disabled} />
         <SelectComponent
           disabled={disabled}
           error={error}

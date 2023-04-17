@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import { Dropdown, Option } from './Dropdown';
@@ -20,7 +20,7 @@ export default {
     options: [],
   },
   decorators: [withDesign],
-} as ComponentMeta<typeof Dropdown>;
+} as Meta<typeof Dropdown>;
 
 const TemplateOptions: Option[] = [
   { label: 'One', value: 1 },
@@ -30,7 +30,7 @@ const TemplateOptions: Option[] = [
 ];
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Dropdown> = (args) => {
+const Template: StoryFn<typeof Dropdown> = (args) => {
   const [current, setCurrent] = useState<number | undefined>(undefined);
   const { options, value, onSelect, ...props } = args;
   return (
@@ -55,6 +55,6 @@ Outlined.args = {
 Outlined.parameters = {
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16258&t=mzQvfJTebebtBWNj-4',
+    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1111-15653&t=WWUciBENbi01DgPO-4',
   },
 };

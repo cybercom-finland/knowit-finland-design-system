@@ -6,14 +6,28 @@ import {
   spacing,
   typography,
   generateRandomString,
+  convertToSpacingUnit,
+  pxToRem,
+  SelectVariant,
 } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
 
 /**
+ * Input dimensions
+ */
+const inputDimensions = {
+  verticalSpacing: 2.5,
+  horizontalSpacing: 1.5,
+  border: 1,
+  boderHover: 2,
+  boderActive: 3,
+};
+
+/**
  * Internal properties for styles
  */
-interface InputProps {
+export interface InputBaseProps {
   /**
    * Controlled input value
    */
@@ -31,6 +45,116 @@ interface InputProps {
    */
   error?: boolean;
   /**
+   * Input layout variant
+   */
+  variant?: SelectVariant;
+  /**
+   * Input label text
+   */
+  label?: string;
+  /**
+   * Additional helper text below input
+   */
+  helperText?: string;
+}
+
+/**
+ * Styles for base input
+ * @returns CSS for input base
+ */
+export const baseInputStyles = (props: InputBaseProps) => {
+  return css`
+    box-sizing: border-box;
+    border: ${pxToRem(inputDimensions.border)} solid
+      ${!props.error ? colors.base.digitalBlack : colors.semantic.danger};
+    border-radius: 4px;
+    display: block;
+    font-family: ${typography.font};
+    font-size: ${typography.size.paragraph2};
+    font-weight: ${typography.weight.regular};
+    padding: ${spacing([
+      inputDimensions.verticalSpacing - convertToSpacingUnit(1),
+      inputDimensions.horizontalSpacing - convertToSpacingUnit(1),
+    ])};
+    width: 100%;
+
+    &:hover:not(:disabled):not(:active):not(:focus-visible) {
+      border-width: ${pxToRem(inputDimensions.boderHover)};
+      padding: ${spacing([
+        inputDimensions.verticalSpacing - convertToSpacingUnit(2),
+        inputDimensions.horizontalSpacing - convertToSpacingUnit(2),
+      ])};
+    }
+    &:active:not(:disabled),
+    &:focus-visible {
+      border-width: ${pxToRem(inputDimensions.boderActive)};
+      outline: none;
+      padding: ${spacing([
+        inputDimensions.verticalSpacing - convertToSpacingUnit(3),
+        inputDimensions.horizontalSpacing - convertToSpacingUnit(3),
+      ])};
+    }
+    &:disabled {
+      border-color: ${colors.base.digitalBlack300};
+      border-width: ${pxToRem(inputDimensions.border)};
+      color: ${colors.base.digitalBlack300};
+    }
+
+    &::placeholder {
+      color: ${colors.base.digitalBlack400};
+    }
+    &::placeholder:disabled {
+      color: ${colors.base.digitalBlack300};
+    }
+  `;
+};
+
+/**
+ * Internal component styling
+ */
+const InputBase = styled.input<InputBaseProps>`
+  ${baseInputStyles}
+`;
+
+/**
+ * Filled input styles
+ * @returns CSS for filled input styles
+ */
+export const FilledInputStyles = () => {
+  return css`
+    background: ${colors.base.digitalBlack100};
+  `;
+};
+
+export const OutlinedInputStyles = () => {
+  return css`
+    background: ${colors.base.neutral};
+    &:disabled {
+      background: ${colors.base.digitalBlack200};
+    }
+  `;
+};
+
+/**
+ * Internal default properties
+ */
+InputBase.defaultProps = {
+  type: 'text',
+};
+
+const FilledInput = styled(InputBase)`
+  ${FilledInputStyles};
+`;
+
+const OutlinedInput = styled(InputBase)`
+  ${OutlinedInputStyles}
+`;
+
+/**
+ * External properties
+ */
+interface Props extends InputBaseProps, WrapperProps {
+  /**
    * Change event handler passed from internal component
    */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -45,82 +169,10 @@ interface InputProps {
 }
 
 /**
- * Internal component styling
+ * Input component
  */
-const InputBase = styled.input<InputProps>`
-  box-sizing: border-box;
-  border: 1px solid ${colors.base.digitalBlack};
-  border-radius: 4px;
-  display: block;
-  font-family: ${typography.font};
-  font-size: ${typography.size.paragraph2};
-  font-weight: ${typography.weight.regular};
-  padding: ${spacing([2.5, 1.5])};
-  width: 100%;
-  &:hover {
-    border-width: 2px;
-  }
-  &:active,
-  &:focus {
-    border-width: 3px;
-    outline: none;
-  }
-  &:disabled {
-    border-color: ${colors.base.digitalBlack300};
-    border-width: 1px !important;
-    color: ${colors.base.digitalBlack300};
-  }
-  ${({ error }) =>
-    error &&
-    css`
-      border-color: ${colors.semantic.danger} !important;
-    `}
-  &::placeholder {
-    color: ${colors.base.digitalBlack400};
-  }
-  &::placeholder:disabled {
-    color: ${colors.base.digitalBlack300};
-  }
-`;
-
-/**
- * Internal default properties
- */
-InputBase.defaultProps = {
-  type: 'text',
-};
-
-const FilledInput = styled(InputBase)`
-  background: ${colors.base.digitalBlack100};
-`;
-
-const OutlinedInput = styled(InputBase)`
-  background: ${colors.base.neutral};
-  &:disabled {
-    background: ${colors.base.digitalBlack200};
-  }
-`;
-
-/**
- * External properties
- */
-interface Props extends InputProps, WrapperProps {
-  /**
-   * Input layout variant
-   */
-  variant?: 'outlined' | 'filled';
-  /**
-   * Input label text
-   */
-  label?: string;
-  /**
-   * Additional helper text below input
-   */
-  helperText?: string;
-}
-
 export const Input = ({
-  variant = 'filled',
+  variant = 'outlined',
   label,
   helperText,
   disabled,

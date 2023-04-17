@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
@@ -18,10 +18,10 @@ export default {
     disabled: false,
   },
   decorators: [withDesign],
-} as ComponentMeta<typeof Button>;
+} as Meta<typeof Button>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+const Template: StoryFn<typeof Button> = (args) => <Button {...args} />;
 
 /**
  * Outlined

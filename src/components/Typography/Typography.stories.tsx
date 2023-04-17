@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import { Typography } from './Typography';
@@ -13,12 +13,10 @@ export default {
     children: { control: 'text' },
   },
   decorators: [withDesign],
-} as ComponentMeta<typeof Typography>;
+} as Meta<typeof Typography>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Typography> = (args) => (
-  <Typography {...args} />
-);
+const Template: StoryFn<typeof Typography> = (args) => <Typography {...args} />;
 
 export const Heading1 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
