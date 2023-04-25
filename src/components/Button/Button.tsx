@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import {
-  colors,
   spacing,
   convertToSpacingUnit,
   pxToRem,
@@ -131,21 +130,21 @@ ButtonBase.defaultProps = {
 const FilledButton = styled(ButtonBase)<InnerProps>`
   ${calculateSizes}
   border: none;
-  color: ${colors.base.neutral};
-  background-color: ${colors.base.digitalBlack900};
+  color: ${(props) => props.theme.base.neutral};
+  background-color: ${(props) => props.theme.base.digitalBlack900};
 
   &:focus-visible,
   &:hover:not(:disabled):not(:active) {
-    background-color: ${colors.base.digitalBlack};
+    background-color: ${(props) => props.theme.base.digitalBlack};
   }
 
   &:active:not(:disabled) {
-    background-color: ${colors.base.digitalBlack400};
+    background-color: ${(props) => props.theme.base.digitalBlack400};
   }
 
   &:disabled {
-    background-color: ${colors.base.digitalBlack300};
-    color: ${colors.base.digitalBlack200};
+    background-color: ${(props) => props.theme.base.digitalBlack300};
+    color: ${(props) => props.theme.base.digitalBlack200};
     cursor: default;
   }
 `;
@@ -155,26 +154,26 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
  */
 const OutlinedButton = styled(ButtonBase)<InnerProps>`
   ${(props) => calculateSizes(props, buttonDimensions.borderWidth)}
-  color: ${colors.base.digitalBlack900};
-  background-color: ${colors.base.neutral};
+  color: ${(props) => props.theme.base.digitalBlack900};
+  background-color: ${(props) => props.theme.base.neutral};
   border: ${pxToRem(buttonDimensions.borderWidth)} solid
-    ${colors.base.digitalBlack900};
+    ${(props) => props.theme.base.digitalBlack900};
 
   &:focus-visible,
   &:hover:not(:disabled) {
-    color: ${colors.base.digitalBlack};
-    border-color: ${colors.base.digitalBlack};
-    background-color: ${colors.base.digitalBlack100};
+    color: ${(props) => props.theme.base.digitalBlack};
+    border-color: ${(props) => props.theme.base.digitalBlack};
+    background-color: ${(props) => props.theme.base.digitalBlack100};
   }
 
   &:active:not(:disabled) {
-    border-color: ${colors.base.digitalBlack400};
-    background-color: ${colors.base.digitalBlack100};
+    border-color: ${(props) => props.theme.base.digitalBlack400};
+    background-color: ${(props) => props.theme.base.digitalBlack100};
   }
 
   &:disabled {
-    color: ${colors.base.digitalBlack300};
-    border-color: ${colors.base.digitalBlack300};
+    color: ${(props) => props.theme.base.digitalBlack300};
+    border-color: ${(props) => props.theme.base.digitalBlack300};
     cursor: default;
   }
 `;
@@ -184,7 +183,7 @@ const OutlinedButton = styled(ButtonBase)<InnerProps>`
  */
 const TextButton = styled(ButtonBase)<InnerProps>`
   ${(props) => calculateSizes(props)}
-  color: ${colors.base.digitalBlack900};
+  color: ${(props) => props.theme.base.digitalBlack900};
   background-color: transparent;
   border: none;
   border-bottom: ${pxToRem(buttonDimensions.borderWidth)} solid transparent;
@@ -215,16 +214,16 @@ const TextButton = styled(ButtonBase)<InnerProps>`
 
   &:focus-visible,
   &:hover:not(:disabled):not(:active) {
-    color: ${colors.base.digitalBlack};
-    border-bottom-color: ${colors.base.digitalBlack};
+    color: ${(props) => props.theme.base.digitalBlack};
+    border-bottom-color: ${(props) => props.theme.base.digitalBlack};
   }
 
   &:active:not(:disabled) {
-    border-bottom-color: ${colors.base.digitalBlack400};
+    border-bottom-color: ${(props) => props.theme.base.digitalBlack400};
   }
 
   &:disabled {
-    color: ${colors.base.digitalBlack300};
+    color: ${(props) => props.theme.base.digitalBlack300};
     cursor: default;
   }
 `;

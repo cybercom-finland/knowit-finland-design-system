@@ -2,12 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-import {
-  spacing,
-  typography,
-  generateRandomString,
-  colors,
-} from '../../shared';
+import { spacing, typography, generateRandomString } from 'shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
 import {
@@ -90,7 +85,7 @@ const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
   pointer-events: none;
   z-index: 100;
   color: ${(props) =>
-    props.disabled ? colors.base.digitalBlack300 : 'inherit'};
+    props.disabled ? props.theme.base.digitalBlack300 : 'inherit'};
 `;
 
 /**

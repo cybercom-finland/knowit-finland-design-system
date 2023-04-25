@@ -2,14 +2,13 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import {
-  colors,
   spacing,
   typography,
   generateRandomString,
   convertToSpacingUnit,
   pxToRem,
   SelectVariant,
-} from '../../shared';
+} from 'shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
 
@@ -62,11 +61,15 @@ export interface InputBaseProps {
  * Styles for base input
  * @returns CSS for input base
  */
-export const baseInputStyles = (props: InputBaseProps) => {
+export const baseInputStyles = (inputProps: InputBaseProps) => {
   return css`
+    color: ${(props) => props.theme.base.digitalBlack};
     box-sizing: border-box;
     border: ${pxToRem(inputDimensions.border)} solid
-      ${!props.error ? colors.base.digitalBlack : colors.semantic.danger};
+      ${(props) =>
+        !inputProps.error
+          ? props.theme.base.digitalBlack
+          : props.theme.semantic.danger};
     border-radius: 4px;
     display: block;
     font-family: ${typography.font};
@@ -95,16 +98,16 @@ export const baseInputStyles = (props: InputBaseProps) => {
       ])};
     }
     &:disabled {
-      border-color: ${colors.base.digitalBlack300};
+      border-color: ${(props) => props.theme.base.digitalBlack300};
       border-width: ${pxToRem(inputDimensions.border)};
-      color: ${colors.base.digitalBlack300};
+      color: ${(props) => props.theme.base.digitalBlack300};
     }
 
     &::placeholder {
-      color: ${colors.base.digitalBlack400};
+      color: ${(props) => props.theme.base.digitalBlack400};
     }
     &::placeholder:disabled {
-      color: ${colors.base.digitalBlack300};
+      color: ${(props) => props.theme.base.digitalBlack300};
     }
   `;
 };
@@ -122,15 +125,15 @@ const InputBase = styled.input<InputBaseProps>`
  */
 export const FilledInputStyles = () => {
   return css`
-    background: ${colors.base.digitalBlack100};
+    background: ${(props) => props.theme.base.digitalBlack100};
   `;
 };
 
 export const OutlinedInputStyles = () => {
   return css`
-    background: ${colors.base.neutral};
+    background: ${(props) => props.theme.base.neutral};
     &:disabled {
-      background: ${colors.base.digitalBlack200};
+      background: ${(props) => props.theme.base.digitalBlack200};
     }
   `;
 };

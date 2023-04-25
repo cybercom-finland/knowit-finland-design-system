@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colors, spacing, typography } from '../../shared';
+import { spacing, typography } from 'shared';
 
 /**
  * Properties for styles
@@ -23,6 +23,7 @@ interface LabelProps {
  * Label and helper text component
  */
 export const Label = styled.label<LabelProps>`
+  color: ${(props) => props.theme.base.digitalBlack};
   pointer-events: none;
   margin: ${spacing([0.75, 0])};
   display: block;
@@ -31,11 +32,11 @@ export const Label = styled.label<LabelProps>`
   ${({ disabled, error }) =>
     error
       ? css`
-          color: ${colors.semantic.danger800};
+          color: ${(props) => props.theme.semantic.danger800};
         `
       : disabled
       ? css`
-          color: ${colors.base.digitalBlack300};
+          color: ${(props) => props.theme.base.digitalBlack300};
         `
       : ''}
 `;
