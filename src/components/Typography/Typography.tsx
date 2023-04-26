@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-import { typography } from '../../shared';
+import styled, { css } from 'styled-components';
+import { typography } from 'shared';
 
 /**
  * Internal properties for styles
@@ -10,39 +10,40 @@ interface InnerProps {
    * Alignment of text
    */
   align?: 'center' | 'inherit' | 'justify' | 'left' | 'right';
-  /**
-   * Color of text
-   */
-  color?: string;
 }
+
+const typographyCommonStyles = (typographyProps: InnerProps) => {
+  return css`
+    color: ${(props) => props.theme.base.digitalBlack};
+    text-align: ${typographyProps.align};
+  `;
+};
 
 /**
  * Internal component styling
  */
 const CaptionComponent = styled.caption<InnerProps>`
-  color: ${({ color }) => color || 'inherit'};
-  text-align: ${({ align }) => align};
+  ${typographyCommonStyles};
 `;
 const HeaderComponent1 = styled.h1<InnerProps>`
-  text-align: ${({ align }) => align};
+  ${typographyCommonStyles};
 `;
 const HeaderComponent2 = styled.h2<InnerProps>`
-  text-align: ${({ align }) => align};
+  ${typographyCommonStyles};
 `;
 const HeaderComponent3 = styled.h3<InnerProps>`
-  text-align: ${({ align }) => align};
+  ${typographyCommonStyles};
 `;
 const HeaderComponent4 = styled.h4<InnerProps>`
-  text-align: ${({ align }) => align};
+  ${typographyCommonStyles};
 `;
 const ParagraphComponent1 = styled.p<InnerProps>`
-  color: ${({ color }) => color || 'inherit'};
-  text-align: ${({ align }) => align};
+  ${typographyCommonStyles};
 `;
 const ParagraphComponent2 = styled.p<InnerProps>`
+  ${typographyCommonStyles};
   font-size: ${typography.size.paragraph2};
   line-height: ${typography.lineHeight.paragraph2};
-  text-align: ${({ align }) => align};
 `;
 
 /**
