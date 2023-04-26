@@ -32,10 +32,18 @@ Outlined.args = {
 };
 
 Outlined.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16265&t=mzQvfJTebebtBWNj-4',
-  },
+  design: [
+    {
+      name: 'light',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-56662&t=jaciSdrjiv4kZ1qN-4',
+    },
+    {
+      name: 'dark',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61336&t=jaciSdrjiv4kZ1qN-4',
+    },
+  ],
 };
 
 /**
@@ -48,10 +56,18 @@ Filled.args = {
 };
 
 Filled.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16264&t=mzQvfJTebebtBWNj-4',
-  },
+  design: [
+    {
+      name: 'light',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-58870&t=jaciSdrjiv4kZ1qN-4',
+    },
+    {
+      name: 'dark',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61594&t=jaciSdrjiv4kZ1qN-4',
+    },
+  ],
 };
 
 /**
@@ -63,24 +79,32 @@ Text.args = {
 };
 
 Text.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16266&t=mzQvfJTebebtBWNj-4',
-  },
+  design: [
+    {
+      name: 'light',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=329-2590&t=jaciSdrjiv4kZ1qN-4',
+    },
+    {
+      name: 'dark',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61078&t=jaciSdrjiv4kZ1qN-4',
+    },
+  ],
 };
 
 /**
  * Outlined button clicked
  */
-export const OutlinedButtonClicked = Template.bind({});
-OutlinedButtonClicked.args = {
+export const OutlinedClicked = Template.bind({});
+OutlinedClicked.args = {
   variant: 'outlined',
   onClick: () => {
     alert('Button clicked');
   },
 };
 
-OutlinedButtonClicked.play = async ({ canvasElement }) => {
+OutlinedClicked.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
@@ -90,13 +114,13 @@ OutlinedButtonClicked.play = async ({ canvasElement }) => {
 /**
  * Outlined button disabled
  */
-export const OutlinedButtonDisabled = Template.bind({});
-OutlinedButtonDisabled.args = {
+export const OutlinedDisabled = Template.bind({});
+OutlinedDisabled.args = {
   variant: 'outlined',
   disabled: true,
 };
 
-OutlinedButtonDisabled.play = async ({ canvasElement }) => {
+OutlinedDisabled.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
