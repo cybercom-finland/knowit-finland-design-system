@@ -30,7 +30,7 @@ export interface InputBaseProps {
   /**
    * Controlled input value
    */
-  value?: string;
+  value?: string | number;
   /**
    * Placeholder text when value is empty
    */

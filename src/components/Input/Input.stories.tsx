@@ -136,7 +136,6 @@ export const FilledEndIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 FilledEndIcon.args = {
   variant: 'filled',
-  error: true,
 };
 
 FilledEndIcon.parameters = Filled.parameters;
