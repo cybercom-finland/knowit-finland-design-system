@@ -32,13 +32,13 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Dropdown> = (args) => {
   const [current, setCurrent] = useState<number | undefined>(undefined);
-  const { options, value, onSelect, ...props } = args;
+  const { options, ...props } = args;
   return (
     <Dropdown
+      {...props}
       options={options}
       value={current}
       onSelect={(e) => setCurrent(Number(e.target.value))}
-      {...props}
     />
   );
 };
