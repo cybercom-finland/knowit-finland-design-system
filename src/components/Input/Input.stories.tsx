@@ -39,10 +39,18 @@ Outlined.args = {
 };
 
 Outlined.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16258&t=mzQvfJTebebtBWNj-4',
-  },
+  design: [
+    {
+      name: 'light',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-69891&t=jaciSdrjiv4kZ1qN-4',
+    },
+    {
+      name: 'dark',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-73930&t=jaciSdrjiv4kZ1qN-4',
+    },
+  ],
 };
 
 /**
@@ -55,12 +63,7 @@ OutlinedError.args = {
   error: true,
 };
 
-OutlinedError.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16259&t=mzQvfJTebebtBWNj-4',
-  },
-};
+OutlinedError.parameters = Outlined.parameters;
 
 /**
  * Outlined end icon
@@ -71,11 +74,23 @@ OutlinedEndIcon.args = {
   variant: 'outlined',
 };
 
-OutlinedEndIcon.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16262&t=mzQvfJTebebtBWNj-4',
-  },
+OutlinedEndIcon.parameters = Outlined.parameters;
+
+/**
+ * OutlinedWithInput
+ */
+export const OutlinedWithContent = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+OutlinedWithContent.args = {
+  variant: 'outlined',
+};
+
+OutlinedWithContent.parameters = Outlined.parameters;
+
+OutlinedWithContent.play = async ({ canvasElement }) => {
+  const input = within(canvasElement).getByRole('textbox');
+  userEvent.type(input, 'Hello Knowit!');
+  expect(input).toHaveValue('Hello Knowit!');
 };
 
 /**
@@ -88,10 +103,18 @@ Filled.args = {
 };
 
 Filled.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16256&t=mzQvfJTebebtBWNj-4',
-  },
+  design: [
+    {
+      name: 'light',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=401-3597&t=jaciSdrjiv4kZ1qN-4',
+    },
+    {
+      name: 'dark',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-73745&t=jaciSdrjiv4kZ1qN-4',
+    },
+  ],
 };
 
 /**
@@ -104,12 +127,7 @@ FilledError.args = {
   error: true,
 };
 
-FilledError.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16260&t=mzQvfJTebebtBWNj-4',
-  },
-};
+FilledError.parameters = Filled.parameters;
 
 /**
  * Filled end icon
@@ -121,31 +139,4 @@ FilledEndIcon.args = {
   error: true,
 };
 
-FilledEndIcon.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16263&t=mzQvfJTebebtBWNj-4',
-  },
-};
-
-/**
- * OutlinedWithInput
- */
-export const OutlinedWithContent = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-OutlinedWithContent.args = {
-  variant: 'outlined',
-};
-
-OutlinedWithContent.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=909-16258&t=mzQvfJTebebtBWNj-4',
-  },
-};
-
-OutlinedWithContent.play = async ({ canvasElement }) => {
-  const input = within(canvasElement).getByRole('textbox');
-  userEvent.type(input, 'Hello Knowit!');
-  expect(input).toHaveValue('Hello Knowit!');
-};
+FilledEndIcon.parameters = Filled.parameters;
