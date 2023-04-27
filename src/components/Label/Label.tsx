@@ -4,7 +4,7 @@ import { spacing, typography } from 'shared';
 /**
  * Properties for styles
  */
-interface InputLabelProps {
+interface LabelProps {
   /**
    * Control font weight
    */
@@ -22,7 +22,7 @@ interface InputLabelProps {
 /**
  * Label and helper text component
  */
-export const InputLabel = styled.label<InputLabelProps>`
+export const Label = styled.label<LabelProps>`
   color: ${(props) => props.theme.base.digitalBlack};
   pointer-events: none;
   margin: ${spacing([0.75, 0])};

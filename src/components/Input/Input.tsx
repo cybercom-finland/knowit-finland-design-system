@@ -9,7 +9,7 @@ import {
   pxToRem,
   SelectVariant,
 } from 'shared';
-import { InputLabel } from '../InputLabel';
+import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
 
 /**
@@ -196,7 +196,7 @@ export const Input = ({
   return (
     <Wrapper width={width}>
       {label && (
-        <InputLabel
+        <Label
           bold
           disabled={disabled}
           error={error}
@@ -204,17 +204,17 @@ export const Input = ({
           id={`label-${id}`}
         >
           {label}
-        </InputLabel>
+        </Label>
       )}
       {helperText && (
-        <InputLabel
+        <Label
           disabled={disabled}
           error={error}
           htmlFor={`input-${id}`}
           id={`helper-${id}`}
         >
           {helperText}
-        </InputLabel>
+        </Label>
       )}
       <InputComponent
         disabled={disabled}

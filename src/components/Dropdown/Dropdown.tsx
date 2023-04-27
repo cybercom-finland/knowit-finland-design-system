@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import { spacing, typography, generateRandomString } from 'shared';
-import { InputLabel } from '../InputLabel';
+import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
 import {
   FilledInputStyles,
@@ -118,7 +118,7 @@ export const Dropdown = ({
   return (
     <Wrapper margin={margin} width={width}>
       {label && (
-        <InputLabel
+        <Label
           bold
           disabled={disabled}
           error={error}
@@ -126,17 +126,17 @@ export const Dropdown = ({
           id={`label-${id}`}
         >
           {label}
-        </InputLabel>
+        </Label>
       )}
       {helperText && (
-        <InputLabel
+        <Label
           disabled={disabled}
           error={error}
           htmlFor={`select-${id}`}
           id={`helper-${id}`}
         >
           {helperText}
-        </InputLabel>
+        </Label>
       )}
       <InputWrapper>
         <DropdownArrow disabled={disabled} />
