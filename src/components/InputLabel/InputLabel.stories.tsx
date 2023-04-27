@@ -1,25 +1,25 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 
-import { Label } from './Label';
+import { InputLabel } from './InputLabel';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Label',
-  component: Label,
+  title: 'Components/InputLabel',
+  component: InputLabel,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     children: { control: 'text' },
   },
-} as Meta<typeof Label>;
+} as Meta<typeof InputLabel>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Label> = (args) => <Label {...args} />;
+const Template: StoryFn<typeof InputLabel> = (args) => <InputLabel {...args} />;
 
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
-  children: 'Default label',
+  children: 'Default Input label',
 };
 
 export const Bold = Template.bind({});
