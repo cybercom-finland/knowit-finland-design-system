@@ -62,7 +62,7 @@ export interface Option {
 /**
  * Dropsdown component properties
  */
-interface Props extends InputBaseProps, WrapperProps {
+interface DropdownProps extends InputBaseProps, WrapperProps {
   /**
    * Dropdown options
    */
@@ -101,7 +101,7 @@ export const Dropdown = ({
   options,
   variant = 'outlined',
   ...props
-}: Props) => {
+}: DropdownProps) => {
   let SelectComponent;
   switch (variant) {
     case 'filled':

@@ -156,7 +156,7 @@ const OutlinedInput = styled(InputBase)`
 /**
  * External properties
  */
-interface Props extends InputBaseProps, WrapperProps {
+interface InputProps extends InputBaseProps, WrapperProps {
   /**
    * Change event handler passed from internal component
    */
@@ -182,7 +182,7 @@ export const Input = ({
   error,
   width,
   ...props
-}: Props) => {
+}: InputProps) => {
   let InputComponent;
   switch (variant) {
     case 'filled':

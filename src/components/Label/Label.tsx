@@ -1,10 +1,11 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { spacing, typography } from 'shared';
 
 /**
  * Properties for styles
  */
-interface LabelProps {
+interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * Control font weight
    */
@@ -22,7 +23,7 @@ interface LabelProps {
 /**
  * Label and helper text component
  */
-export const Label = styled.label<LabelProps>`
+const InnerLabel = styled.label<LabelProps>`
   color: ${(props) => props.theme.base.digitalBlack};
   pointer-events: none;
   margin: ${spacing([0.75, 0])};
@@ -40,3 +41,12 @@ export const Label = styled.label<LabelProps>`
         `
       : ''}
 `;
+
+/**
+ * Label component
+ * @param props Label props
+ * @returns Label component
+ */
+export const Label = (props: LabelProps) => {
+  return <InnerLabel {...props} />;
+};

@@ -49,7 +49,7 @@ interface InnerProps {
 /**
  * Button properties
  */
-interface Props extends InnerProps {
+interface ButtonProps extends InnerProps {
   /**
    * Layout variant of the button
    */
@@ -237,7 +237,7 @@ export const Button = ({
   endIcon,
   variant = 'filled',
   ...props
-}: Props) => {
+}: ButtonProps) => {
   let ButtonComponent;
   switch (variant) {
     case 'filled':
