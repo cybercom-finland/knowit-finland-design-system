@@ -28,8 +28,16 @@ Heading1.args = {
 Heading1.storyName = 'Typography';
 
 Heading1.parameters = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=20-799&t=bGAWXsGi0mOwJZDu-4',
-  },
+  design: [
+    {
+      name: 'light',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1155-15667&t=jaciSdrjiv4kZ1qN-4',
+    },
+    {
+      name: 'dark',
+      type: 'figma',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1466-85449&t=jaciSdrjiv4kZ1qN-4',
+    },
+  ],
 };
