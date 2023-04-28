@@ -11,6 +11,7 @@ import {
   OutlinedInputStyles,
   baseInputStyles,
 } from 'components/Input';
+import { HelperText } from 'components/Helper text';
 
 /**
  * Main component
@@ -119,7 +120,6 @@ export const Dropdown = ({
     <Wrapper margin={margin} width={width}>
       {label && (
         <Label
-          bold
           disabled={disabled}
           error={error}
           htmlFor={`select-${id}`}
@@ -129,14 +129,9 @@ export const Dropdown = ({
         </Label>
       )}
       {helperText && (
-        <Label
-          disabled={disabled}
-          error={error}
-          htmlFor={`select-${id}`}
-          id={`helper-${id}`}
-        >
+        <HelperText disabled={disabled} error={error} id={`helper-${id}`}>
           {helperText}
-        </Label>
+        </HelperText>
       )}
       <InputWrapper>
         <DropdownArrow disabled={disabled} />

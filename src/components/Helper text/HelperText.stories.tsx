@@ -1,37 +1,37 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 
-import { Label } from './Label';
+import { HelperText } from './HelperText';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Label',
-  component: Label,
+  title: 'Components/HelperText',
+  component: HelperText,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     children: { control: 'text' },
   },
-} as Meta<typeof Label>;
+} as Meta<typeof HelperText>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Label> = (args) => <Label {...args} />;
+const Template: StoryFn<typeof HelperText> = (args) => <HelperText {...args} />;
 
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
-  children: 'Default label',
+  children: 'Default',
 };
 
 export const Disabled = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Disabled.args = {
-  children: 'Label for disabled input',
+  children: 'Disabled',
   disabled: true,
 };
 
 export const Error = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Error.args = {
-  children: 'Label for input with error',
+  children: 'With error',
   error: true,
 };

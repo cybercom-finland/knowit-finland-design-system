@@ -11,6 +11,7 @@ import {
 } from 'shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
+import { HelperText } from 'components/Helper text';
 
 /**
  * Input dimensions
@@ -197,7 +198,6 @@ export const Input = ({
     <Wrapper width={width}>
       {label && (
         <Label
-          bold
           disabled={disabled}
           error={error}
           htmlFor={`input-${id}`}
@@ -207,14 +207,9 @@ export const Input = ({
         </Label>
       )}
       {helperText && (
-        <Label
-          disabled={disabled}
-          error={error}
-          htmlFor={`input-${id}`}
-          id={`helper-${id}`}
-        >
+        <HelperText disabled={disabled} error={error} id={`helper-${id}`}>
           {helperText}
-        </Label>
+        </HelperText>
       )}
       <InputComponent
         disabled={disabled}

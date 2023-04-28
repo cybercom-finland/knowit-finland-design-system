@@ -5,7 +5,7 @@ import { spacing, typography } from 'shared';
 /**
  * Properties for styles
  */
-interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+interface HelperTextProps extends React.HtmlHTMLAttributes<HTMLSpanElement> {
   /**
    * For disabled input
    */
@@ -19,12 +19,12 @@ interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
 /**
  * Label and helper text component
  */
-const InnerLabel = styled.label<LabelProps>`
+const InnerHelperText = styled.span<HelperTextProps>`
   color: ${(props) => props.theme.colors.digitalBlack};
   pointer-events: none;
   margin: ${spacing([0.75, 0])};
   display: block;
-  font-weight: ${typography.weight.bold};
+  font-weight: ${typography.weight.regular};
   ${({ disabled, error }) =>
     error
       ? css`
@@ -42,6 +42,6 @@ const InnerLabel = styled.label<LabelProps>`
  * @param props Label props
  * @returns Label component
  */
-export const Label = (props: LabelProps) => {
-  return <InnerLabel {...props} />;
+export const HelperText = (props: HelperTextProps) => {
+  return <InnerHelperText {...props} />;
 };
