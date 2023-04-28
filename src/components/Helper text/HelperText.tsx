@@ -3,21 +3,21 @@ import styled, { css } from 'styled-components';
 import { spacing, typography } from 'shared';
 
 /**
- * Properties for styles
+ * Helper text properties
  */
 interface HelperTextProps extends React.HtmlHTMLAttributes<HTMLSpanElement> {
   /**
-   * For disabled input
+   * Disabled
    */
   disabled?: boolean;
   /**
-   * Input error state
+   * Error state
    */
   error?: boolean;
 }
 
 /**
- * Label and helper text component
+ * Helper text inner component to wrap styles
  */
 const InnerHelperText = styled.span<HelperTextProps>`
   color: ${(props) => props.theme.colors.digitalBlack};
@@ -38,9 +38,9 @@ const InnerHelperText = styled.span<HelperTextProps>`
 `;
 
 /**
- * Label component
- * @param props Label props
- * @returns Label component
+ * Helper text component
+ * @param props Helper text props
+ * @returns Helper text component
  */
 export const HelperText = (props: HelperTextProps) => {
   return <InnerHelperText {...props} />;

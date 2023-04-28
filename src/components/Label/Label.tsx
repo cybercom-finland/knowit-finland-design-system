@@ -3,21 +3,21 @@ import styled, { css } from 'styled-components';
 import { spacing, typography } from 'shared';
 
 /**
- * Properties for styles
+ * Label properties
  */
 interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
-   * For disabled input
+   * Disabled state
    */
   disabled?: boolean;
   /**
-   * Input error state
+   * Error state
    */
   error?: boolean;
 }
 
 /**
- * Label and helper text component
+ * Label inner component to wrap styles
  */
 const InnerLabel = styled.label<LabelProps>`
   color: ${(props) => props.theme.colors.digitalBlack};
