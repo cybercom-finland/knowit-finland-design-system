@@ -3,11 +3,11 @@ import styled, { css } from 'styled-components';
 import { spacing, typography } from 'shared';
 
 /**
- * Label properties
+ * Helper text properties
  */
-interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+interface HelperTextProps extends React.HtmlHTMLAttributes<HTMLSpanElement> {
   /**
-   * Disabled state
+   * Disabled
    */
   disabled?: boolean;
   /**
@@ -17,14 +17,14 @@ interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
 }
 
 /**
- * Label inner component to wrap styles
+ * Helper text inner component to wrap styles
  */
-const InnerLabel = styled.label<LabelProps>`
+const InnerHelperText = styled.span<HelperTextProps>`
   color: ${(props) => props.theme.colors.digitalBlack};
   pointer-events: none;
   margin: ${spacing([0.75, 0])};
   display: block;
-  font-weight: ${typography.weight.bold};
+  font-weight: ${typography.weight.regular};
   ${({ disabled, error }) =>
     error
       ? css`
@@ -38,10 +38,10 @@ const InnerLabel = styled.label<LabelProps>`
 `;
 
 /**
- * Label component
- * @param props Label props
- * @returns Label component
+ * Helper text component
+ * @param props Helper text props
+ * @returns Helper text component
  */
-export const Label = (props: LabelProps) => {
-  return <InnerLabel {...props} />;
+export const HelperText = (props: HelperTextProps) => {
+  return <InnerHelperText {...props} />;
 };

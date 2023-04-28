@@ -11,6 +11,7 @@ import {
   OutlinedInputStyles,
   baseInputStyles,
 } from 'components/Input';
+import { HelperText } from 'components/Helper text';
 
 /**
  * Main component
@@ -62,7 +63,7 @@ export interface Option {
 /**
  * Dropsdown component properties
  */
-interface Props extends InputBaseProps, WrapperProps {
+interface DropdownProps extends InputBaseProps, WrapperProps {
   /**
    * Dropdown options
    */
@@ -85,7 +86,7 @@ const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
   pointer-events: none;
   z-index: 100;
   color: ${(props) =>
-    props.disabled ? props.theme.base.digitalBlack300 : 'inherit'};
+    props.disabled ? props.theme.colors.digitalBlack300 : 'inherit'};
 `;
 
 /**
@@ -101,7 +102,7 @@ export const Dropdown = ({
   options,
   variant = 'outlined',
   ...props
-}: Props) => {
+}: DropdownProps) => {
   let SelectComponent;
   switch (variant) {
     case 'filled':
@@ -119,7 +120,6 @@ export const Dropdown = ({
     <Wrapper margin={margin} width={width}>
       {label && (
         <Label
-          bold
           disabled={disabled}
           error={error}
           htmlFor={`select-${id}`}
@@ -129,14 +129,9 @@ export const Dropdown = ({
         </Label>
       )}
       {helperText && (
-        <Label
-          disabled={disabled}
-          error={error}
-          htmlFor={`select-${id}`}
-          id={`helper-${id}`}
-        >
+        <HelperText disabled={disabled} error={error} id={`helper-${id}`}>
           {helperText}
-        </Label>
+        </HelperText>
       )}
       <InputWrapper>
         <DropdownArrow disabled={disabled} />

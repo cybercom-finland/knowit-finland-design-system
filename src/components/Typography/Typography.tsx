@@ -14,7 +14,7 @@ interface InnerProps {
 
 const typographyCommonStyles = (typographyProps: InnerProps) => {
   return css`
-    color: ${(props) => props.theme.base.digitalBlack};
+    color: ${(props) => props.theme.colors.digitalBlack};
     text-align: ${typographyProps.align};
   `;
 };
@@ -49,7 +49,7 @@ const ParagraphComponent2 = styled.p<InnerProps>`
 /**
  * External properties
  */
-interface Props extends InnerProps {
+interface TypographyProps extends InnerProps {
   /**
    * Typography content
    */
@@ -63,7 +63,11 @@ interface Props extends InnerProps {
 /**
  * Exported component
  */
-export const Typography = ({ children, variant = 'p1', ...props }: Props) => {
+export const Typography = ({
+  children,
+  variant = 'p1',
+  ...props
+}: TypographyProps) => {
   switch (variant) {
     case 'caption':
       return <CaptionComponent {...props}>{children}</CaptionComponent>;

@@ -3,7 +3,7 @@ import { typography } from '.';
 
 export const bodyStyles = css`
   font-family: '${typography.font}', sans-serif;
-  color: ${(props) => props.theme.base.digitalBlack};
+  color: ${(props) => props.theme.colors.digitalBlack};
 
   h1,
   h2,
