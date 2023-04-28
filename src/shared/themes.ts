@@ -1,5 +1,5 @@
 export const lightTheme = {
-  base: {
+  colors: {
     digitalBlack: '#333333',
     digitalBlack100: '#F1F0ED',
     digitalBlack200: '#E4E1DB',
@@ -7,8 +7,6 @@ export const lightTheme = {
     digitalBlack400: '#848484',
     digitalBlack900: '#18090E',
     neutral: '#FFFFFF',
-  },
-  additional: {
     forest: '#4B6455',
     pear: '#B7DEBD',
     mint: '#DBEEDE',
@@ -16,8 +14,6 @@ export const lightTheme = {
     flamingo: '#FAC0B1',
     melon: '#FCDFD8',
     clay: '#A5B1AA',
-  },
-  semantic: {
     success: '#55C436',
     success200: '#D0F9B0',
     success800: '#117111',
@@ -34,7 +30,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  base: {
+  colors: {
     digitalBlack: '#F1F0ED',
     digitalBlack100: '#333333',
     digitalBlack200: '#848484',
@@ -42,8 +38,6 @@ export const darkTheme = {
     digitalBlack400: '#E4E1DB',
     digitalBlack900: '#FFFFFF',
     neutral: '#18090E',
-  },
-  additional: {
     forest: '#DBEEDE',
     pear: '#B7DEBD',
     mint: '#26332B',
@@ -51,8 +45,6 @@ export const darkTheme = {
     flamingo: '#FAC0B1',
     melon: '#4E252E',
     clay: '#A5B1AA',
-  },
-  semantic: {
     success: '#55C436',
     success200: '#0B480B',
     success800: '#117111',

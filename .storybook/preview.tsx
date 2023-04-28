@@ -10,7 +10,7 @@ const ThemeBlock = styled.div(
     css`
       padding: 1rem;
       box-sizing: border-box;
-      background: ${theme.base.neutral};
+      background: ${theme.colors.neutral};
     `
 );
 

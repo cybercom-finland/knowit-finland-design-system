@@ -24,7 +24,7 @@ interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
  * Label and helper text component
  */
 const InnerLabel = styled.label<LabelProps>`
-  color: ${(props) => props.theme.base.digitalBlack};
+  color: ${(props) => props.theme.colors.digitalBlack};
   pointer-events: none;
   margin: ${spacing([0.75, 0])};
   display: block;
@@ -33,11 +33,11 @@ const InnerLabel = styled.label<LabelProps>`
   ${({ disabled, error }) =>
     error
       ? css`
-          color: ${(props) => props.theme.semantic.danger800};
+          color: ${(props) => props.theme.colors.danger800};
         `
       : disabled
       ? css`
-          color: ${(props) => props.theme.base.digitalBlack300};
+          color: ${(props) => props.theme.colors.digitalBlack300};
         `
       : ''}
 `;

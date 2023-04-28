@@ -85,7 +85,7 @@ const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
   pointer-events: none;
   z-index: 100;
   color: ${(props) =>
-    props.disabled ? props.theme.base.digitalBlack300 : 'inherit'};
+    props.disabled ? props.theme.colors.digitalBlack300 : 'inherit'};
 `;
 
 /**

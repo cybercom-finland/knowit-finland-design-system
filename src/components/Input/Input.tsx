@@ -63,13 +63,13 @@ export interface InputBaseProps {
  */
 export const baseInputStyles = (inputProps: InputBaseProps) => {
   return css`
-    color: ${(props) => props.theme.base.digitalBlack};
+    color: ${(props) => props.theme.colors.digitalBlack};
     box-sizing: border-box;
     border: ${pxToRem(inputDimensions.border)} solid
       ${(props) =>
         !inputProps.error
-          ? props.theme.base.digitalBlack
-          : props.theme.semantic.danger};
+          ? props.theme.colors.digitalBlack
+          : props.theme.colors.danger};
     border-radius: 4px;
     display: block;
     font-family: ${typography.font};
@@ -98,16 +98,16 @@ export const baseInputStyles = (inputProps: InputBaseProps) => {
       ])};
     }
     &:disabled {
-      border-color: ${(props) => props.theme.base.digitalBlack300};
+      border-color: ${(props) => props.theme.colors.digitalBlack300};
       border-width: ${pxToRem(inputDimensions.border)};
-      color: ${(props) => props.theme.base.digitalBlack300};
+      color: ${(props) => props.theme.colors.digitalBlack300};
     }
 
     &::placeholder {
-      color: ${(props) => props.theme.base.digitalBlack400};
+      color: ${(props) => props.theme.colors.digitalBlack400};
     }
     &::placeholder:disabled {
-      color: ${(props) => props.theme.base.digitalBlack300};
+      color: ${(props) => props.theme.colors.digitalBlack300};
     }
   `;
 };
@@ -125,15 +125,15 @@ const InputBase = styled.input<InputBaseProps>`
  */
 export const FilledInputStyles = () => {
   return css`
-    background: ${(props) => props.theme.base.digitalBlack100};
+    background: ${(props) => props.theme.colors.digitalBlack100};
   `;
 };
 
 export const OutlinedInputStyles = () => {
   return css`
-    background: ${(props) => props.theme.base.neutral};
+    background: ${(props) => props.theme.colors.neutral};
     &:disabled {
-      background: ${(props) => props.theme.base.digitalBlack200};
+      background: ${(props) => props.theme.colors.digitalBlack200};
     }
   `;
 };
