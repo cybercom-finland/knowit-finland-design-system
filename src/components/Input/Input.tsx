@@ -7,7 +7,7 @@ import {
   generateRandomString,
   convertToSpacingUnit,
   pxToRem,
-  SelectVariant,
+  InputVariant,
 } from 'shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
@@ -29,17 +29,9 @@ const inputDimensions = {
  */
 export interface InputBaseProps {
   /**
-   * Controlled input value
+   * Element id
    */
-  value?: string | number;
-  /**
-   * Placeholder text when value is empty
-   */
-  placeholder?: string;
-  /**
-   * Is input disabled?
-   */
-  disabled?: boolean;
+  id?: string;
   /**
    * Is there an error in input value? Ignored if input is disabled
    */
@@ -47,7 +39,7 @@ export interface InputBaseProps {
   /**
    * Input layout variant
    */
-  variant?: SelectVariant;
+  variant?: InputVariant;
   /**
    * Input label text
    */
@@ -155,17 +147,58 @@ const OutlinedInput = styled(InputBase)`
 `;
 
 /**
- * External properties
+ * Input component properties
+ * Extends default html input element attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
  */
-interface InputProps extends InputBaseProps, WrapperProps {
+interface InputProps
+  extends InputBaseProps,
+    WrapperProps,
+    Omit<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      | 'accept'
+      | 'alt'
+      | 'capture'
+      | 'checked'
+      | 'formaction'
+      | 'formEncType'
+      | 'formMethod'
+      | 'formNoValidate'
+      | 'formTarget'
+      | 'height'
+      | 'src'
+      | 'width'
+    > {
+  /**
+   * Controlled input value
+   */
+  value?: string | number;
+
+  /**
+   * Placeholder text when value is empty
+   */
+  placeholder?: string;
+
+  /**
+   * Is input disabled?
+   */
+  disabled?: boolean;
+
+  /**
+   * Supported input types
+   */
+  type?: 'number' | 'text' | 'email' | 'password' | 'tel' | 'url';
+
   /**
    * Change event handler passed from internal component
    */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
   /**
    * Mouse click event handler passed from internal component
    */
   onClick?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
+
   /**
    * Blur event handler passed from internal component
    */
@@ -176,6 +209,7 @@ interface InputProps extends InputBaseProps, WrapperProps {
  * Input component
  */
 export const Input = ({
+  id,
   variant = 'outlined',
   label,
   helperText,
@@ -193,30 +227,34 @@ export const Input = ({
       InputComponent = OutlinedInput;
       break;
   }
-  const id = generateRandomString(5); // randomized part for id to avoid duplicates with multiple inputs
+  const componentId = id ?? generateRandomString(5); // randomized part for id to avoid duplicates with multiple inputs
   return (
     <Wrapper width={width}>
       {label && (
         <Label
           disabled={disabled}
           error={error}
-          htmlFor={`input-${id}`}
-          id={`label-${id}`}
+          htmlFor={`input-${componentId}`}
+          id={`label-${componentId}`}
         >
           {label}
         </Label>
       )}
       {helperText && (
-        <HelperText disabled={disabled} error={error} id={`helper-${id}`}>
+        <HelperText
+          disabled={disabled}
+          error={error}
+          id={`helper-${componentId}`}
+        >
           {helperText}
         </HelperText>
       )}
       <InputComponent
         disabled={disabled}
         error={error}
-        id={`input-${id}`}
-        aria-labelledby={label && `label-${id}`}
-        aria-describedby={helperText && `helper-${id}`}
+        id={`input-${componentId}`}
+        aria-labelledby={label && `label-${componentId}`}
+        aria-describedby={helperText && `helper-${componentId}`}
         {...props}
       />
     </Wrapper>
