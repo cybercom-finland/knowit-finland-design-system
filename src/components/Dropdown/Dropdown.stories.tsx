@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
-import { Dropdown, Option } from './Dropdown';
+import { Dropdown, DropdownOption } from './Dropdown';
 
-const TemplateOptions: Option[] = [
+const TemplateOptions: DropdownOption[] = [
   { label: 'One', value: 1 },
   { label: 'Two', value: 2 },
   { label: 'Three', value: 3 },

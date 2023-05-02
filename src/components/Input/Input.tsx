@@ -29,10 +29,6 @@ const inputDimensions = {
  */
 export interface InputBaseProps {
   /**
-   * Element id
-   */
-  id?: string;
-  /**
    * Is there an error in input value? Ignored if input is disabled
    */
   error?: boolean;
@@ -172,7 +168,7 @@ interface InputProps
   /**
    * Controlled input value
    */
-  value?: string | number;
+  value?: React.InputHTMLAttributes<HTMLInputElement>['value'];
 
   /**
    * Placeholder text when value is empty
@@ -192,17 +188,17 @@ interface InputProps
   /**
    * Change event handler passed from internal component
    */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
   /**
    * Mouse click event handler passed from internal component
    */
-  onClick?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
 
   /**
    * Blur event handler passed from internal component
    */
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 /**
