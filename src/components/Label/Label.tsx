@@ -3,7 +3,9 @@ import styled, { css } from 'styled-components';
 import { spacing, typography } from 'shared';
 
 /**
- * Label properties
+ * Label component properties
+ * Extends html label attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#attributes
  */
 interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /**

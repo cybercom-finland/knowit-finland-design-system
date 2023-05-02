@@ -47,9 +47,15 @@ const ParagraphComponent2 = styled.p<InnerProps>`
 `;
 
 /**
- * External properties
+ * Typography properties
+ * Extends global html element attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements#attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p#attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption#attributes
  */
-interface TypographyProps extends InnerProps {
+interface TypographyProps
+  extends InnerProps,
+    React.HTMLAttributes<HTMLElement> {
   /**
    * Typography content
    */

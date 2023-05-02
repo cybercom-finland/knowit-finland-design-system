@@ -144,7 +144,7 @@ const OutlinedInput = styled(InputBase)`
 
 /**
  * Input component properties
- * Extends default html input element attributes
+ * Extends html input element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
  */
 export interface InputProps

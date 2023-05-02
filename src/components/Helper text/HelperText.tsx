@@ -3,9 +3,11 @@ import styled, { css } from 'styled-components';
 import { spacing, typography } from 'shared';
 
 /**
- * Helper text properties
+ * Helper text component properties
+ * Extends global html attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span#attributes
  */
-interface HelperTextProps extends React.HtmlHTMLAttributes<HTMLSpanElement> {
+interface HelperTextProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * Disabled
    */
