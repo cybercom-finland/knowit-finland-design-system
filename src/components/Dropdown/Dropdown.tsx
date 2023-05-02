@@ -49,31 +49,42 @@ const DropdownOption = styled.option`
 /**
  * Dropdown option
  */
-export interface Option {
-  /**
-   * Option label
-   */
-  label?: string;
-  /**
-   * Option value
-   */
-  value: string | number;
-}
+export type DropdownOption = React.OptionHTMLAttributes<HTMLOptionElement>;
 
 /**
- * Dropsdown component properties
+ * Dropdown component properties
+ * Extends html select component attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attributes
  */
-interface DropdownProps extends InputBaseProps, WrapperProps {
+export interface DropdownProps
+  extends InputBaseProps,
+    WrapperProps,
+    Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'multiple'> {
+  /**
+   * Controlled input value
+   */
+  value?: React.SelectHTMLAttributes<HTMLSelectElement>['value'];
+
+  /**
+   * Placeholder text when value is empty
+   */
+  placeholder?: string;
+
+  /**
+   * Is input disabled?
+   */
+  disabled?: boolean;
+
   /**
    * Dropdown options
    */
-  options: Option[];
+  options: DropdownOption[];
+
   /**
    * On select event handler
-   * @param e event
-   * @returns -
+   * @param event event
    */
-  onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onSelect: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 /**
@@ -93,6 +104,7 @@ const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
  * Dropdown component
  */
 export const Dropdown = ({
+  id,
   label,
   helperText,
   disabled,
@@ -114,7 +126,7 @@ export const Dropdown = ({
   }
 
   // randomized part for id to avoid duplicates with multiple inputs
-  const id = generateRandomString(5);
+  const componentId = id ?? generateRandomString(5);
 
   return (
     <Wrapper margin={margin} width={width}>
@@ -122,14 +134,18 @@ export const Dropdown = ({
         <Label
           disabled={disabled}
           error={error}
-          htmlFor={`select-${id}`}
-          id={`label-${id}`}
+          htmlFor={`select-${componentId}`}
+          id={`label-${componentId}`}
         >
           {label}
         </Label>
       )}
       {helperText && (
-        <HelperText disabled={disabled} error={error} id={`helper-${id}`}>
+        <HelperText
+          disabled={disabled}
+          error={error}
+          id={`helper-${componentId}`}
+        >
           {helperText}
         </HelperText>
       )}
@@ -138,14 +154,14 @@ export const Dropdown = ({
         <SelectComponent
           disabled={disabled}
           error={error}
-          id={`select-${id}`}
-          aria-labelledby={label && `label-${id}`}
-          aria-describedby={helperText && `helper-${id}`}
+          id={`select-${componentId}`}
+          aria-labelledby={label && `label-${componentId}`}
+          aria-describedby={helperText && `helper-${componentId}`}
           {...props}
         >
-          {options.map((o, i) => (
-            <DropdownOption key={i} value={o.value}>
-              {o.label || o.value}
+          {options.map((option, index) => (
+            <DropdownOption key={index} value={option.value}>
+              {option.label || option.value}
             </DropdownOption>
           ))}
         </SelectComponent>

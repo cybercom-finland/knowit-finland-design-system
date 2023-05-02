@@ -47,25 +47,33 @@ interface InnerProps {
 }
 
 /**
- * Button properties
+ * Button component properties
+ * Extrends html button element attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes
  */
-interface ButtonProps extends InnerProps {
+export interface ButtonProps
+  extends InnerProps,
+    React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Layout variant of the button
    */
   variant?: Variant;
+
   /**
    * Button label text
    */
-  text: string;
+  label: string;
+
   /**
    * Optional icon before the text
    */
   startIcon?: React.ReactNode;
+
   /**
    * Optional icon after the text
    */
   endIcon?: React.ReactNode;
+
   /**
    * OnClick event handler
    */
@@ -232,7 +240,7 @@ const TextButton = styled(ButtonBase)<InnerProps>`
  * Exported component
  */
 export const Button = ({
-  text: label,
+  label,
   startIcon,
   endIcon,
   variant = 'filled',

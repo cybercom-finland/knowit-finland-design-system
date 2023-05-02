@@ -13,7 +13,7 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
   args: {
-    text: 'Button',
+    label: 'Button',
     size: 'medium',
     disabled: false,
   },
