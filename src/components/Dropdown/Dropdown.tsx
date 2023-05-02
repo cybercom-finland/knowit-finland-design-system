@@ -56,7 +56,7 @@ export type DropdownOption = React.OptionHTMLAttributes<HTMLOptionElement>;
  * Extends html select component properties
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attributes
  */
-interface DropdownProps
+export interface DropdownProps
   extends InputBaseProps,
     WrapperProps,
     Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'multiple'> {
