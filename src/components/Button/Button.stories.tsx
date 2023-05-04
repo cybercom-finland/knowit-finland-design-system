@@ -5,6 +5,7 @@ import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 
 import { Button } from './Button';
+import { MdAdd } from 'react-icons/md';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -45,6 +46,17 @@ Outlined.parameters = {
     },
   ],
 };
+
+/**
+ * Outlined with end icon
+ */
+export const OutlinedWithEndIcon = Template.bind({});
+OutlinedWithEndIcon.args = {
+  variant: 'outlined',
+  endIcon: <MdAdd />,
+};
+
+OutlinedWithEndIcon.parameters = Outlined.parameters;
 
 /**
  * Filled
