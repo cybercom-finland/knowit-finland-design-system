@@ -19,7 +19,7 @@ import { HelperText } from 'components/Helper text';
  */
 const SelectBase = styled.select<InputBaseProps>`
   ${baseInputStyles};
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -53,6 +53,7 @@ const SelectInputWrapper = styled.div`
  * Dropdown options component
  */
 const DropdownOption = styled.option`
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   color: inherit;
   font-size: ${typography.size.paragraph2};
   font-weight: ${typography.weight.regular};
