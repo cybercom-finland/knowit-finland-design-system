@@ -1,4 +1,7 @@
-export { Button } from './Button';
-export { Dropdown } from './Dropdown';
-export { Input } from './Input';
-export { Typography } from './Typography';
+export * from './Button';
+export * from './Dropdown';
+export * from './Input';
+export * from './Typography';
+export * from './HelperText';
+export * from './Label';
+export * from './Textarea';

@@ -12,7 +12,7 @@ import {
   OutlinedInputStyles,
   baseInputStyles,
 } from 'components/Input';
-import { HelperText } from 'components/Helper text';
+import { HelperText } from 'components/HelperText';
 
 /**
  * Main component
@@ -91,16 +91,6 @@ export interface DropdownProps
    * Controlled input value
    */
   value?: React.SelectHTMLAttributes<HTMLSelectElement>['value'];
-
-  /**
-   * Placeholder text when value is empty
-   */
-  placeholder?: string;
-
-  /**
-   * Is input disabled?
-   */
-  disabled?: boolean;
 
   /**
    * Dropdown options

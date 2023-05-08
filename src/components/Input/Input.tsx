@@ -11,7 +11,7 @@ import {
 } from 'shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
-import { HelperText } from 'components/Helper text';
+import { HelperText } from 'components/HelperText';
 
 /**
  * Input dimensions
@@ -30,22 +30,22 @@ const inputDimensions = {
  */
 export interface InputBaseProps {
   /**
-   * Is there an error in input value? Ignored if input is disabled
+   * Is there an error in value? Ignored if component is disabled
    */
   error?: boolean;
 
   /**
-   * Input layout variant
+   * ayout variant
    */
   variant?: InputVariant;
 
   /**
-   * Input label text
+   * Label text
    */
   label?: string;
 
   /**
-   * Additional helper text below input
+   * Additional helper text below component
    */
   helperText?: string;
 
@@ -53,6 +53,26 @@ export interface InputBaseProps {
    * Optional icon after the text
    */
   endIcon?: React.ReactNode;
+
+  /**
+   * Placeholder text when value is empty
+   */
+  placeholder?: string;
+
+  /**
+   * Is component disabled?
+   */
+  disabled?: boolean;
+
+  /**
+   * Is component read only?
+   */
+  readOnly?: boolean;
+
+  /**
+   * Is component required?
+   */
+  required?: boolean;
 }
 
 /**
@@ -104,10 +124,10 @@ export const baseInputStyles = (inputProps: InputBaseProps) => {
     }
 
     &::placeholder {
-      color: ${(props) => props.theme.colors.digitalBlack400};
-    }
-    &::placeholder:disabled {
-      color: ${(props) => props.theme.colors.digitalBlack300};
+      color: ${(props) =>
+        inputProps.disabled
+          ? props.theme.colors.digitalBlack300
+          : props.theme.colors.digitalBlack400};
     }
   `;
 };
@@ -175,41 +195,12 @@ export const InputRow = styled.div<React.PropsWithChildren>`
 
 /**
  * Input component properties
- * Extends html input element attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
  */
-export interface InputProps
-  extends InputBaseProps,
-    WrapperProps,
-    Omit<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      | 'accept'
-      | 'alt'
-      | 'capture'
-      | 'checked'
-      | 'formaction'
-      | 'formEncType'
-      | 'formMethod'
-      | 'formNoValidate'
-      | 'formTarget'
-      | 'height'
-      | 'src'
-      | 'width'
-    > {
+export interface InputProps {
   /**
    * Controlled input value
    */
   value?: React.InputHTMLAttributes<HTMLInputElement>['value'];
-
-  /**
-   * Placeholder text when value is empty
-   */
-  placeholder?: string;
-
-  /**
-   * Is input disabled?
-   */
-  disabled?: boolean;
 
   /**
    * Supported input types
@@ -233,6 +224,30 @@ export interface InputProps
 }
 
 /**
+ * All props together
+ * Extends html input element attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
+ */
+type Props = InputProps &
+  InputBaseProps &
+  WrapperProps &
+  Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    | 'accept'
+    | 'alt'
+    | 'capture'
+    | 'checked'
+    | 'formaction'
+    | 'formEncType'
+    | 'formMethod'
+    | 'formNoValidate'
+    | 'formTarget'
+    | 'height'
+    | 'src'
+    | 'width'
+  >;
+
+/**
  * Input component
  */
 export const Input = ({
@@ -245,7 +260,7 @@ export const Input = ({
   width,
   endIcon,
   ...props
-}: InputProps) => {
+}: Props) => {
   let InputComponent;
   switch (variant) {
     case 'filled':
