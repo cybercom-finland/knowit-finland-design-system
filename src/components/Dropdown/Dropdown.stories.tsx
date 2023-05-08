@@ -4,6 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 
 import { Dropdown, DropdownOption } from './Dropdown';
 import { MdInfo } from 'react-icons/md';
+import { pxToRem } from 'shared';
 
 const TemplateOptions: DropdownOption[] = [
   { label: 'One', value: 1 },
@@ -87,7 +88,7 @@ export const OutlinedEndIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 OutlinedEndIcon.args = {
   variant: 'outlined',
-  endIcon: <MdInfo />,
+  endIcon: <MdInfo size={pxToRem(24)} />,
 };
 
 /**
@@ -132,7 +133,7 @@ export const FilledEndIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 FilledEndIcon.args = {
   variant: 'filled',
-  endIcon: <MdInfo />,
+  endIcon: <MdInfo size={pxToRem(24)} />,
 };
 
 FilledEndIcon.parameters = Filled.parameters;
