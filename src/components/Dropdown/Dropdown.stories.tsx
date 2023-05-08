@@ -25,6 +25,8 @@ export default {
     helperText: 'Helper text',
     disabled: false,
     error: false,
+    readOnly: false,
+    required: false,
     width: 300,
     options: TemplateOptions,
   },
