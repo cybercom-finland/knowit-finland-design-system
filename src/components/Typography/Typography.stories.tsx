@@ -25,6 +25,47 @@ Heading1.args = {
   children: 'Heading1',
 };
 
+export const Heading2 = Template.bind({});
+Heading2.args = {
+  variant: 'h2',
+  children: 'Heading2',
+};
+
+export const Heading3 = Template.bind({});
+Heading3.args = {
+  variant: 'h3',
+  children: 'Heading3',
+};
+
+export const Heading4 = Template.bind({});
+Heading4.args = {
+  variant: 'h4',
+  children: 'Heading4',
+};
+
+export const Paragraph1 = Template.bind({});
+Paragraph1.args = {
+  variant: 'p1',
+  children: 'Paragraph1',
+};
+
+export const Paragraph2 = Template.bind({});
+Paragraph2.args = {
+  variant: 'p2',
+  children: 'Paragraph2',
+};
+
+export const Caption = Template.bind({});
+Caption.args = {
+  variant: 'caption',
+  children: 'Caption',
+};
+
+export const DefaultVariant = Template.bind({});
+DefaultVariant.args = {
+  children: 'Variant arg not specified'
+};
+
 Heading1.storyName = 'Typography';
 
 Heading1.parameters = {
