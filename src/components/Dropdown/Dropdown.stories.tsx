@@ -4,6 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 
 import { Dropdown, DropdownOption } from './Dropdown';
 import { MdInfo } from 'react-icons/md';
+import { pxToRem } from 'shared';
 
 const TemplateOptions: DropdownOption[] = [
   { label: 'One', value: 1 },
@@ -24,6 +25,8 @@ export default {
     helperText: 'Helper text',
     disabled: false,
     error: false,
+    readOnly: false,
+    required: false,
     width: 300,
     options: TemplateOptions,
   },
@@ -34,12 +37,13 @@ export default {
 const Template: StoryFn<typeof Dropdown> = (args) => {
   const [current, setCurrent] = useState<number | undefined>(undefined);
   const { options, ...props } = args;
+
   return (
     <Dropdown
       {...props}
       options={options}
       value={current}
-      onSelect={(e) => setCurrent(Number(e.target.value))}
+      onChange={(e) => setCurrent(Number(e.target.value))}
     />
   );
 };
@@ -87,7 +91,7 @@ export const OutlinedEndIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 OutlinedEndIcon.args = {
   variant: 'outlined',
-  endIcon: <MdInfo />,
+  endIcon: <MdInfo size={pxToRem(24)} />,
 };
 
 /**
@@ -132,7 +136,7 @@ export const FilledEndIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 FilledEndIcon.args = {
   variant: 'filled',
-  endIcon: <MdInfo />,
+  endIcon: <MdInfo size={pxToRem(24)} />,
 };
 
 FilledEndIcon.parameters = Filled.parameters;

@@ -4,35 +4,33 @@ import { withDesign } from 'storybook-addon-designs';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 
-import { Input } from './Input';
+import { Textarea } from './Textarea';
 import { MdLock } from 'react-icons/md';
 import { pxToRem } from 'shared';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Input',
-  component: Input,
+  title: 'Components/Textarea',
+  component: Textarea,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
     variant: 'outlined',
-    placeholder: 'Default input',
+    placeholder: 'Default textarea',
     label: 'Label',
     helperText: 'Helper text',
     disabled: false,
     error: false,
     readOnly: false,
     required: false,
-    width: 300,
-    type: 'text',
   },
   argTypes: {
     value: { control: 'text' },
   },
   decorators: [withDesign],
-} as Meta<typeof Input>;
+} as Meta<typeof Textarea>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Input> = (args) => <Input {...args} />;
+const Template: StoryFn<typeof Textarea> = (args) => <Textarea {...args} />;
 
 /**
  * Outlined
@@ -48,12 +46,12 @@ Outlined.parameters = {
     {
       name: 'light',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-69891&t=jaciSdrjiv4kZ1qN-4',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1533-88672&t=BUE6Y8Y5BWD4rDGB-4',
     },
     {
       name: 'dark',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-73930&t=jaciSdrjiv4kZ1qN-4',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1533-90178&t=BUE6Y8Y5BWD4rDGB-4',
     },
   ],
 };
@@ -94,9 +92,9 @@ OutlinedWithContent.args = {
 OutlinedWithContent.parameters = Outlined.parameters;
 
 OutlinedWithContent.play = async ({ canvasElement }) => {
-  const input = within(canvasElement).getByRole('textbox');
-  userEvent.type(input, 'Hello Knowit!');
-  expect(input).toHaveValue('Hello Knowit!');
+  const textarea = within(canvasElement).getByRole('textbox');
+  userEvent.type(textarea, 'Hello Knowit!');
+  expect(textarea).toHaveValue('Hello Knowit!');
 };
 
 /**
@@ -113,12 +111,12 @@ Filled.parameters = {
     {
       name: 'light',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=401-3597&t=jaciSdrjiv4kZ1qN-4',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=875-15871&t=BUE6Y8Y5BWD4rDGB-4',
     },
     {
       name: 'dark',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-73745&t=jaciSdrjiv4kZ1qN-4',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1533-90049&t=BUE6Y8Y5BWD4rDGB-4',
     },
   ],
 };
