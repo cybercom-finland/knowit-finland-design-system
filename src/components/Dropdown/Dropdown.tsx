@@ -8,6 +8,7 @@ import { Wrapper, WrapperProps } from '../Wrapper';
 import {
   FilledInputStyles,
   InputBaseProps,
+  InputRow,
   OutlinedInputStyles,
   baseInputStyles,
 } from 'components/Input';
@@ -18,32 +19,58 @@ import { HelperText } from 'components/Helper text';
  */
 const SelectBase = styled.select<InputBaseProps>`
   ${baseInputStyles};
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
 `;
 
+/**
+ * Filled select
+ */
 const FilledSelect = styled(SelectBase)`
   ${FilledInputStyles};
 `;
 
+/**
+ * Outlined select
+ */
 const OutlinedSelect = styled(SelectBase)`
   ${OutlinedInputStyles}
 `;
 
-const InputWrapper = styled.div`
+/**
+ * Helper to wrap select related elements
+ */
+const SelectInputWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
 `;
 
+/**
+ * Dropdown options component
+ */
 const DropdownOption = styled.option`
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   color: inherit;
   font-size: ${typography.size.paragraph2};
   font-weight: ${typography.weight.regular};
   line-height: ${typography.size.paragraph2};
+`;
+
+/**
+ * Dropdown arrow component
+ */
+const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
+  font-size: ${typography.size.paragraph2};
+  position: absolute;
+  right: ${spacing(1.5)};
+  pointer-events: none;
+  z-index: 100;
+  color: ${(props) =>
+    props.disabled ? props.theme.colors.digitalBlack300 : 'inherit'};
 `;
 
 /**
@@ -88,19 +115,6 @@ export interface DropdownProps
 }
 
 /**
- * Dropdown arrow component
- */
-const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
-  font-size: ${typography.size.paragraph2};
-  position: absolute;
-  right: ${spacing(1.5)};
-  pointer-events: none;
-  z-index: 100;
-  color: ${(props) =>
-    props.disabled ? props.theme.colors.digitalBlack300 : 'inherit'};
-`;
-
-/**
  * Dropdown component
  */
 export const Dropdown = ({
@@ -112,6 +126,7 @@ export const Dropdown = ({
   margin,
   width,
   options,
+  endIcon,
   variant = 'outlined',
   ...props
 }: DropdownProps) => {
@@ -149,23 +164,26 @@ export const Dropdown = ({
           {helperText}
         </HelperText>
       )}
-      <InputWrapper>
-        <DropdownArrow disabled={disabled} />
-        <SelectComponent
-          disabled={disabled}
-          error={error}
-          id={`select-${componentId}`}
-          aria-labelledby={label && `label-${componentId}`}
-          aria-describedby={helperText && `helper-${componentId}`}
-          {...props}
-        >
-          {options.map((option, index) => (
-            <DropdownOption key={index} value={option.value}>
-              {option.label || option.value}
-            </DropdownOption>
-          ))}
-        </SelectComponent>
-      </InputWrapper>
+      <InputRow>
+        <SelectInputWrapper>
+          <DropdownArrow disabled={disabled} />
+          <SelectComponent
+            disabled={disabled}
+            error={error}
+            id={`select-${componentId}`}
+            aria-labelledby={label && `label-${componentId}`}
+            aria-describedby={helperText && `helper-${componentId}`}
+            {...props}
+          >
+            {options.map((option, index) => (
+              <DropdownOption key={index} value={option.value}>
+                {option.label || option.value}
+              </DropdownOption>
+            ))}
+          </SelectComponent>
+        </SelectInputWrapper>
+        {endIcon}
+      </InputRow>
     </Wrapper>
   );
 };

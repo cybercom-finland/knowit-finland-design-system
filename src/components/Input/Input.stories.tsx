@@ -5,6 +5,7 @@ import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 
 import { Input } from './Input';
+import { MdLock } from 'react-icons/md';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -19,6 +20,7 @@ export default {
     disabled: false,
     error: false,
     width: 300,
+    type: 'text',
   },
   argTypes: {
     value: { control: 'text' },
@@ -72,6 +74,7 @@ export const OutlinedEndIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 OutlinedEndIcon.args = {
   variant: 'outlined',
+  endIcon: <MdLock />,
 };
 
 OutlinedEndIcon.parameters = Outlined.parameters;
@@ -136,6 +139,7 @@ export const FilledEndIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 FilledEndIcon.args = {
   variant: 'filled',
+  endIcon: <MdLock />,
 };
 
 FilledEndIcon.parameters = Filled.parameters;

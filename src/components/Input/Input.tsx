@@ -22,6 +22,7 @@ const inputDimensions = {
   border: 1,
   boderHover: 2,
   boderActive: 3,
+  contentSpacing: 1,
 };
 
 /**
@@ -32,18 +33,26 @@ export interface InputBaseProps {
    * Is there an error in input value? Ignored if input is disabled
    */
   error?: boolean;
+
   /**
    * Input layout variant
    */
   variant?: InputVariant;
+
   /**
    * Input label text
    */
   label?: string;
+
   /**
    * Additional helper text below input
    */
   helperText?: string;
+
+  /**
+   * Optional icon after the text
+   */
+  endIcon?: React.ReactNode;
 }
 
 /**
@@ -58,9 +67,8 @@ export const baseInputStyles = (inputProps: InputBaseProps) => {
       ${(props) =>
         !inputProps.error
           ? props.theme.colors.digitalBlack
-          : props.theme.colors.danger};
+          : props.theme.colors.danger800};
     border-radius: 4px;
-    display: block;
     font-family: ${typography.font};
     font-size: ${typography.size.paragraph2};
     font-weight: ${typography.weight.regular};
@@ -87,7 +95,10 @@ export const baseInputStyles = (inputProps: InputBaseProps) => {
       ])};
     }
     &:disabled {
-      border-color: ${(props) => props.theme.colors.digitalBlack300};
+      border-color: ${(props) =>
+        !inputProps.error
+          ? props.theme.colors.digitalBlack300
+          : props.theme.colors.danger800};
       border-width: ${pxToRem(inputDimensions.border)};
       color: ${(props) => props.theme.colors.digitalBlack300};
     }
@@ -109,6 +120,13 @@ const InputBase = styled.input<InputBaseProps>`
 `;
 
 /**
+ * Input base default props
+ */
+InputBase.defaultProps = {
+  type: 'text',
+};
+
+/**
  * Filled input styles
  * @returns CSS for filled input styles
  */
@@ -118,6 +136,17 @@ export const FilledInputStyles = () => {
   `;
 };
 
+/**
+ * Filled input component
+ */
+const FilledInput = styled(InputBase)`
+  ${FilledInputStyles};
+`;
+
+/**
+ * Outlined input styles
+ * @returns CSS for outlined input styles
+ */
 export const OutlinedInputStyles = () => {
   return css`
     background: ${(props) => props.theme.colors.neutral};
@@ -128,18 +157,20 @@ export const OutlinedInputStyles = () => {
 };
 
 /**
- * Internal default properties
+ * Outlined input component
  */
-InputBase.defaultProps = {
-  type: 'text',
-};
-
-const FilledInput = styled(InputBase)`
-  ${FilledInputStyles};
-`;
-
 const OutlinedInput = styled(InputBase)`
   ${OutlinedInputStyles}
+`;
+
+/**
+ * Input row component
+ */
+export const InputRow = styled.div<React.PropsWithChildren>`
+  color: ${(props) => props.theme.colors.digitalBlack};
+  display: flex;
+  align-items: center;
+  gap: ${spacing(inputDimensions.contentSpacing)};
 `;
 
 /**
@@ -212,6 +243,7 @@ export const Input = ({
   disabled,
   error,
   width,
+  endIcon,
   ...props
 }: InputProps) => {
   let InputComponent;
@@ -223,7 +255,10 @@ export const Input = ({
       InputComponent = OutlinedInput;
       break;
   }
-  const componentId = id ?? generateRandomString(5); // randomized part for id to avoid duplicates with multiple inputs
+
+  // Use Id form props or create randomized string
+  const componentId = id ?? generateRandomString(5);
+
   return (
     <Wrapper width={width}>
       {label && (
@@ -245,14 +280,17 @@ export const Input = ({
           {helperText}
         </HelperText>
       )}
-      <InputComponent
-        disabled={disabled}
-        error={error}
-        id={`input-${componentId}`}
-        aria-labelledby={label && `label-${componentId}`}
-        aria-describedby={helperText && `helper-${componentId}`}
-        {...props}
-      />
+      <InputRow>
+        <InputComponent
+          disabled={disabled}
+          error={error}
+          id={`input-${componentId}`}
+          aria-labelledby={label && `label-${componentId}`}
+          aria-describedby={helperText && `helper-${componentId}`}
+          {...props}
+        />
+        {endIcon}
+      </InputRow>
     </Wrapper>
   );
 };

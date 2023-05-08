@@ -15,6 +15,7 @@ import {
  */
 const buttonDimensions = {
   borderWidth: 3,
+  contentSpacing: spacing(1),
   small: {
     fontSize: pxToRem(14),
     lineHeight: pxToRem(16),
@@ -124,10 +125,12 @@ const ButtonBase = styled.button<InnerProps>`
   font-family: ${typography.font};
   font-weight: ${typography.weight.regular};
   cursor: pointer;
-  display: inline-block;
+  display: flex;
   box-sizing: border-box;
-  line-height: 1;
+  align-items: center;
+  gap: ${buttonDimensions.contentSpacing};
 `;
+
 ButtonBase.defaultProps = {
   size: 'medium',
 };
