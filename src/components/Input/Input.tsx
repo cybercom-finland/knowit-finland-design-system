@@ -35,7 +35,7 @@ export interface InputBaseProps {
   error?: boolean;
 
   /**
-   * ayout variant
+   * Layout variant
    */
   variant?: InputVariant;
 
