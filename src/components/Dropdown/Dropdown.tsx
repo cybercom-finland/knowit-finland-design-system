@@ -80,13 +80,8 @@ export type DropdownOption = React.OptionHTMLAttributes<HTMLOptionElement>;
 
 /**
  * Dropdown component properties
- * Extends html select component attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attributes
  */
-export interface DropdownProps
-  extends InputBaseProps,
-    WrapperProps,
-    Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'multiple'> {
+export interface DropdownProps {
   /**
    * Controlled input value
    */
@@ -98,11 +93,21 @@ export interface DropdownProps
   options: DropdownOption[];
 
   /**
-   * On select event handler
+   * onChange event handler
    * @param event event
    */
-  onSelect: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
+
+/**
+ * All props together
+ * Extends html select component attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attributes
+ */
+type Props = DropdownProps &
+  InputBaseProps &
+  WrapperProps &
+  Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'multiple'>;
 
 /**
  * Dropdown component
@@ -119,7 +124,7 @@ export const Dropdown = ({
   endIcon,
   variant = 'outlined',
   ...props
-}: DropdownProps) => {
+}: Props) => {
   let SelectComponent;
   switch (variant) {
     case 'filled':
