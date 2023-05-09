@@ -19,11 +19,9 @@ export default {
   component: Dropdown,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    variant: 'outlined',
     placeholder: 'Default Dropdown',
     label: 'Label',
     helperText: 'Helper text',
-    disabled: false,
     error: false,
     readOnly: false,
     required: false,
@@ -140,3 +138,17 @@ FilledEndIcon.args = {
 };
 
 FilledEndIcon.parameters = Filled.parameters;
+
+/**
+ * Disabled
+ */
+export const Disabled = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Disabled.args = {
+  disabled: true,
+};
+
+/**
+ * Default variant (not specified)
+ */
+export const DefaultVariant = Template.bind({});

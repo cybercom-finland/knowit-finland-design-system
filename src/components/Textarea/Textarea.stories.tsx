@@ -14,7 +14,6 @@ export default {
   component: Textarea,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    variant: 'outlined',
     placeholder: 'Default textarea',
     label: 'Label',
     helperText: 'Helper text',
@@ -144,3 +143,8 @@ FilledEndIcon.args = {
 };
 
 FilledEndIcon.parameters = Filled.parameters;
+
+/**
+ * Default variant (not specified)
+ */
+export const DefaultVariant = Template.bind({});

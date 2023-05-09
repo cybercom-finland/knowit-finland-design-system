@@ -139,3 +139,8 @@ OutlinedDisabled.play = async ({ canvasElement }) => {
   await userEvent.click(canvas.getByRole('button'));
   expect(canvas.getByRole('button')).toBeDisabled();
 };
+
+/**
+ * Default variant (not specified)
+ */
+export const DefaultVariant = Template.bind({});
