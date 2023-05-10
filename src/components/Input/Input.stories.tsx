@@ -14,7 +14,6 @@ export default {
   component: Input,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    variant: 'outlined',
     placeholder: 'Default input',
     label: 'Label',
     helperText: 'Helper text',
@@ -146,3 +145,8 @@ FilledEndIcon.args = {
 };
 
 FilledEndIcon.parameters = Filled.parameters;
+
+/**
+ * Default variant (not specified)
+ */
+export const DefaultVariant = Template.bind({});
