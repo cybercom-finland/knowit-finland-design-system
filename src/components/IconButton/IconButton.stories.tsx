@@ -83,6 +83,7 @@ Disabled.play = async ({ canvasElement }) => {
  */
 export const ButtonClicked = Template.bind({});
 ButtonClicked.args = {
+  children: <MdAdd />,
   onClick: () => {
     alert('Button clicked');
   },
