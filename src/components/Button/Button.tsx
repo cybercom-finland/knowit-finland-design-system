@@ -78,7 +78,7 @@ export interface ButtonProps
   /**
    * OnClick event handler
    */
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 /**
