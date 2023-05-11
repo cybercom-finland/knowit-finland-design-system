@@ -1,8 +1,8 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { within, userEvent } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { within, userEvent, waitFor } from '@storybook/testing-library';
+import { expect, jest } from '@storybook/jest';
 
 import { IconButton } from './IconButton';
 import { MdAdd } from 'react-icons/md';
@@ -12,7 +12,9 @@ export default {
   title: 'Components/IconButton',
   component: IconButton,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {},
+  argTypes: {
+    onClick: { action: true },
+  },
   args: {
     size: 'medium',
     disabled: false,
@@ -60,6 +62,23 @@ Large.args = {
 Large.parameters = Default.parameters;
 
 /**
+ * Button clicked
+ */
+export const ButtonClicked = Template.bind({});
+ButtonClicked.args = {
+  children: <MdAdd />,
+  onClick: jest.fn(),
+};
+
+ButtonClicked.play = async ({ args, canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+  await userEvent.click(canvas.getByRole('button'));
+  await waitFor(() => expect(args.onClick).toHaveBeenCalled());
+};
+
+/**
  * Disabled
  */
 export const Disabled = Template.bind({});
@@ -76,22 +95,4 @@ Disabled.play = async ({ canvasElement }) => {
   // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
   await userEvent.click(canvas.getByRole('button'));
   expect(canvas.getByRole('button')).toBeDisabled();
-};
-
-/**
- * Button clicked
- */
-export const ButtonClicked = Template.bind({});
-ButtonClicked.args = {
-  children: <MdAdd />,
-  onClick: () => {
-    alert('Button clicked');
-  },
-};
-
-ButtonClicked.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('button'));
 };
