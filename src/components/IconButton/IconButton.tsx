@@ -3,6 +3,19 @@ import { Size, pxToRem } from 'shared';
 import styled from 'styled-components';
 import { variant } from 'styled-system';
 
+/**
+ * Various dimensions of icon button component
+ */
+const iconButtonDimension = {
+  borderRadius: pxToRem(4),
+  medium: {
+    fontSize: pxToRem(16),
+  },
+  large: {
+    fontSize: pxToRem(24),
+  },
+};
+
 type ButtonSize = Exclude<Size, 'small'>;
 
 export interface IconButtonProps
@@ -42,16 +55,16 @@ const IconButtonWrapper = styled.button<IconButtonProps>`
   color: ${(props) => props.theme.colors.digitalBlack900};
   background-color: transparent;
   border: none;
-  border-radius: ${pxToRem(4)};
+  border-radius: ${iconButtonDimension.borderRadius};
 
   ${variant({
     prop: 'size',
     variants: {
       medium: {
-        fontSize: pxToRem(16),
+        fontSize: iconButtonDimension.medium.fontSize,
       },
       large: {
-        fontSize: pxToRem(24),
+        fontSize: iconButtonDimension.large.fontSize,
       },
     },
   })}
@@ -76,14 +89,13 @@ const IconButtonWrapper = styled.button<IconButtonProps>`
 /**
  * Icon button component
  */
-export const IconButton = ({ children, ...props }: IconButtonProps) => {
-  return <IconButtonWrapper {...props}>{children}</IconButtonWrapper>;
-};
+export const IconButton = ({
+  children,
+  size = 'medium',
+  disabled = false,
+  ...restProps
+}: IconButtonProps) => {
+  const props = { size, disabled, ...restProps };
 
-/**
- * Icon button default props
- */
-IconButton.defaultProps = {
-  size: 'medium',
-  disabled: false,
+  return <IconButtonWrapper {...props}>{children}</IconButtonWrapper>;
 };
