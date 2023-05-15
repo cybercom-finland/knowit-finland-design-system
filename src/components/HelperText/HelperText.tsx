@@ -44,6 +44,11 @@ const InnerHelperText = styled.span<HelperTextProps>`
  * @param props Helper text props
  * @returns Helper text component
  */
-export const HelperText = (props: HelperTextProps) => {
+export const HelperText = ({
+  disabled = false,
+  error = false,
+  ...restProps
+}: HelperTextProps) => {
+  const props = { disabled, error, ...restProps };
   return <InnerHelperText {...props} />;
 };

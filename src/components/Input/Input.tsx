@@ -255,11 +255,13 @@ export const Input = ({
   variant = 'outlined',
   label,
   helperText,
-  disabled,
-  error,
+  disabled = false,
+  error = false,
+  readOnly = false,
+  required = false,
   width,
   endIcon,
-  ...props
+  ...restProps
 }: Props) => {
   let InputComponent;
   switch (variant) {
@@ -280,6 +282,7 @@ export const Input = ({
         <Label
           disabled={disabled}
           error={error}
+          required={required}
           htmlFor={`input-${componentId}`}
           id={`label-${componentId}`}
         >
@@ -299,10 +302,12 @@ export const Input = ({
         <InputComponent
           disabled={disabled}
           error={error}
+          required={required}
+          readOnly={readOnly}
           id={`input-${componentId}`}
           aria-labelledby={label && `label-${componentId}`}
           aria-describedby={helperText && `helper-${componentId}`}
-          {...props}
+          {...restProps}
         />
         {endIcon}
       </InputRow>
