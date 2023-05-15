@@ -9,6 +9,10 @@ import {
   Size,
   Variant,
 } from 'shared';
+import { MdCheckBox } from 'react-icons/md';
+import { MdOutlineCheckBox } from 'react-icons/md';
+import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
+import { MdIndeterminateCheckBox } from 'react-icons/md';
 
 /**
  * Various dimensions of checkbox component
@@ -20,11 +24,6 @@ const checkboxDimensions = {
     fontSize: pxToRem(14),
     lineHeight: pxToRem(16),
     spacing: 1.5,
-  },
-  medium: {
-    fontSize: pxToRem(18),
-    lineHeight: pxToRem(21),
-    spacing: 2,
   },
   large: {
     fontSize: pxToRem(22),
@@ -41,12 +40,17 @@ interface InnerProps {
    * Disable checkbox
    */
   disabled?: boolean;
+
+  /**
+   * Checkbox is indeterminate state
+   */
+  indeterminate?: boolean;
 }
 
 /**
  * Checkbox component properties
  * Extrends html input element attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/checkbox#attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
  */
 export interface CheckboxProps
   extends InnerProps,
@@ -60,21 +64,6 @@ export interface CheckboxProps
    * Checkbox label text
    */
   label: string;
-
-  /**
-   * Optional icon before the text
-   */
-  startIcon?: React.ReactNode;
-
-  /**
-   * Optional icon after the text
-   */
-  endIcon?: React.ReactNode;
-
-  /**
-   * OnClick event handler
-   */
-  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -95,13 +84,6 @@ const calculateSizes = (props: InnerProps, borderSize?: number) => {
           fontSize: checkboxDimensions.small.fontSize,
           lineHeight: checkboxDimensions.small.lineHeight,
         },
-        medium: {
-          padding: spacing(
-            checkboxDimensions.medium.spacing - convertToSpacingUnit(borderSize)
-          ),
-          fontSize: checkboxDimensions.medium.fontSize,
-          lineHeight: checkboxDimensions.medium.lineHeight,
-        },
         large: {
           padding: spacing(
             checkboxDimensions.large.spacing - convertToSpacingUnit(borderSize)
@@ -116,6 +98,7 @@ const calculateSizes = (props: InnerProps, borderSize?: number) => {
 
 /**
  * Internal component styling
+ * display: none !important;
  */
 const CheckboxBase = styled.input<InnerProps>`
   font-family: ${typography.font};
@@ -204,12 +187,6 @@ const TextCheckbox = styled(CheckboxBase)<InnerProps>`
             convertToSpacingUnit(checkboxDimensions.borderWidth)
         ),
       },
-      medium: {
-        paddingBottom: spacing(
-          checkboxDimensions.medium.spacing -
-            convertToSpacingUnit(checkboxDimensions.borderWidth)
-        ),
-      },
       large: {
         paddingBottom: spacing(
           checkboxDimensions.large.spacing -
@@ -240,11 +217,18 @@ const TextCheckbox = styled(CheckboxBase)<InnerProps>`
  */
 export const Checkbox = ({
   label,
-  startIcon,
-  endIcon,
   variant = 'filled',
+  checked,
+  indeterminate,
   ...props
 }: CheckboxProps) => {
+
+  const [boxChecked, setChecked] = React.useState(true);
+
+  React.useEffect(() => {
+    setChecked(!!checked)
+  }, [checked])
+
   let CheckboxComponent;
   switch (variant) {
     case 'filled':
@@ -259,8 +243,12 @@ export const Checkbox = ({
   }
   return (
     <>
-      <CheckboxComponent {...props}/>
+      {boxChecked && !indeterminate && <MdCheckBox onClick={(target) => {setChecked(!boxChecked)}}/>}
+      {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank onClick={(target) => {setChecked(!boxChecked)}}/>}
+      {indeterminate && <MdIndeterminateCheckBox onClick={(target) => {setChecked(!boxChecked)}}/>}
+      <CheckboxComponent checked={boxChecked} readOnly {...props}/>
       {label}
+      
     </>
   );
 };
