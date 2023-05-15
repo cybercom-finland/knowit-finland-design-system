@@ -3,16 +3,14 @@ import styled from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import { spacing, typography, generateRandomString } from 'shared';
-import { Label } from '../Label';
-import { Wrapper, WrapperProps } from '../Wrapper';
+import { Wrapper, WrapperProps } from 'components/Wrapper';
 import {
   FilledInputStyles,
   InputBaseProps,
-  InputRow,
+  InputWrapper,
   OutlinedInputStyles,
   baseInputStyles,
 } from 'components/Input';
-import { HelperText } from 'components/HelperText';
 
 /**
  * Main component
@@ -116,8 +114,9 @@ export const Dropdown = ({
   id,
   label,
   helperText,
-  disabled,
-  error,
+  disabled = false,
+  error = false,
+  required = false,
   margin,
   width,
   options,
@@ -140,31 +139,20 @@ export const Dropdown = ({
 
   return (
     <Wrapper margin={margin} width={width}>
-      {label && (
-        <Label
-          disabled={disabled}
-          error={error}
-          htmlFor={`select-${componentId}`}
-          id={`label-${componentId}`}
-        >
-          {label}
-        </Label>
-      )}
-      {helperText && (
-        <HelperText
-          disabled={disabled}
-          error={error}
-          id={`helper-${componentId}`}
-        >
-          {helperText}
-        </HelperText>
-      )}
-      <InputRow>
+      <InputWrapper
+        id={id}
+        label={label}
+        helperText={helperText}
+        disabled={disabled}
+        error={error}
+        required={required}
+      >
         <SelectInputWrapper>
           <DropdownArrow disabled={disabled} />
           <SelectComponent
             disabled={disabled}
             error={error}
+            required={required}
             id={`select-${componentId}`}
             aria-labelledby={label && `label-${componentId}`}
             aria-describedby={helperText && `helper-${componentId}`}
@@ -178,7 +166,7 @@ export const Dropdown = ({
           </SelectComponent>
         </SelectInputWrapper>
         {endIcon}
-      </InputRow>
+      </InputWrapper>
     </Wrapper>
   );
 };

@@ -7,7 +7,8 @@ import { spacing, typography } from 'shared';
  * Extends html label attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#attributes
  */
-interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+export interface LabelProps
+  extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * Disabled state
    */

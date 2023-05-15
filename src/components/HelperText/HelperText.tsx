@@ -7,7 +7,7 @@ import { spacing, typography } from 'shared';
  * Extends global html attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span#attributes
  */
-interface HelperTextProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface HelperTextProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * Disabled
    */

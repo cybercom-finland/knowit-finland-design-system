@@ -9,8 +9,8 @@ import {
   pxToRem,
   InputVariant,
 } from 'shared';
-import { Label } from '../Label';
-import { Wrapper, WrapperProps } from '../Wrapper';
+import { Label } from 'components/Label';
+import { Wrapper, WrapperProps } from 'components/Wrapper';
 import { HelperText } from 'components/HelperText';
 
 /**
@@ -63,11 +63,6 @@ export interface InputBaseProps {
    * Is component disabled?
    */
   disabled?: boolean;
-
-  /**
-   * Is component read only?
-   */
-  readOnly?: boolean;
 
   /**
    * Is component required?
@@ -194,6 +189,57 @@ export const InputRow = styled.div<React.PropsWithChildren>`
 `;
 
 /**
+ * Input wrapper props
+ */
+export interface InputWrapperProps extends InputBaseProps {
+  /**
+   * Component id
+   */
+  id?: string;
+
+  /**
+   * Actual input component
+   */
+  children?: React.ReactNode;
+}
+
+/**
+ * InputWrapper
+ * Helper component to create Labelled inputs with consistent styles
+ */
+export const InputWrapper = ({
+  id,
+  children,
+  label,
+  helperText,
+  disabled,
+  error,
+  required,
+}: InputWrapperProps) => {
+  return (
+    <>
+      {label && (
+        <Label
+          disabled={disabled}
+          error={error}
+          required={required}
+          htmlFor={`input-${id}`}
+          id={`label-${id}`}
+        >
+          {label}
+        </Label>
+      )}
+      {helperText && (
+        <HelperText disabled={disabled} error={error} id={`helper-${id}`}>
+          {helperText}
+        </HelperText>
+      )}
+      <InputRow>{children}</InputRow>
+    </>
+  );
+};
+
+/**
  * Input component properties
  */
 export interface InputProps {
@@ -206,6 +252,11 @@ export interface InputProps {
    * Supported input types
    */
   type?: 'number' | 'text' | 'email' | 'password' | 'tel' | 'url';
+
+  /**
+   * Is component read only?
+   */
+  readOnly?: boolean;
 
   /**
    * Change event handler passed from internal component
@@ -278,27 +329,14 @@ export const Input = ({
 
   return (
     <Wrapper width={width}>
-      {label && (
-        <Label
-          disabled={disabled}
-          error={error}
-          required={required}
-          htmlFor={`input-${componentId}`}
-          id={`label-${componentId}`}
-        >
-          {label}
-        </Label>
-      )}
-      {helperText && (
-        <HelperText
-          disabled={disabled}
-          error={error}
-          id={`helper-${componentId}`}
-        >
-          {helperText}
-        </HelperText>
-      )}
-      <InputRow>
+      <InputWrapper
+        id={id}
+        label={label}
+        helperText={helperText}
+        disabled={disabled}
+        error={error}
+        required={required}
+      >
         <InputComponent
           disabled={disabled}
           error={error}
@@ -310,7 +348,7 @@ export const Input = ({
           {...restProps}
         />
         {endIcon}
-      </InputRow>
+      </InputWrapper>
     </Wrapper>
   );
 };
