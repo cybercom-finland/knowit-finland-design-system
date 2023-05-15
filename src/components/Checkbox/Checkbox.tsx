@@ -10,10 +10,8 @@ import {
   Variant,
 } from 'shared';
 import { MdCheckBox } from 'react-icons/md';
-import { MdOutlineCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
-import { func } from 'prop-types';
 
 /**
  * Various dimensions of checkbox component
@@ -56,10 +54,6 @@ interface InnerProps {
 export interface CheckboxProps
   extends InnerProps,
     React.InputHTMLAttributes<HTMLInputElement> {
-  /**
-   * Layout variant of the checkbox
-   */
-  variant?: Variant;
 
   /**
    * Checkbox label text
@@ -116,9 +110,9 @@ CheckboxBase.defaultProps = {
 };
 
 /**
- * Filled variant
+ * Default variant
  */
-const FilledCheckbox = styled(CheckboxBase)<InnerProps>`
+const CheckboxComponent = styled(CheckboxBase)<InnerProps>`
   ${calculateSizes}
   border: none;
   color: ${(props) => props.theme.colors.neutral};
@@ -136,79 +130,6 @@ const FilledCheckbox = styled(CheckboxBase)<InnerProps>`
   &:disabled {
     background-color: ${(props) => props.theme.colors.digitalBlack300};
     color: ${(props) => props.theme.colors.digitalBlack200};
-    cursor: default;
-  }
-`;
-
-/**
- * Outlined variant
- */
-const OutlinedCheckbox = styled(CheckboxBase)<InnerProps>`
-  ${(props) => calculateSizes(props, checkboxDimensions.borderWidth)}
-  color: ${(props) => props.theme.colors.digitalBlack900};
-  background-color: ${(props) => props.theme.colors.neutral};
-  border: ${pxToRem(checkboxDimensions.borderWidth)} solid
-    ${(props) => props.theme.colors.digitalBlack900};
-
-  &:focus-visible,
-  &:hover:not(:disabled) {
-    color: ${(props) => props.theme.colors.digitalBlack};
-    border-color: ${(props) => props.theme.colors.digitalBlack};
-    background-color: ${(props) => props.theme.colors.digitalBlack100};
-  }
-
-  &:active:not(:disabled) {
-    border-color: ${(props) => props.theme.colors.digitalBlack400};
-    background-color: ${(props) => props.theme.colors.digitalBlack100};
-  }
-
-  &:disabled {
-    color: ${(props) => props.theme.colors.digitalBlack300};
-    border-color: ${(props) => props.theme.colors.digitalBlack300};
-    cursor: default;
-  }
-`;
-
-/**
- * Text variant
- */
-const TextCheckbox = styled(CheckboxBase)<InnerProps>`
-  ${(props) => calculateSizes(props)}
-  color: ${(props) => props.theme.colors.digitalBlack900};
-  background-color: transparent;
-  border: none;
-  border-bottom: ${pxToRem(checkboxDimensions.borderWidth)} solid transparent;
-  ${variant({
-    prop: 'size',
-    /* Override bottom padding */
-    variants: {
-      small: {
-        paddingBottom: spacing(
-          checkboxDimensions.small.spacing -
-            convertToSpacingUnit(checkboxDimensions.borderWidth)
-        ),
-      },
-      large: {
-        paddingBottom: spacing(
-          checkboxDimensions.large.spacing -
-            convertToSpacingUnit(checkboxDimensions.borderWidth)
-        ),
-      },
-    },
-  })};
-
-  &:focus-visible,
-  &:hover:not(:disabled):not(:active) {
-    color: ${(props) => props.theme.colors.digitalBlack};
-    border-bottom-color: ${(props) => props.theme.colors.digitalBlack};
-  }
-
-  &:active:not(:disabled) {
-    border-bottom-color: ${(props) => props.theme.colors.digitalBlack400};
-  }
-
-  &:disabled {
-    color: ${(props) => props.theme.colors.digitalBlack300};
     cursor: default;
   }
 `;
@@ -236,18 +157,6 @@ export const Checkbox = ({
     setChecked(!boxChecked);
   };
 
-  let CheckboxComponent;
-  switch (variant) {
-    case 'filled':
-      CheckboxComponent = FilledCheckbox;
-      break;
-    case 'outlined':
-      CheckboxComponent = OutlinedCheckbox;
-      break;
-    case 'text':
-      CheckboxComponent = TextCheckbox;
-      break;
-  }
   return (
     <>
       {boxChecked && !indeterminate && <MdCheckBox onClick={checkboxClicked}/>}

@@ -51,17 +51,6 @@ Outlined.parameters = {
 };
 
 /**
- * Outlined with end icon
- */
-export const OutlinedWithEndIcon = Template.bind({});
-OutlinedWithEndIcon.args = {
-  variant: 'outlined',
-  endIcon: <MdAdd />,
-};
-
-OutlinedWithEndIcon.parameters = Outlined.parameters;
-
-/**
  * Filled
  */
 export const Filled = Template.bind({});
@@ -106,40 +95,6 @@ Text.parameters = {
       url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61078&t=jaciSdrjiv4kZ1qN-4',
     },
   ],
-};
-
-/**
- * Outlined checkbox clicked
- */
-export const OutlinedClicked = Template.bind({});
-OutlinedClicked.args = {
-  variant: 'outlined',
-  onClick: jest.fn(),
-};
-
-OutlinedClicked.play = async ({ args, canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('checkbox'));
-  await waitFor(() => expect(args.onClick).toHaveBeenCalled());
-};
-
-/**
- * Outlined checkbox disabled
- */
-export const OutlinedDisabled = Template.bind({});
-OutlinedDisabled.args = {
-  variant: 'outlined',
-  disabled: true,
-};
-
-OutlinedDisabled.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('checkbox'));
-  expect(canvas.getByRole('checkbox')).toBeDisabled();
 };
 
 /**
