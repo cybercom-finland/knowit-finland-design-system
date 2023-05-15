@@ -1,11 +1,7 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { within, userEvent, waitFor } from '@storybook/testing-library';
-import { expect, jest } from '@storybook/jest';
-
 import { Checkbox } from './Checkbox';
-import { MdAdd } from 'react-icons/md';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

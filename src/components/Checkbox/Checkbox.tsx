@@ -12,22 +12,18 @@ import {
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
+import { Wrapper } from 'components/Wrapper';
 
 /**
  * Various dimensions of checkbox component
  */
 const checkboxDimensions = {
-  borderWidth: 3,
   contentSpacing: spacing(1),
   small: {
-    fontSize: pxToRem(14),
-    lineHeight: pxToRem(16),
-    spacing: 1.5,
+    fontSize: pxToRem(16),
   },
   large: {
-    fontSize: pxToRem(22),
-    lineHeight: pxToRem(25),
-    spacing: 2,
+    fontSize: pxToRem(24),
   },
 };
 
@@ -72,29 +68,21 @@ export interface CheckboxProps
 }
 
 /**
- * Helper function to calculate correct sizes for padding, font size and lineHeight
+ * Helper function to calculate correct sizes for font size
  * @param props mandatory checkbox props
  * @param borderSize Border width if specified
  * @returns modified css
  */
-const calculateSizes = (props: InnerProps, borderSize?: number) => {
+const calculateSizes = (props: InnerProps) => {
   return css`
     ${variant({
       prop: 'size',
       variants: {
         small: {
-          padding: spacing(
-            checkboxDimensions.small.spacing - convertToSpacingUnit(borderSize)
-          ),
           fontSize: checkboxDimensions.small.fontSize,
-          lineHeight: checkboxDimensions.small.lineHeight,
         },
         large: {
-          padding: spacing(
-            checkboxDimensions.large.spacing - convertToSpacingUnit(borderSize)
-          ),
           fontSize: checkboxDimensions.large.fontSize,
-          lineHeight: checkboxDimensions.large.lineHeight,
         },
       },
     })};
@@ -149,10 +137,10 @@ const CheckboxComponent = styled(CheckboxBase)<InnerProps>`
  */
 export const Checkbox = ({
   label,
-  checked,
-  indeterminate,
-  disabled,
-  ...props
+  checked = false,
+  indeterminate = false,
+  disabled = false,
+  ...restProps
 }: CheckboxProps) => {
 
   const [boxChecked, setChecked] = React.useState(true);
@@ -167,13 +155,12 @@ export const Checkbox = ({
   };
 
   return (
-    <>
-      {boxChecked && !indeterminate && <MdCheckBox onClick={checkboxClicked}/>}
-      {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank onClick={checkboxClicked}/>}
-      {indeterminate && <MdIndeterminateCheckBox onClick={checkboxClicked}/>}
-      <CheckboxComponent checked={boxChecked} readOnly {...props}/>
+    <Wrapper onClick={checkboxClicked}>
+      {boxChecked && !indeterminate && <MdCheckBox/>}
+      {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank/>}
+      {indeterminate && <MdIndeterminateCheckBox />}
+      <CheckboxComponent checked={boxChecked} readOnly {...restProps}/>
       {label}
-      
-    </>
+    </Wrapper>
   );
 };
