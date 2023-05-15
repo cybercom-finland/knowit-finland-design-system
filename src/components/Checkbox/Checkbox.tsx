@@ -103,9 +103,9 @@ const calculateSizes = (props: InnerProps, borderSize?: number) => {
 
 /**
  * Internal component styling
- * display: none !important;
  */
 const CheckboxBase = styled.input<InnerProps>`
+  display: none !important;
   font-family: ${typography.font};
   font-weight: ${typography.weight.regular};
   cursor: pointer;
