@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import {
@@ -44,6 +44,11 @@ interface InnerProps {
    * Checkbox is indeterminate state
    */
   indeterminate?: boolean;
+
+  /**
+   * Change event handler passed from internal component
+   */
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -58,7 +63,12 @@ export interface CheckboxProps
   /**
    * Checkbox label text
    */
-  label: string;
+  label?: string;
+
+  /**
+   * Checkbox is checked
+   */
+  checked?: boolean;
 }
 
 /**
@@ -139,7 +149,6 @@ const CheckboxComponent = styled(CheckboxBase)<InnerProps>`
  */
 export const Checkbox = ({
   label,
-  variant = 'filled',
   checked,
   indeterminate,
   disabled,
