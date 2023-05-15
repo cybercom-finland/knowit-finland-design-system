@@ -18,6 +18,8 @@ export default {
   args: {
     label: 'Checkbox',
     disabled: false,
+    indeterminate: false,
+    checked: false,
   },
   decorators: [withDesign],
 } as Meta<typeof Checkbox>;

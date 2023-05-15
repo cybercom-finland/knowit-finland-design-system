@@ -13,6 +13,7 @@ import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
+import { func } from 'prop-types';
 
 /**
  * Various dimensions of checkbox component
@@ -220,6 +221,7 @@ export const Checkbox = ({
   variant = 'filled',
   checked,
   indeterminate,
+  disabled,
   ...props
 }: CheckboxProps) => {
 
@@ -228,6 +230,11 @@ export const Checkbox = ({
   React.useEffect(() => {
     setChecked(!!checked)
   }, [checked])
+
+  const checkboxClicked = () => {
+    if(disabled) return;
+    setChecked(!boxChecked);
+  };
 
   let CheckboxComponent;
   switch (variant) {
@@ -243,9 +250,9 @@ export const Checkbox = ({
   }
   return (
     <>
-      {boxChecked && !indeterminate && <MdCheckBox onClick={(target) => {setChecked(!boxChecked)}}/>}
-      {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank onClick={(target) => {setChecked(!boxChecked)}}/>}
-      {indeterminate && <MdIndeterminateCheckBox onClick={(target) => {setChecked(!boxChecked)}}/>}
+      {boxChecked && !indeterminate && <MdCheckBox onClick={checkboxClicked}/>}
+      {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank onClick={checkboxClicked}/>}
+      {indeterminate && <MdIndeterminateCheckBox onClick={checkboxClicked}/>}
       <CheckboxComponent checked={boxChecked} readOnly {...props}/>
       {label}
       
