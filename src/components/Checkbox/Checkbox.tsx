@@ -85,8 +85,8 @@ const calculateSizes = (props: InnerProps) => {
   `;
 };
 /**
- * Helper function to calculate correct sizes for font size
- * @param props mandatory checkbox props
+ * Helper function for checkbox disabled styles
+ * @param props mandatory checkbox props and theme props
  * @returns modified css
  */
 //TODO: find out real type
