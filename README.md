@@ -10,6 +10,7 @@ To run the app in development mode, run the following commands:
 
 ```bash
 npm install
+npm run prepare
 npm run storybook
 ```
 

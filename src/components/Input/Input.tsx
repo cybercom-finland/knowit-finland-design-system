@@ -330,7 +330,7 @@ export const Input = ({
   return (
     <Wrapper width={width}>
       <InputWrapper
-        id={id}
+        id={componentId}
         label={label}
         helperText={helperText}
         disabled={disabled}
