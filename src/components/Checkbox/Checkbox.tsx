@@ -1,16 +1,11 @@
 import React, { ChangeEventHandler } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { ThemeProps, css } from 'styled-components';
 import { variant } from 'styled-system';
-import {
-  spacing,
-  convertToSpacingUnit,
-  pxToRem,
-  typography,
-  Variant,
-} from 'shared';
+import { spacing, pxToRem, typography } from 'shared';
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
+import { Label } from 'components/Label';
 
 /**
  * Various dimensions of checkbox component
@@ -91,9 +86,34 @@ const calculateSizes = (props: InnerProps) => {
     })};
   `;
 };
+/**
+ * Helper function to calculate correct sizes for font size
+ * @param props mandatory checkbox props
+ * @returns modified css
+ */
+//TODO: find out real type
+const isDisabled = (props: ThemeProps<any> & InnerProps) => {
+  return css`
+    ${variant({
+      prop: 'disabled',
+      variants: {
+        true: {
+          color: props.theme.colors.digitalBlack300,
+          cursor: 'default',
+        },
+        false: {
+          color: props.theme.colors.digitalBlack,
+          cursor: 'pointer',
+        },
+      },
+    })};
+  `;
+};
 
 const Wrapper = styled.span<InnerProps>`
   ${calculateSizes}
+  ${isDisabled}
+  display: flex;
   font-family: ${typography.font};
   font-weight: ${typography.weight.regular};
   cursor: pointer;
@@ -101,14 +121,7 @@ const Wrapper = styled.span<InnerProps>`
   align-items: center;
   gap: ${checkboxDimensions.contentSpacing};
   border: none;
-  color: ${(props) => props.theme.colors.digitalBlack900};
   background-color: ${(props) => props.theme.colors.neutral};
-
-  &:disabled {
-    background-color: ${(props) => props.theme.colors.digitalBlack300};
-    color: ${(props) => props.theme.colors.digitalBlack200};
-    cursor: default;
-  }
 `;
 
 /**
@@ -146,14 +159,12 @@ export const Checkbox = ({
   };
 
   return (
-    <>
-      <Wrapper onClick={checkboxClicked} size={size}>
-        {boxChecked && !indeterminate && <MdCheckBox />}
-        {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
-        {indeterminate && <MdIndeterminateCheckBox />}
-        <CheckboxComponent checked={boxChecked} readOnly {...restProps} />
-      </Wrapper>
-      {label}
-    </>
+    <Wrapper onClick={checkboxClicked} size={size} disabled={disabled}>
+      {boxChecked && !indeterminate && <MdCheckBox />}
+      {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
+      {indeterminate && <MdIndeterminateCheckBox />}
+      <CheckboxComponent checked={boxChecked} readOnly {...restProps} />
+      <Label disabled={disabled}>{label}</Label>
+    </Wrapper>
   );
 };
