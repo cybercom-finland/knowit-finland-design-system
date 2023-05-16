@@ -6,7 +6,6 @@ import {
   convertToSpacingUnit,
   pxToRem,
   typography,
-  Size,
   Variant,
 } from 'shared';
 import { MdCheckBox } from 'react-icons/md';
@@ -26,6 +25,8 @@ const checkboxDimensions = {
   },
 };
 
+type Size = 'small' | 'large';
+
 /**
  * Internal properties for styles
  */
@@ -41,6 +42,11 @@ interface InnerProps {
   indeterminate?: boolean;
 
   /**
+   * Size of checkbox
+   */
+  size?: Size;
+
+  /**
    * Change event handler passed from internal component
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -49,11 +55,11 @@ interface InnerProps {
 /**
  * Checkbox component properties
  * Extrends html input element attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#additional_attributes
  */
 export interface CheckboxProps
   extends InnerProps,
-    React.InputHTMLAttributes<HTMLInputElement> {
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   /**
    * Checkbox label text
    */
@@ -68,7 +74,6 @@ export interface CheckboxProps
 /**
  * Helper function to calculate correct sizes for font size
  * @param props mandatory checkbox props
- * @param borderSize Border width if specified
  * @returns modified css
  */
 const calculateSizes = (props: InnerProps) => {
@@ -87,27 +92,17 @@ const calculateSizes = (props: InnerProps) => {
   `;
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.span<InnerProps>`
+  ${calculateSizes}
   font-family: ${typography.font};
   font-weight: ${typography.weight.regular};
   cursor: pointer;
-  display: flex;
   box-sizing: border-box;
   align-items: center;
   gap: ${checkboxDimensions.contentSpacing};
-  ${calculateSizes}
   border: none;
-  color: ${(props) => props.theme.colors.neutral};
-  background-color: ${(props) => props.theme.colors.digitalBlack900};
-
-  &:focus-visible,
-  &:hover:not(:disabled):not(:active) {
-    background-color: ${(props) => props.theme.colors.digitalBlack};
-  }
-
-  &:active:not(:disabled) {
-    background-color: ${(props) => props.theme.colors.digitalBlack400};
-  }
+  color: ${(props) => props.theme.colors.digitalBlack900};
+  background-color: ${(props) => props.theme.colors.neutral};
 
   &:disabled {
     background-color: ${(props) => props.theme.colors.digitalBlack300};
@@ -133,9 +128,9 @@ CheckboxComponent.defaultProps = {
 export const Checkbox = ({
   label,
   checked = false,
-  indeterminate = false,
   disabled = false,
-  size = 18,
+  indeterminate = false,
+  size = 'small',
   ...restProps
 }: CheckboxProps) => {
   const [boxChecked, setChecked] = React.useState(true);
@@ -152,7 +147,7 @@ export const Checkbox = ({
 
   return (
     <>
-      <Wrapper onClick={checkboxClicked}>
+      <Wrapper onClick={checkboxClicked} size={size}>
         {boxChecked && !indeterminate && <MdCheckBox />}
         {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
         {indeterminate && <MdIndeterminateCheckBox />}

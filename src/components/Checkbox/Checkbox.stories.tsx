@@ -16,13 +16,13 @@ export default {
     label: 'Checkbox',
     disabled: false,
     indeterminate: false,
+    size: 'large',
   },
   decorators: [withDesign],
 } as Meta<typeof Checkbox>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Checkbox> = (args) => <Checkbox {...args} />;
-
 
 /**
  * Default variant (not specified)
