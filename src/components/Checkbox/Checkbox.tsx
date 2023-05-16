@@ -156,7 +156,7 @@ export const Checkbox = ({
       {boxChecked && !indeterminate && <MdCheckBox />}
       {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
       {indeterminate && <MdIndeterminateCheckBox />}
-      <CheckboxComponent checked={boxChecked} {...restProps} />
+      <CheckboxComponent type={type} checked={boxChecked} {...restProps} />
       <Label disabled={disabled}>{label}</Label>
     </CheckboxWrapper>
   );
