@@ -111,10 +111,9 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
 const CheckboxWrapper = styled.span<InnerProps>`
   ${calculateSizes}
   ${isDisabled}
-  display: flex;
+  display: inline-flex;
   font-family: ${typography.font};
   font-weight: ${typography.weight.regular};
-  cursor: pointer;
   box-sizing: border-box;
   align-items: center;
   gap: ${checkboxDimensions.contentSpacing};
@@ -128,10 +127,6 @@ const CheckboxComponent = styled.input<InnerProps>`
   display: none !important;
 `;
 
-CheckboxComponent.defaultProps = {
-  type: 'checkbox',
-};
-
 /**
  * Exported component
  */
@@ -141,9 +136,10 @@ export const Checkbox = ({
   disabled = false,
   indeterminate = false,
   size = 'small',
+  type = 'checkbox',
   ...restProps
 }: CheckboxProps) => {
-  const [boxChecked, setChecked] = React.useState(true);
+  const [boxChecked, setChecked] = React.useState(false);
 
   React.useEffect(() => {
     setChecked(!!checked);
