@@ -7,7 +7,7 @@ import { spacing, typography } from 'shared';
  * Extends global html attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span#attributes
  */
-interface HelperTextProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface HelperTextProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * Disabled
    */
@@ -44,6 +44,11 @@ const InnerHelperText = styled.span<HelperTextProps>`
  * @param props Helper text props
  * @returns Helper text component
  */
-export const HelperText = (props: HelperTextProps) => {
+export const HelperText = ({
+  disabled = false,
+  error = false,
+  ...restProps
+}: HelperTextProps) => {
+  const props = { disabled, error, ...restProps };
   return <InnerHelperText {...props} />;
 };

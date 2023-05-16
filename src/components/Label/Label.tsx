@@ -7,7 +7,8 @@ import { spacing, typography } from 'shared';
  * Extends html label attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#attributes
  */
-interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+export interface LabelProps
+  extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * Disabled state
    */
@@ -16,6 +17,11 @@ interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
    * Error state
    */
   error?: boolean;
+
+  /**
+   * Show required marker on Label
+   */
+  required?: boolean;
 }
 
 /**
@@ -36,7 +42,15 @@ const InnerLabel = styled.label<LabelProps>`
       ? css`
           color: ${(props) => props.theme.colors.digitalBlack300};
         `
-      : ''}
+      : ''};
+  ${({ required }) =>
+    required &&
+    css`
+      &::after {
+        margin-left: ${spacing(0.5)};
+        content: '*';
+      }
+    `}
 `;
 
 /**
@@ -44,6 +58,12 @@ const InnerLabel = styled.label<LabelProps>`
  * @param props Label props
  * @returns Label component
  */
-export const Label = (props: LabelProps) => {
+export const Label = ({
+  disabled = false,
+  error = false,
+  required = false,
+  ...restProps
+}: LabelProps) => {
+  const props = { disabled, error, required, ...restProps };
   return <InnerLabel {...props} />;
 };

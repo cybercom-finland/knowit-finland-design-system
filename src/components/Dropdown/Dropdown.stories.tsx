@@ -23,7 +23,6 @@ export default {
     label: 'Label',
     helperText: 'Helper text',
     error: false,
-    readOnly: false,
     required: false,
     width: 300,
     options: TemplateOptions,
