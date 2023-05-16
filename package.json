@@ -34,6 +34,17 @@
       }
     ]
   },
+  "lint-staged": {
+    "**/*.{js,jsx,json}": [
+      "eslint . --fix",
+      "prettier --write ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -49,10 +60,10 @@
   "devDependencies": {
     "@storybook/addon-a11y": "^7.0.10",
     "@storybook/addon-actions": "^7.0.10",
+    "@storybook/addon-coverage": "^0.0.8",
     "@storybook/addon-essentials": "^7.0.10",
     "@storybook/addon-interactions": "^7.0.10",
     "@storybook/addon-links": "^7.0.10",
-    "@storybook/addon-coverage": "^0.0.8",
     "@storybook/jest": "^0.1.0",
     "@storybook/node-logger": "^7.0.10",
     "@storybook/preset-create-react-app": "^7.0.10",
@@ -77,8 +88,10 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-storybook": "^0.6.12",
+    "husky": "^8.0.3",
     "jest-environment-node": "^29.5.0",
     "jest-runner": "^29.5.0",
+    "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
     "react-scripts": "^5.0.1",
