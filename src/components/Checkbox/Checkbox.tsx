@@ -12,7 +12,6 @@ import {
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
-import { Wrapper } from 'components/Wrapper';
 
 /**
  * Various dimensions of checkbox component
@@ -55,7 +54,6 @@ interface InnerProps {
 export interface CheckboxProps
   extends InnerProps,
     React.InputHTMLAttributes<HTMLInputElement> {
-
   /**
    * Checkbox label text
    */
@@ -89,11 +87,7 @@ const calculateSizes = (props: InnerProps) => {
   `;
 };
 
-/**
- * Internal component styling
- */
-const CheckboxBase = styled.input<InnerProps>`
-  display: none !important;
+const Wrapper = styled.div`
   font-family: ${typography.font};
   font-weight: ${typography.weight.regular};
   cursor: pointer;
@@ -101,16 +95,6 @@ const CheckboxBase = styled.input<InnerProps>`
   box-sizing: border-box;
   align-items: center;
   gap: ${checkboxDimensions.contentSpacing};
-`;
-
-CheckboxBase.defaultProps = {
-  type: "checkbox"
-};
-
-/**
- * Default variant
- */
-const CheckboxComponent = styled(CheckboxBase)<InnerProps>`
   ${calculateSizes}
   border: none;
   color: ${(props) => props.theme.colors.neutral};
@@ -133,6 +117,17 @@ const CheckboxComponent = styled(CheckboxBase)<InnerProps>`
 `;
 
 /**
+ * Internal component styling
+ */
+const CheckboxComponent = styled.input<InnerProps>`
+  display: none !important;
+`;
+
+CheckboxComponent.defaultProps = {
+  type: 'checkbox',
+};
+
+/**
  * Exported component
  */
 export const Checkbox = ({
@@ -140,27 +135,30 @@ export const Checkbox = ({
   checked = false,
   indeterminate = false,
   disabled = false,
+  size = 18,
   ...restProps
 }: CheckboxProps) => {
-
   const [boxChecked, setChecked] = React.useState(true);
 
   React.useEffect(() => {
-    setChecked(!!checked)
-  }, [checked])
+    setChecked(!!checked);
+  }, [checked]);
 
   const checkboxClicked = () => {
-    if(disabled) return;
+    if (disabled) return;
+    checked = !boxChecked;
     setChecked(!boxChecked);
   };
 
   return (
-    <Wrapper onClick={checkboxClicked}>
-      {boxChecked && !indeterminate && <MdCheckBox/>}
-      {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank/>}
-      {indeterminate && <MdIndeterminateCheckBox />}
-      <CheckboxComponent checked={boxChecked} readOnly {...restProps}/>
+    <>
+      <Wrapper onClick={checkboxClicked}>
+        {boxChecked && !indeterminate && <MdCheckBox />}
+        {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
+        {indeterminate && <MdIndeterminateCheckBox />}
+        <CheckboxComponent checked={boxChecked} readOnly {...restProps} />
+      </Wrapper>
       {label}
-    </Wrapper>
+    </>
   );
 };
