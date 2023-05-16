@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler } from 'react';
 import styled, { ThemeProps, css } from 'styled-components';
 import { variant } from 'styled-system';
-import { spacing, pxToRem, typography } from 'shared';
+import { spacing, pxToRem, typography, Size } from 'shared';
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
@@ -20,8 +20,6 @@ const checkboxDimensions = {
   },
 };
 
-type Size = 'small' | 'large';
-
 /**
  * Internal properties for styles
  */
@@ -39,7 +37,7 @@ interface InnerProps {
   /**
    * Size of checkbox
    */
-  size?: Size;
+  size?: Exclude<Size, 'medium'>;
 
   /**
    * Change event handler passed from internal component
@@ -110,7 +108,7 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
   `;
 };
 
-const Wrapper = styled.span<InnerProps>`
+const CheckboxWrapper = styled.span<InnerProps>`
   ${calculateSizes}
   ${isDisabled}
   display: flex;
@@ -121,7 +119,6 @@ const Wrapper = styled.span<InnerProps>`
   align-items: center;
   gap: ${checkboxDimensions.contentSpacing};
   border: none;
-  background-color: ${(props) => props.theme.colors.neutral};
 `;
 
 /**
@@ -159,12 +156,12 @@ export const Checkbox = ({
   };
 
   return (
-    <Wrapper onClick={checkboxClicked} size={size} disabled={disabled}>
+    <CheckboxWrapper onClick={checkboxClicked} size={size} disabled={disabled}>
       {boxChecked && !indeterminate && <MdCheckBox />}
       {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
       {indeterminate && <MdIndeterminateCheckBox />}
-      <CheckboxComponent checked={boxChecked} readOnly {...restProps} />
+      <CheckboxComponent checked={boxChecked} {...restProps} />
       <Label disabled={disabled}>{label}</Label>
-    </Wrapper>
+    </CheckboxWrapper>
   );
 };
