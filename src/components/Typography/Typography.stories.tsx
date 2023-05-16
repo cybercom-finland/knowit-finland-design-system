@@ -63,7 +63,7 @@ Caption.args = {
 
 export const DefaultVariant = Template.bind({});
 DefaultVariant.args = {
-  children: 'Variant arg not specified'
+  children: 'Variant arg not specified',
 };
 
 Heading1.storyName = 'Typography';
