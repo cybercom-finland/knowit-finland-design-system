@@ -20,6 +20,20 @@ export default {
     disabled: false,
     'aria-label': 'Add descriptive text for action',
   },
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1623-20367&t=Iduz1FwfMKfnxndl-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1623-20368&t=Iduz1FwfMKfnxndl-4',
+      },
+    ],
+  },
   decorators: [withDesign],
 } as Meta<typeof IconButton>;
 
@@ -34,21 +48,6 @@ Default.args = {
   children: <MdAdd />,
 };
 
-Default.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1623-20367&t=Iduz1FwfMKfnxndl-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1623-20368&t=Iduz1FwfMKfnxndl-4',
-    },
-  ],
-};
-
 /**
  * Large
  */
@@ -58,8 +57,6 @@ Large.args = {
   size: 'large',
   children: <MdAdd />,
 };
-
-Large.parameters = Default.parameters;
 
 /**
  * Button clicked
@@ -86,8 +83,6 @@ Disabled.args = {
   disabled: true,
   children: <MdAdd />,
 };
-
-Disabled.parameters = Default.parameters;
 
 Disabled.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
