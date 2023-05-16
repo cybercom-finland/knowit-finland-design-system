@@ -140,7 +140,7 @@ export const Dropdown = ({
   return (
     <Wrapper margin={margin} width={width}>
       <InputWrapper
-        id={id}
+        id={componentId}
         label={label}
         helperText={helperText}
         disabled={disabled}
