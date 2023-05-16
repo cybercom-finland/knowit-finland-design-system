@@ -16,7 +16,8 @@
     "storybook": "storybook dev -p 6006 -s public",
     "build-storybook": "storybook build -s public",
     "test-storybook": "test-storybook",
-    "chromatic": "chromatic --exit-zero-on-changes"
+    "chromatic": "chromatic --exit-zero-on-changes",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -88,7 +89,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-storybook": "^0.6.12",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "jest-environment-node": "^29.5.0",
     "jest-runner": "^29.5.0",
     "lint-staged": "^13.2.2",
