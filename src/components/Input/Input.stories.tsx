@@ -101,12 +101,13 @@ OutlinedWithContent.play = async ({ canvasElement }) => {
 /**
  * Outlined required
  */
-export const Required = Template.bind({});
-Required.args = {
+export const OutlinedRequired = Template.bind({});
+OutlinedRequired.args = {
+  variant: 'outlined',
   required: true,
 };
 
-Required.parameters = Outlined.parameters;
+OutlinedRequired.parameters = Outlined.parameters;
 
 /**
  * Filled
