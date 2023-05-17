@@ -53,6 +53,14 @@ Disabled.args = {
   children: 'Label for disabled input',
   disabled: true,
 };
+Disabled.parameters = {
+  a11y: {
+    config: {
+      // Element has disabled attribute for screen readers, so contrast can be ignored
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
 /**
  * Error

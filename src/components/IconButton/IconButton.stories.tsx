@@ -83,6 +83,14 @@ Disabled.args = {
   disabled: true,
   children: <MdAdd />,
 };
+Disabled.parameters = {
+  a11y: {
+    config: {
+      // Element has disabled attribute for screen readers, so contrast can be ignored
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
 Disabled.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
