@@ -15,11 +15,11 @@ const TemplateOptions: DropdownOption[] = [
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Dropdown',
+  title: 'Components/DropdownMenu',
   component: Dropdown,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    placeholder: 'Default Dropdown',
+    placeholder: 'Default Dropdown menu',
     label: 'Label',
     helperText: 'Helper text',
     error: false,
