@@ -12,6 +12,20 @@ export default {
   argTypes: {
     children: { control: 'text' },
   },
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1155-15667&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1466-85449&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
   decorators: [withDesign],
 } as Meta<typeof Typography>;
 
@@ -64,21 +78,4 @@ Caption.args = {
 export const DefaultVariant = Template.bind({});
 DefaultVariant.args = {
   children: 'Variant arg not specified',
-};
-
-Heading1.storyName = 'Typography';
-
-Heading1.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1155-15667&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1466-85449&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
 };
