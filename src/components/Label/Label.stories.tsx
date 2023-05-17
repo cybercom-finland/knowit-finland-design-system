@@ -73,6 +73,17 @@ Error.args = {
 };
 
 /**
+ * Error disabled
+ */
+export const ErrorDisabled = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+ErrorDisabled.args = {
+  children: 'Label for input with error',
+  error: true,
+  disabled: true,
+};
+
+/**
  * Required
  */
 export const Required = Template.bind({});
