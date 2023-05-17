@@ -29,12 +29,12 @@ const config: TestRunnerConfig = {
           // Don't test contrast (accessibility) for elements that correctly have disabled attribute
           'color-contrast': {
             enabled: false,
-            selector: '[disabled]'
-          }
-        }
+            selector: '[disabled]',
+          },
+        },
       },
-      verbose: false // Don't make a lot of lines to console about every successful test
-    })
+      verbose: false, // Don't make a lot of lines to console about every successful test
+    });
   },
 };
 
