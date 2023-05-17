@@ -28,6 +28,14 @@ Disabled.args = {
   children: 'Disabled',
   disabled: true,
 };
+Disabled.parameters = {
+  a11y: {
+    config: {
+      // Element has disabled attribute for screen readers, so contrast can be ignored
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
 export const Error = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
