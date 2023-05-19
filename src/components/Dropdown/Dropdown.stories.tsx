@@ -4,7 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 
 import { Dropdown, DropdownOption } from './Dropdown';
 import { MdInfo } from 'react-icons/md';
-import { pxToRem } from 'shared';
+import { pxToRem } from '../../shared';
 
 const TemplateOptions: DropdownOption[] = [
   { label: 'One', value: 1 },

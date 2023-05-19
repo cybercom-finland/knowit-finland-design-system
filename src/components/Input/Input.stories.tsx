@@ -6,7 +6,7 @@ import { expect } from '@storybook/jest';
 
 import { Input } from './Input';
 import { MdLock } from 'react-icons/md';
-import { pxToRem } from 'shared';
+import { pxToRem } from '../../shared';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

@@ -8,7 +8,7 @@ import {
   typography,
   Size,
   Variant,
-} from 'shared';
+} from '../../shared';
 
 /**
  * Various dimensions of button component

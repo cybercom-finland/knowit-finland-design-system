@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { generateRandomString } from 'shared';
+import { generateRandomString } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
-import { HelperText } from 'components/HelperText';
+import { HelperText } from '../HelperText';
 import {
   FilledInputStyles,
   InputBaseProps,
   InputRow,
   OutlinedInputStyles,
   baseInputStyles,
-} from 'components/Input';
+} from '../Input';
 
 /**
  * Internal component styling
