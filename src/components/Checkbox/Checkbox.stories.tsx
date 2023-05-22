@@ -14,6 +14,7 @@ export default {
   args: {
     checked: false,
     label: 'Checkbox',
+    helperText: 'helper',
     disabled: false,
     indeterminate: false,
     size: 'large',

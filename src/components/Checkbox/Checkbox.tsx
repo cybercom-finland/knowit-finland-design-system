@@ -1,17 +1,20 @@
 import React, { ChangeEventHandler } from 'react';
 import styled, { ThemeProps, css } from 'styled-components';
-import { variant } from 'styled-system';
+import { Theme, variant } from 'styled-system';
 import { spacing, pxToRem, typography, Size } from 'shared';
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
 import { Label } from 'components/Label';
+import { HelperText } from 'components/HelperText';
 
 /**
  * Various dimensions of checkbox component
  */
 const checkboxDimensions = {
   contentSpacing: spacing(1),
+  checkboxMargin: pxToRem(21.1),
+  helperTextFontSize: pxToRem(14),
   small: {
     fontSize: pxToRem(16),
   },
@@ -38,6 +41,11 @@ interface InnerProps {
    * Size of checkbox
    */
   size?: Exclude<Size, 'medium'>;
+
+  /**
+   * Checkbox helper text
+   */
+  helperText?: string;
 
   /**
    * Change event handler passed from internal component
@@ -89,7 +97,6 @@ const calculateSizes = (props: InnerProps) => {
  * @param props mandatory checkbox props and theme props
  * @returns modified css
  */
-//TODO: find out real type
 const isDisabled = (props: ThemeProps<any> & InnerProps) => {
   return css`
     ${variant({
@@ -108,6 +115,20 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
   `;
 };
 
+/**
+ * calculate checkbox placement margin based on helper text
+ * @param props mandatory checkbox props
+ * @returns modified css
+ */
+const calculateMargin = (props: InnerProps) => {
+  return css`
+    margin-bottom: ${(props) =>
+      props.helperText == undefined || props.helperText == ''
+        ? 0
+        : checkboxDimensions.checkboxMargin};
+  `;
+};
+
 const CheckboxWrapper = styled.span<InnerProps>`
   ${calculateSizes}
   ${isDisabled}
@@ -118,6 +139,26 @@ const CheckboxWrapper = styled.span<InnerProps>`
   align-items: center;
   gap: ${checkboxDimensions.contentSpacing};
   border: none;
+`;
+
+/**
+ * Filled input component
+ */
+const CheckboxHelperText = styled(HelperText)`
+  font-size: ${checkboxDimensions.helperTextFontSize};
+`;
+
+/**
+ * Different types of checkbox icon component
+ */
+const CheckboxCheckedIcon = styled(MdCheckBox)`
+  ${calculateMargin}
+`;
+const CheckboxUncheckedIcon = styled(MdOutlineCheckBoxOutlineBlank)`
+  ${calculateMargin}
+`;
+const CheckboxIndeterminateIcon = styled(MdIndeterminateCheckBox)`
+  ${calculateMargin}
 `;
 
 /**
@@ -137,27 +178,40 @@ export const Checkbox = ({
   indeterminate = false,
   size = 'small',
   type = 'checkbox',
+  helperText,
   ...restProps
 }: CheckboxProps) => {
   const [boxChecked, setChecked] = React.useState(false);
 
+  // Sync checkbox to undelying input component
   React.useEffect(() => {
     setChecked(!!checked);
   }, [checked]);
 
+  // Handle onclick, sync with underlying input component
   const checkboxClicked = () => {
     if (disabled) return;
     checked = !boxChecked;
     setChecked(!boxChecked);
   };
 
+  //TODO add margin
   return (
     <CheckboxWrapper onClick={checkboxClicked} size={size} disabled={disabled}>
-      {boxChecked && !indeterminate && <MdCheckBox />}
-      {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
-      {indeterminate && <MdIndeterminateCheckBox />}
+      {boxChecked && !indeterminate && (
+        <CheckboxCheckedIcon helperText={helperText} />
+      )}
+      {!boxChecked && !indeterminate && (
+        <CheckboxUncheckedIcon helperText={helperText} />
+      )}
+      {indeterminate && <CheckboxIndeterminateIcon helperText={helperText} />}
       <CheckboxComponent type={type} checked={boxChecked} {...restProps} />
-      <Label disabled={disabled}>{label}</Label>
+      <div>
+        <Label disabled={disabled}>{label}</Label>
+        <CheckboxHelperText disabled={disabled}>
+          {helperText}
+        </CheckboxHelperText>
+      </div>
     </CheckboxWrapper>
   );
 };
