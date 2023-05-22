@@ -214,7 +214,6 @@ const CheckboxComponent = styled.input<InnerProps>`
  */
 export const Checkbox = ({
   id,
-  value,
   label,
   checked = false,
   disabled = false,
@@ -256,7 +255,6 @@ export const Checkbox = ({
       {indeterminate && <CheckboxIndeterminateIcon helperText={helperText} />}
       <CheckboxComponent
         id={`checkbox-${componentId}`}
-        value={value}
         aria-labelledby={label && `label-${componentId}`}
         aria-describedby={helperText && `helper-${componentId}`}
         type={'checkbox'}
