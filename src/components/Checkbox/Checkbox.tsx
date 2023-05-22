@@ -122,7 +122,7 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
  */
 const calculateMargin = (props: InnerProps) => {
   return css`
-    margin-bottom: ${(props) =>
+    margin-bottom: ${() =>
       props.helperText == undefined || props.helperText == ''
         ? 0
         : checkboxDimensions.checkboxMargin};
