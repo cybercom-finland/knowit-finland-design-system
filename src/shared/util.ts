@@ -1,4 +1,2 @@
 export const generateRandomString = (length: number) =>
-  Math.random()
-    .toString(36)
-    .substring(2, length + 2);
+  Array.from({ length: length }, () => Math.random().toString(36)[2]).join('');

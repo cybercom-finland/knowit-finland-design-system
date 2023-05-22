@@ -16,6 +16,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
+    "ts-jest": "^29.1.0",
     "react-dom": "^18.2.0"
   },
   "scripts": {
@@ -26,7 +27,8 @@
     "test-storybook": "test-storybook",
     "chromatic": "chromatic --exit-zero-on-changes",
     "prepare": "husky install",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
