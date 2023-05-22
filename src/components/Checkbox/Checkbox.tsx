@@ -159,7 +159,7 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
 };
 
 /**
- * calculate checkbox placement margin based on helper text
+ * calculate checkbox spacer width based on helper text
  * @param props mandatory checkbox props
  * @returns modified css
  */
@@ -198,7 +198,7 @@ const CheckboxHelperTextWrapper = styled(HelperText)`
   display: flex;
   width: fit-content;
   gap: ${checkboxDimensions.contentSpacing};
-  margin: -6px 0 0 0;
+  margin: ${pxToRem(-6)} 0 0 0;
 `;
 
 /**
