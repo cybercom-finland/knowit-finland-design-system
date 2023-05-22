@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { spacing, typography } from 'shared';
+import { spacing, typography } from '../../shared';
 
 /**
  * Helper text component properties

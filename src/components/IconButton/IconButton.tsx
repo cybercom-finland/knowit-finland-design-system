@@ -1,5 +1,5 @@
 import React from 'react';
-import { Size, pxToRem } from 'shared';
+import { Size, pxToRem } from '../../shared';
 import styled from 'styled-components';
 import { variant } from 'styled-system';
 

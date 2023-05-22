@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { typography } from 'shared';
+import { typography } from '../../shared';
 
 /**
  * Internal properties for styles

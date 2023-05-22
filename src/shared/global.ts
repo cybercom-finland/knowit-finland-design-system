@@ -1,5 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components';
-import { typography } from '.';
+import { typography } from './styles';
 
 export const bodyStyles = css`
   font-family: '${typography.font}', sans-serif;

@@ -8,10 +8,10 @@ import {
   convertToSpacingUnit,
   pxToRem,
   InputVariant,
-} from 'shared';
-import { Label } from 'components/Label';
-import { Wrapper, WrapperProps } from 'components/Wrapper';
-import { HelperText } from 'components/HelperText';
+} from '../../shared';
+import { Label } from '../Label';
+import { Wrapper, WrapperProps } from '../Wrapper';
+import { HelperText } from '../HelperText';
 
 /**
  * Input dimensions
