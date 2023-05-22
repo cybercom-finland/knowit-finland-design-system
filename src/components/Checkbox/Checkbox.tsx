@@ -19,7 +19,7 @@ import { HelperText } from '../HelperText';
  */
 const checkboxDimensions = {
   contentSpacing: spacing(1),
-  checkboxMargin: pxToRem(21.1),
+  checkboxWidth: pxToRem(21.1),
   helperTextFontSize: pxToRem(14),
   small: {
     fontSize: pxToRem(16),
@@ -162,11 +162,11 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
  * @param props mandatory checkbox props
  * @returns modified css
  */
-const calculateMargin = (props: InnerProps) => {
+const calculateWidth = (props: InnerProps) => {
   return css`
-    margin-bottom: ${props?.helperText?.length
-      ? checkboxDimensions.checkboxMargin
-      : 0};
+    width: ${props?.size == 'large'
+      ? checkboxDimensions.large.fontSize
+      : checkboxDimensions.small.fontSize};
   `;
 };
 
@@ -187,19 +187,18 @@ const CheckboxWrapper = styled.span<InnerProps>`
  */
 const CheckboxHelperText = styled(HelperText)`
   font-size: ${checkboxDimensions.helperTextFontSize};
+  margin: ${pxToRem(2)} 0 ${pxToRem(15)} 0;
 `;
 
-/**
- * Different types of checkbox icon component
- */
-const CheckboxCheckedIcon = styled(MdCheckBox)`
-  ${calculateMargin}
+const CheckboxHelperTextWrapper = styled(HelperText)`
+  display: flex;
+  gap: ${checkboxDimensions.contentSpacing};
+  line-height: ${pxToRem(0)};
+  margin: 0 0 0 0;
 `;
-const CheckboxUncheckedIcon = styled(MdOutlineCheckBoxOutlineBlank)`
-  ${calculateMargin}
-`;
-const CheckboxIndeterminateIcon = styled(MdIndeterminateCheckBox)`
-  ${calculateMargin}
+
+const CheckboxLabel = styled(Label)`
+  margin: 0 0 0 0;
 `;
 
 /**
@@ -207,6 +206,16 @@ const CheckboxIndeterminateIcon = styled(MdIndeterminateCheckBox)`
  */
 const CheckboxComponent = styled.input<InnerProps>`
   display: none !important;
+`;
+
+const HelperTextSpacer = styled.span<InnerProps>`
+  ${calculateWidth};
+  font-family: ${typography.font};
+  font-weight: ${typography.weight.regular};
+  box-sizing: border-box;
+  align-items: center;
+  gap: ${checkboxDimensions.contentSpacing};
+  border: none;
 `;
 
 /**
@@ -240,33 +249,32 @@ export const Checkbox = ({
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <CheckboxWrapper
-      id={componentId}
-      onClick={checkboxClicked}
-      size={size}
-      disabled={disabled}
-    >
-      {boxChecked && !indeterminate && (
-        <CheckboxCheckedIcon helperText={helperText} />
-      )}
-      {!boxChecked && !indeterminate && (
-        <CheckboxUncheckedIcon helperText={helperText} />
-      )}
-      {indeterminate && <CheckboxIndeterminateIcon helperText={helperText} />}
-      <CheckboxComponent
-        id={`checkbox-${componentId}`}
-        aria-labelledby={label && `label-${componentId}`}
-        aria-describedby={helperText && `helper-${componentId}`}
-        type={'checkbox'}
-        checked={boxChecked}
-        {...restProps}
-      />
-      <div>
-        <Label disabled={disabled}>{label}</Label>
+    <>
+      <CheckboxWrapper
+        id={componentId}
+        onClick={checkboxClicked}
+        size={size}
+        disabled={disabled}
+      >
+        {boxChecked && !indeterminate && <MdCheckBox />}
+        {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
+        {indeterminate && <MdIndeterminateCheckBox />}
+        <CheckboxComponent
+          id={`checkbox-${componentId}`}
+          aria-labelledby={label && `label-${componentId}`}
+          aria-describedby={helperText && `helper-${componentId}`}
+          type={'checkbox'}
+          checked={boxChecked}
+          {...restProps}
+        />
+        <CheckboxLabel disabled={disabled}>{label}</CheckboxLabel>
+      </CheckboxWrapper>
+      <CheckboxHelperTextWrapper>
+        <HelperTextSpacer size={size}></HelperTextSpacer>
         <CheckboxHelperText disabled={disabled}>
           {helperText}
         </CheckboxHelperText>
-      </div>
-    </CheckboxWrapper>
+      </CheckboxHelperTextWrapper>
+    </>
   );
 };

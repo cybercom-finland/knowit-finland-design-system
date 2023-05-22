@@ -13,8 +13,8 @@ export default {
   },
   args: {
     checked: false,
-    label: 'Checkbox',
-    helperText: 'helper',
+    label: 'Value',
+    helperText: 'Helper text',
     disabled: false,
     indeterminate: false,
     size: 'large',
