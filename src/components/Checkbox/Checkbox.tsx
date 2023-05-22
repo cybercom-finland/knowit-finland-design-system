@@ -140,6 +140,7 @@ const calculateSizes = (props: InnerProps) => {
  * @returns modified css
  */
 const isDisabled = (props: ThemeProps<any> & InnerProps) => {
+  console.log(props);
   return css`
     ${variant({
       prop: 'disabled',
@@ -182,23 +183,22 @@ const CheckboxWrapper = styled.span<InnerProps>`
   border: none;
 `;
 
-/**
- * Filled input component
- */
 const CheckboxHelperText = styled(HelperText)`
+  ${isDisabled}
+  pointer-events: auto;
   font-size: ${checkboxDimensions.helperTextFontSize};
-  margin: ${pxToRem(2)} 0 ${pxToRem(15)} 0;
-`;
-
-const CheckboxHelperTextWrapper = styled(HelperText)`
-  display: flex;
-  gap: ${checkboxDimensions.contentSpacing};
-  line-height: ${pxToRem(0)};
   margin: 0 0 0 0;
 `;
 
 const CheckboxLabel = styled(Label)`
   margin: 0 0 0 0;
+`;
+
+const CheckboxHelperTextWrapper = styled(HelperText)`
+  display: flex;
+  width: fit-content;
+  gap: ${checkboxDimensions.contentSpacing};
+  margin: -6px 0 0 0;
 `;
 
 /**
@@ -271,7 +271,7 @@ export const Checkbox = ({
       </CheckboxWrapper>
       <CheckboxHelperTextWrapper>
         <HelperTextSpacer size={size}></HelperTextSpacer>
-        <CheckboxHelperText disabled={disabled}>
+        <CheckboxHelperText disabled={disabled} onClick={checkboxClicked}>
           {helperText}
         </CheckboxHelperText>
       </CheckboxHelperTextWrapper>
