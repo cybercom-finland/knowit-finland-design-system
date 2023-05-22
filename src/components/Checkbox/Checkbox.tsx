@@ -19,7 +19,6 @@ import { HelperText } from '../HelperText';
  */
 const checkboxDimensions = {
   contentSpacing: spacing(1),
-  checkboxWidth: pxToRem(21.1),
   helperTextFontSize: pxToRem(14),
   small: {
     fontSize: pxToRem(16),
