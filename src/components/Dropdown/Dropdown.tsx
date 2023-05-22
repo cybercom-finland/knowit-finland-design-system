@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-import { spacing, typography, generateRandomString } from 'shared';
-import { Wrapper, WrapperProps } from 'components/Wrapper';
+import { spacing, typography, generateRandomString } from '../../shared';
+import { Wrapper, WrapperProps } from '../Wrapper';
 import {
   FilledInputStyles,
   InputBaseProps,
   InputWrapper,
   OutlinedInputStyles,
   baseInputStyles,
-} from 'components/Input';
+} from '../Input';
 
 /**
  * Main component

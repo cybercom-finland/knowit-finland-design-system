@@ -46,4 +46,6 @@ Please refer to the [CI/CD -automation documentation](https://www.chromatic.com/
 
 When you are making a pull request to the main branch, the first thing to do is to review the visual changes that the pull request introduces. This is done in the [Chromatic UI review](https://www.chromatic.com/docs/review).
 
+Accessibility tests are done by the storybook-addon-a11y package. Accessibility tests are also ran as part of test-storybook by the configured axe-playwright package.
+
 After accepting the changes in Chromatic, the code changes can be reviewed in Github. When the pull request is merged, the changes are automatically deployed.

@@ -4,7 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 
 import { Dropdown, DropdownOption } from './Dropdown';
 import { MdInfo } from 'react-icons/md';
-import { pxToRem } from 'shared';
+import { pxToRem } from '../../shared';
 
 const TemplateOptions: DropdownOption[] = [
   { label: 'One', value: 1 },
@@ -15,11 +15,11 @@ const TemplateOptions: DropdownOption[] = [
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Dropdown',
+  title: 'Components/DropdownMenu',
   component: Dropdown,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    placeholder: 'Default Dropdown',
+    placeholder: 'Default Dropdown menu',
     label: 'Label',
     helperText: 'Helper text',
     error: false,
@@ -145,6 +145,14 @@ export const Disabled = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Disabled.args = {
   disabled: true,
+};
+Disabled.parameters = {
+  a11y: {
+    config: {
+      // Element has disabled attribute for screen readers, so contrast can be ignored
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
 };
 
 /**

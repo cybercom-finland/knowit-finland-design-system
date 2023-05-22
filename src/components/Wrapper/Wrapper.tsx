@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { spacing } from 'shared';
+import { spacing } from '../../shared';
 
 /**
  * Properties of wrapper div of whole component
