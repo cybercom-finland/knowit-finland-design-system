@@ -60,7 +60,7 @@ interface InnerProps {
  */
 export interface CheckboxProps
   extends InnerProps,
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   /**
    * Checkbox label text
    */
@@ -122,10 +122,9 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
  */
 const calculateMargin = (props: InnerProps) => {
   return css`
-    margin-bottom: ${() =>
-      props.helperText == undefined || props.helperText == ''
-        ? 0
-        : checkboxDimensions.checkboxMargin};
+    margin-bottom: ${!props?.helperText?.length
+      ? 0
+      : checkboxDimensions.checkboxMargin};
   `;
 };
 
@@ -177,7 +176,6 @@ export const Checkbox = ({
   disabled = false,
   indeterminate = false,
   size = 'small',
-  type = 'checkbox',
   helperText,
   ...restProps
 }: CheckboxProps) => {
@@ -205,7 +203,11 @@ export const Checkbox = ({
         <CheckboxUncheckedIcon helperText={helperText} />
       )}
       {indeterminate && <CheckboxIndeterminateIcon helperText={helperText} />}
-      <CheckboxComponent type={type} checked={boxChecked} {...restProps} />
+      <CheckboxComponent
+        type={'checkbox'}
+        checked={boxChecked}
+        {...restProps}
+      />
       <div>
         <Label disabled={disabled}>{label}</Label>
         <CheckboxHelperText disabled={disabled}>

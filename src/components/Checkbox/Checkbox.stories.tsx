@@ -26,6 +26,11 @@ export default {
 const Template: StoryFn<typeof Checkbox> = (args) => <Checkbox {...args} />;
 
 /**
+ * Default variant (not specified)
+ */
+export const DefaultVariant = Template.bind({});
+
+/**
  * Disabled
  */
 export const Disabled = Template.bind({});
@@ -38,12 +43,12 @@ Disabled.parameters = {
     {
       name: 'light',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=802%3A13566&t=Td7pgQM4IO7fZ5mL-1',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=799%3A13731&t=aZ3vwdu5JAJD0sQm-1',
     },
     {
       name: 'dark',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1533%3A85609&t=Td7pgQM4IO7fZ5mL-1',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1533%3A85558&t=aZ3vwdu5JAJD0sQm-1',
     },
   ],
 };
@@ -61,12 +66,12 @@ Small.parameters = {
     {
       name: 'light',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=802%3A13043&t=Td7pgQM4IO7fZ5mL-1',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=799%3A13731&t=aZ3vwdu5JAJD0sQm-1',
     },
     {
       name: 'dark',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1533%3A85628&t=Td7pgQM4IO7fZ5mL-1',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1533%3A85558&t=aZ3vwdu5JAJD0sQm-1',
     },
   ],
 };
@@ -84,17 +89,12 @@ NoHelperText.parameters = {
     {
       name: 'light',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=801%3A10641&t=Td7pgQM4IO7fZ5mL-1',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=799%3A13731&t=aZ3vwdu5JAJD0sQm-1',
     },
     {
       name: 'dark',
       type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1533%3A85644&t=Td7pgQM4IO7fZ5mL-1',
+      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1533%3A85558&t=aZ3vwdu5JAJD0sQm-1',
     },
   ],
 };
-
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
