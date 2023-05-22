@@ -186,18 +186,18 @@ const CheckboxHelperText = styled(HelperText)`
   ${isDisabled}
   pointer-events: auto;
   font-size: ${checkboxDimensions.helperTextFontSize};
-  margin: 0 0 0 0;
+  margin: 0;
 `;
 
 const CheckboxLabel = styled(Label)`
-  margin: 0 0 0 0;
+  margin: 0;
 `;
 
-const CheckboxHelperTextWrapper = styled(HelperText)`
+const CheckboxHelperTextWrapper = styled.span`
   display: flex;
   width: fit-content;
   gap: ${checkboxDimensions.contentSpacing};
-  margin: ${pxToRem(-6)} 0 0 0;
+  margin: 0;
 `;
 
 /**
@@ -209,12 +209,6 @@ const CheckboxComponent = styled.input<InnerProps>`
 
 const HelperTextSpacer = styled.span<InnerProps>`
   ${calculateWidth};
-  font-family: ${typography.font};
-  font-weight: ${typography.weight.regular};
-  box-sizing: border-box;
-  align-items: center;
-  gap: ${checkboxDimensions.contentSpacing};
-  border: none;
 `;
 
 /**
