@@ -26,7 +26,7 @@ export default {
 const Template: StoryFn<typeof Checkbox> = (args) => <Checkbox {...args} />;
 
 /**
- * With Label
+ * Disabled
  */
 export const Disabled = Template.bind({});
 Disabled.args = {
@@ -49,7 +49,7 @@ Disabled.parameters = {
 };
 
 /**
- * With Label
+ * Small checkbox
  */
 export const Small = Template.bind({});
 Small.args = {
@@ -72,7 +72,7 @@ Small.parameters = {
 };
 
 /**
- * With Label
+ * With no helper text
  */
 export const NoHelperText = Template.bind({});
 NoHelperText.args = {
