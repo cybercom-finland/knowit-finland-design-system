@@ -60,7 +60,33 @@ interface InnerProps {
  */
 export interface CheckboxProps
   extends InnerProps,
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
+    Omit<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      | 'size'
+      | 'type'
+      | 'accept'
+      | 'autoComplete'
+      | 'list'
+      | 'max'
+      | 'min'
+      | 'maxLength'
+      | 'minLength'
+      | 'multiple'
+      | 'pattern'
+      | 'placeholder'
+      | 'dirName'
+      | 'alt'
+      | 'capture'
+      | 'step'
+      | 'formAction'
+      | 'formEncType'
+      | 'formMethod'
+      | 'formNoValidate'
+      | 'formTarget'
+      | 'height'
+      | 'src'
+      | 'width'
+    > {
   /**
    * Checkbox label text
    */
@@ -122,9 +148,9 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
  */
 const calculateMargin = (props: InnerProps) => {
   return css`
-    margin-bottom: ${!props?.helperText?.length
-      ? 0
-      : checkboxDimensions.checkboxMargin};
+    margin-bottom: ${props?.helperText?.length
+      ? checkboxDimensions.checkboxMargin
+      : 0};
   `;
 };
 
@@ -193,7 +219,6 @@ export const Checkbox = ({
     setChecked(!boxChecked);
   };
 
-  //TODO add margin
   return (
     <CheckboxWrapper onClick={checkboxClicked} size={size} disabled={disabled}>
       {boxChecked && !indeterminate && (
