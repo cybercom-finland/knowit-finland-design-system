@@ -1,12 +1,18 @@
 import React from 'react';
 import styled, { ThemeProps, css } from 'styled-components';
 import { variant } from 'styled-system';
-import { spacing, pxToRem, typography, Size } from 'shared';
+import {
+  spacing,
+  pxToRem,
+  typography,
+  Size,
+  generateRandomString,
+} from '../../shared';
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
-import { Label } from 'components/Label';
-import { HelperText } from 'components/HelperText';
+import { Label } from '../Label';
+import { HelperText } from '../HelperText';
 
 /**
  * Various dimensions of checkbox component
@@ -55,7 +61,7 @@ interface InnerProps {
 
 /**
  * Checkbox component properties
- * Extrends html input element attributes
+ * Extends html input element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#additional_attributes
  */
 export interface CheckboxProps
@@ -87,6 +93,11 @@ export interface CheckboxProps
       | 'src'
       | 'width'
     > {
+  /**
+   * Component id
+   */
+  id?: string;
+
   /**
    * Checkbox label text
    */
@@ -197,6 +208,7 @@ const CheckboxComponent = styled.input<InnerProps>`
  * Exported component
  */
 export const Checkbox = ({
+  id,
   label,
   checked = false,
   disabled = false,
@@ -219,8 +231,16 @@ export const Checkbox = ({
     setChecked(!boxChecked);
   };
 
+  // Use Id form props or create randomized string
+  const componentId = id ?? generateRandomString(5);
+
   return (
-    <CheckboxWrapper onClick={checkboxClicked} size={size} disabled={disabled}>
+    <CheckboxWrapper
+      id={componentId}
+      onClick={checkboxClicked}
+      size={size}
+      disabled={disabled}
+    >
       {boxChecked && !indeterminate && (
         <CheckboxCheckedIcon helperText={helperText} />
       )}
@@ -229,6 +249,9 @@ export const Checkbox = ({
       )}
       {indeterminate && <CheckboxIndeterminateIcon helperText={helperText} />}
       <CheckboxComponent
+        id={`checkbox-${componentId}`}
+        aria-labelledby={label && `label-${componentId}`}
+        aria-describedby={helperText && `helper-${componentId}`}
         type={'checkbox'}
         checked={boxChecked}
         {...restProps}
