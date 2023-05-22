@@ -1,6 +1,6 @@
-import React, { ChangeEventHandler } from 'react';
+import React from 'react';
 import styled, { ThemeProps, css } from 'styled-components';
-import { Theme, variant } from 'styled-system';
+import { variant } from 'styled-system';
 import { spacing, pxToRem, typography, Size } from 'shared';
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
