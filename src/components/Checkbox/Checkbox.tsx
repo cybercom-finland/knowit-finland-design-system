@@ -22,9 +22,11 @@ const checkboxDimensions = {
   helperTextFontSize: pxToRem(14),
   small: {
     fontSize: pxToRem(16),
+    marginLeft: pxToRem(24),
   },
   large: {
     fontSize: pxToRem(24),
+    marginLeft: pxToRem(32),
   },
 };
 
@@ -139,7 +141,6 @@ const calculateSizes = (props: InnerProps) => {
  * @returns modified css
  */
 const isDisabled = (props: ThemeProps<any> & InnerProps) => {
-  console.log(props);
   return css`
     ${variant({
       prop: 'disabled',
@@ -158,15 +159,15 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
 };
 
 /**
- * calculate checkbox spacer width based on helper text
+ * calculate left margin for helper text
  * @param props mandatory checkbox props
  * @returns modified css
  */
-const calculateWidth = (props: InnerProps) => {
+const calculateMargin = (props: InnerProps) => {
   return css`
-    width: ${props?.size == 'large'
-      ? checkboxDimensions.large.fontSize
-      : checkboxDimensions.small.fontSize};
+    margin-left: ${props?.size == 'large'
+      ? checkboxDimensions.large.marginLeft
+      : checkboxDimensions.small.marginLeft} !important;
   `;
 };
 
@@ -182,19 +183,18 @@ const CheckboxWrapper = styled.span<InnerProps>`
   border: none;
 `;
 
-const CheckboxHelperText = styled(HelperText)`
+const CheckboxHelperText = styled(HelperText)<InnerProps>`
+  ${calculateMargin}
   font-size: ${checkboxDimensions.helperTextFontSize};
   margin: 0;
 `;
 
-const CheckboxLabel = styled(Label)`
-  margin: 0;
+const CheckboxComponentWrapper = styled.span<InnerProps>`
+  display: flex;
+  flex-direction: column;
 `;
 
-const CheckboxHelperTextWrapper = styled.span`
-  display: flex;
-  width: fit-content;
-  gap: ${checkboxDimensions.contentSpacing};
+const CheckboxLabel = styled(Label)`
   margin: 0;
 `;
 
@@ -203,10 +203,6 @@ const CheckboxHelperTextWrapper = styled.span`
  */
 const NativeCheckbox = styled.input<InnerProps>`
   display: none !important;
-`;
-
-const HelperTextSpacer = styled.span<InnerProps>`
-  ${calculateWidth};
 `;
 
 /**
@@ -218,7 +214,7 @@ export const Checkbox = ({
   checked = false,
   disabled = false,
   indeterminate = false,
-  size = 'small',
+  size = 'large',
   helperText,
   ...restProps
 }: CheckboxProps) => {
@@ -240,7 +236,7 @@ export const Checkbox = ({
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <>
+    <CheckboxComponentWrapper>
       <CheckboxWrapper
         id={componentId}
         onClick={checkboxClicked}
@@ -260,10 +256,7 @@ export const Checkbox = ({
         />
         <CheckboxLabel disabled={disabled}>{label}</CheckboxLabel>
       </CheckboxWrapper>
-      <CheckboxHelperTextWrapper>
-        <HelperTextSpacer size={size}></HelperTextSpacer>
-        <CheckboxHelperText>{helperText}</CheckboxHelperText>
-      </CheckboxHelperTextWrapper>
-    </>
+      <CheckboxHelperText size={size}>{helperText}</CheckboxHelperText>
+    </CheckboxComponentWrapper>
   );
 };
