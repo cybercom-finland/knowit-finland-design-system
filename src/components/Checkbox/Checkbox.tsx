@@ -183,8 +183,6 @@ const CheckboxWrapper = styled.span<InnerProps>`
 `;
 
 const CheckboxHelperText = styled(HelperText)`
-  ${isDisabled}
-  pointer-events: auto;
   font-size: ${checkboxDimensions.helperTextFontSize};
   margin: 0;
 `;
@@ -203,7 +201,7 @@ const CheckboxHelperTextWrapper = styled.span`
 /**
  * Internal component styling
  */
-const CheckboxComponent = styled.input<InnerProps>`
+const NativeCheckbox = styled.input<InnerProps>`
   display: none !important;
 `;
 
@@ -252,7 +250,7 @@ export const Checkbox = ({
         {boxChecked && !indeterminate && <MdCheckBox />}
         {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
         {indeterminate && <MdIndeterminateCheckBox />}
-        <CheckboxComponent
+        <NativeCheckbox
           id={`checkbox-${componentId}`}
           aria-labelledby={label && `label-${componentId}`}
           aria-describedby={helperText && `helper-${componentId}`}
@@ -264,9 +262,7 @@ export const Checkbox = ({
       </CheckboxWrapper>
       <CheckboxHelperTextWrapper>
         <HelperTextSpacer size={size}></HelperTextSpacer>
-        <CheckboxHelperText disabled={disabled} onClick={checkboxClicked}>
-          {helperText}
-        </CheckboxHelperText>
+        <CheckboxHelperText>{helperText}</CheckboxHelperText>
       </CheckboxHelperTextWrapper>
     </>
   );
