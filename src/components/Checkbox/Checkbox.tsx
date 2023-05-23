@@ -120,7 +120,7 @@ export interface CheckboxProps
  * @param props mandatory checkbox props
  * @returns modified css
  */
-const calculateSizes = (props: InnerProps) => {
+const calculateSizes = () => {
   return css`
     ${variant({
       prop: 'size',
@@ -165,7 +165,7 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
  */
 const calculateMargin = (props: InnerProps) => {
   return css`
-    margin-left: ${props?.size == 'large'
+    margin-left: ${props.size == 'large'
       ? checkboxDimensions.large.marginLeft
       : checkboxDimensions.small.marginLeft} !important;
   `;
@@ -190,7 +190,7 @@ const CheckboxHelperText = styled(HelperText)<InnerProps>`
 `;
 
 const CheckboxComponentWrapper = styled.span<InnerProps>`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
 `;
 
