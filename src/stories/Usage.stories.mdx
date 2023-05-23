@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design System/Usage" />
+
+# Prerequisites
+
+## Personal access token
+
+You need first to create [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) on github.
+
+## .npmrc file
+
+Create .npmrc file to you project if it doesn't exist yet. Then add following lines to .npmrc file.
+
+> //npm.pkg.github.com/:\_authToken=YOUR_PERSONAL_ACCESS_TOKEN  
+> @cybercom-finland:registry=https://npm.pkg.github.com
+
+Replace YOUR_PERSONAL_ACCESS_TOKEN with the token that you generated before.
+
+## Installation
+
+After configuring the .npmrc file you can install the package with:
+
+`npm install @cybercom-finland/knowit-design-system`
+
+## Usage
+
+You need to wrap your App with [Theme](/docs/utils-theme--docs).
+
+### Example
+
+`App.tsx`
+
+```jsx
+import React from 'react';
+import { Button, Theme } from '@cybercom-finland/knowit-design-system';
+
+const App = () => {
+  return (
+    <Theme theme="light">
+      <Button variant="filled" label="Test" />
+    </Theme>
+  );
+};
+
+export default App;
+```
