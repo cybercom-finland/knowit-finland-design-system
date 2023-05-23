@@ -24,10 +24,16 @@ npm run build-storybook
 
 Once the app is built, it is ready to be deployed.
 
-To run tests, use the following command:
+To run storybook tests, use the following command:
 
 ```bash
 npm run test-storybook
+```
+
+To run unit tests, use the following command:
+
+```bash
+npm run test
 ```
 
 To get the test coverage, use the following command:

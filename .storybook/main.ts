@@ -8,6 +8,7 @@ module.exports = {
     '@storybook/preset-create-react-app',
     '@storybook/addon-a11y',
     'storybook-addon-designs',
+    '@storybook/addon-storyshots',
   ],
   features: {
     interactionDebugger: true,
