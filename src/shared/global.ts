@@ -1,7 +1,9 @@
 import { createGlobalStyle, css } from 'styled-components';
 import { typography } from './styles';
+import { modernNormalize } from './modernNormalize';
 
 export const bodyStyles = css`
+  ${modernNormalize}
   font-family: '${typography.font}', sans-serif;
   color: ${(props) => props.theme.colors.digitalBlack};
 
