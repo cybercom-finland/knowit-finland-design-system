@@ -3,7 +3,6 @@ import { typography } from './styles';
 import { modernNormalize } from './modernNormalize';
 
 export const bodyStyles = css`
-  ${modernNormalize}
   font-family: '${typography.font}', sans-serif;
   color: ${(props) => props.theme.colors.digitalBlack};
 
@@ -50,6 +49,7 @@ export const bodyStyles = css`
 `;
 
 export const GlobalStyle = createGlobalStyle`
+  ${modernNormalize}
   body {
     ${bodyStyles}
   }
