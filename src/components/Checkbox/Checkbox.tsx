@@ -113,6 +113,11 @@ export interface CheckboxProps
    * Server side checkbox value
    */
   value?: string | number;
+
+  /**
+   * Ref object for the native input element
+   */
+  ref?: React.RefObject<HTMLInputElement>;
 }
 
 /**

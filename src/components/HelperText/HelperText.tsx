@@ -16,6 +16,11 @@ export interface HelperTextProps extends React.HTMLAttributes<HTMLSpanElement> {
    * Error state
    */
   error?: boolean;
+
+  /**
+   * Ref object for the native span element
+   */
+  ref?: React.RefObject<HTMLSpanElement>;
 }
 
 /**

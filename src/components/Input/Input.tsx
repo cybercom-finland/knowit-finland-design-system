@@ -259,6 +259,11 @@ export interface InputProps {
   readOnly?: boolean;
 
   /**
+   * Ref object for the native input element
+   */
+  ref?: React.RefObject<HTMLInputElement>;
+
+  /**
    * Change event handler passed from internal component
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
