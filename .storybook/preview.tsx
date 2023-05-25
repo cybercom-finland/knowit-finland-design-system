@@ -1,7 +1,6 @@
 import React from 'react';
-import { GlobalStyle } from '../src/shared/global';
-import { darkTheme, lightTheme } from '../src/shared';
-import styled, { css, ThemeProvider } from 'styled-components';
+import { Theme } from '../src/components';
+import styled, { css } from 'styled-components';
 import { Decorator, Preview } from '@storybook/react';
 
 // Helper to change story bg color according to the theme
@@ -18,35 +17,31 @@ const ThemeBlock = styled.div(
 const withTheme: Decorator = (Story, context) => {
   // Get values from story parameter first, else fallback to globals
   const theme = context.parameters.theme || context.globals.theme;
-  const storyTheme = theme === 'light' ? lightTheme : darkTheme;
 
   switch (theme) {
     case 'both': {
       return (
         <>
-          <ThemeProvider theme={lightTheme}>
-            <GlobalStyle />
+          <Theme theme="light">
             <ThemeBlock>
               <Story />
             </ThemeBlock>
-          </ThemeProvider>
-          <ThemeProvider theme={darkTheme}>
-            <GlobalStyle />
+          </Theme>
+          <Theme theme="dark">
             <ThemeBlock>
               <Story />
             </ThemeBlock>
-          </ThemeProvider>
+          </Theme>
         </>
       );
     }
     default: {
       return (
-        <ThemeProvider theme={storyTheme}>
-          <GlobalStyle />
+        <Theme theme={theme}>
           <ThemeBlock>
             <Story />
           </ThemeBlock>
-        </ThemeProvider>
+        </Theme>
       );
     }
   }
