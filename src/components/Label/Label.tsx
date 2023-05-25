@@ -22,6 +22,11 @@ export interface LabelProps
    * Show required marker on Label
    */
   required?: boolean;
+
+  /**
+   * Ref object for the native label element
+   */
+  ref?: React.RefObject<HTMLLabelElement>;
 }
 
 /**

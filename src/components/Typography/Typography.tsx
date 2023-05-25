@@ -55,7 +55,7 @@ const ParagraphComponent2 = styled.p<InnerProps>`
  */
 interface TypographyProps
   extends InnerProps,
-    React.HTMLAttributes<HTMLElement> {
+    React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Typography content
    */
@@ -64,6 +64,11 @@ interface TypographyProps
    * Text variant
    */
   variant: 'caption' | 'h1' | 'h2' | 'h3' | 'h4' | 'p1' | 'p2';
+
+  /**
+   * Ref object for the native heading element
+   */
+  ref?: React.RefObject<HTMLHeadingElement>;
 }
 
 /**

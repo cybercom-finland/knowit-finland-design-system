@@ -76,6 +76,11 @@ export interface ButtonProps
   endIcon?: React.ReactNode;
 
   /**
+   * Ref object for the native button element
+   */
+  ref?: React.RefObject<HTMLButtonElement>;
+
+  /**
    * OnClick event handler
    */
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;

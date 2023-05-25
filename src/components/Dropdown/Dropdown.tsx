@@ -91,6 +91,11 @@ export interface DropdownProps {
   options: DropdownOption[];
 
   /**
+   * Ref object for the native select element
+   */
+  ref?: React.RefObject<HTMLSelectElement>;
+
+  /**
    * onChange event handler
    * @param event event
    */

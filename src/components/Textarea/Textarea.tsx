@@ -35,12 +35,23 @@ const OutlinedTextarea = styled(TextareaBase)`
 `;
 
 /**
+ * Text area props
+ */
+interface TextareaProps {
+  /**
+   * Ref object for the native textarea element
+   */
+  ref?: React.RefObject<HTMLTextAreaElement>;
+}
+
+/**
  * All props together
  * Extends html textarea element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea
  */
 type Props = InputBaseProps &
   WrapperProps &
+  TextareaProps &
   React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 /**
