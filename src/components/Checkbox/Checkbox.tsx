@@ -110,9 +110,9 @@ export interface CheckboxProps
   checked?: boolean;
 
   /**
-   * Server side checkbox value
+   * Checkbox input control value
    */
-  value?: string | number;
+  value?: string;
 
   /**
    * Ref object for the native input element
