@@ -1,5 +1,6 @@
 import { createGlobalStyle, css } from 'styled-components';
 import { typography } from './styles';
+import { modernNormalize } from './modernNormalize';
 
 export const bodyStyles = css`
   font-family: '${typography.font}', sans-serif;
@@ -48,6 +49,7 @@ export const bodyStyles = css`
 `;
 
 export const GlobalStyle = createGlobalStyle`
+  ${modernNormalize}
   body {
     ${bodyStyles}
   }
