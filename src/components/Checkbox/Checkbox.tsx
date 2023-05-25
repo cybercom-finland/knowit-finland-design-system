@@ -135,11 +135,13 @@ const calculateSizes = () => {
     })};
   `;
 };
+
 /**
  * Helper function for checkbox disabled styles
  * @param props mandatory checkbox props and theme props
  * @returns modified css
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isDisabled = (props: ThemeProps<any> & InnerProps) => {
   return css`
     ${variant({
@@ -256,7 +258,9 @@ export const Checkbox = ({
         />
         <CheckboxLabel disabled={disabled}>{label}</CheckboxLabel>
       </CheckboxWrapper>
-      <CheckboxHelperText size={size}>{helperText}</CheckboxHelperText>
+      <CheckboxHelperText size={size} disabled={disabled}>
+        {helperText}
+      </CheckboxHelperText>
     </CheckboxComponentWrapper>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme } from '../src/components';
 import styled, { css } from 'styled-components';
-import { Decorator } from '@storybook/react';
+import { Decorator, Preview } from '@storybook/react';
 
 // Helper to change story bg color according to the theme
 const ThemeBlock = styled.div(
@@ -66,6 +66,7 @@ export const globalTypes = {
     },
   },
 };
+
 export const decorators = [withTheme];
 
 export const parameters = {
@@ -77,3 +78,20 @@ export const parameters = {
     },
   },
 };
+
+const preview: Preview = {
+  parameters: {
+    options: {
+      storySort: {
+        order: [
+          'Design System',
+          ['Intro', 'Usage', 'Contribution'],
+          'Components',
+          'Utils',
+        ],
+      },
+    },
+  },
+};
+
+export default preview;
