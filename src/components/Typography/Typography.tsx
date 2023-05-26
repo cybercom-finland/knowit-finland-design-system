@@ -14,7 +14,7 @@ interface InnerProps {
 
 const typographyCommonStyles = (typographyProps: InnerProps) => {
   return css`
-    color: ${(props) => props.theme.colors.digitalBlack};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack};
     text-align: ${typographyProps.align};
   `;
 };

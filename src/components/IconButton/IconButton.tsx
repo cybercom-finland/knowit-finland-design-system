@@ -57,7 +57,7 @@ const IconButtonWrapper = styled.button<IconButtonProps>`
   justify-content: center;
   padding: 0;
 
-  color: ${(props) => props.theme.colors.digitalBlack900};
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
   background-color: transparent;
   border: none;
   border-radius: ${iconButtonDimension.borderRadius};
@@ -76,17 +76,19 @@ const IconButtonWrapper = styled.button<IconButtonProps>`
 
   &:focus-visible,
   &:hover:not(:disabled) {
-    color: ${(props) => props.theme.colors.digitalBlack};
-    background-color: ${(props) => props.theme.colors.digitalBlack200};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack};
+    background-color: ${(props) =>
+      props.theme.colors.grayScale.digitalBlack200};
   }
 
   &:active:not(:disabled) {
-    color: ${(props) => props.theme.colors.digitalBlack400};
-    background-color: ${(props) => props.theme.colors.digitalBlack100};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack400};
+    background-color: ${(props) =>
+      props.theme.colors.grayScale.digitalBlack100};
   }
 
   &:disabled {
-    color: ${(props) => props.theme.colors.digitalBlack300};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
     cursor: default;
   }
 `;

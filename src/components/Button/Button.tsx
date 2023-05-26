@@ -147,20 +147,22 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
   ${calculateSizes}
   border: none;
   color: ${(props) => props.theme.colors.neutral};
-  background-color: ${(props) => props.theme.colors.digitalBlack900};
+  background-color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
 
   &:focus-visible,
   &:hover:not(:disabled):not(:active) {
-    background-color: ${(props) => props.theme.colors.digitalBlack};
+    background-color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   }
 
   &:active:not(:disabled) {
-    background-color: ${(props) => props.theme.colors.digitalBlack400};
+    background-color: ${(props) =>
+      props.theme.colors.grayScale.digitalBlack400};
   }
 
   &:disabled {
-    background-color: ${(props) => props.theme.colors.digitalBlack300};
-    color: ${(props) => props.theme.colors.digitalBlack200};
+    background-color: ${(props) =>
+      props.theme.colors.grayScale.digitalBlack300};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack200};
     cursor: default;
   }
 `;
@@ -170,26 +172,28 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
  */
 const OutlinedButton = styled(ButtonBase)<InnerProps>`
   ${(props) => calculateSizes(props, buttonDimensions.borderWidth)}
-  color: ${(props) => props.theme.colors.digitalBlack900};
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
   background-color: ${(props) => props.theme.colors.neutral};
   border: ${pxToRem(buttonDimensions.borderWidth)} solid
-    ${(props) => props.theme.colors.digitalBlack900};
+    ${(props) => props.theme.colors.grayScale.digitalBlack900};
 
   &:focus-visible,
   &:hover:not(:disabled) {
-    color: ${(props) => props.theme.colors.digitalBlack};
-    border-color: ${(props) => props.theme.colors.digitalBlack};
-    background-color: ${(props) => props.theme.colors.digitalBlack100};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack};
+    border-color: ${(props) => props.theme.colors.grayScale.digitalBlack};
+    background-color: ${(props) =>
+      props.theme.colors.grayScale.digitalBlack100};
   }
 
   &:active:not(:disabled) {
-    border-color: ${(props) => props.theme.colors.digitalBlack400};
-    background-color: ${(props) => props.theme.colors.digitalBlack100};
+    border-color: ${(props) => props.theme.colors.grayScale.digitalBlack400};
+    background-color: ${(props) =>
+      props.theme.colors.grayScale.digitalBlack100};
   }
 
   &:disabled {
-    color: ${(props) => props.theme.colors.digitalBlack300};
-    border-color: ${(props) => props.theme.colors.digitalBlack300};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
+    border-color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
     cursor: default;
   }
 `;
@@ -199,7 +203,7 @@ const OutlinedButton = styled(ButtonBase)<InnerProps>`
  */
 const TextButton = styled(ButtonBase)<InnerProps>`
   ${(props) => calculateSizes(props)}
-  color: ${(props) => props.theme.colors.digitalBlack900};
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
   background-color: transparent;
   border: none;
   border-bottom: ${pxToRem(buttonDimensions.borderWidth)} solid transparent;
@@ -230,16 +234,18 @@ const TextButton = styled(ButtonBase)<InnerProps>`
 
   &:focus-visible,
   &:hover:not(:disabled):not(:active) {
-    color: ${(props) => props.theme.colors.digitalBlack};
-    border-bottom-color: ${(props) => props.theme.colors.digitalBlack};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack};
+    border-bottom-color: ${(props) =>
+      props.theme.colors.grayScale.digitalBlack};
   }
 
   &:active:not(:disabled) {
-    border-bottom-color: ${(props) => props.theme.colors.digitalBlack400};
+    border-bottom-color: ${(props) =>
+      props.theme.colors.grayScale.digitalBlack400};
   }
 
   &:disabled {
-    color: ${(props) => props.theme.colors.digitalBlack300};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
     cursor: default;
   }
 `;

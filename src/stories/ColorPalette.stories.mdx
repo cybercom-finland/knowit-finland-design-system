@@ -1,0 +1,92 @@
+import {
+  Meta,
+  ColorPalette,
+  ColorItem,
+  Title,
+  Subtitle,
+} from '@storybook/blocks';
+import { lightTheme, darkTheme } from '../';
+
+<Meta title="Design System/Color Palette" />
+
+# Knowit color palette
+
+## Light theme
+
+<ColorPalette>
+  <ColorItem
+    title="theme.colors.neutral"
+    subtitle="Neutral"
+    colors={[lightTheme.colors.neutral]}
+  />
+  <ColorItem
+    title="theme.colors.grayScale"
+    subtitle="Gray scale colors"
+    colors={lightTheme.colors.grayScale}
+  />
+  <ColorItem
+    title="theme.colors.success"
+    subtitle="Success colors"
+    colors={lightTheme.colors.success}
+  />
+  <ColorItem
+    title="theme.colors.warning"
+    subtitle="Warning colors"
+    colors={lightTheme.colors.warning}
+  />
+  <ColorItem
+    title="theme.colors.danger"
+    subtitle="Danger colors"
+    colors={lightTheme.colors.danger}
+  />
+  <ColorItem
+    title="theme.colors.info"
+    subtitle="Info colors"
+    colors={lightTheme.colors.info}
+  />
+  <ColorItem
+    title="theme.colors.additional"
+    subtitle="Additional colors"
+    colors={lightTheme.colors.additional}
+  />
+</ColorPalette>
+
+## Dark theme
+
+<ColorPalette>
+  <ColorItem
+    title="theme.colors.neutral"
+    subtitle="Neutral"
+    colors={[darkTheme.colors.neutral]}
+  />
+  <ColorItem
+    title="theme.colors.grayScale"
+    subtitle="Gray scale colors"
+    colors={darkTheme.colors.grayScale}
+  />
+  <ColorItem
+    title="theme.colors.success"
+    subtitle="Success colors"
+    colors={darkTheme.colors.success}
+  />
+  <ColorItem
+    title="theme.colors.warning"
+    subtitle="Warning colors"
+    colors={darkTheme.colors.warning}
+  />
+  <ColorItem
+    title="theme.colors.danger"
+    subtitle="Danger colors"
+    colors={darkTheme.colors.danger}
+  />
+  <ColorItem
+    title="theme.colors.info"
+    subtitle="Info colors"
+    colors={darkTheme.colors.info}
+  />
+  <ColorItem
+    title="theme.colors.additional"
+    subtitle="Additional colors"
+    colors={darkTheme.colors.additional}
+  />
+</ColorPalette>
