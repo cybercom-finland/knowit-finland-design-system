@@ -1,5 +1,5 @@
 import React from 'react';
-import { Size, pxToRem } from '../../shared';
+import { ComponentBaseProps, Size, pxToRem } from '../../shared';
 import styled from 'styled-components';
 import { variant } from 'styled-system';
 
@@ -19,7 +19,8 @@ const iconButtonDimension = {
 type ButtonSize = Exclude<Size, 'small'>;
 
 export interface IconButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends ComponentBaseProps<HTMLButtonElement>,
+    React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Icon content as chilren prop
    */
@@ -34,16 +35,6 @@ export interface IconButtonProps
    * Is button disabled
    */
   disabled?: boolean;
-
-  /**
-   * Ref object for the native button element
-   */
-  ref?: React.RefObject<HTMLButtonElement>;
-
-  /**
-   * OnClick event handler
-   */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 /**

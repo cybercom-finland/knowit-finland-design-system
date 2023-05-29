@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { spacing, typography } from '../../shared';
+import { ComponentBaseProps, spacing, typography } from '../../shared';
 
 /**
  * Label component properties
@@ -8,7 +8,8 @@ import { spacing, typography } from '../../shared';
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#attributes
  */
 export interface LabelProps
-  extends React.LabelHTMLAttributes<HTMLLabelElement> {
+  extends ComponentBaseProps<HTMLLabelElement>,
+    React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * Disabled state
    */
@@ -22,11 +23,6 @@ export interface LabelProps
    * Show required marker on Label
    */
   required?: boolean;
-
-  /**
-   * Ref object for the native label element
-   */
-  ref?: React.RefObject<HTMLLabelElement>;
 }
 
 /**

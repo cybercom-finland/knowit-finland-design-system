@@ -2,6 +2,9 @@ export type Size = 'small' | 'medium' | 'large';
 export type Variant = 'filled' | 'outlined' | 'text';
 export type InputVariant = Exclude<Variant, 'text'>;
 
+/**
+ * Base props for components
+ */
 export interface ComponentBaseProps<T> {
   /**
    * Component id
@@ -16,7 +19,7 @@ export interface ComponentBaseProps<T> {
   /**
    * Change event handler passed from internal component
    */
-  onChange?: (event: React.ChangeEvent<T>) => void;
+  onChange?: (event: React.FormEvent<T>) => void;
 
   /**
    * Mouse click event handler passed from internal component
@@ -27,4 +30,15 @@ export interface ComponentBaseProps<T> {
    * Blur event handler passed from internal component
    */
   onBlur?: (event: React.FocusEvent<T>) => void;
+}
+
+/**
+ * Base props for input and select components
+ */
+export interface InputComponentBaseProps<T>
+  extends Omit<ComponentBaseProps<T>, 'onChange'> {
+  /**
+   * Change event handler passed from internal component
+   */
+  onChange?: (event: React.ChangeEvent<T>) => void;
 }

@@ -8,7 +8,7 @@ import {
   convertToSpacingUnit,
   pxToRem,
   InputVariant,
-  ComponentBaseProps,
+  InputComponentBaseProps,
 } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
@@ -258,7 +258,7 @@ type InputHTMLAttributes = Omit<
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
  */
 export interface InputProps
-  extends ComponentBaseProps<HTMLInputElement>,
+  extends InputComponentBaseProps<HTMLInputElement>,
     InputBaseProps,
     InputHTMLAttributes,
     WrapperProps {

@@ -8,6 +8,7 @@ import {
   typography,
   Size,
   Variant,
+  ComponentBaseProps,
 } from '../../shared';
 
 /**
@@ -33,12 +34,16 @@ const buttonDimensions = {
   },
 };
 
+type ButtonHTMLAttributes = React.ButtonHTMLAttributes<HTMLButtonElement>;
+
 /**
  * Button component properties
  * Extrends html button element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes
  */
-export interface ButtonProps extends ButtonInternalProps {
+export interface ButtonProps
+  extends ComponentBaseProps<HTMLButtonElement>,
+    ButtonHTMLAttributes {
   /**
    * Button label text
    */
@@ -58,24 +63,11 @@ export interface ButtonProps extends ButtonInternalProps {
    * Layout variant of the button
    */
   variant?: Variant;
-}
 
-interface ButtonInternalProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button size
    */
   size?: Size;
-
-  /**
-   * Ref object for the native button element
-   */
-  ref?: React.RefObject<HTMLButtonElement>;
-
-  /**
-   * OnClick event handler
-   */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 /**
@@ -131,7 +123,7 @@ const ButtonBase = styled.button`
 /**
  * Filled variant
  */
-const FilledButton = styled(ButtonBase)<ButtonInternalProps>`
+const FilledButton = styled(ButtonBase)<{ size?: Size }>`
   ${calculateSizes()}
   border: none;
   color: ${(props) => props.theme.colors.neutral};
@@ -158,7 +150,7 @@ const FilledButton = styled(ButtonBase)<ButtonInternalProps>`
 /**
  * Outlined variant
  */
-const OutlinedButton = styled(ButtonBase)<ButtonInternalProps>`
+const OutlinedButton = styled(ButtonBase)<{ size?: Size }>`
   ${calculateSizes(buttonDimensions.borderWidth)}
   color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
   background-color: ${(props) => props.theme.colors.neutral};
@@ -189,7 +181,7 @@ const OutlinedButton = styled(ButtonBase)<ButtonInternalProps>`
 /**
  * Text variant
  */
-const TextButton = styled(ButtonBase)<ButtonInternalProps>`
+const TextButton = styled(ButtonBase)<{ size?: Size }>`
   ${calculateSizes()}
   color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
   background-color: transparent;

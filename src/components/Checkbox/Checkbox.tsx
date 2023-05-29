@@ -7,7 +7,7 @@ import {
   typography,
   Size,
   generateRandomString,
-  ComponentBaseProps,
+  InputComponentBaseProps,
 } from '../../shared';
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
@@ -74,7 +74,7 @@ type CheckboxInputHTMLAttributes = Omit<
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#additional_attributes
  */
 export interface CheckboxProps
-  extends ComponentBaseProps<HTMLInputElement>,
+  extends InputComponentBaseProps<HTMLInputElement>,
     CheckboxInputBaseProps,
     CheckboxInputHTMLAttributes {
   /**

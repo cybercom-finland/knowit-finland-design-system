@@ -1,13 +1,15 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { spacing, typography } from '../../shared';
+import { ComponentBaseProps, spacing, typography } from '../../shared';
 
 /**
  * Helper text component properties
  * Extends global html attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span#attributes
  */
-export interface HelperTextProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface HelperTextProps
+  extends ComponentBaseProps<HTMLSpanElement>,
+    React.HTMLAttributes<HTMLSpanElement> {
   /**
    * Disabled
    */
@@ -16,11 +18,6 @@ export interface HelperTextProps extends React.HTMLAttributes<HTMLSpanElement> {
    * Error state
    */
   error?: boolean;
-
-  /**
-   * Ref object for the native span element
-   */
-  ref?: React.RefObject<HTMLSpanElement>;
 }
 
 /**

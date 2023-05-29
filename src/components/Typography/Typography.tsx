@@ -1,18 +1,18 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { typography } from '../../shared';
+import { ComponentBaseProps, typography } from '../../shared';
 
 /**
  * Internal properties for styles
  */
-interface InnerProps {
+interface TextProps {
   /**
    * Alignment of text
    */
   align?: 'center' | 'inherit' | 'justify' | 'left' | 'right';
 }
 
-const typographyCommonStyles = (typographyProps: InnerProps) => {
+const typographyCommonStyles = (typographyProps: TextProps) => {
   return css`
     color: ${(props) => props.theme.colors.grayScale.digitalBlack};
     text-align: ${typographyProps.align};
@@ -22,25 +22,25 @@ const typographyCommonStyles = (typographyProps: InnerProps) => {
 /**
  * Internal component styling
  */
-const CaptionComponent = styled.caption<InnerProps>`
+const CaptionComponent = styled.caption<TextProps>`
   ${typographyCommonStyles};
 `;
-const HeaderComponent1 = styled.h1<InnerProps>`
+const HeaderComponent1 = styled.h1<TextProps>`
   ${typographyCommonStyles};
 `;
-const HeaderComponent2 = styled.h2<InnerProps>`
+const HeaderComponent2 = styled.h2<TextProps>`
   ${typographyCommonStyles};
 `;
-const HeaderComponent3 = styled.h3<InnerProps>`
+const HeaderComponent3 = styled.h3<TextProps>`
   ${typographyCommonStyles};
 `;
-const HeaderComponent4 = styled.h4<InnerProps>`
+const HeaderComponent4 = styled.h4<TextProps>`
   ${typographyCommonStyles};
 `;
-const ParagraphComponent1 = styled.p<InnerProps>`
+const ParagraphComponent1 = styled.p<TextProps>`
   ${typographyCommonStyles};
 `;
-const ParagraphComponent2 = styled.p<InnerProps>`
+const ParagraphComponent2 = styled.p<TextProps>`
   ${typographyCommonStyles};
   font-size: ${typography.size.paragraph2};
   line-height: ${typography.lineHeight.paragraph2};
@@ -54,7 +54,8 @@ const ParagraphComponent2 = styled.p<InnerProps>`
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption#attributes
  */
 interface TypographyProps
-  extends InnerProps,
+  extends TextProps,
+    ComponentBaseProps<HTMLHeadingElement>,
     React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Typography content
@@ -64,11 +65,6 @@ interface TypographyProps
    * Text variant
    */
   variant: 'caption' | 'h1' | 'h2' | 'h3' | 'h4' | 'p1' | 'p2';
-
-  /**
-   * Ref object for the native heading element
-   */
-  ref?: React.RefObject<HTMLHeadingElement>;
 }
 
 /**
@@ -77,8 +73,11 @@ interface TypographyProps
 export const Typography = ({
   children,
   variant = 'p1',
-  ...props
+  align = 'left',
+  ...restProps
 }: TypographyProps) => {
+  const props = { variant, align, ...restProps };
+
   switch (variant) {
     case 'caption':
       return <CaptionComponent {...props}>{children}</CaptionComponent>;

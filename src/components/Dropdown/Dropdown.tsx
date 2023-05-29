@@ -6,7 +6,7 @@ import {
   spacing,
   typography,
   generateRandomString,
-  ComponentBaseProps,
+  InputComponentBaseProps,
 } from '../../shared';
 import { Wrapper, WrapperProps } from '../Wrapper';
 import {
@@ -95,7 +95,7 @@ type SelectHTMLAttributes = Omit<
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attributes
  */
 export interface DropdownProps
-  extends ComponentBaseProps<HTMLSelectElement>,
+  extends InputComponentBaseProps<HTMLSelectElement>,
     InputBaseProps,
     SelectHTMLAttributes,
     WrapperProps {
