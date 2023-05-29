@@ -9,7 +9,7 @@ export interface ComponentBaseProps<T> {
   /**
    * Component id
    */
-  id?: string | undefined;
+  id?: string;
 
   /**
    * Ref object for the native input element
