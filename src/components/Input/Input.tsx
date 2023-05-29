@@ -76,13 +76,13 @@ export interface InputBaseProps {
  */
 export const baseInputStyles = (inputProps: InputBaseProps) => {
   return css`
-    color: ${(props) => props.theme.colors.digitalBlack};
+    color: ${(props) => props.theme.colors.grayScale.digitalBlack};
     box-sizing: border-box;
     border: ${pxToRem(inputDimensions.border)} solid
       ${(props) =>
         !inputProps.error
-          ? props.theme.colors.digitalBlack
-          : props.theme.colors.danger800};
+          ? props.theme.colors.grayScale.digitalBlack
+          : props.theme.colors.danger.danger800};
     border-radius: 4px;
     font-family: ${typography.font};
     font-size: ${typography.size.paragraph2};
@@ -112,17 +112,17 @@ export const baseInputStyles = (inputProps: InputBaseProps) => {
     &:disabled {
       border-color: ${(props) =>
         !inputProps.error
-          ? props.theme.colors.digitalBlack300
-          : props.theme.colors.danger800};
+          ? props.theme.colors.grayScale.digitalBlack300
+          : props.theme.colors.danger.danger800};
       border-width: ${pxToRem(inputDimensions.border)};
-      color: ${(props) => props.theme.colors.digitalBlack300};
+      color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
     }
 
     &::placeholder {
       color: ${(props) =>
         inputProps.disabled
-          ? props.theme.colors.digitalBlack300
-          : props.theme.colors.digitalBlack400};
+          ? props.theme.colors.grayScale.digitalBlack300
+          : props.theme.colors.grayScale.digitalBlack400};
     }
   `;
 };
@@ -147,7 +147,7 @@ InputBase.defaultProps = {
  */
 export const FilledInputStyles = () => {
   return css`
-    background: ${(props) => props.theme.colors.digitalBlack100};
+    background: ${(props) => props.theme.colors.grayScale.digitalBlack100};
   `;
 };
 
@@ -166,7 +166,7 @@ export const OutlinedInputStyles = () => {
   return css`
     background: ${(props) => props.theme.colors.neutral};
     &:disabled {
-      background: ${(props) => props.theme.colors.digitalBlack200};
+      background: ${(props) => props.theme.colors.grayScale.digitalBlack200};
     }
   `;
 };
@@ -182,7 +182,7 @@ const OutlinedInput = styled(InputBase)`
  * Input row component
  */
 export const InputRow = styled.div<React.PropsWithChildren>`
-  color: ${(props) => props.theme.colors.digitalBlack};
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   display: flex;
   align-items: center;
   gap: ${spacing(inputDimensions.contentSpacing)};

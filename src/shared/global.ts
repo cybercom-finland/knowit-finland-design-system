@@ -4,7 +4,7 @@ import { modernNormalize } from './modernNormalize';
 
 export const bodyStyles = css`
   font-family: '${typography.font}', sans-serif;
-  color: ${(props) => props.theme.colors.digitalBlack};
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack};
 
   h1,
   h2,

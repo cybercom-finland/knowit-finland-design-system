@@ -153,11 +153,11 @@ const isDisabled = (props: ThemeProps<any> & InnerProps) => {
       prop: 'disabled',
       variants: {
         true: {
-          color: props.theme.colors.digitalBlack300,
+          color: props.theme.colors.grayScale.digitalBlack300,
           cursor: 'default',
         },
         false: {
-          color: props.theme.colors.digitalBlack,
+          color: props.theme.colors.grayScale.digitalBlack,
           cursor: 'pointer',
         },
       },

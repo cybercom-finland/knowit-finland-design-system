@@ -33,7 +33,7 @@ export interface LabelProps
  * Label inner component to wrap styles
  */
 const InnerLabel = styled.label<LabelProps>`
-  color: ${(props) => props.theme.colors.digitalBlack};
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   pointer-events: none;
   margin: ${spacing([0.75, 0])};
   display: block;
@@ -41,11 +41,11 @@ const InnerLabel = styled.label<LabelProps>`
   ${({ disabled, error }) =>
     error
       ? css`
-          color: ${(props) => props.theme.colors.danger800};
+          color: ${(props) => props.theme.colors.danger.danger800};
         `
       : disabled
       ? css`
-          color: ${(props) => props.theme.colors.digitalBlack300};
+          color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
         `
       : ''};
   ${({ required }) =>
