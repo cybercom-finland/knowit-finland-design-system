@@ -8,6 +8,7 @@ import {
   convertToSpacingUnit,
   pxToRem,
   InputVariant,
+  ComponentBaseProps,
 } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
@@ -135,13 +136,6 @@ const InputBase = styled.input<InputBaseProps>`
 `;
 
 /**
- * Input base default props
- */
-InputBase.defaultProps = {
-  type: 'text',
-};
-
-/**
  * Filled input styles
  * @returns CSS for filled input styles
  */
@@ -242,7 +236,7 @@ export const InputWrapper = ({
 /**
  * Input component properties
  */
-export interface InputProps {
+export interface InputProps extends ComponentBaseProps<HTMLInputElement> {
   /**
    * Controlled input value
    */
@@ -257,26 +251,6 @@ export interface InputProps {
    * Is component read only?
    */
   readOnly?: boolean;
-
-  /**
-   * Ref object for the native input element
-   */
-  ref?: React.RefObject<HTMLInputElement>;
-
-  /**
-   * Change event handler passed from internal component
-   */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-
-  /**
-   * Mouse click event handler passed from internal component
-   */
-  onClick?: (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
-
-  /**
-   * Blur event handler passed from internal component
-   */
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 /**

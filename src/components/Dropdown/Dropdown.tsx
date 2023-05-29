@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-import { spacing, typography, generateRandomString } from '../../shared';
+import {
+  spacing,
+  typography,
+  generateRandomString,
+  ComponentBaseProps,
+} from '../../shared';
 import { Wrapper, WrapperProps } from '../Wrapper';
 import {
   FilledInputStyles,
@@ -79,7 +84,7 @@ export type DropdownOption = React.OptionHTMLAttributes<HTMLOptionElement>;
 /**
  * Dropdown component properties
  */
-export interface DropdownProps {
+export interface DropdownProps extends ComponentBaseProps<HTMLSelectElement> {
   /**
    * Controlled input value
    */
@@ -89,17 +94,6 @@ export interface DropdownProps {
    * Dropdown options
    */
   options: DropdownOption[];
-
-  /**
-   * Ref object for the native select element
-   */
-  ref?: React.RefObject<HTMLSelectElement>;
-
-  /**
-   * onChange event handler
-   * @param event event
-   */
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 /**

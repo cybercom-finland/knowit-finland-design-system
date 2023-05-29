@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { ThemeProps, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import {
   spacing,
@@ -7,6 +7,7 @@ import {
   typography,
   Size,
   generateRandomString,
+  ComponentBaseProps,
 } from '../../shared';
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
@@ -31,43 +32,12 @@ const checkboxDimensions = {
 };
 
 /**
- * Internal properties for styles
- */
-interface InnerProps {
-  /**
-   * Disable checkbox
-   */
-  disabled?: boolean;
-
-  /**
-   * Checkbox is indeterminate state
-   */
-  indeterminate?: boolean;
-
-  /**
-   * Size of checkbox
-   */
-  size?: Exclude<Size, 'medium'>;
-
-  /**
-   * Checkbox helper text
-   */
-  helperText?: string;
-
-  /**
-   * Change event handler passed from internal component
-   */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-/**
  * Checkbox component properties
  * Extends html input element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#additional_attributes
  */
 export interface CheckboxProps
-  extends InnerProps,
-    Omit<
+  extends Omit<
       React.InputHTMLAttributes<HTMLInputElement>,
       | 'size'
       | 'type'
@@ -93,12 +63,8 @@ export interface CheckboxProps
       | 'height'
       | 'src'
       | 'width'
-    > {
-  /**
-   * Component id
-   */
-  id?: string;
-
+    >,
+    ComponentBaseProps<HTMLInputElement> {
   /**
    * Checkbox label text
    */
@@ -115,9 +81,24 @@ export interface CheckboxProps
   value?: string;
 
   /**
-   * Ref object for the native input element
+   * Disable checkbox
    */
-  ref?: React.RefObject<HTMLInputElement>;
+  disabled?: boolean;
+
+  /**
+   * Checkbox is indeterminate state
+   */
+  indeterminate?: boolean;
+
+  /**
+   * Size of checkbox
+   */
+  size?: Exclude<Size, 'medium'>;
+
+  /**
+   * Checkbox helper text
+   */
+  helperText?: string;
 }
 
 /**
@@ -142,35 +123,11 @@ const calculateSizes = () => {
 };
 
 /**
- * Helper function for checkbox disabled styles
- * @param props mandatory checkbox props and theme props
- * @returns modified css
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const isDisabled = (props: ThemeProps<any> & InnerProps) => {
-  return css`
-    ${variant({
-      prop: 'disabled',
-      variants: {
-        true: {
-          color: props.theme.colors.grayScale.digitalBlack300,
-          cursor: 'default',
-        },
-        false: {
-          color: props.theme.colors.grayScale.digitalBlack,
-          cursor: 'pointer',
-        },
-      },
-    })};
-  `;
-};
-
-/**
  * calculate left margin for helper text
  * @param props mandatory checkbox props
  * @returns modified css
  */
-const calculateMargin = (props: InnerProps) => {
+const calculateMargin = (props: CheckboxProps) => {
   return css`
     margin-left: ${props.size == 'large'
       ? checkboxDimensions.large.marginLeft
@@ -178,9 +135,9 @@ const calculateMargin = (props: InnerProps) => {
   `;
 };
 
-const CheckboxWrapper = styled.span<InnerProps>`
+const CheckboxWrapper = styled.span<CheckboxProps>`
   ${calculateSizes}
-  ${isDisabled}
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   display: inline-flex;
   font-family: ${typography.font};
   font-weight: ${typography.weight.regular};
@@ -188,15 +145,23 @@ const CheckboxWrapper = styled.span<InnerProps>`
   align-items: center;
   gap: ${checkboxDimensions.contentSpacing};
   border: none;
+  cursor: 'pointer';
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
+      cursor: 'default';
+    `}
 `;
 
-const CheckboxHelperText = styled(HelperText)<InnerProps>`
+const CheckboxHelperText = styled(HelperText)`
   ${calculateMargin}
   font-size: ${checkboxDimensions.helperTextFontSize};
   margin: 0;
 `;
 
-const CheckboxComponentWrapper = styled.span<InnerProps>`
+const CheckboxComponentWrapper = styled.span`
   display: inline-flex;
   flex-direction: column;
 `;
@@ -208,7 +173,7 @@ const CheckboxLabel = styled(Label)`
 /**
  * Internal component styling
  */
-const NativeCheckbox = styled.input<InnerProps>`
+const NativeCheckbox = styled.input`
   display: none !important;
 `;
 
