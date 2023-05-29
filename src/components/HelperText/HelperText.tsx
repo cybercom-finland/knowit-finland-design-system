@@ -11,6 +11,11 @@ export interface HelperTextProps
   extends ComponentBaseProps<HTMLSpanElement>,
     React.HTMLAttributes<HTMLSpanElement> {
   /**
+   * Text content
+   */
+  children?: string;
+
+  /**
    * Disabled
    */
   disabled?: boolean;

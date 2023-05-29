@@ -239,7 +239,8 @@ export const Button = ({
   endIcon,
   variant = 'filled',
   size = 'medium',
-  ...props
+  disabled = false,
+  ...restProps
 }: ButtonProps) => {
   let ButtonComponent;
   switch (variant) {
@@ -254,7 +255,7 @@ export const Button = ({
       break;
   }
   return (
-    <ButtonComponent size={size} {...props}>
+    <ButtonComponent size={size} disabled={disabled} {...restProps}>
       {startIcon}
       {label}
       {endIcon}

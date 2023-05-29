@@ -11,6 +11,12 @@ export interface LabelProps
   extends ComponentBaseProps<HTMLLabelElement>,
     React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
+   * Text content
+   */
+
+  children?: string;
+
+  /**
    * Disabled state
    */
   disabled?: boolean;

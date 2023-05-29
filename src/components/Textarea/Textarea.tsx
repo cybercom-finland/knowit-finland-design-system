@@ -53,11 +53,11 @@ export const Textarea = ({
   required = false,
   label,
   helperText,
-  disabled,
-  error,
+  disabled = false,
+  error = false,
   width,
   endIcon,
-  ...props
+  ...restProps
 }: TextareaProps) => {
   let TextareaComponent;
   switch (variant) {
@@ -102,7 +102,7 @@ export const Textarea = ({
           id={`textarea-${componentId}`}
           aria-labelledby={label && `label-${componentId}`}
           aria-describedby={helperText && `helper-${componentId}`}
-          {...props}
+          {...restProps}
         />
         {endIcon}
       </InputRow>

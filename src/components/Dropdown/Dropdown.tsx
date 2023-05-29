@@ -125,7 +125,7 @@ export const Dropdown = ({
   options,
   endIcon,
   variant = 'outlined',
-  ...props
+  ...restProps
 }: DropdownProps) => {
   let SelectComponent;
   switch (variant) {
@@ -159,7 +159,7 @@ export const Dropdown = ({
             id={`select-${componentId}`}
             aria-labelledby={label && `label-${componentId}`}
             aria-describedby={helperText && `helper-${componentId}`}
-            {...props}
+            {...restProps}
           >
             {options.map((option, index) => (
               <DropdownOption key={index} value={option.value}>
