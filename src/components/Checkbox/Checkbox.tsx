@@ -14,6 +14,7 @@ import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
 import { Label } from '../Label';
 import { HelperText } from '../HelperText';
+import { InputBaseProps } from '../Input';
 
 /**
  * Various dimensions of checkbox component
@@ -31,59 +32,55 @@ const checkboxDimensions = {
   },
 };
 
+type CheckboxInputBaseProps = Omit<
+  InputBaseProps,
+  'error' | 'variant' | 'endIcon' | 'placeholder' | 'readOnly'
+>;
+
+/**
+ * Used HTML Attributes
+ */
+type CheckboxInputHTMLAttributes = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  | 'size'
+  | 'type'
+  | 'accept'
+  | 'autoComplete'
+  | 'list'
+  | 'max'
+  | 'min'
+  | 'maxLength'
+  | 'minLength'
+  | 'multiple'
+  | 'pattern'
+  | 'placeholder'
+  | 'dirName'
+  | 'alt'
+  | 'capture'
+  | 'step'
+  | 'formAction'
+  | 'formEncType'
+  | 'formMethod'
+  | 'formNoValidate'
+  | 'formTarget'
+  | 'height'
+  | 'src'
+  | 'width'
+>;
+
 /**
  * Checkbox component properties
  * Extends html input element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#additional_attributes
  */
 export interface CheckboxProps
-  extends Omit<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      | 'size'
-      | 'type'
-      | 'accept'
-      | 'autoComplete'
-      | 'list'
-      | 'max'
-      | 'min'
-      | 'maxLength'
-      | 'minLength'
-      | 'multiple'
-      | 'pattern'
-      | 'placeholder'
-      | 'dirName'
-      | 'alt'
-      | 'capture'
-      | 'step'
-      | 'formAction'
-      | 'formEncType'
-      | 'formMethod'
-      | 'formNoValidate'
-      | 'formTarget'
-      | 'height'
-      | 'src'
-      | 'width'
-    >,
-    ComponentBaseProps<HTMLInputElement> {
-  /**
-   * Checkbox label text
-   */
-  label?: string;
-
+  extends ComponentBaseProps<HTMLInputElement>,
+    CheckboxInputBaseProps,
+    CheckboxInputHTMLAttributes {
   /**
    * Checkbox is checked
    */
   checked?: boolean;
-
-  /**
-   * Checkbox input control value
-   */
-  value?: string;
-
-  /**
-   * Disable checkbox
-   */
-  disabled?: boolean;
 
   /**
    * Checkbox is indeterminate state
@@ -94,11 +91,6 @@ export interface CheckboxProps
    * Size of checkbox
    */
   size?: Exclude<Size, 'medium'>;
-
-  /**
-   * Checkbox helper text
-   */
-  helperText?: string;
 }
 
 /**
@@ -186,6 +178,7 @@ export const Checkbox = ({
   checked = false,
   disabled = false,
   indeterminate = false,
+  required = false,
   size = 'large',
   helperText,
   ...restProps
@@ -226,7 +219,9 @@ export const Checkbox = ({
           checked={boxChecked}
           {...restProps}
         />
-        <CheckboxLabel disabled={disabled}>{label}</CheckboxLabel>
+        <CheckboxLabel disabled={disabled} required={required}>
+          {label}
+        </CheckboxLabel>
       </CheckboxWrapper>
       <CheckboxHelperText size={size} disabled={disabled}>
         {helperText}

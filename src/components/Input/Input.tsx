@@ -27,51 +27,6 @@ const inputDimensions = {
 };
 
 /**
- * Internal properties for styles
- */
-export interface InputBaseProps {
-  /**
-   * Is there an error in value? Ignored if component is disabled
-   */
-  error?: boolean;
-
-  /**
-   * Layout variant
-   */
-  variant?: InputVariant;
-
-  /**
-   * Label text
-   */
-  label?: string;
-
-  /**
-   * Additional helper text below component
-   */
-  helperText?: string;
-
-  /**
-   * Optional icon after the text
-   */
-  endIcon?: React.ReactNode;
-
-  /**
-   * Placeholder text when value is empty
-   */
-  placeholder?: string;
-
-  /**
-   * Is component disabled?
-   */
-  disabled?: boolean;
-
-  /**
-   * Is component required?
-   */
-  required?: boolean;
-}
-
-/**
  * Styles for base input
  * @returns CSS for input base
  */
@@ -234,9 +189,84 @@ export const InputWrapper = ({
 };
 
 /**
- * Input component properties
+ * Internal properties for styles
  */
-export interface InputProps extends ComponentBaseProps<HTMLInputElement> {
+export interface InputBaseProps {
+  /**
+   * Is there an error in value? Ignored if component is disabled
+   */
+  error?: boolean;
+
+  /**
+   * Layout variant
+   */
+  variant?: InputVariant;
+
+  /**
+   * Label text
+   */
+  label?: string;
+
+  /**
+   * Additional helper text below component
+   */
+  helperText?: string;
+
+  /**
+   * Optional icon after the text
+   */
+  endIcon?: React.ReactNode;
+
+  /**
+   * Placeholder text when value is empty
+   */
+  placeholder?: string;
+
+  /**
+   * Is component disabled?
+   */
+  disabled?: boolean;
+
+  /**
+   * Is component required?
+   */
+  required?: boolean;
+
+  /**
+   * Is component read only?
+   */
+  readOnly?: boolean;
+}
+
+/**
+ * Used HTML Attributes
+ */
+type InputHTMLAttributes = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  | 'accept'
+  | 'alt'
+  | 'capture'
+  | 'checked'
+  | 'formaction'
+  | 'formEncType'
+  | 'formMethod'
+  | 'formNoValidate'
+  | 'formTarget'
+  | 'height'
+  | 'src'
+  | 'width'
+>;
+
+/**
+ * Input component properties
+ *  Extends html input element attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
+ */
+export interface InputProps
+  extends ComponentBaseProps<HTMLInputElement>,
+    InputBaseProps,
+    InputHTMLAttributes,
+    WrapperProps {
   /**
    * Controlled input value
    */
@@ -246,36 +276,7 @@ export interface InputProps extends ComponentBaseProps<HTMLInputElement> {
    * Supported input types
    */
   type?: 'number' | 'text' | 'email' | 'password' | 'tel' | 'url';
-
-  /**
-   * Is component read only?
-   */
-  readOnly?: boolean;
 }
-
-/**
- * All props together
- * Extends html input element attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
- */
-type Props = InputProps &
-  InputBaseProps &
-  WrapperProps &
-  Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    | 'accept'
-    | 'alt'
-    | 'capture'
-    | 'checked'
-    | 'formaction'
-    | 'formEncType'
-    | 'formMethod'
-    | 'formNoValidate'
-    | 'formTarget'
-    | 'height'
-    | 'src'
-    | 'width'
-  >;
 
 /**
  * Input component
@@ -292,7 +293,7 @@ export const Input = ({
   width,
   endIcon,
   ...restProps
-}: Props) => {
+}: InputProps) => {
   let InputComponent;
   switch (variant) {
     case 'filled':
