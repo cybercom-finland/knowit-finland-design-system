@@ -82,9 +82,23 @@ const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
 export type DropdownOption = React.OptionHTMLAttributes<HTMLOptionElement>;
 
 /**
- * Dropdown component properties
+ * Used HTML Attributes
  */
-export interface DropdownProps extends ComponentBaseProps<HTMLSelectElement> {
+type SelectHTMLAttributes = Omit<
+  React.SelectHTMLAttributes<HTMLSelectElement>,
+  'multiple'
+>;
+
+/**
+ * Dropdown component properties
+ * Extends html select component attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attributes
+ */
+export interface DropdownProps
+  extends ComponentBaseProps<HTMLSelectElement>,
+    InputBaseProps,
+    SelectHTMLAttributes,
+    WrapperProps {
   /**
    * Controlled input value
    */
@@ -95,16 +109,6 @@ export interface DropdownProps extends ComponentBaseProps<HTMLSelectElement> {
    */
   options: DropdownOption[];
 }
-
-/**
- * All props together
- * Extends html select component attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attributes
- */
-type Props = DropdownProps &
-  InputBaseProps &
-  WrapperProps &
-  Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'multiple'>;
 
 /**
  * Dropdown component
@@ -122,7 +126,7 @@ export const Dropdown = ({
   endIcon,
   variant = 'outlined',
   ...props
-}: Props) => {
+}: DropdownProps) => {
   let SelectComponent;
   switch (variant) {
     case 'filled':

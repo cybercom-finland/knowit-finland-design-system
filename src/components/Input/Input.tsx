@@ -231,11 +231,6 @@ export interface InputBaseProps {
    * Is component required?
    */
   required?: boolean;
-
-  /**
-   * Is component read only?
-   */
-  readOnly?: boolean;
 }
 
 /**
@@ -276,6 +271,11 @@ export interface InputProps
    * Supported input types
    */
   type?: 'number' | 'text' | 'email' | 'password' | 'tel' | 'url';
+
+  /**
+   * Is component read only?
+   */
+  readOnly?: boolean;
 }
 
 /**

@@ -34,7 +34,7 @@ const checkboxDimensions = {
 
 type CheckboxInputBaseProps = Omit<
   InputBaseProps,
-  'error' | 'variant' | 'endIcon' | 'placeholder' | 'readOnly'
+  'error' | 'variant' | 'endIcon' | 'placeholder'
 >;
 
 /**
