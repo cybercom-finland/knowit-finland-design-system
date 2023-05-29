@@ -34,36 +34,15 @@ const buttonDimensions = {
 };
 
 /**
- * Internal properties for styles
- */
-interface InnerProps {
-  /**
-   * Disable button
-   */
-  disabled?: boolean;
-  /**
-   * Button size
-   */
-  size?: Size;
-}
-
-/**
  * Button component properties
  * Extrends html button element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes
  */
-export interface ButtonProps
-  extends InnerProps,
-    React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * Layout variant of the button
-   */
-  variant?: Variant;
-
+export interface ButtonProps extends ButtonInternalProps {
   /**
    * Button label text
    */
-  label: string;
+  label?: string;
 
   /**
    * Optional icon before the text
@@ -74,6 +53,19 @@ export interface ButtonProps
    * Optional icon after the text
    */
   endIcon?: React.ReactNode;
+
+  /**
+   * Layout variant of the button
+   */
+  variant?: Variant;
+}
+
+interface ButtonInternalProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Button size
+   */
+  size?: Size;
 
   /**
    * Ref object for the native button element
@@ -92,7 +84,7 @@ export interface ButtonProps
  * @param borderSize Border width if specified
  * @returns modified css
  */
-const calculateSizes = (props: InnerProps, borderSize?: number) => {
+const calculateSizes = (borderSize?: number) => {
   return css`
     ${variant({
       prop: 'size',
@@ -126,7 +118,7 @@ const calculateSizes = (props: InnerProps, borderSize?: number) => {
 /**
  * Internal component styling
  */
-const ButtonBase = styled.button<InnerProps>`
+const ButtonBase = styled.button`
   font-family: ${typography.font};
   font-weight: ${typography.weight.regular};
   cursor: pointer;
@@ -136,15 +128,11 @@ const ButtonBase = styled.button<InnerProps>`
   gap: ${buttonDimensions.contentSpacing};
 `;
 
-ButtonBase.defaultProps = {
-  size: 'medium',
-};
-
 /**
  * Filled variant
  */
-const FilledButton = styled(ButtonBase)<InnerProps>`
-  ${calculateSizes}
+const FilledButton = styled(ButtonBase)<ButtonInternalProps>`
+  ${calculateSizes()}
   border: none;
   color: ${(props) => props.theme.colors.neutral};
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
@@ -170,8 +158,8 @@ const FilledButton = styled(ButtonBase)<InnerProps>`
 /**
  * Outlined variant
  */
-const OutlinedButton = styled(ButtonBase)<InnerProps>`
-  ${(props) => calculateSizes(props, buttonDimensions.borderWidth)}
+const OutlinedButton = styled(ButtonBase)<ButtonInternalProps>`
+  ${calculateSizes(buttonDimensions.borderWidth)}
   color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
   background-color: ${(props) => props.theme.colors.neutral};
   border: ${pxToRem(buttonDimensions.borderWidth)} solid
@@ -201,8 +189,8 @@ const OutlinedButton = styled(ButtonBase)<InnerProps>`
 /**
  * Text variant
  */
-const TextButton = styled(ButtonBase)<InnerProps>`
-  ${(props) => calculateSizes(props)}
+const TextButton = styled(ButtonBase)<ButtonInternalProps>`
+  ${calculateSizes()}
   color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
   background-color: transparent;
   border: none;
@@ -251,13 +239,14 @@ const TextButton = styled(ButtonBase)<InnerProps>`
 `;
 
 /**
- * Exported component
+ * Button component
  */
 export const Button = ({
   label,
   startIcon,
   endIcon,
   variant = 'filled',
+  size = 'medium',
   ...props
 }: ButtonProps) => {
   let ButtonComponent;
@@ -273,7 +262,7 @@ export const Button = ({
       break;
   }
   return (
-    <ButtonComponent {...props}>
+    <ButtonComponent size={size} {...props}>
       {startIcon}
       {label}
       {endIcon}
