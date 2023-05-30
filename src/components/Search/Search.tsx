@@ -1,51 +1,26 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { variant } from 'styled-system';
 import {
-  spacing,
   pxToRem,
-  typography,
-  Size,
   generateRandomString,
   InputComponentBaseProps,
+  InputVariant,
 } from '../../shared';
-import { MdCheckBox } from 'react-icons/md';
-import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
-import { MdIndeterminateCheckBox } from 'react-icons/md';
-import { Label } from '../Label';
-import { HelperText } from '../HelperText';
-import { InputBaseProps } from '../Input';
+import { MdSearch } from 'react-icons/md';
+import { Input, InputBaseProps } from '../Input';
 
-/**
- * Various dimensions of checkbox component
- */
-const checkboxDimensions = {
-  contentSpacing: spacing(1),
-  helperTextFontSize: pxToRem(14),
-  small: {
-    fontSize: pxToRem(16),
-    marginLeft: pxToRem(24),
-  },
-  large: {
-    fontSize: pxToRem(24),
-    marginLeft: pxToRem(32),
-  },
-};
-
-type CheckboxInputBaseProps = Omit<
-  InputBaseProps,
-  'error' | 'variant' | 'endIcon' | 'placeholder'
->;
+type SearchInputBaseProps = Omit<InputBaseProps, 'error' | 'endIcon'>;
 
 /**
  * Used HTML Attributes
  */
-type CheckboxInputHTMLAttributes = Omit<
+type SearchInputHTMLAttributes = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   | 'size'
   | 'type'
   | 'accept'
   | 'autoComplete'
+  | 'checked'
   | 'list'
   | 'max'
   | 'min'
@@ -69,168 +44,77 @@ type CheckboxInputHTMLAttributes = Omit<
 >;
 
 /**
- * Checkbox component properties
+ * Search component properties
  * Extends html input element attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#additional_attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/search#additional_attributes
  */
-export interface CheckboxProps
+export interface SearchProps
   extends InputComponentBaseProps<HTMLInputElement>,
-    CheckboxInputBaseProps,
-    CheckboxInputHTMLAttributes {
+    SearchInputBaseProps,
+    SearchInputHTMLAttributes {
   /**
-   * Checkbox value
+   * Search value
    */
   value?: React.InputHTMLAttributes<HTMLInputElement>['value'];
 
   /**
-   * Checkbox is checked
+   * Layout variant
    */
-  checked?: boolean;
+  variant?: InputVariant;
 
   /**
-   * Checkbox is indeterminate state
+   * Label text
    */
-  indeterminate?: boolean;
+  label?: string;
 
   /**
-   * Size of checkbox
+   * Additional helper text below component
    */
-  size?: Exclude<Size, 'medium'>;
+  helperText?: string;
+
+  /**
+   * Placeholder text when value is empty
+   */
+  placeholder?: string;
+
+  /**
+   * Is component disabled?
+   */
+  disabled?: boolean;
+
+  /**
+   * Is component required?
+   */
+  required?: boolean;
+
+  /**
+   * Is component read only?
+   */
+  readOnly?: boolean;
 }
-
-/**
- * Helper function to calculate correct sizes for font size
- * @param props mandatory checkbox props
- * @returns modified css
- */
-const calculateSizes = () => {
-  return css`
-    ${variant({
-      prop: 'size',
-      variants: {
-        small: {
-          fontSize: checkboxDimensions.small.fontSize,
-        },
-        large: {
-          fontSize: checkboxDimensions.large.fontSize,
-        },
-      },
-    })};
-  `;
-};
-
-/**
- * calculate left margin for helper text
- * @param props mandatory checkbox props
- * @returns modified css
- */
-const calculateMargin = (props: CheckboxProps) => {
-  return css`
-    margin-left: ${props.size == 'large'
-      ? checkboxDimensions.large.marginLeft
-      : checkboxDimensions.small.marginLeft} !important;
-  `;
-};
-
-const CheckboxWrapper = styled.span<CheckboxProps>`
-  ${calculateSizes}
-  color: ${(props) => props.theme.colors.grayScale.digitalBlack};
-  display: inline-flex;
-  font-family: ${typography.font};
-  font-weight: ${typography.weight.regular};
-  box-sizing: border-box;
-  align-items: center;
-  gap: ${checkboxDimensions.contentSpacing};
-  border: none;
-  cursor: pointer;
-
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
-      cursor: default;
-    `}
-`;
-
-const CheckboxHelperText = styled(HelperText)`
-  ${calculateMargin}
-  font-size: ${checkboxDimensions.helperTextFontSize};
-  margin: 0;
-`;
-
-const CheckboxComponentWrapper = styled.span`
-  display: inline-flex;
-  flex-direction: column;
-`;
-
-const CheckboxLabel = styled(Label)`
-  margin: 0;
-`;
-
-/**
- * Internal component styling
- */
-const NativeCheckbox = styled.input`
-  display: none !important;
-`;
 
 /**
  * Exported component
  */
-export const Checkbox = ({
+export const Search = ({
   id,
   label,
-  checked = false,
-  disabled = false,
-  indeterminate = false,
-  required = false,
-  size = 'large',
   helperText,
   ...restProps
-}: CheckboxProps) => {
-  const [boxChecked, setChecked] = React.useState(false);
-
-  // Sync checkbox to undelying input component
-  React.useEffect(() => {
-    setChecked(!!checked);
-  }, [checked]);
-
-  // Handle onclick, sync with underlying input component
-  const checkboxClicked = () => {
-    if (disabled) return;
-    checked = !boxChecked;
-    setChecked(!boxChecked);
-  };
-
+}: SearchProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <CheckboxComponentWrapper>
-      <CheckboxWrapper
-        id={componentId}
-        onClick={checkboxClicked}
-        size={size}
-        disabled={disabled}
-      >
-        {boxChecked && !indeterminate && <MdCheckBox />}
-        {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
-        {indeterminate && <MdIndeterminateCheckBox />}
-        <NativeCheckbox
-          id={`checkbox-${componentId}`}
-          aria-labelledby={label && `label-${componentId}`}
-          aria-describedby={helperText && `helper-${componentId}`}
-          type={'checkbox'}
-          checked={boxChecked}
-          {...restProps}
-        />
-        <CheckboxLabel disabled={disabled} required={required}>
-          {label}
-        </CheckboxLabel>
-      </CheckboxWrapper>
-      <CheckboxHelperText size={size} disabled={disabled}>
-        {helperText}
-      </CheckboxHelperText>
-    </CheckboxComponentWrapper>
+    <Input
+      id={`search-${componentId}`}
+      endIcon={<MdSearch size={pxToRem(24)} />}
+      label={label}
+      helperText={helperText}
+      aria-labelledby={label && `label-${componentId}`}
+      aria-describedby={helperText && `helper-${componentId}`}
+      type={'search'}
+      {...restProps}
+    />
   );
 };

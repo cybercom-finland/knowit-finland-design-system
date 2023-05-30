@@ -270,7 +270,7 @@ export interface InputProps
   /**
    * Supported input types
    */
-  type?: 'number' | 'text' | 'email' | 'password' | 'tel' | 'url';
+  type?: 'number' | 'text' | 'email' | 'password' | 'tel' | 'url' | 'search';
 
   /**
    * Is component read only?

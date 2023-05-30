@@ -1,12 +1,12 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Checkbox } from './Search';
+import { Search } from './Search';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Checkbox',
-  component: Checkbox,
+  title: 'Components/Search',
+  component: Search,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     onChange: { action: true },
@@ -34,35 +34,12 @@ export default {
     ],
   },
   decorators: [withDesign],
-} as Meta<typeof Checkbox>;
+} as Meta<typeof Search>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Checkbox> = (args) => <Checkbox {...args} />;
+const Template: StoryFn<typeof Search> = (args) => <Search {...args} />;
 
 /**
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
-
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
-};
-
-/**
- * Small checkbox
- */
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-};
-/**
- * With no helper text
- */
-export const NoHelperText = Template.bind({});
-NoHelperText.args = {
-  helperText: undefined,
-};
