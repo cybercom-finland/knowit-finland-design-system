@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import { within, userEvent, fireEvent } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 
 import { Dropdown, DropdownOption } from './Dropdown';
 import { MdInfo } from 'react-icons/md';
@@ -155,7 +157,28 @@ Disabled.parameters = {
   },
 };
 
+Disabled.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  // Component should be disabled
+  await userEvent.click(canvas.getByTestId('dropdown'));
+  expect(canvas.getByTestId('dropdown')).toBeDisabled();
+};
+
 /**
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
+DefaultVariant.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  // Component should be enabled
+  await userEvent.click(canvas.getByTestId('dropdown'));
+  expect(canvas.getByTestId('dropdown')).toBeEnabled;
+  
+  // Try switching between options and see that the displayed value is reflected correctly
+  fireEvent.change(canvas.getByTestId('dropdown'), { target: { value: 2 } });
+  await userEvent.click(canvas.getByDisplayValue('Two'));
+  fireEvent.change(canvas.getByTestId('dropdown'), { target: { value: 1 } });
+  await userEvent.click(canvas.getByDisplayValue('One'));
+};

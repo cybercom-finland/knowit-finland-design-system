@@ -96,6 +96,11 @@ export interface CheckboxProps
    * Size of checkbox
    */
   size?: Exclude<Size, 'medium'>;
+
+  /**
+   * Callback for checked state change
+   */
+  onChange?: any;
 }
 
 /**
@@ -186,6 +191,7 @@ export const Checkbox = ({
   required = false,
   size = 'large',
   helperText,
+  onChange,
   ...restProps
 }: CheckboxProps) => {
   const [boxChecked, setChecked] = React.useState(false);
@@ -200,6 +206,9 @@ export const Checkbox = ({
     if (disabled) return;
     checked = !boxChecked;
     setChecked(!boxChecked);
+    if (typeof onChange === 'function') {
+      onChange();
+    }
   };
 
   // Use Id form props or create randomized string
@@ -211,7 +220,8 @@ export const Checkbox = ({
         id={componentId}
         onClick={checkboxClicked}
         size={size}
-        disabled={disabled}
+        data-testid='checkbox'
+        disabled={disabled}        
       >
         {boxChecked && !indeterminate && <MdCheckBox />}
         {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
