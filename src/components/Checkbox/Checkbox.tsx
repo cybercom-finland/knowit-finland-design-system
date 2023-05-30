@@ -78,6 +78,11 @@ export interface CheckboxProps
     CheckboxInputBaseProps,
     CheckboxInputHTMLAttributes {
   /**
+   * Checkbox value
+   */
+  value?: React.InputHTMLAttributes<HTMLInputElement>['value'];
+
+  /**
    * Checkbox is checked
    */
   checked?: boolean;
@@ -137,13 +142,13 @@ const CheckboxWrapper = styled.span<CheckboxProps>`
   align-items: center;
   gap: ${checkboxDimensions.contentSpacing};
   border: none;
-  cursor: 'pointer';
+  cursor: pointer;
 
   ${({ disabled }) =>
     disabled &&
     css`
       color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
-      cursor: 'default';
+      cursor: default;
     `}
 `;
 

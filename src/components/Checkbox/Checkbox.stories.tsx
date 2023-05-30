@@ -13,7 +13,7 @@ export default {
   },
   args: {
     checked: false,
-    label: 'Value',
+    label: 'Label',
     helperText: 'Helper text',
     disabled: false,
     indeterminate: false,
