@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-import { spacing, typography, generateRandomString } from '../../shared';
+import {
+  spacing,
+  typography,
+  generateRandomString,
+  InputComponentBaseProps,
+} from '../../shared';
 import { Wrapper, WrapperProps } from '../Wrapper';
 import {
   FilledInputStyles,
@@ -77,9 +82,23 @@ const DropdownArrow = styled(MdKeyboardArrowDown)<{ disabled?: boolean }>`
 export type DropdownOption = React.OptionHTMLAttributes<HTMLOptionElement>;
 
 /**
- * Dropdown component properties
+ * Used HTML Attributes
  */
-export interface DropdownProps {
+type SelectHTMLAttributes = Omit<
+  React.SelectHTMLAttributes<HTMLSelectElement>,
+  'multiple'
+>;
+
+/**
+ * Dropdown component properties
+ * Extends html select component attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attributes
+ */
+export interface DropdownProps
+  extends InputComponentBaseProps<HTMLSelectElement>,
+    InputBaseProps,
+    SelectHTMLAttributes,
+    WrapperProps {
   /**
    * Controlled input value
    */
@@ -89,28 +108,7 @@ export interface DropdownProps {
    * Dropdown options
    */
   options: DropdownOption[];
-
-  /**
-   * Ref object for the native select element
-   */
-  ref?: React.RefObject<HTMLSelectElement>;
-
-  /**
-   * onChange event handler
-   * @param event event
-   */
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
-
-/**
- * All props together
- * Extends html select component attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attributes
- */
-type Props = DropdownProps &
-  InputBaseProps &
-  WrapperProps &
-  Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'multiple'>;
 
 /**
  * Dropdown component
@@ -127,8 +125,8 @@ export const Dropdown = ({
   options,
   endIcon,
   variant = 'outlined',
-  ...props
-}: Props) => {
+  ...restProps
+}: DropdownProps) => {
   let SelectComponent;
   switch (variant) {
     case 'filled':
@@ -161,7 +159,7 @@ export const Dropdown = ({
             id={`select-${componentId}`}
             aria-labelledby={label && `label-${componentId}`}
             aria-describedby={helperText && `helper-${componentId}`}
-            {...props}
+            {...restProps}
           >
             {options.map((option, index) => (
               <DropdownOption key={index} value={option.value}>

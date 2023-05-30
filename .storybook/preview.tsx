@@ -69,18 +69,16 @@ export const globalTypes = {
 
 export const decorators = [withTheme];
 
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
-};
-
 const preview: Preview = {
   parameters: {
+    docs: {
+      controls: {
+        sort: 'requiredFirst',
+      },
+    },
+    controls: {
+      sort: 'requiredFirst',
+    },
     options: {
       storySort: {
         order: [

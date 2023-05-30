@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { ThemeProps, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import {
   spacing,
@@ -7,12 +7,14 @@ import {
   typography,
   Size,
   generateRandomString,
+  InputComponentBaseProps,
 } from '../../shared';
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
 import { Label } from '../Label';
 import { HelperText } from '../HelperText';
+import { InputBaseProps } from '../Input';
 
 /**
  * Various dimensions of checkbox component
@@ -30,14 +32,60 @@ const checkboxDimensions = {
   },
 };
 
+type CheckboxInputBaseProps = Omit<
+  InputBaseProps,
+  'error' | 'variant' | 'endIcon' | 'placeholder'
+>;
+
 /**
- * Internal properties for styles
+ * Used HTML Attributes
  */
-interface InnerProps {
+type CheckboxInputHTMLAttributes = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  | 'size'
+  | 'type'
+  | 'accept'
+  | 'autoComplete'
+  | 'list'
+  | 'max'
+  | 'min'
+  | 'maxLength'
+  | 'minLength'
+  | 'multiple'
+  | 'pattern'
+  | 'placeholder'
+  | 'dirName'
+  | 'alt'
+  | 'capture'
+  | 'step'
+  | 'formAction'
+  | 'formEncType'
+  | 'formMethod'
+  | 'formNoValidate'
+  | 'formTarget'
+  | 'height'
+  | 'src'
+  | 'width'
+>;
+
+/**
+ * Checkbox component properties
+ * Extends html input element attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#additional_attributes
+ */
+export interface CheckboxProps
+  extends InputComponentBaseProps<HTMLInputElement>,
+    CheckboxInputBaseProps,
+    CheckboxInputHTMLAttributes {
   /**
-   * Disable checkbox
+   * Checkbox value
    */
-  disabled?: boolean;
+  value?: React.InputHTMLAttributes<HTMLInputElement>['value'];
+
+  /**
+   * Checkbox is checked
+   */
+  checked?: boolean;
 
   /**
    * Checkbox is indeterminate state
@@ -48,76 +96,6 @@ interface InnerProps {
    * Size of checkbox
    */
   size?: Exclude<Size, 'medium'>;
-
-  /**
-   * Checkbox helper text
-   */
-  helperText?: string;
-
-  /**
-   * Change event handler passed from internal component
-   */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-/**
- * Checkbox component properties
- * Extends html input element attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#additional_attributes
- */
-export interface CheckboxProps
-  extends InnerProps,
-    Omit<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      | 'size'
-      | 'type'
-      | 'accept'
-      | 'autoComplete'
-      | 'list'
-      | 'max'
-      | 'min'
-      | 'maxLength'
-      | 'minLength'
-      | 'multiple'
-      | 'pattern'
-      | 'placeholder'
-      | 'dirName'
-      | 'alt'
-      | 'capture'
-      | 'step'
-      | 'formAction'
-      | 'formEncType'
-      | 'formMethod'
-      | 'formNoValidate'
-      | 'formTarget'
-      | 'height'
-      | 'src'
-      | 'width'
-    > {
-  /**
-   * Component id
-   */
-  id?: string;
-
-  /**
-   * Checkbox label text
-   */
-  label?: string;
-
-  /**
-   * Checkbox is checked
-   */
-  checked?: boolean;
-
-  /**
-   * Checkbox input control value
-   */
-  value?: string;
-
-  /**
-   * Ref object for the native input element
-   */
-  ref?: React.RefObject<HTMLInputElement>;
 }
 
 /**
@@ -142,35 +120,11 @@ const calculateSizes = () => {
 };
 
 /**
- * Helper function for checkbox disabled styles
- * @param props mandatory checkbox props and theme props
- * @returns modified css
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const isDisabled = (props: ThemeProps<any> & InnerProps) => {
-  return css`
-    ${variant({
-      prop: 'disabled',
-      variants: {
-        true: {
-          color: props.theme.colors.grayScale.digitalBlack300,
-          cursor: 'default',
-        },
-        false: {
-          color: props.theme.colors.grayScale.digitalBlack,
-          cursor: 'pointer',
-        },
-      },
-    })};
-  `;
-};
-
-/**
  * calculate left margin for helper text
  * @param props mandatory checkbox props
  * @returns modified css
  */
-const calculateMargin = (props: InnerProps) => {
+const calculateMargin = (props: CheckboxProps) => {
   return css`
     margin-left: ${props.size == 'large'
       ? checkboxDimensions.large.marginLeft
@@ -178,9 +132,9 @@ const calculateMargin = (props: InnerProps) => {
   `;
 };
 
-const CheckboxWrapper = styled.span<InnerProps>`
+const CheckboxWrapper = styled.span<CheckboxProps>`
   ${calculateSizes}
-  ${isDisabled}
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   display: inline-flex;
   font-family: ${typography.font};
   font-weight: ${typography.weight.regular};
@@ -188,15 +142,23 @@ const CheckboxWrapper = styled.span<InnerProps>`
   align-items: center;
   gap: ${checkboxDimensions.contentSpacing};
   border: none;
+  cursor: pointer;
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
+      cursor: default;
+    `}
 `;
 
-const CheckboxHelperText = styled(HelperText)<InnerProps>`
+const CheckboxHelperText = styled(HelperText)`
   ${calculateMargin}
   font-size: ${checkboxDimensions.helperTextFontSize};
   margin: 0;
 `;
 
-const CheckboxComponentWrapper = styled.span<InnerProps>`
+const CheckboxComponentWrapper = styled.span`
   display: inline-flex;
   flex-direction: column;
 `;
@@ -208,7 +170,7 @@ const CheckboxLabel = styled(Label)`
 /**
  * Internal component styling
  */
-const NativeCheckbox = styled.input<InnerProps>`
+const NativeCheckbox = styled.input`
   display: none !important;
 `;
 
@@ -221,6 +183,7 @@ export const Checkbox = ({
   checked = false,
   disabled = false,
   indeterminate = false,
+  required = false,
   size = 'large',
   helperText,
   ...restProps
@@ -261,7 +224,9 @@ export const Checkbox = ({
           checked={boxChecked}
           {...restProps}
         />
-        <CheckboxLabel disabled={disabled}>{label}</CheckboxLabel>
+        <CheckboxLabel disabled={disabled} required={required}>
+          {label}
+        </CheckboxLabel>
       </CheckboxWrapper>
       <CheckboxHelperText size={size} disabled={disabled}>
         {helperText}

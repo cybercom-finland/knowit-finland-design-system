@@ -8,6 +8,7 @@ import {
   convertToSpacingUnit,
   pxToRem,
   InputVariant,
+  InputComponentBaseProps,
 } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
@@ -24,51 +25,6 @@ const inputDimensions = {
   boderActive: 3,
   contentSpacing: 1,
 };
-
-/**
- * Internal properties for styles
- */
-export interface InputBaseProps {
-  /**
-   * Is there an error in value? Ignored if component is disabled
-   */
-  error?: boolean;
-
-  /**
-   * Layout variant
-   */
-  variant?: InputVariant;
-
-  /**
-   * Label text
-   */
-  label?: string;
-
-  /**
-   * Additional helper text below component
-   */
-  helperText?: string;
-
-  /**
-   * Optional icon after the text
-   */
-  endIcon?: React.ReactNode;
-
-  /**
-   * Placeholder text when value is empty
-   */
-  placeholder?: string;
-
-  /**
-   * Is component disabled?
-   */
-  disabled?: boolean;
-
-  /**
-   * Is component required?
-   */
-  required?: boolean;
-}
 
 /**
  * Styles for base input
@@ -133,13 +89,6 @@ export const baseInputStyles = (inputProps: InputBaseProps) => {
 const InputBase = styled.input<InputBaseProps>`
   ${baseInputStyles}
 `;
-
-/**
- * Input base default props
- */
-InputBase.defaultProps = {
-  type: 'text',
-};
 
 /**
  * Filled input styles
@@ -240,9 +189,79 @@ export const InputWrapper = ({
 };
 
 /**
- * Input component properties
+ * Internal properties for styles
  */
-export interface InputProps {
+export interface InputBaseProps {
+  /**
+   * Is there an error in value? Ignored if component is disabled
+   */
+  error?: boolean;
+
+  /**
+   * Layout variant
+   */
+  variant?: InputVariant;
+
+  /**
+   * Label text
+   */
+  label?: string;
+
+  /**
+   * Additional helper text below component
+   */
+  helperText?: string;
+
+  /**
+   * Optional icon after the text
+   */
+  endIcon?: React.ReactNode;
+
+  /**
+   * Placeholder text when value is empty
+   */
+  placeholder?: string;
+
+  /**
+   * Is component disabled?
+   */
+  disabled?: boolean;
+
+  /**
+   * Is component required?
+   */
+  required?: boolean;
+}
+
+/**
+ * Used HTML Attributes
+ */
+type InputHTMLAttributes = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  | 'accept'
+  | 'alt'
+  | 'capture'
+  | 'checked'
+  | 'formaction'
+  | 'formEncType'
+  | 'formMethod'
+  | 'formNoValidate'
+  | 'formTarget'
+  | 'height'
+  | 'src'
+  | 'width'
+>;
+
+/**
+ * Input component properties
+ *  Extends html input element attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
+ */
+export interface InputProps
+  extends InputComponentBaseProps<HTMLInputElement>,
+    InputBaseProps,
+    InputHTMLAttributes,
+    WrapperProps {
   /**
    * Controlled input value
    */
@@ -257,51 +276,7 @@ export interface InputProps {
    * Is component read only?
    */
   readOnly?: boolean;
-
-  /**
-   * Ref object for the native input element
-   */
-  ref?: React.RefObject<HTMLInputElement>;
-
-  /**
-   * Change event handler passed from internal component
-   */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-
-  /**
-   * Mouse click event handler passed from internal component
-   */
-  onClick?: (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
-
-  /**
-   * Blur event handler passed from internal component
-   */
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
-
-/**
- * All props together
- * Extends html input element attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
- */
-type Props = InputProps &
-  InputBaseProps &
-  WrapperProps &
-  Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    | 'accept'
-    | 'alt'
-    | 'capture'
-    | 'checked'
-    | 'formaction'
-    | 'formEncType'
-    | 'formMethod'
-    | 'formNoValidate'
-    | 'formTarget'
-    | 'height'
-    | 'src'
-    | 'width'
-  >;
 
 /**
  * Input component
@@ -318,7 +293,7 @@ export const Input = ({
   width,
   endIcon,
   ...restProps
-}: Props) => {
+}: InputProps) => {
   let InputComponent;
   switch (variant) {
     case 'filled':

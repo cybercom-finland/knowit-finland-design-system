@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { generateRandomString } from '../../shared';
+import { InputComponentBaseProps, generateRandomString } from '../../shared';
 import { Label } from '../Label';
 import { Wrapper, WrapperProps } from '../Wrapper';
 import { HelperText } from '../HelperText';
@@ -16,7 +16,7 @@ import {
 /**
  * Internal component styling
  */
-const TextareaBase = styled.textarea<InputBaseProps>`
+const TextareaBase = styled.textarea`
   ${baseInputStyles}
 `;
 
@@ -36,23 +36,13 @@ const OutlinedTextarea = styled(TextareaBase)`
 
 /**
  * Text area props
- */
-interface TextareaProps {
-  /**
-   * Ref object for the native textarea element
-   */
-  ref?: React.RefObject<HTMLTextAreaElement>;
-}
-
-/**
- * All props together
  * Extends html textarea element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea
  */
-type Props = InputBaseProps &
-  WrapperProps &
-  TextareaProps &
-  React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+export type TextareaProps = InputComponentBaseProps<HTMLTextAreaElement> &
+  InputBaseProps &
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> &
+  WrapperProps;
 
 /**
  * Textarea component
@@ -60,14 +50,15 @@ type Props = InputBaseProps &
 export const Textarea = ({
   id,
   variant = 'outlined',
+  required = false,
   label,
   helperText,
-  disabled,
-  error,
+  disabled = false,
+  error = false,
   width,
   endIcon,
-  ...props
-}: Props) => {
+  ...restProps
+}: TextareaProps) => {
   let TextareaComponent;
   switch (variant) {
     case 'filled':
@@ -85,6 +76,7 @@ export const Textarea = ({
     <Wrapper width={width}>
       {label && (
         <Label
+          required={required}
           disabled={disabled}
           error={error}
           htmlFor={`textarea-${componentId}`}
@@ -104,12 +96,13 @@ export const Textarea = ({
       )}
       <InputRow>
         <TextareaComponent
+          required={required}
           disabled={disabled}
           error={error}
           id={`textarea-${componentId}`}
           aria-labelledby={label && `label-${componentId}`}
           aria-describedby={helperText && `helper-${componentId}`}
-          {...props}
+          {...restProps}
         />
         {endIcon}
       </InputRow>
