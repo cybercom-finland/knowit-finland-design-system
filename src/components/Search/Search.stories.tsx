@@ -37,6 +37,9 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Search> = (args) => <Search {...args} />;
 
+/**
+ * Outlined
+ */
 export const Outlined = Template.bind({});
 Outlined.args = {
   variant: 'outlined',

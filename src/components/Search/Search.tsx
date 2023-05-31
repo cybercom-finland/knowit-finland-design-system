@@ -14,23 +14,14 @@ type SearchInputBaseProps = Omit<InputBaseProps, 'error' | 'endIcon'>;
  */
 type SearchInputHTMLAttributes = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  | 'size'
-  | 'type'
   | 'accept'
-  | 'autoComplete'
-  | 'checked'
-  | 'list'
-  | 'max'
-  | 'min'
-  | 'maxLength'
-  | 'minLength'
-  | 'multiple'
-  | 'pattern'
-  | 'placeholder'
-  | 'dirName'
   | 'alt'
+  | 'min'
+  | 'max'
+  | 'multiple'
+  | 'type'
   | 'capture'
-  | 'step'
+  | 'checked'
   | 'formAction'
   | 'formEncType'
   | 'formMethod'
@@ -59,12 +50,7 @@ export interface SearchProps
 /**
  * Exported component
  */
-export const Search = ({
-  id,
-  label,
-  helperText,
-  ...restProps
-}: SearchProps) => {
+export const Search = ({ id, ...restProps }: SearchProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
@@ -72,10 +58,6 @@ export const Search = ({
     <Input
       id={`search-${componentId}`}
       endIcon={<MdSearch size={pxToRem(24)} />}
-      label={label}
-      helperText={helperText}
-      aria-labelledby={label && `label-${componentId}`}
-      aria-describedby={helperText && `helper-${componentId}`}
       type={'search'}
       {...restProps}
     />
