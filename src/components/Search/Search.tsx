@@ -1,10 +1,8 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
 import {
   pxToRem,
   generateRandomString,
   InputComponentBaseProps,
-  InputVariant,
 } from '../../shared';
 import { MdSearch } from 'react-icons/md';
 import { Input, InputBaseProps } from '../Input';
@@ -56,41 +54,6 @@ export interface SearchProps
    * Search value
    */
   value?: React.InputHTMLAttributes<HTMLInputElement>['value'];
-
-  /**
-   * Layout variant
-   */
-  variant?: InputVariant;
-
-  /**
-   * Label text
-   */
-  label?: string;
-
-  /**
-   * Additional helper text below component
-   */
-  helperText?: string;
-
-  /**
-   * Placeholder text when value is empty
-   */
-  placeholder?: string;
-
-  /**
-   * Is component disabled?
-   */
-  disabled?: boolean;
-
-  /**
-   * Is component required?
-   */
-  required?: boolean;
-
-  /**
-   * Is component read only?
-   */
-  readOnly?: boolean;
 }
 
 /**

@@ -12,24 +12,22 @@ export default {
     onChange: { action: true },
   },
   args: {
-    checked: false,
     label: 'Label',
     helperText: 'Helper text',
     disabled: false,
-    indeterminate: false,
-    size: 'large',
+    width: 300,
   },
   parameters: {
     design: [
       {
         name: 'light',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=799%3A13731&t=aZ3vwdu5JAJD0sQm-1',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=875%3A17785&t=XP17dFGaaegn1hFH-1',
       },
       {
         name: 'dark',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1533%3A85558&t=aZ3vwdu5JAJD0sQm-1',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1533%3A88161&t=XP17dFGaaegn1hFH-1',
       },
     ],
   },
@@ -38,6 +36,29 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Search> = (args) => <Search {...args} />;
+
+export const Outlined = Template.bind({});
+Outlined.args = {
+  variant: 'outlined',
+};
+
+/**
+ * Filled
+ */
+export const Filled = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Filled.args = {
+  variant: 'filled',
+};
+
+/**
+ * Disabled
+ */
+export const Disabled = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Disabled.args = {
+  disabled: true,
+};
 
 /**
  * Default variant (not specified)
