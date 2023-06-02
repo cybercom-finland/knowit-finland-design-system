@@ -46,7 +46,7 @@ const Template: StoryFn<typeof Checkbox> = (args) => <Checkbox {...args} />;
  */
 export const DefaultVariant = Template.bind({});
 DefaultVariant.args = {
-  onChange: jest.fn()
+  onChange: jest.fn(),
 };
 
 DefaultVariant.play = async ({ args, canvasElement }) => {
