@@ -2,6 +2,8 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Checkbox } from './Checkbox';
+import { within, userEvent, waitFor } from '@storybook/testing-library';
+import { expect, jest } from '@storybook/jest';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -43,6 +45,20 @@ const Template: StoryFn<typeof Checkbox> = (args) => <Checkbox {...args} />;
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
+DefaultVariant.args = {
+  onChange: jest.fn(),
+};
+
+DefaultVariant.play = async ({ args, canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  // Check that the checkbox is enabled as it should be
+  await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeEnabled());
+
+  // Click the checkbox to change state and test that the onChange event is working
+  await userEvent.click(canvas.getByTestId('checkbox'));
+  await waitFor(() => expect(args.onChange).toHaveBeenCalled());
+};
 
 /**
  * Disabled
@@ -50,6 +66,22 @@ export const DefaultVariant = Template.bind({});
 export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,
+};
+Disabled.parameters = {
+  a11y: {
+    config: {
+      // Element has disabled attribute for screen readers, so contrast can be ignored
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+Disabled.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  // Check that the checkbox is disabled as it should be
+  await userEvent.click(canvas.getByTestId('checkbox'));
+  await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeDisabled);
 };
 
 /**

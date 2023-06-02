@@ -14,7 +14,7 @@ export interface LabelProps
    * Text content
    */
 
-  children?: string;
+  children?: React.ReactNode;
 
   /**
    * Disabled state
@@ -37,8 +37,7 @@ export interface LabelProps
 const InnerLabel = styled.label<LabelProps>`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   pointer-events: none;
-  margin: ${spacing([0.75, 0])};
-  display: block;
+  display: flex;
   font-weight: ${typography.weight.bold};
   ${({ disabled, error }) =>
     error
@@ -74,3 +73,24 @@ export const Label = ({
   const props = { disabled, error, required, ...restProps };
   return <InnerLabel {...props} />;
 };
+
+const formLabelDimension = {
+  contentSpacing: spacing(1),
+};
+
+/**
+ * Label component wrapper for components that need pointer events.
+ * E.g. checkbox and radio button
+ */
+export const FormLabel = styled(Label)`
+  pointer-events: unset;
+  cursor: pointer;
+  align-items: center;
+  gap: ${formLabelDimension.contentSpacing};
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: default;
+    `}
+`;

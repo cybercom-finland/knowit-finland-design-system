@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import {
-  spacing,
   pxToRem,
   typography,
   Size,
@@ -12,7 +11,7 @@ import {
 import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
-import { Label } from '../Label';
+import { FormLabel } from '../Label';
 import { HelperText } from '../HelperText';
 import { InputBaseProps } from '../Input';
 
@@ -20,7 +19,6 @@ import { InputBaseProps } from '../Input';
  * Various dimensions of checkbox component
  */
 const checkboxDimensions = {
-  contentSpacing: spacing(1),
   helperTextFontSize: pxToRem(14),
   small: {
     fontSize: pxToRem(16),
@@ -140,7 +138,6 @@ const CheckboxWrapper = styled.span<CheckboxProps>`
   font-weight: ${typography.weight.regular};
   box-sizing: border-box;
   align-items: center;
-  gap: ${checkboxDimensions.contentSpacing};
   border: none;
   cursor: pointer;
 
@@ -163,19 +160,15 @@ const CheckboxComponentWrapper = styled.span`
   flex-direction: column;
 `;
 
-const CheckboxLabel = styled(Label)`
-  margin: 0;
-`;
-
 /**
  * Internal component styling
  */
 const NativeCheckbox = styled.input`
-  display: none !important;
+  display: none;
 `;
 
 /**
- * Exported component
+ * Checkbox component
  */
 export const Checkbox = ({
   id,
@@ -186,6 +179,7 @@ export const Checkbox = ({
   required = false,
   size = 'large',
   helperText,
+  onChange,
   ...restProps
 }: CheckboxProps) => {
   const [boxChecked, setChecked] = React.useState(false);
@@ -196,10 +190,11 @@ export const Checkbox = ({
   }, [checked]);
 
   // Handle onclick, sync with underlying input component
-  const checkboxClicked = () => {
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) return;
-    checked = !boxChecked;
-    setChecked(!boxChecked);
+
+    setChecked(!!event.target.checked);
+    onChange && onChange(event);
   };
 
   // Use Id form props or create randomized string
@@ -207,27 +202,28 @@ export const Checkbox = ({
 
   return (
     <CheckboxComponentWrapper>
-      <CheckboxWrapper
-        id={componentId}
-        onClick={checkboxClicked}
-        size={size}
-        disabled={disabled}
-      >
-        {boxChecked && !indeterminate && <MdCheckBox />}
-        {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
-        {indeterminate && <MdIndeterminateCheckBox />}
+      <FormLabel disabled={disabled} required={required}>
+        <CheckboxWrapper
+          id={componentId}
+          size={size}
+          data-testid="checkbox"
+          disabled={disabled}
+        >
+          {boxChecked && !indeterminate && <MdCheckBox />}
+          {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
+          {indeterminate && <MdIndeterminateCheckBox />}
+        </CheckboxWrapper>
         <NativeCheckbox
           id={`checkbox-${componentId}`}
           aria-labelledby={label && `label-${componentId}`}
           aria-describedby={helperText && `helper-${componentId}`}
           type={'checkbox'}
           checked={boxChecked}
+          onChange={onChangeHandler}
           {...restProps}
         />
-        <CheckboxLabel disabled={disabled} required={required}>
-          {label}
-        </CheckboxLabel>
-      </CheckboxWrapper>
+        {label}
+      </FormLabel>
       <CheckboxHelperText size={size} disabled={disabled}>
         {helperText}
       </CheckboxHelperText>
