@@ -96,11 +96,6 @@ export interface CheckboxProps
    * Size of checkbox
    */
   size?: Exclude<Size, 'medium'>;
-
-  /**
-   * Callback for checked state change
-   */
-  onChange?: any;
 }
 
 /**
@@ -202,13 +197,12 @@ export const Checkbox = ({
   }, [checked]);
 
   // Handle onclick, sync with underlying input component
-  const checkboxClicked = () => {
+  const checkboxClickHandler = (ev: React.MouseEvent) => {
     if (disabled) return;
     checked = !boxChecked;
     setChecked(!boxChecked);
-    if (typeof onChange === 'function') {
-      onChange();
-    }
+
+    onChange && onChange(ev as unknown as React.ChangeEvent<HTMLInputElement>);
   };
 
   // Use Id form props or create randomized string
@@ -218,7 +212,7 @@ export const Checkbox = ({
     <CheckboxComponentWrapper>
       <CheckboxWrapper
         id={componentId}
-        onClick={checkboxClicked}
+        onClick={(ev) => checkboxClickHandler(ev)}
         size={size}
         data-testid='checkbox'
         disabled={disabled}        
