@@ -14,13 +14,17 @@ export interface LinkProps
   /**
    * Text content
    */
-
   children?: React.ReactNode;
 
   /**
    * Optional icon after the text
    */
   endIcon?: React.ReactNode;
+
+  /**
+   * Optional href
+   */
+  href?: string;
 }
 
 /**
@@ -41,11 +45,7 @@ const InnerLink = styled.a<LinkProps>`
  * @param props Link props
  * @returns Link component
  */
-export const Link = ({
-  endIcon = <MdOpenInNew />,
-  children,
-  ...restProps
-}: LinkProps) => {
+export const Link = ({ endIcon, children, ...restProps }: LinkProps) => {
   return (
     <InnerLink {...restProps}>
       {children}

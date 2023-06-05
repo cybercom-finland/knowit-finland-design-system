@@ -2,6 +2,7 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 
 import { Link } from './Link';
+import { MdOpenInNew } from 'react-icons/md';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -37,5 +38,15 @@ const Template: StoryFn<typeof Link> = (args) => <Link {...args} />;
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
-  children: 'Default label',
+  children: 'Link',
+};
+
+/**
+ * With endicon
+ */
+export const EndIcon = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+EndIcon.args = {
+  children: 'Link with end icon',
+  endIcon: <MdOpenInNew />,
 };
