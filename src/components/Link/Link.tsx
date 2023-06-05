@@ -32,9 +32,11 @@ export interface LinkProps
  */
 const InnerLink = styled.a<LinkProps>`
   display: inline-flex;
+  font-size: 28;
   text-decoration: underline;
   gap: ${spacing(1)};
   cursor: pointer;
+  color: ${(props) => props.theme.colors.info.info};
   &:hover {
     color: ${(props) => props.theme.colors.info.info800};
   }
