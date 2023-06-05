@@ -1,7 +1,6 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { ComponentBaseProps, spacing } from '../../shared';
-import { MdOpenInNew } from 'react-icons/md';
 
 /**
  * Link component properties
