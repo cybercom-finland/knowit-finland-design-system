@@ -14,6 +14,7 @@ export default {
   args: {
     label: 'Label',
     helperText: 'Helper text',
+    placeholder: 'Search...',
     disabled: false,
     width: 300,
   },
