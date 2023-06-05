@@ -40,6 +40,7 @@ export const bodyStyles = css`
   }
   label {
     font-size: ${typography.size.paragraph2};
+    line-height: ${typography.lineHeight.paragraph2};
   }
   p {
     font-size: ${typography.size.paragraph};

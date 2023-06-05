@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { ComponentBaseProps, spacing, typography } from '../../shared';
+import { ComponentBaseProps, typography } from '../../shared';
 
 /**
  * Helper text component properties
@@ -31,8 +31,9 @@ export interface HelperTextProps
 const InnerHelperText = styled.span<HelperTextProps>`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   pointer-events: none;
-  margin: ${spacing([0.75, 0])};
   display: block;
+  font-size: ${typography.size.paragraph2};
+  line-height: ${typography.lineHeight.paragraph2};
   font-weight: ${typography.weight.regular};
   ${({ disabled, error }) =>
     error
