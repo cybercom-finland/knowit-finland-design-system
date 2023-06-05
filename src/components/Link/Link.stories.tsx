@@ -42,7 +42,7 @@ Default.args = {
 };
 
 /**
- * With endicon
+ * With end icon
  */
 export const EndIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
