@@ -2,11 +2,6 @@ import React from 'react';
 import { generateRandomString, InputComponentBaseProps } from '../../shared';
 import { Input, InputBaseProps } from '../Input';
 
-type DatePickerInputBaseProps = Omit<
-  InputBaseProps,
-  'variant' | 'helperText' | 'error' | 'endIcon' | 'disabled'
->;
-
 /**
  * Used HTML Attributes
  */
@@ -37,7 +32,7 @@ type DatePickerInputHTMLAttributes = Omit<
  */
 export interface DatePickerProps
   extends InputComponentBaseProps<HTMLInputElement>,
-    DatePickerInputBaseProps,
+    InputBaseProps,
     DatePickerInputHTMLAttributes {
   /**
    * DatePicker value
