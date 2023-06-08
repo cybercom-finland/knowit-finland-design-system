@@ -41,7 +41,7 @@ export interface DatePickerProps
 }
 
 /**
- * Exported component
+ * DatePicker component
  */
 export const DatePicker = ({ id, ...restProps }: DatePickerProps) => {
   // Use Id form props or create randomized string
