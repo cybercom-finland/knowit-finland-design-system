@@ -4,7 +4,7 @@ import {
   generateRandomString,
   InputComponentBaseProps,
 } from '../../shared';
-import { MdSearch } from 'react-icons/md';
+import { MdCalendarToday } from 'react-icons/md';
 import { Input, InputBaseProps } from '../Input';
 
 type DatePickerInputBaseProps = Omit<InputBaseProps, 'error' | 'endIcon'>;
@@ -57,7 +57,7 @@ export const DatePicker = ({ id, ...restProps }: DatePickerProps) => {
   return (
     <Input
       id={`search-${componentId}`}
-      endIcon={<MdSearch size={pxToRem(24)} />}
+      endIcon={<MdCalendarToday size={pxToRem(24)} />}
       type={'date'}
       {...restProps}
     />
