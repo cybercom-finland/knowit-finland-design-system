@@ -9,8 +9,6 @@ type DatePickerInputHTMLAttributes = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   | 'accept'
   | 'alt'
-  | 'min'
-  | 'max'
   | 'multiple'
   | 'type'
   | 'capture'
