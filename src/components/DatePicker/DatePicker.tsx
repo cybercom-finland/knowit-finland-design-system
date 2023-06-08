@@ -1,13 +1,11 @@
 import React from 'react';
-import {
-  pxToRem,
-  generateRandomString,
-  InputComponentBaseProps,
-} from '../../shared';
-import { MdCalendarToday } from 'react-icons/md';
+import { generateRandomString, InputComponentBaseProps } from '../../shared';
 import { Input, InputBaseProps } from '../Input';
 
-type DatePickerInputBaseProps = Omit<InputBaseProps, 'error' | 'endIcon'>;
+type DatePickerInputBaseProps = Omit<
+  InputBaseProps,
+  'variant' | 'helperText' | 'error' | 'endIcon' | 'disabled'
+>;
 
 /**
  * Used HTML Attributes
@@ -54,12 +52,5 @@ export const DatePicker = ({ id, ...restProps }: DatePickerProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
-  return (
-    <Input
-      id={`search-${componentId}`}
-      endIcon={<MdCalendarToday size={pxToRem(24)} />}
-      type={'date'}
-      {...restProps}
-    />
-  );
+  return <Input id={`search-${componentId}`} type={'date'} {...restProps} />;
 };
