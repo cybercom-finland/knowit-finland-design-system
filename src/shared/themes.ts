@@ -33,7 +33,19 @@ export const lightTheme = {
       danger200: '#FFBFB6',
       danger800: '#A01B1B',
     },
-    info: { info: '#0047FF', info200: '#B5C9FF', info800: '#001C64' },
+    info: {
+      info: '#0047FF',
+      info200: '#B5C9FF',
+      info800: '#001C64',
+    },
+    loadingIndicator: {
+      background: '#F1F0ED',
+      default: '#333333',
+      success: '#55C436',
+      warning: '#E08302',
+      error: '#FF4965',
+      info: '#0047FF',
+    },
   },
 };
 
@@ -76,6 +88,14 @@ export const darkTheme = {
       info: '#4D7EFF',
       info200: '#001C64',
       info800: '#B5C9FF',
+    },
+    loadingIndicator: {
+      background: '#333333',
+      default: '#F1F0ED',
+      success: '#55C436',
+      warning: '#E08302',
+      error: '#FF4965',
+      info: '#4D7EFF',
     },
   },
 };

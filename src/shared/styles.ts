@@ -1,3 +1,5 @@
+import { darkTheme, lightTheme } from './themes';
+
 // 1rem = 16px
 export const baseSize = 16;
 // 1 spacing unit = 8px
@@ -67,4 +69,39 @@ export const typography = {
     paragraph2: pxToRem(21),
     caption: pxToRem(16),
   },
+};
+
+/**
+ * Different styles for the loading indicator
+ */
+export enum LoadingIndicatorStyle {
+  Default,
+  Success,
+  Warning,
+  Error,
+  Info,
+}
+
+/**
+ * Get color for the loading indicator style and the color theme
+ * @param style Style of the loading indicator
+ * @param theme Color theme that is in use
+ * @returns Color for the style and theme as #rrggbb string
+ */
+export const LoadingIndicatorColor = (
+  style: LoadingIndicatorStyle,
+  theme: typeof darkTheme | typeof lightTheme
+): string => {
+  switch (style) {
+    case LoadingIndicatorStyle.Success:
+      return theme.colors.loadingIndicator.success;
+    case LoadingIndicatorStyle.Warning:
+      return theme.colors.loadingIndicator.warning;
+    case LoadingIndicatorStyle.Error:
+      return theme.colors.loadingIndicator.error;
+    case LoadingIndicatorStyle.Info:
+      return theme.colors.loadingIndicator.info;
+    default:
+      return theme.colors.loadingIndicator.default;
+  }
 };

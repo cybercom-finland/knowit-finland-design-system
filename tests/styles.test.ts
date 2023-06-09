@@ -1,4 +1,11 @@
-import { spacing, convertToSpacingUnit, pxToRem } from '../src/shared/styles';
+import {
+  spacing,
+  convertToSpacingUnit,
+  pxToRem,
+  LoadingIndicatorStyle,
+  LoadingIndicatorColor,
+} from '../src/shared/styles';
+import { darkTheme, lightTheme } from '../src/shared/themes';
 
 describe('testing spacing', () => {
   test('No value given', () => {
@@ -71,5 +78,19 @@ describe('testing pxToRem', () => {
 
   test('Very large value', () => {
     expect(pxToRem(16000000)).toBe('1000000rem');
+  });
+});
+
+describe('testing LoadingIndicatorColor', () => {
+  test('Get RGB value strings 1/2', () => {
+    expect(
+      LoadingIndicatorColor(LoadingIndicatorStyle.Success, darkTheme)
+    ).toMatch(/^#[\dA-F]{6}$/);
+  });
+
+  test('Get RGB value strings 2/2', () => {
+    expect(
+      LoadingIndicatorColor(LoadingIndicatorStyle.Warning, lightTheme)
+    ).toMatch(/^#[\dA-F]{6}$/);
   });
 });
