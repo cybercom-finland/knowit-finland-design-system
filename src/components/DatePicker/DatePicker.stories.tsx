@@ -14,6 +14,13 @@ export default {
   args: {
     label: 'Label',
     width: 300,
+    placeholder: 'Default input',
+    helperText: 'Helper text',
+    variant: 'outlined',
+    disabled: false,
+    error: false,
+    readOnly: false,
+    required: false,
   },
   parameters: {
     design: [
@@ -34,6 +41,23 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof DatePicker> = (args) => <DatePicker {...args} />;
+
+/**
+ * Outlined
+ */
+export const Outlined = Template.bind({});
+Outlined.args = {
+  variant: 'outlined',
+};
+
+/**
+ * Filled
+ */
+export const Filled = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Filled.args = {
+  variant: 'filled',
+};
 
 /**
  * Default variant (not specified)
