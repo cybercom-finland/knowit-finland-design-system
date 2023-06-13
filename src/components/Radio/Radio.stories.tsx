@@ -36,17 +36,14 @@ const Template: StoryFn<typeof Radio> = (args) => {
   const [selectedValue, setSelectedValue] = useState<string | undefined>(undefined);
 
   return (
-  <Radio {...args}
-         onSelect={(e) => setSelectedValue(String(e.target.value))}
-         selectedValue={selectedValue}
-         value={'value1'}
-  />
+        <Radio {...args}
+               onSelect={(e) => setSelectedValue(String(e.target.value))}
+               selectedValue={selectedValue}
+               value={'value1'}
+        />
   )
 };
 
-/**
- * Vertical group
- */
 // TODO: Add vertical & horizontal groups
 
 /**
