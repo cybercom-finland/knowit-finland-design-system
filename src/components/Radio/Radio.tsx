@@ -98,7 +98,7 @@ const RadioComponentWrapper = styled.span<RadioProps>`
 
 const RadioButton = styled.div<RadioProps>`
   ${calculateSizes};
-  border: 1px solid #000000;
+  border: 1px solid ${(props) => props.theme.colors.grayScale.digitalBlack};
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -107,28 +107,27 @@ const RadioButton = styled.div<RadioProps>`
   margin-right: 0.4rem;
   transition: background 0.10s, border-color 0.10s;
   padding: 2px;
-
-  ${({ disabled }) =>
-          disabled
-              ? css`
-        border: 1px solid ${(props) => props.theme.colors.grayScale.digitalBlack300} !important;
-        &::after {
-          background: ${(props) => props.theme.colors.grayScale.digitalBlack300} !important;
-          pointer-events: none;
-        }
-      `
-              : ''};
-
+  
   &::after {
     content: "";
     width: 100%;
     height: 100%;
     display: block;
-    background: #000000;
+    background: ${(props) => props.theme.colors.grayScale.digitalBlack};
     border-radius: 50%;
     cursor: pointer;
     transform: scale(0);
   }
+  ${({ disabled }) =>
+          disabled
+                  ? css`
+        border: 1px solid ${(props) => props.theme.colors.grayScale.digitalBlack300};
+        &::after {
+          background: ${(props) => props.theme.colors.grayScale.digitalBlack300};
+          pointer-events: none;
+        }
+      `
+                  : ''};
 `;
 
 const RadioInput = styled.input`
@@ -167,7 +166,7 @@ export const Radio = ({
               id={`radio-${componentId}`}
               type={'radio'}
               value={value}
-              checked={selectedValue === value}
+              checked={selectedValue === value || defaultChecked}
               disabled={disabled}
               onChange={onSelect}
               defaultChecked={defaultChecked}
