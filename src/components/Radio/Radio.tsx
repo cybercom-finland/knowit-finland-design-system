@@ -104,7 +104,7 @@ const RadioButton = styled.div<RadioProps>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-right: 0.4rem;
+  margin-right: ${pxToRem(10)};
   transition: background 0.10s, border-color 0.10s;
   padding: 2px;
   
