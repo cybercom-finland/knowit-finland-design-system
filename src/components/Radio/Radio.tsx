@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   generateRandomString,
   InputComponentBaseProps, pxToRem, Size,
@@ -174,6 +174,7 @@ export const Radio = ({
       <RadioComponentWrapper
           id={componentId}
           size={size}
+          data-testid={'radio'}
       >
         <FormLabel disabled={disabled} required={required}>
           <RadioInput
