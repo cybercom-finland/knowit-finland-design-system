@@ -278,8 +278,8 @@ export interface InputProps
     | 'tel'
     | 'url'
     | 'search'
-    | 'radio';
-    | 'date';
+    | 'radio'g
+    | 'date'
 
   /**
    * Is component read only?
