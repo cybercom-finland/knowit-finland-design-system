@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Radio } from './Radio';
@@ -12,7 +12,7 @@ export default {
     placeholder: 'Radio...',
     disabled: false,
     width: 300,
-    size: "large",
+    size: 'large',
   },
   parameters: {
     design: [
@@ -33,18 +33,20 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Radio> = (args) => {
-  const [selectedValue, setSelectedValue] = useState<string | undefined>(undefined);
+  const [selectedValue, setSelectedValue] = useState<string | undefined>(
+    undefined
+  );
 
   return (
-        <Radio {...args}
-               onSelect={(e) => setSelectedValue(String(e.target.value))}
-               selectedValue={selectedValue}
-               value={'value1'}
-        />
-  )
+    <Radio
+      {...args}
+      onSelect={(e) => setSelectedValue(String(e.target.value))}
+      selectedValue={selectedValue}
+      value={'value'}
+      name={'test'}
+    />
+  );
 };
-
-// TODO: Add vertical & horizontal groups
 
 /**
  * Small variant
