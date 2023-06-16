@@ -60,7 +60,7 @@ Success100PercentDeterminate.args = {
 };
 
 /**
- * Error, 100%, determinate
+ * Error, 33%, determinate
  */
 export const Error33PercentDeterminate = Template.bind({});
 Error33PercentDeterminate.args = {

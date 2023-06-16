@@ -94,14 +94,19 @@ export const LoadingIndicatorColor = (
 ): string => {
   switch (style) {
     case LoadingIndicatorStyle.Success:
-      return theme.colors.loadingIndicator.success;
+      return theme.colors.success.success;
     case LoadingIndicatorStyle.Warning:
-      return theme.colors.loadingIndicator.warning;
+      return theme.colors.warning.warning;
     case LoadingIndicatorStyle.Error:
-      return theme.colors.loadingIndicator.error;
+      return theme.colors.danger.danger;
     case LoadingIndicatorStyle.Info:
-      return theme.colors.loadingIndicator.info;
+      return theme.colors.info.info;
     default:
-      return theme.colors.loadingIndicator.default;
+      return theme.colors.grayScale.digitalBlack;
   }
 };
+
+/**
+ * Height of the linear loading indicator bar
+ */
+export const linearLoadingIndicatorHeight = 5;

@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  generateRandomString,
   ComponentBaseProps,
   LoadingIndicatorStyle,
   LoadingIndicatorColor,
+  linearLoadingIndicatorHeight,
 } from '../../shared';
 import { Wrapper, WrapperProps } from '../Wrapper';
 import { InputBaseProps } from '../Input/Input';
@@ -35,23 +35,23 @@ export interface LinearLoadingIndicatorBaseProps
 /**
  * OuterSpan component, which represents 100% width of the whole loading indicator / progress bar
  */
-export const OuterSpan = styled.span<LinearLoadingIndicatorBaseProps>`
-  background: ${(props) => props.theme.colors.loadingIndicator.background};
+const BarBackground = styled.span<LinearLoadingIndicatorBaseProps>`
+  background: ${(props) => props.theme.colors.grayScale.digitalBlack100};
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
+  height: ${linearLoadingIndicatorHeight}px;
   display: inline-block;
 `;
 
 /**
  * InnerSpan component, which represents the visible progress % of the bar, or the loading animation
  */
-export const InnerSpan = styled.span<LinearLoadingIndicatorBaseProps>`
+const Bar = styled.span<LinearLoadingIndicatorBaseProps>`
   top: 0;
   left: 0;
   width: ${(props) => props.progress}%;
-  height: 4px;
+  height: ${linearLoadingIndicatorHeight}px;
   display: inline-block;
   position: relative;
   background: ${(props) =>
@@ -82,7 +82,6 @@ export const InnerSpan = styled.span<LinearLoadingIndicatorBaseProps>`
  * LinearLoadingIndicator component
  */
 export const LinearLoadingIndicator = ({
-  id,
   margin,
   width,
   progress,
@@ -90,16 +89,16 @@ export const LinearLoadingIndicator = ({
   indicatorStyle,
   ...restProps
 }: LinearLoadingIndicatorBaseProps) => {
-  // randomized part for id to avoid duplicates with multiple inputs
-  const componentId = id ?? generateRandomString(5);
-
-  const ariaLabelText = determinate ? `${progress}%` : '';
+  const ariaLabelText = determinate && progress ? `${progress}%` : '';
 
   return (
-    <Wrapper margin={margin} width={width}>
-      <OuterSpan id={`outerspan-${componentId}`} {...restProps}>
-        <InnerSpan
-          id={`innerspan-${componentId}`}
+    <Wrapper
+      margin={margin}
+      width={width}
+      height={linearLoadingIndicatorHeight}
+    >
+      <BarBackground {...restProps}>
+        <Bar
           indicatorStyle={indicatorStyle}
           progress={progress}
           determinate={determinate}
@@ -108,8 +107,8 @@ export const LinearLoadingIndicator = ({
           {...restProps}
         >
           &nbsp;
-        </InnerSpan>
-      </OuterSpan>
+        </Bar>
+      </BarBackground>
     </Wrapper>
   );
 };
