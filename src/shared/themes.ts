@@ -33,7 +33,11 @@ export const lightTheme = {
       danger200: '#FFBFB6',
       danger800: '#A01B1B',
     },
-    info: { info: '#0047FF', info200: '#B5C9FF', info800: '#001C64' },
+    info: {
+      info: '#0047FF',
+      info200: '#B5C9FF',
+      info800: '#001C64',
+    },
   },
 };
 
