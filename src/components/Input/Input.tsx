@@ -278,7 +278,7 @@ export interface InputProps
     | 'tel'
     | 'url'
     | 'search'
-    | 'radio'g
+    | 'radio'
     | 'date'
 
   /**
