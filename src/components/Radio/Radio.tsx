@@ -161,7 +161,7 @@ export const Radio = ({
   // Use ID form props or create randomized string
   const [checked, setChecked] = useState(false);
   const componentId = id ?? generateRandomString(5);
-g
+
   const checkedProps = React.useMemo(() => {
     if (!defaultChecked) {
       return { checked };
