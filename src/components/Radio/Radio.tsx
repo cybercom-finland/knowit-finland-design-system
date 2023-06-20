@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   generateRandomString,
   InputComponentBaseProps,
@@ -37,6 +37,8 @@ type RadioInputHTMLAttributes = Omit<
   | 'src'
   | 'width'
   | 'size'
+  | 'placeholder'
+  | 'helperText'
 >;
 
 /**
@@ -68,10 +70,6 @@ export interface RadioProps
    * Size of radio
    */
   size?: Exclude<Size, 'medium'>;
-  /**
-   * selected value
-   */
-  selectedValue?: string;
 }
 
 const calculateSizes = () => {
@@ -107,7 +105,6 @@ const RadioButton = styled.div<RadioProps>`
   border-radius: 50%;
   display: flex;
   cursor: pointer;
-  margin-right: ${pxToRem(10)};
   transition: background 0.1s, border-color 0.1s;
   padding: 2px;
 
@@ -154,26 +151,11 @@ export const Radio = ({
   required = false,
   size = 'large',
   defaultChecked,
-  selectedValue,
   onSelect,
   ...restProps
 }: RadioProps) => {
   // Use ID form props or create randomized string
-  const [checked, setChecked] = useState(false);
   const componentId = id ?? generateRandomString(5);
-
-  const checkedProps = React.useMemo(() => {
-    if (!defaultChecked) {
-      return { checked };
-    }
-    return { defaultChecked };
-  }, [checked, defaultChecked]);
-
-  React.useEffect(() => {
-    if (selectedValue === value) {
-      setChecked(true);
-    }
-  }, [selectedValue]);
 
   return (
     <RadioComponentWrapper id={componentId} size={size} data-testid={'radio'}>
@@ -186,7 +168,7 @@ export const Radio = ({
           id={`radio-${componentId}`}
           type={'radio'}
           value={value}
-          {...checkedProps}
+          defaultChecked={defaultChecked}
           disabled={disabled}
           onChange={onSelect}
           {...restProps}

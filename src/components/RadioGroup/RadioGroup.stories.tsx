@@ -1,17 +1,17 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Radio } from './Radio';
+import { RadioGroup } from './RadioGroup';
+import { Radio } from '../Radio';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Radio',
-  component: Radio,
+  title: 'Components/RadioGroup',
+  component: RadioGroup,
   args: {
     label: 'Label',
-    disabled: false,
-    width: 300,
-    size: 'large',
+    helperText: 'Help text',
+    direction: 'horizontal',
   },
   parameters: {
     design: [
@@ -28,30 +28,22 @@ export default {
     ],
   },
   decorators: [withDesign],
-} as Meta<typeof Radio>;
+} as Meta<typeof RadioGroup>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Radio> = (args) => {
-  return <Radio {...args} value={'value'} name={'test'} />;
+const Template: StoryFn<typeof RadioGroup> = (args) => {
+  return (
+    <RadioGroup
+      label={'label'}
+      helperText={'Help Text'}
+      direction={args.direction}
+    >
+      <Radio {...args} value={'value'} name={'test'} />
+      <Radio {...args} value={'value2'} name={'test'} />
+      <Radio {...args} value={'valu3'} name={'test'} />
+    </RadioGroup>
+  );
 };
-
-/**
- * Small variant
- */
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-};
-
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Disabled.args = {
-  disabled: true,
-};
-
 /**
  * Default variant (not specified)
  */
