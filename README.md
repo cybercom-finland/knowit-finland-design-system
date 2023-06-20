@@ -56,6 +56,10 @@ Accessibility tests are done by the storybook-addon-a11y package. Accessibility 
 
 After accepting the changes in Chromatic, the code changes can be reviewed in Github. When the pull request is merged, the changes are automatically deployed.
 
+## Installation and Usage guide
+
+Installation and usage guide can be located [here](https://main--642d30efc01f531daf615203.chromatic.com/?path=/docs/design-system-usage--docs)
+
 ## Thanks
 
 <a href="https://www.chromatic.com/"><img src="https://user-images.githubusercontent.com/321738/84662277-e3db4f80-af1b-11ea-88f5-91d67a5e59f6.png" width="153" height="30" alt="Chromatic" /></a>
