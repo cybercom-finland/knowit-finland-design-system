@@ -32,8 +32,12 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Radio> = (args) => {
-  return <Radio {...args} value={'value'} name={'test'} />;
+  return <Radio {...args} value="value" name="test" />;
 };
+/**
+ * Default variant (not specified)
+ */
+export const DefaultVariant = Template.bind({});
 
 /**
  * Small variant
@@ -51,8 +55,3 @@ export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,
 };
-
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});

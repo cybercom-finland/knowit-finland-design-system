@@ -70,6 +70,10 @@ export interface RadioProps
    * Size of radio
    */
   size?: Exclude<Size, 'medium'>;
+  /**
+   * Radio checked
+   */
+  checked?: boolean;
 }
 
 const calculateSizes = () => {
@@ -152,13 +156,14 @@ export const Radio = ({
   size = 'large',
   defaultChecked,
   onSelect,
+  checked,
   ...restProps
 }: RadioProps) => {
   // Use ID form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <RadioComponentWrapper id={componentId} size={size} data-testid={'radio'}>
+    <RadioComponentWrapper id={componentId} size={size} data-testid="radio">
       <FormLabel
         disabled={disabled}
         required={required}
@@ -166,11 +171,12 @@ export const Radio = ({
       >
         <RadioInput
           id={`radio-${componentId}`}
-          type={'radio'}
+          type="radio"
           value={value}
           defaultChecked={defaultChecked}
           disabled={disabled}
           onChange={onSelect}
+          checked={checked}
           {...restProps}
         />
         <RadioButton size={size} disabled={disabled} />

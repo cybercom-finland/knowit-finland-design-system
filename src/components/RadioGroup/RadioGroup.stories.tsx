@@ -10,7 +10,7 @@ export default {
   component: RadioGroup,
   args: {
     label: 'Label',
-    helperText: 'Help text',
+    helperText: 'Helper text',
     direction: 'horizontal',
   },
   parameters: {
@@ -34,13 +34,13 @@ export default {
 const Template: StoryFn<typeof RadioGroup> = (args) => {
   return (
     <RadioGroup
-      label={'label'}
-      helperText={'Help Text'}
+      label="label"
+      helperText="Helper Text"
       direction={args.direction}
     >
-      <Radio {...args} value={'value'} name={'test'} />
-      <Radio {...args} value={'value2'} name={'test'} />
-      <Radio {...args} value={'valu3'} name={'test'} />
+      <Radio {...args} value="value" name="test" />
+      <Radio {...args} value="value2" name="test" />
+      <Radio {...args} value="valu3" name="test" />
     </RadioGroup>
   );
 };
@@ -48,3 +48,11 @@ const Template: StoryFn<typeof RadioGroup> = (args) => {
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
+export const Vertical = Template.bind({});
+Vertical.args = {
+  direction: 'vertical',
+};
+export const Horizontal = Template.bind({});
+Horizontal.args = {
+  direction: 'horizontal',
+};

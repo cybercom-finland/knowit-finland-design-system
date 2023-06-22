@@ -1,57 +1,23 @@
 import React from 'react';
-import {
-  generateRandomString,
-  InputComponentBaseProps,
-  pxToRem,
-  typography,
-} from '../../shared';
-import { InputBaseProps } from '../Input';
+import { generateRandomString } from '../../shared';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
+import { Label } from '../Label';
+import { HelperText } from '../HelperText';
+import { RadioProps } from '../Radio';
 
-type RadioInputBaseProps = Omit<
-  InputBaseProps,
-  'error' | 'endIcon' | 'variant'
->;
-
-/**
- * Used HTML Attributes
- */
-type RadioInputHTMLAttributes = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  | 'accept'
-  | 'alt'
-  | 'min'
-  | 'max'
-  | 'multiple'
-  | 'type'
-  | 'capture'
-  | 'checked'
-  | 'formAction'
-  | 'formEncType'
-  | 'formMethod'
-  | 'formNoValidate'
-  | 'formTarget'
-  | 'height'
-  | 'src'
-  | 'width'
-  | 'size'
->;
 /**
  * Search component properties
  * Extends html input element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#additional_attributes
  */
-export interface RadioGroupProps
-  extends InputComponentBaseProps<HTMLInputElement>,
-    RadioInputBaseProps,
-    RadioInputHTMLAttributes {
+export interface RadioGroupProps extends RadioProps {
   /**
    * Radio Group label
    */
   label?: string;
   /**
-   * Radio Group help text
+   * Radio Group helper text
    */
   helperText?: string;
   /**
@@ -83,16 +49,6 @@ const RadioGroupWrapper = styled.div<RadioGroupProps>`
   align-items: flex-start;
   border: none;
 `;
-const RadioGroupLabel = styled.span`
-  font-size: ${pxToRem(18)};
-  font-weight: ${typography.weight.bold};
-  color: ${(props) => props.theme.colors.grayScale.digitalBlack};
-  padding-bottom: ${pxToRem(8)};
-`;
-const RadioGroupHelpText = styled.span`
-  font-size: ${pxToRem(18)};
-  color: ${(props) => props.theme.colors.grayScale.digitalBlack};
-`;
 const RadioGroupComponent = styled.div<RadioGroupProps>`
   display: inline-flex;
   ${changeDirection};
@@ -115,12 +71,12 @@ export const RadioGroup = ({
 
   return (
     <RadioGroupWrapper>
-      <RadioGroupLabel>{label}</RadioGroupLabel>
-      <RadioGroupHelpText>{helperText}</RadioGroupHelpText>
+      <Label>{label}</Label>
+      <HelperText>{helperText}</HelperText>
       <RadioGroupComponent
         direction={direction}
         id={componentId}
-        data-testid={'radioGroup'}
+        data-testid="radioGroup"
         {...restProps}
       />
     </RadioGroupWrapper>
