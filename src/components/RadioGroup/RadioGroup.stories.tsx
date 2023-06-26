@@ -34,13 +34,13 @@ export default {
 const Template: StoryFn<typeof RadioGroup> = (args) => {
   return (
     <RadioGroup
-      label="label"
-      helperText="Helper Text"
+      label='label'
+      helperText='Helper Text'
       direction={args.direction}
     >
-      <Radio {...args} value="value" name="test" />
-      <Radio {...args} value="value2" name="test" />
-      <Radio {...args} value="valu3" name="test" />
+      <Radio {...args} value='value' name='test' />
+      <Radio {...args} value='value2' name='test' />
+      <Radio {...args} value='valu3' name='test' />
     </RadioGroup>
   );
 };

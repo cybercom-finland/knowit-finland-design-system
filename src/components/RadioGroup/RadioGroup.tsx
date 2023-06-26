@@ -76,7 +76,7 @@ export const RadioGroup = ({
       <RadioGroupComponent
         direction={direction}
         id={componentId}
-        data-testid="radioGroup"
+        data-testid='radioGroup'
         {...restProps}
       />
     </RadioGroupWrapper>

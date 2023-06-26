@@ -137,11 +137,12 @@ const RadioButton = styled.div<RadioProps>`
 `;
 
 const RadioInput = styled.input`
- display: none;
+  display: none;
   &:checked + ${RadioButton} {
     &::after {
       transform: scale(1);
     }
+  }
 `;
 
 /**
@@ -163,7 +164,7 @@ export const Radio = ({
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <RadioComponentWrapper id={componentId} size={size} data-testid="radio">
+    <RadioComponentWrapper id={componentId} size={size} data-testid='radio'>
       <FormLabel
         disabled={disabled}
         required={required}
@@ -171,7 +172,7 @@ export const Radio = ({
       >
         <RadioInput
           id={`radio-${componentId}`}
-          type="radio"
+          type='radio'
           value={value}
           defaultChecked={defaultChecked}
           disabled={disabled}
