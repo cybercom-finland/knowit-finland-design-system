@@ -34,6 +34,7 @@ export default {
 const Template: StoryFn<typeof Radio> = (args) => {
   return <Radio {...args} value="value" name="test" />;
 };
+
 /**
  * Default variant (not specified)
  */

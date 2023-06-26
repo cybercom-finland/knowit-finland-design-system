@@ -49,6 +49,7 @@ const RadioGroupWrapper = styled.div<RadioGroupProps>`
   align-items: flex-start;
   border: none;
 `;
+
 const RadioGroupComponent = styled.div<RadioGroupProps>`
   display: inline-flex;
   ${changeDirection};
@@ -56,8 +57,9 @@ const RadioGroupComponent = styled.div<RadioGroupProps>`
   align-items: center;
   border: none;
 `;
+
 /**
- * Exported component
+ * Radio group component
  */
 export const RadioGroup = ({
   id,

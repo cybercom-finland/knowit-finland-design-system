@@ -44,6 +44,7 @@ const Template: StoryFn<typeof RadioGroup> = (args) => {
     </RadioGroup>
   );
 };
+
 /**
  * Default variant (not specified)
  */
