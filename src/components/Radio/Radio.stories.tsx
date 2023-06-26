@@ -32,7 +32,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Radio> = (args) => {
-  return <Radio {...args} value="value" name="test" />;
+  return <Radio {...args} value='value' name='test' />;
 };
 
 /**
