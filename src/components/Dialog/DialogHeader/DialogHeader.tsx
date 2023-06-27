@@ -2,6 +2,8 @@ import React, { HTMLProps, ReactNode } from 'react';
 import { generateRandomString, pxToRem } from '../../../shared';
 import { DialogVariant } from '../Dialog/Dialog';
 import styled from 'styled-components';
+import { MdAdd, MdClose } from 'react-icons/md';
+import { IconButton } from '../../IconButton';
 
 /**
  * Checkbox component properties
@@ -35,14 +37,16 @@ interface InternalModalContentProps extends ModalContentProps {
   scrollable: boolean;
 }
 
-const NativeModalContent = ({
+const NativeDialogHeader = ({
   children,
   ...passProps
 }: InternalModalContentProps) => {
   return <div {...passProps}>{children}</div>;
 };
 
-const ModalContent = styled(NativeModalContent)`
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
   border-bottom: ${pxToRem(2)} solid
     ${(props) => props.theme.colors.grayScale.digitalBlack100};
   padding: 32px;
@@ -57,13 +61,18 @@ export const DialogHeader = ({ id, children, ...restProps }: DialogProps) => {
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <ModalContent
-      id={componentId}
-      modalVariant={'mobile'}
-      scrollable={false}
-      {...restProps}
-    >
-      {children}
-    </ModalContent>
+    <Wrapper>
+      <NativeDialogHeader
+        id={componentId}
+        modalVariant={'mobile'}
+        scrollable={false}
+        {...restProps}
+      >
+        {children}
+      </NativeDialogHeader>
+      <IconButton>
+        <MdClose />
+      </IconButton>
+    </Wrapper>
   );
 };

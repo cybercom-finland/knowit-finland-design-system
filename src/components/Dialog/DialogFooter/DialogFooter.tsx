@@ -36,11 +36,16 @@ interface InternalModalContentProps extends ModalContentProps {
 }
 
 const NativeDialogFooter = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   background: ${(props) => props.theme.colors.grayScale.digitalBlack100};
-  width: 100%;
   padding: 24px 32px 32px 16px;
+  justify-content: right;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: right;
 `;
 
 /**
@@ -52,7 +57,7 @@ export const DialogFooter = ({ id, children, ...restProps }: DialogProps) => {
 
   return (
     <NativeDialogFooter id={componentId} {...restProps}>
-      {children}
+      <Wrapper>{children}</Wrapper>
     </NativeDialogFooter>
   );
 };

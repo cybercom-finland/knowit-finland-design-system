@@ -6,6 +6,7 @@ import { variant } from 'styled-system';
 import { DialogContent } from '../DialogContent/DialogContent';
 import { DialogHeader } from '../DialogHeader/DialogHeader';
 import { DialogFooter } from '../DialogFooter/DialogFooter';
+import { Button } from '../../Button';
 
 export type DialogVariant = 'mobile' | 'medium' | 'large';
 
@@ -134,7 +135,9 @@ const Dialog = ({ ...restProps }: DialogProps) => {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
         odio sed est pellentesque gravida sit amet at orci.
       </DialogContent>
-      <DialogFooter {...restProps}>Footer</DialogFooter>
+      <DialogFooter {...restProps}>
+        <Button label={'Button'} />
+      </DialogFooter>
     </NativeDialog>
   );
 };
