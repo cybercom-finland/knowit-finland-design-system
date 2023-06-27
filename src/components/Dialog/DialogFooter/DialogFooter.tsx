@@ -1,5 +1,5 @@
 import React, { HTMLProps, ReactNode } from 'react';
-import { generateRandomString, pxToRem } from '../../../shared';
+import { generateRandomString } from '../../../shared';
 import { DialogVariant } from '../Dialog/Dialog';
 import styled from 'styled-components';
 
@@ -35,33 +35,24 @@ interface InternalModalContentProps extends ModalContentProps {
   scrollable: boolean;
 }
 
-const NativeModalContent = ({
-  children,
-  ...passProps
-}: InternalModalContentProps) => {
-  return <div {...passProps}>{children}</div>;
-};
-
-const ModalContent = styled(NativeModalContent)`
-  padding: 32px;
-  gap: 32px;
+const NativeDialogFooter = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  background: ${(props) => props.theme.colors.grayScale.digitalBlack100};
+  width: 100%;
+  padding: 24px 32px 32px 16px;
 `;
 
 /**
  * Checkbox component
  */
-export const DialogContent = ({ id, children, ...restProps }: DialogProps) => {
+export const DialogFooter = ({ id, children, ...restProps }: DialogProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <ModalContent
-      id={componentId}
-      modalVariant={'mobile'}
-      scrollable={false}
-      {...restProps}
-    >
+    <NativeDialogFooter id={componentId} {...restProps}>
       {children}
-    </ModalContent>
+    </NativeDialogFooter>
   );
 };

@@ -43,6 +43,8 @@ const NativeModalContent = ({
 };
 
 const ModalContent = styled(NativeModalContent)`
+  border-bottom: ${pxToRem(2)} solid
+    ${(props) => props.theme.colors.grayScale.digitalBlack100};
   padding: 32px;
   gap: 32px;
 `;
@@ -50,7 +52,7 @@ const ModalContent = styled(NativeModalContent)`
 /**
  * Checkbox component
  */
-export const DialogContent = ({ id, children, ...restProps }: DialogProps) => {
+export const DialogHeader = ({ id, children, ...restProps }: DialogProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 

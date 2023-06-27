@@ -3,6 +3,9 @@ import { generateRandomString, pxToRem } from '../../../shared';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { variant } from 'styled-system';
+import { DialogContent } from '../DialogContent/DialogContent';
+import { DialogHeader } from '../DialogHeader/DialogHeader';
+import { DialogFooter } from '../DialogFooter/DialogFooter';
 
 export type DialogVariant = 'mobile' | 'medium' | 'large';
 
@@ -68,25 +71,10 @@ export interface ModalProviderState {
   scrollable: boolean;
 }
 
-const defaultProviderValue: ModalProviderState = {
-  /** Focus title on open for resolving title tab index */
-  focusTitleOnOpen: true,
-  /** Modal title ref for focusing */
-  titleRef: null,
-  /** Modal's smallScreen setting */
-  variant: 'mobile',
-  /** If modal should have scrollable content and size */
-  scrollable: true,
-};
-
-const { Provider: ModalProvider, Consumer: ModalConsumer } =
-  React.createContext(defaultProviderValue);
-
 const ModalStyle = styled.div`
   height: min-content;
+  padding: 0 !important;
 `;
-
-export const baseClassName = 'fi-modal';
 
 const OverlayStyle = styled.div<DialogProps | any>`
   ${variant({
@@ -108,7 +96,7 @@ const OverlayStyle = styled.div<DialogProps | any>`
 /**
  * Checkbox component
  */
-const Dialog = ({
+const NativeDialog = ({
   id,
   visible,
   focusOnOpenRef,
@@ -133,18 +121,22 @@ const Dialog = ({
         </OverlayStyle>
       )}
     >
-      <ModalProvider
-        value={{
-          focusTitleOnOpen: !focusOnOpenRef,
-          titleRef: titleRef,
-          variant,
-          scrollable,
-        }}
-      >
-        {children}
-      </ModalProvider>
+      {children}
     </ReactModal>
   );
 };
 
-export { Dialog, ModalProvider, ModalConsumer };
+const Dialog = ({ ...restProps }: DialogProps) => {
+  return (
+    <NativeDialog {...restProps}>
+      <DialogHeader {...restProps}>Header</DialogHeader>
+      <DialogContent {...restProps}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
+        odio sed est pellentesque gravida sit amet at orci.
+      </DialogContent>
+      <DialogFooter {...restProps}>Footer</DialogFooter>
+    </NativeDialog>
+  );
+};
+
+export { Dialog, NativeDialog };
