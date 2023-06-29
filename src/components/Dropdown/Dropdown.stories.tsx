@@ -175,7 +175,7 @@ DefaultVariant.play = async ({ canvasElement }) => {
   // Component should be enabled
   await userEvent.click(canvas.getByTestId('dropdown'));
   expect(canvas.getByTestId('dropdown')).toBeEnabled;
-  
+
   // Try switching between options and see that the displayed value is reflected correctly
   fireEvent.change(canvas.getByTestId('dropdown'), { target: { value: 2 } });
   await userEvent.click(canvas.getByDisplayValue('Two'));
