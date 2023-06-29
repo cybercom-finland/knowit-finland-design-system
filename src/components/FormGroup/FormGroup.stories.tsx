@@ -1,13 +1,13 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { RadioGroup } from './RadioGroup';
+import { FormGroup } from './FormGroup';
 import { Radio } from '../Radio';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/RadioGroup',
-  component: RadioGroup,
+  title: 'Components/FormGroup',
+  component: FormGroup,
   args: {
     label: 'Label',
     helperText: 'Helper text',
@@ -28,12 +28,12 @@ export default {
     ],
   },
   decorators: [withDesign],
-} as Meta<typeof RadioGroup>;
+} as Meta<typeof FormGroup>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof RadioGroup> = (args) => {
+const Template: StoryFn<typeof FormGroup> = (args) => {
   return (
-    <RadioGroup
+    <FormGroup
       label='label'
       helperText='Helper Text'
       direction={args.direction}
@@ -41,7 +41,7 @@ const Template: StoryFn<typeof RadioGroup> = (args) => {
       <Radio {...args} value='value' name='test' />
       <Radio {...args} value='value2' name='test' />
       <Radio {...args} value='valu3' name='test' />
-    </RadioGroup>
+    </FormGroup>
   );
 };
 

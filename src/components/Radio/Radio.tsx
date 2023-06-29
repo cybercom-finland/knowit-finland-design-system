@@ -55,10 +55,6 @@ export interface RadioProps
    */
   value?: React.InputHTMLAttributes<HTMLInputElement>['value'];
   /**
-   * Radio callback function
-   */
-  onSelect?: (event: React.ChangeEvent<HTMLInputElement | null>) => void;
-  /**
    * Radio is required
    */
   required?: boolean;
@@ -156,7 +152,6 @@ export const Radio = ({
   required = false,
   size = 'large',
   defaultChecked,
-  onSelect,
   checked,
   ...restProps
 }: RadioProps) => {
@@ -176,7 +171,6 @@ export const Radio = ({
           value={value}
           defaultChecked={defaultChecked}
           disabled={disabled}
-          onChange={onSelect}
           checked={checked}
           {...restProps}
         />

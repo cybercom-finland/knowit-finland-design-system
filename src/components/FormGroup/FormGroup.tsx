@@ -4,24 +4,27 @@ import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import { Label } from '../Label';
 import { HelperText } from '../HelperText';
-import { RadioProps } from '../Radio';
 
 /**
  * Search component properties
  * Extends html input element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#additional_attributes
  */
-export interface RadioGroupProps extends RadioProps {
+export interface FormGroupProps {
   /**
-   * Radio Group label
+   * Form Group label
    */
   label?: string;
   /**
-   * Radio Group helper text
+   * Id
+   */
+  id?: string;
+  /**
+   * Form Group helper text
    */
   helperText?: string;
   /**
-   * Radio Group direction
+   * Form Group direction
    */
   direction?: 'horizontal' | 'vertical';
 }
@@ -42,7 +45,7 @@ const changeDirection = () => {
   `;
 };
 
-const RadioGroupWrapper = styled.div<RadioGroupProps>`
+const FormGroupWrapper = styled.fieldset<FormGroupProps>`
   display: inline-flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -50,7 +53,7 @@ const RadioGroupWrapper = styled.div<RadioGroupProps>`
   border: none;
 `;
 
-const RadioGroupComponent = styled.div<RadioGroupProps>`
+const FieldGroupComponent = styled.div<FormGroupProps>`
   display: inline-flex;
   ${changeDirection};
   box-sizing: border-box;
@@ -59,28 +62,28 @@ const RadioGroupComponent = styled.div<RadioGroupProps>`
 `;
 
 /**
- * Radio group component
+ * Form group component
  */
-export const RadioGroup = ({
+export const FormGroup = ({
   id,
   label,
   helperText,
   direction,
   ...restProps
-}: RadioGroupProps) => {
+}: FormGroupProps) => {
   // Use ID form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <RadioGroupWrapper>
+    <FormGroupWrapper>
       <Label>{label}</Label>
       <HelperText>{helperText}</HelperText>
-      <RadioGroupComponent
+      <FieldGroupComponent
         direction={direction}
         id={componentId}
-        data-testid='radioGroup'
+        data-testid='formGroup'
         {...restProps}
       />
-    </RadioGroupWrapper>
+    </FormGroupWrapper>
   );
 };
