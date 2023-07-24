@@ -1,10 +1,8 @@
+import { spacing, convertToSpacingUnit, pxToRem } from '../src/shared/styles';
 import {
-  spacing,
-  convertToSpacingUnit,
-  pxToRem,
   LoadingIndicatorStyle,
   LoadingIndicatorColor,
-} from '../src/shared/styles';
+} from '../src/components/LinearLoadingIndicator/styles';
 import { darkTheme, lightTheme } from '../src/shared/themes';
 
 describe('testing spacing', () => {

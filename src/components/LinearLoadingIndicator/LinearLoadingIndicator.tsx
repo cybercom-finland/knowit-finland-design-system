@@ -1,10 +1,10 @@
 import React from 'react';
+import { ComponentBaseProps } from '../../shared';
 import {
-  ComponentBaseProps,
   LoadingIndicatorStyle,
   LoadingIndicatorColor,
   linearLoadingIndicatorHeight,
-} from '../../shared';
+} from './styles';
 import { Wrapper, WrapperProps } from '../Wrapper';
 import { InputBaseProps } from '../Input/Input';
 import styled from 'styled-components';
@@ -14,7 +14,6 @@ import styled from 'styled-components';
  */
 export interface LinearLoadingIndicatorBaseProps
   extends ComponentBaseProps<HTMLSpanElement>,
-    InputBaseProps,
     WrapperProps {
   /**
    * Progress (0-100)
@@ -96,6 +95,7 @@ export const LinearLoadingIndicator = ({
       margin={margin}
       width={width}
       height={linearLoadingIndicatorHeight}
+      style={{ display: 'flex' }}
     >
       <BarBackground {...restProps}>
         <Bar

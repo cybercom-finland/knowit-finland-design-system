@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { LinearLoadingIndicator } from './LinearLoadingIndicator';
-import { LoadingIndicatorStyle } from '../../shared/styles';
+import { LoadingIndicatorStyle } from './styles';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
