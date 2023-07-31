@@ -59,15 +59,11 @@ export interface RadioProps
    */
   required?: boolean;
   /**
-   * Is radio default checked
-   */
-  defaultChecked?: boolean;
-  /**
    * Size of radio
    */
   size?: Exclude<Size, 'medium'>;
   /**
-   * Radio checked
+   * Is radio checked
    */
   checked?: boolean;
 }
@@ -151,27 +147,30 @@ export const Radio = ({
   disabled = false,
   required = false,
   size = 'large',
-  defaultChecked,
+  onChange,
   checked,
   ...restProps
 }: RadioProps) => {
   // Use ID form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
+  const isChecked = function (checked: boolean) {
+    if (checked) {
+      return checked;
+    }
+    return null;
+  };
+
   return (
     <RadioComponentWrapper id={componentId} size={size} data-testid='radio'>
-      <FormLabel
-        disabled={disabled}
-        required={required}
-        style={{ marginTop: 11, marginRight: 18 }}
-      >
+      <FormLabel disabled={disabled} required={required}>
         <RadioInput
           id={`radio-${componentId}`}
           type='radio'
           value={value}
-          defaultChecked={defaultChecked}
           disabled={disabled}
-          checked={checked}
+          onChange={onChange}
+          {...isChecked}
           {...restProps}
         />
         <RadioButton size={size} disabled={disabled} />
