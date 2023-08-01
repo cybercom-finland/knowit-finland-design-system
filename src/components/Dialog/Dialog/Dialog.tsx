@@ -153,12 +153,12 @@ const NativeDialog = ({
 const Dialog = ({ ...restProps }: DialogProps) => {
   return (
     <NativeDialog {...restProps}>
-      <DialogHeader {...restProps}>Header</DialogHeader>
-      <DialogContent {...restProps}>
+      <DialogHeader>Header</DialogHeader>
+      <DialogContent>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
         odio sed est pellentesque gravida sit amet at orci.
       </DialogContent>
-      <DialogFooter id={''}>
+      <DialogFooter>
         <Button label={'Button'} />
       </DialogFooter>
     </NativeDialog>

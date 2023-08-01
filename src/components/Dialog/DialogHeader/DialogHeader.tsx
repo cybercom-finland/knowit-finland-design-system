@@ -14,7 +14,7 @@ export interface DialogProps {
   /**
    * Show or hide the modal
    */
-  id: string;
+  id?: string;
 
   /**
    * Children
