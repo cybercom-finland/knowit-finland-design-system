@@ -1,6 +1,6 @@
 import React, { HTMLProps, ReactNode } from 'react';
 import { generateRandomString, pxToRem } from '../../../shared';
-import { DialogVariant } from '../Dialog/Dialog';
+import { DialogVariant, ModalConsumer } from '../Dialog/Dialog';
 import styled from 'styled-components';
 
 /**
@@ -50,18 +50,21 @@ const ModalContent = styled(NativeModalContent)`
 /**
  * Checkbox component
  */
-export const DialogContent = ({ id, children, ...restProps }: DialogProps) => {
+export const DialogContent = ({ id, children }: DialogProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <ModalContent
-      id={componentId}
-      modalVariant={'mobile'}
-      scrollable={false}
-      {...restProps}
-    >
-      {children}
-    </ModalContent>
+    <ModalConsumer>
+      {({ variant, scrollable }) => (
+        <ModalContent
+          id={componentId}
+          modalVariant={variant}
+          scrollable={scrollable}
+        >
+          {children}
+        </ModalContent>
+      )}
+    </ModalConsumer>
   );
 };

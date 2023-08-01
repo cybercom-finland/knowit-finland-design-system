@@ -72,6 +72,20 @@ export interface ModalProviderState {
   scrollable: boolean;
 }
 
+const defaultProviderValue: ModalProviderState = {
+  /** Focus title on open for resolving title tab index */
+  focusTitleOnOpen: true,
+  /** Modal title ref for focusing */
+  titleRef: null,
+  /** Modal's smallScreen setting */
+  variant: 'mobile',
+  /** If modal should have scrollable content and size */
+  scrollable: true,
+};
+
+const { Provider: ModalProvider, Consumer: ModalConsumer } =
+  React.createContext(defaultProviderValue);
+
 const ModalStyle = styled.div`
   height: min-content;
   padding: 0 !important;
@@ -122,7 +136,16 @@ const NativeDialog = ({
         </OverlayStyle>
       )}
     >
-      {children}
+      <ModalProvider
+        value={{
+          focusTitleOnOpen: !focusOnOpenRef,
+          titleRef: titleRef,
+          variant,
+          scrollable,
+        }}
+      >
+        {children}
+      </ModalProvider>
     </ReactModal>
   );
 };
@@ -135,11 +158,11 @@ const Dialog = ({ ...restProps }: DialogProps) => {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
         odio sed est pellentesque gravida sit amet at orci.
       </DialogContent>
-      <DialogFooter {...restProps}>
+      <DialogFooter id={''}>
         <Button label={'Button'} />
       </DialogFooter>
     </NativeDialog>
   );
 };
 
-export { Dialog, NativeDialog };
+export { Dialog, NativeDialog, ModalConsumer };

@@ -1,6 +1,6 @@
 import React, { HTMLProps, ReactNode } from 'react';
 import { generateRandomString } from '../../../shared';
-import { DialogVariant } from '../Dialog/Dialog';
+import { DialogVariant, ModalConsumer } from '../Dialog/Dialog';
 import styled from 'styled-components';
 
 /**
@@ -29,12 +29,6 @@ export interface ModalContentProps
   children: ReactNode;
 }
 
-interface InternalModalContentProps extends ModalContentProps {
-  id?: string;
-  modalVariant: DialogVariant;
-  scrollable: boolean;
-}
-
 const NativeDialogFooter = styled.div`
   display: flex;
   flex-direction: column;
@@ -56,8 +50,12 @@ export const DialogFooter = ({ id, children, ...restProps }: DialogProps) => {
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <NativeDialogFooter id={componentId} {...restProps}>
-      <Wrapper>{children}</Wrapper>
-    </NativeDialogFooter>
+    <ModalConsumer>
+      {({ variant, scrollable }) => (
+        <NativeDialogFooter id={componentId}>
+          <Wrapper>{children}</Wrapper>
+        </NativeDialogFooter>
+      )}
+    </ModalConsumer>
   );
 };

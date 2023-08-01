@@ -1,8 +1,8 @@
 import React, { HTMLProps, ReactNode } from 'react';
 import { generateRandomString, pxToRem } from '../../../shared';
-import { DialogVariant } from '../Dialog/Dialog';
+import { DialogVariant, ModalConsumer } from '../Dialog/Dialog';
 import styled from 'styled-components';
-import { MdAdd, MdClose } from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
 import { IconButton } from '../../IconButton';
 
 /**
@@ -56,23 +56,26 @@ const Wrapper = styled.div`
 /**
  * Checkbox component
  */
-export const DialogHeader = ({ id, children, ...restProps }: DialogProps) => {
+export const DialogHeader = ({ id, children }: DialogProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <Wrapper>
-      <NativeDialogHeader
-        id={componentId}
-        modalVariant={'mobile'}
-        scrollable={false}
-        {...restProps}
-      >
-        {children}
-      </NativeDialogHeader>
-      <IconButton>
-        <MdClose />
-      </IconButton>
-    </Wrapper>
+    <ModalConsumer>
+      {({ focusTitleOnOpen, titleRef, variant, scrollable }) => (
+        <Wrapper>
+          <NativeDialogHeader
+            id={componentId}
+            modalVariant={variant}
+            scrollable={scrollable}
+          >
+            {children}
+          </NativeDialogHeader>
+          <IconButton>
+            <MdClose />
+          </IconButton>
+        </Wrapper>
+      )}
+    </ModalConsumer>
   );
 };
