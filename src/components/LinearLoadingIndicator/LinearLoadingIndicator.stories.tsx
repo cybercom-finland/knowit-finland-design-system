@@ -87,3 +87,21 @@ WarningIndeterminate.args = {
   determinate: false,
   indicatorStyle: LoadingIndicatorStyle.Warning,
 };
+
+/**
+ * Negative value (below 0%)
+ */
+export const NegativePercent = Template.bind({});
+NegativePercent.args = {
+  progress: -1000,
+  determinate: true,
+};
+
+/**
+ * Value above 100%
+ */
+export const Above100Percent = Template.bind({});
+Above100Percent.args = {
+  progress: 1000,
+  determinate: true,
+};

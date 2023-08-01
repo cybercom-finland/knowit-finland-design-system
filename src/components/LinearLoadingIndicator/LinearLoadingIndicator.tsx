@@ -32,7 +32,7 @@ export interface LinearLoadingIndicatorBaseProps
 }
 
 /**
- * OuterSpan component, which represents 100% width of the whole loading indicator / progress bar
+ * BarBackground component, which represents 100% width of the whole loading indicator / progress bar
  */
 const BarBackground = styled.span<LinearLoadingIndicatorBaseProps>`
   background: ${(props) => props.theme.colors.grayScale.digitalBlack100};
@@ -44,12 +44,20 @@ const BarBackground = styled.span<LinearLoadingIndicatorBaseProps>`
 `;
 
 /**
- * InnerSpan component, which represents the visible progress % of the bar, or the loading animation
+ * Bar component, which represents the visible progress % of the bar, or the loading animation.
+ * The percent will be limited between 0-100%. If it is undefined, it will be zero.
  */
 const Bar = styled.span<LinearLoadingIndicatorBaseProps>`
   top: 0;
   left: 0;
-  width: ${(props) => props.progress}%;
+  width: ${(props) =>
+    props.progress == undefined
+      ? 0
+      : props.progress < 0
+      ? 0
+      : props.progress > 100
+      ? 100
+      : props.progress}%;
   height: ${linearLoadingIndicatorHeight}px;
   display: inline-block;
   position: relative;
