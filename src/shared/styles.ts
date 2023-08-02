@@ -1,3 +1,5 @@
+import { darkTheme, lightTheme } from './themes';
+
 // 1rem = 16px
 export const baseSize = 16;
 // 1 spacing unit = 8px

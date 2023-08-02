@@ -13,6 +13,10 @@ export interface WrapperProps {
    * Wrapper width in px, if undefined the component takes width of containing element
    */
   width?: number;
+  /**
+   * Wrapper height in px, if undefined the component takes height of containing element
+   */
+  height?: number;
 }
 
 /**
@@ -24,6 +28,14 @@ export const Wrapper = styled.div<WrapperProps>`
     width
       ? css`
           width: ${width}px;
+        `
+      : css`
+          flex: 1;
+        `};
+  ${({ height }) =>
+    height
+      ? css`
+          height: ${height}px;
         `
       : css`
           flex: 1;
