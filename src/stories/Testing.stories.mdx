@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design System/Testing" />
+
+# Automatic testing in the Design System
+
+Knowit Design System undergoes testing facilitated by Storybook and Chromatic. Additionally, unit tests are written for generic functions used throughout the project.
+
+The story-based testing approach of Storybook makes it easy to have automated testing without writing every test case manually. Chromatic further enhances this by identifying errors, such as visual regressions, in pull request reviews. This combination of automatic and efficient testing is enhanced by additional test cases for interaction testing. On overall, these various testing methods help in identifying bugs and regressions early in the development process.
+
+## Storybook and Chromatic based tests
+
+1. Visual testing
+
+Whenever components undergo visual changes, the alterations can be reviewed in Chromatic to ensure they align with the intended design and do not introduce regressions.
+
+2. Accessibility testing
+
+Accessibility features, such as color contrast, keyboard navigation and screen reader support, are being automatically tested using the a11y add-on. The testing complies with the Web Content Accessibility Guidelines (WCAG) standard.
+
+3. Interaction testing
+
+Interactive components are automatically tested using written play functions, which interact with the components (e.g., clicks) and verify that the interactions produce the expected state changes.
+
+4. Test coverage
+
+Statement, branch, function, and lines coverage are automatically measured and can be increased by creating new stories for the components.
+
+## Unit Tests
+
+Generic utility functions of the project, used by many components, are unit tested with Jest.
+
+## Running the Tests
+
+Storybook-based tests are automatically executed during pull requests by Chromatic. You can also run the Storybook-based tests manually using the npm run test-storybook command while Storybook is running. To view code coverage, use the npm run test-storybook -- --coverage command.
+
+Jest unit tests are automatically run at commit using a pre-commit hook. You can run unit tests manually with the npm run test command.
+
+Accessibility issues can be viewed in the Storybook web page while it is running. Simply open the component and the specific story in Storybook.
+
+## External Links
+
+- [Storybook testing](https://storybook.js.org/docs/react/writing-tests/introduction)
+- [WCAG standard](https://www.w3.org/WAI/standards-guidelines/wcag/)
