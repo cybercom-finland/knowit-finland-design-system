@@ -8,31 +8,17 @@ import { ComponentState } from '../../shared/types';
 export default {
   title: 'Components/LinearLoadingIndicator',
   component: LinearLoadingIndicator,
-  argTypes: {
-    indicatorStyle: {
-      control: {
-        type: 'radio',
-        labels: {
-          0: 'Default',
-          1: 'Success',
-          2: 'Warning',
-          3: 'Error',
-          4: 'Info',
-        },
-      },
-    },
-  },
   parameters: {
     design: [
       {
         name: 'light',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1617-18316&t=n5YOe4QFyTaCSzxP-0',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2158-18132&mode=design&t=WdazPvcApBl7ozFP-4',
       },
       {
         name: 'dark',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1617-18316&t=n5YOe4QFyTaCSzxP-0',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2168-18215&mode=design&t=WdazPvcApBl7ozFP-4',
       },
     ],
   },
