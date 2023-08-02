@@ -74,12 +74,12 @@ const calculateSizes = () => {
       prop: 'size',
       variants: {
         small: {
-          width: pxToRem(13),
-          height: pxToRem(13),
+          width: `${pxToRem(13)}`,
+          height: `${pxToRem(13)}`,
         },
         large: {
-          width: pxToRem(20),
-          height: pxToRem(20),
+          width: `${pxToRem(24)}`,
+          height: `${pxToRem(24)}`,
         },
       },
     })};
@@ -95,45 +95,37 @@ const RadioComponentWrapper = styled.span<RadioProps>`
   border: none;
 `;
 
-const RadioButton = styled.div<RadioProps>`
+const RadioSvgButton = styled.svg<RadioProps>`
   ${calculateSizes};
-  border: 1px solid ${(props) => props.theme.colors.grayScale.digitalBlack};
-  border-radius: 50%;
-  display: flex;
-  cursor: pointer;
-  transition: background 0.1s, border-color 0.1s;
-  padding: 2px;
+  fill: ${(props) => props.theme.colors.grayScale.digitalBlack};
+`;
 
-  &::after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    display: block;
-    background: ${(props) => props.theme.colors.grayScale.digitalBlack};
-    border-radius: 50%;
-    cursor: pointer;
-    transform: scale(0);
-  }
+const RadioCircle = styled.circle<RadioProps>`
+  stroke: ${(props) => props.theme.colors.grayScale.digitalBlack};
+
   ${({ disabled }) =>
     disabled
       ? css`
-          border: 1px solid
-            ${(props) => props.theme.colors.grayScale.digitalBlack300};
-          &::after {
-            background: ${(props) =>
-              props.theme.colors.grayScale.digitalBlack300};
-            pointer-events: none;
-          }
+          stroke: ${(props) => props.theme.colors.grayScale.digitalBlack300};
         `
       : ''};
 `;
 
+const RadioDot = styled.circle<RadioProps>`
+  fill: ${(props) => props.theme.colors.grayScale.digitalBlack};
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          fill: ${(props) => props.theme.colors.grayScale.digitalBlack300};
+        `
+      : ''};
+  opacity: 0;
+`;
+
 const RadioInput = styled.input`
   display: none;
-  &:checked + ${RadioButton} {
-    &::after {
-      transform: scale(1);
-    }
+  &:checked + ${RadioSvgButton} > ${RadioDot} {
+    opacity: 1;
   }
 `;
 
@@ -173,7 +165,21 @@ export const Radio = ({
           {...isChecked}
           {...restProps}
         />
-        <RadioButton size={size} disabled={disabled} />
+        <RadioSvgButton
+          size={size}
+          preserveAspectRatio='xMidYMid meet'
+          viewBox='0 0 24 24'
+        >
+          <RadioCircle
+            cx='12'
+            cy='12'
+            r='10'
+            fill='none'
+            strokeWidth='2'
+            disabled={disabled}
+          />
+          <RadioDot cx='12' cy='12' r='6' disabled={disabled} />
+        </RadioSvgButton>
         {label}
       </FormLabel>
     </RadioComponentWrapper>
