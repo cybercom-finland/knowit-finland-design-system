@@ -56,9 +56,10 @@ const FormGroupWrapper = styled.fieldset<FormGroupProps>`
 const FieldGroupComponent = styled.div<FormGroupProps>`
   display: inline-flex;
   ${changeDirection};
-  box-sizing: border-box;
-  align-items: center;
   border: none;
+  > * {
+    margin: 4px;
+  }
 `;
 
 /**

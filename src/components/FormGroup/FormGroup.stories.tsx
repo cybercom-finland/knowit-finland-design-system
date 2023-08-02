@@ -46,15 +46,21 @@ const Template: StoryFn<typeof FormGroup> = (args) => {
 };
 
 /**
- * Default variant (not specified)
+ * Radio Form group
  */
-export const DefaultVariant = Template.bind({});
+export const RadioGroup = Template.bind({});
 
+/**
+ * Vertical Radio group
+ */
 export const Vertical = Template.bind({});
 Vertical.args = {
   direction: 'vertical',
 };
 
+/**
+ * Horizontal Radio group
+ */
 export const Horizontal = Template.bind({});
 Horizontal.args = {
   direction: 'horizontal',
