@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Dialog } from './Dialog';
@@ -15,7 +15,9 @@ export default {
   argTypes: {
     onChange: { action: true },
   },
-  args: {},
+  args: {
+    visible: false,
+  },
   parameters: {
     design: [
       {
@@ -37,24 +39,30 @@ export default {
  * Example Button story with React Hooks.
  * See note below related to this example.
  */
-const DialogWithHooks = (props) => {
-  const [isVisible, setVisible] = useState(false);
+const DialogWithHooks = (visible, restProps) => {
+  const [isVisible, setVisible] = useState(visible);
 
-  return <Dialog {...props} visible={isVisible} setVisible={setVisible} />;
+  useEffect(() => {
+    setVisible(visible);
+  }, [visible]);
+
+  return (
+    <Dialog {...restProps} visible={isVisible}>
+      <DialogHeader setVisible={setVisible}>Header</DialogHeader>
+      <DialogContent>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
+        odio sed est pellentesque gravida sit amet at orci.
+      </DialogContent>
+      <DialogFooter>
+        <Button label={'Button'} />
+      </DialogFooter>
+    </Dialog>
+  );
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Dialog> = (args) => (
-  <DialogWithHooks {...args}>
-    <DialogHeader>Header</DialogHeader>
-    <DialogContent>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
-      odio sed est pellentesque gravida sit amet at orci.
-    </DialogContent>
-    <DialogFooter>
-      <Button label={'Button'} />
-    </DialogFooter>
-  </DialogWithHooks>
+  <DialogWithHooks {...args}></DialogWithHooks>
 );
 
 /**

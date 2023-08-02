@@ -14,6 +14,11 @@ export interface DialogProps {
   /**
    * Show or hide the modal
    */
+  setVisible: any;
+
+  /**
+   * Show or hide the modal
+   */
   id?: string;
 
   /**
@@ -56,7 +61,7 @@ const Wrapper = styled.div`
 /**
  * Checkbox component
  */
-export const DialogHeader = ({ id, children }: DialogProps) => {
+export const DialogHeader = ({ id, children, setVisible }: DialogProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
@@ -71,7 +76,11 @@ export const DialogHeader = ({ id, children }: DialogProps) => {
           >
             {children}
           </NativeDialogHeader>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              setVisible(false);
+            }}
+          >
             <MdClose />
           </IconButton>
         </Wrapper>

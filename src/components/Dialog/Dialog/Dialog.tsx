@@ -32,8 +32,6 @@ export interface DialogProps {
    */
   visible: boolean;
 
-  setVisible: any;
-
   /**
    * Show or hide the modal
    */
