@@ -1,15 +1,5 @@
 import { darkTheme, lightTheme } from '../../shared/themes';
-
-/**
- * Different styles for the loading indicator
- */
-export enum LoadingIndicatorStyle {
-  Default,
-  Success,
-  Warning,
-  Error,
-  Info,
-}
+import { ComponentState } from '../../shared/types';
 
 /**
  * Get color for the loading indicator style and the color theme
@@ -18,17 +8,17 @@ export enum LoadingIndicatorStyle {
  * @returns Color for the style and theme as #rrggbb string
  */
 export const LoadingIndicatorColor = (
-  style: LoadingIndicatorStyle,
+  style: ComponentState,
   theme: typeof darkTheme | typeof lightTheme
 ): string => {
   switch (style) {
-    case LoadingIndicatorStyle.Success:
+    case 'success':
       return theme.colors.success.success;
-    case LoadingIndicatorStyle.Warning:
+    case 'warning':
       return theme.colors.warning.warning;
-    case LoadingIndicatorStyle.Error:
+    case 'error':
       return theme.colors.danger.danger;
-    case LoadingIndicatorStyle.Info:
+    case 'info':
       return theme.colors.info.info;
     default:
       return theme.colors.grayScale.digitalBlack;

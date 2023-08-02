@@ -1,12 +1,8 @@
 import React from 'react';
 import { ComponentBaseProps } from '../../shared';
-import {
-  LoadingIndicatorStyle,
-  LoadingIndicatorColor,
-  linearLoadingIndicatorHeight,
-} from './styles';
+import { LoadingIndicatorColor, linearLoadingIndicatorHeight } from './styles';
 import { Wrapper, WrapperProps } from '../Wrapper';
-import { InputBaseProps } from '../Input/Input';
+import { ComponentState } from '../../shared/types';
 import styled from 'styled-components';
 
 /**
@@ -28,7 +24,7 @@ export interface LinearLoadingIndicatorBaseProps
   /**
    * Style (colour) of the loading indicator
    */
-  indicatorStyle?: LoadingIndicatorStyle;
+  indicatorStyle?: ComponentState;
 }
 
 /**
@@ -62,10 +58,7 @@ const Bar = styled.span<LinearLoadingIndicatorBaseProps>`
   display: inline-block;
   position: relative;
   background: ${(props) =>
-    LoadingIndicatorColor(
-      props.indicatorStyle || LoadingIndicatorStyle.Default,
-      props.theme
-    )};
+    LoadingIndicatorColor(props.indicatorStyle || 'default', props.theme)};
   @keyframes loadingAnimation {
     0% {
       width: 0%;

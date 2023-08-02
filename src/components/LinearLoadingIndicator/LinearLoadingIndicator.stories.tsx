@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { LinearLoadingIndicator } from './LinearLoadingIndicator';
-import { LoadingIndicatorStyle } from './styles';
+import { ComponentState } from '../../shared/types';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -56,7 +56,7 @@ export const Success100PercentDeterminate = Template.bind({});
 Success100PercentDeterminate.args = {
   progress: 100,
   determinate: true,
-  indicatorStyle: LoadingIndicatorStyle.Success,
+  indicatorStyle: 'success',
 };
 
 /**
@@ -66,7 +66,7 @@ export const Error33PercentDeterminate = Template.bind({});
 Error33PercentDeterminate.args = {
   progress: 33,
   determinate: true,
-  indicatorStyle: LoadingIndicatorStyle.Error,
+  indicatorStyle: 'error',
 };
 
 /**
@@ -76,7 +76,7 @@ export const Info50PercentDeterminate = Template.bind({});
 Info50PercentDeterminate.args = {
   progress: 50,
   determinate: true,
-  indicatorStyle: LoadingIndicatorStyle.Info,
+  indicatorStyle: 'info',
 };
 
 /**
@@ -85,7 +85,7 @@ Info50PercentDeterminate.args = {
 export const WarningIndeterminate = Template.bind({});
 WarningIndeterminate.args = {
   determinate: false,
-  indicatorStyle: LoadingIndicatorStyle.Warning,
+  indicatorStyle: 'warning',
 };
 
 /**
