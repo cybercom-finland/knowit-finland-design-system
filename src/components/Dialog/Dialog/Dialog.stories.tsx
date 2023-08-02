@@ -48,16 +48,19 @@ const DialogWithHooks = ({ visible, ...restProps }: DialogProps) => {
   }, [visible]);
 
   return (
-    <Dialog {...restProps} visible={isVisible}>
-      <DialogHeader setVisible={setVisible}>Header</DialogHeader>
-      <DialogContent>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
-        odio sed est pellentesque gravida sit amet at orci.
-      </DialogContent>
-      <DialogFooter>
-        <Button onClick={() => setVisible(false)} label={'Button'} />
-      </DialogFooter>
-    </Dialog>
+    <>
+      <Button onClick={() => setVisible(true)} label={'Open dialog'} />
+      <Dialog {...restProps} visible={isVisible}>
+        <DialogHeader setVisible={setVisible}>Header</DialogHeader>
+        <DialogContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+          et odio sed est pellentesque gravida sit amet at orci.
+        </DialogContent>
+        <DialogFooter>
+          <Button onClick={() => setVisible(false)} label={'Close'} />
+        </DialogFooter>
+      </Dialog>
+    </>
   );
 };
 
