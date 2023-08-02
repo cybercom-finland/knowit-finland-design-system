@@ -3,10 +3,6 @@ import { generateRandomString, pxToRem } from '../../../shared';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { variant } from 'styled-system';
-import { DialogContent } from '../DialogContent/DialogContent';
-import { DialogHeader } from '../DialogHeader/DialogHeader';
-import { DialogFooter } from '../DialogFooter/DialogFooter';
-import { Button } from '../../Button';
 
 export type DialogVariant = 'mobile' | 'medium' | 'large';
 
@@ -35,6 +31,8 @@ export interface DialogProps {
    * Show or hide the modal
    */
   visible: boolean;
+
+  setVisible: any;
 
   /**
    * Show or hide the modal
@@ -86,12 +84,7 @@ const defaultProviderValue: ModalProviderState = {
 const { Provider: ModalProvider, Consumer: ModalConsumer } =
   React.createContext(defaultProviderValue);
 
-const ModalStyle = styled.div`
-  height: min-content;
-  padding: 0 !important;
-`;
-
-const OverlayStyle = styled.div<DialogProps | any>`
+const StyledModal = styled.div<DialogProps | any>`
   ${variant({
     prop: 'variant',
     variants: {
@@ -106,12 +99,17 @@ const OverlayStyle = styled.div<DialogProps | any>`
       },
     },
   })};
+  margin: auto;
+  height: min-content;
+  padding: 0 !important;
 `;
+
+const StyledOverlay = styled.div<DialogProps | any>``;
 
 /**
  * Checkbox component
  */
-const NativeDialog = ({
+const Dialog = ({
   id,
   visible,
   focusOnOpenRef,
@@ -128,12 +126,14 @@ const NativeDialog = ({
     <ReactModal
       isOpen={visible}
       contentElement={(props, children) => (
-        <ModalStyle {...props}>{children}</ModalStyle>
+        <StyledModal {...props} variant={variant}>
+          {children}
+        </StyledModal>
       )}
       overlayElement={(props, contentElement) => (
-        <OverlayStyle {...props} {...restProps} variant={variant}>
+        <StyledOverlay {...props} variant={variant}>
           {contentElement}
-        </OverlayStyle>
+        </StyledOverlay>
       )}
     >
       <ModalProvider
@@ -150,19 +150,4 @@ const NativeDialog = ({
   );
 };
 
-const Dialog = ({ ...restProps }: DialogProps) => {
-  return (
-    <NativeDialog {...restProps}>
-      <DialogHeader>Header</DialogHeader>
-      <DialogContent>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
-        odio sed est pellentesque gravida sit amet at orci.
-      </DialogContent>
-      <DialogFooter>
-        <Button label={'Button'} />
-      </DialogFooter>
-    </NativeDialog>
-  );
-};
-
-export { Dialog, NativeDialog, ModalConsumer };
+export { Dialog, ModalConsumer };
