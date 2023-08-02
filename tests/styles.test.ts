@@ -1,4 +1,6 @@
 import { spacing, convertToSpacingUnit, pxToRem } from '../src/shared/styles';
+import { LoadingIndicatorColor } from '../src/components/LinearLoadingIndicator/styles';
+import { darkTheme, lightTheme } from '../src/shared/themes';
 
 describe('testing spacing', () => {
   test('No value given', () => {
@@ -71,5 +73,19 @@ describe('testing pxToRem', () => {
 
   test('Very large value', () => {
     expect(pxToRem(16000000)).toBe('1000000rem');
+  });
+});
+
+describe('testing LoadingIndicatorColor', () => {
+  test('Get RGB value strings 1/2', () => {
+    expect(LoadingIndicatorColor('success', darkTheme)).toMatch(
+      /^#[\dA-F]{6}$/
+    );
+  });
+
+  test('Get RGB value strings 2/2', () => {
+    expect(LoadingIndicatorColor('warning', lightTheme)).toMatch(
+      /^#[\dA-F]{6}$/
+    );
   });
 });

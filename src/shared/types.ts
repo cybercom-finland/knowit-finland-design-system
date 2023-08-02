@@ -42,3 +42,13 @@ export interface InputComponentBaseProps<T>
    */
   onChange?: (event: React.ChangeEvent<T>) => void;
 }
+
+/**
+ * State of a component (loading indicators, etc.)
+ */
+export type ComponentState =
+  | 'default'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info';
