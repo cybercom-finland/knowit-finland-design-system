@@ -40,11 +40,11 @@ export default {
  * See note below related to this example.
  */
 const DialogWithHooks = (visible, restProps) => {
-  const [isVisible, setVisible] = useState(visible);
+  const [isVisible, setVisible] = useState(visible.visible);
 
   useEffect(() => {
-    setVisible(visible);
-  }, [visible]);
+    setVisible(visible.visible);
+  }, [visible.visible]);
 
   return (
     <Dialog {...restProps} visible={isVisible}>
@@ -54,7 +54,7 @@ const DialogWithHooks = (visible, restProps) => {
         odio sed est pellentesque gravida sit amet at orci.
       </DialogContent>
       <DialogFooter>
-        <Button label={'Button'} />
+        <Button onClick={() => setVisible(false)} label={'Button'} />
       </DialogFooter>
     </Dialog>
   );
