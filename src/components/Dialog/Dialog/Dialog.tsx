@@ -129,9 +129,7 @@ const Dialog = ({
         </StyledModal>
       )}
       overlayElement={(props, contentElement) => (
-        <StyledOverlay {...props} variant={variant}>
-          {contentElement}
-        </StyledOverlay>
+        <StyledOverlay {...props}>{contentElement}</StyledOverlay>
       )}
     >
       <ModalProvider

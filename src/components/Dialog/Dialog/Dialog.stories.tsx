@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Dialog } from './Dialog';
+import { Dialog, DialogProps } from './Dialog';
 import { DialogHeader } from '../DialogHeader/DialogHeader';
 import { DialogContent } from '../DialogContent/DialogContent';
 import { DialogFooter } from '../DialogFooter/DialogFooter';
@@ -17,6 +17,7 @@ export default {
   },
   args: {
     visible: false,
+    showContent: true,
   },
   parameters: {
     design: [
@@ -39,12 +40,12 @@ export default {
  * Example Button story with React Hooks.
  * See note below related to this example.
  */
-const DialogWithHooks = (visible, restProps) => {
-  const [isVisible, setVisible] = useState(visible.visible);
+const DialogWithHooks = ({ visible, ...restProps }: DialogProps) => {
+  const [isVisible, setVisible] = useState(visible);
 
   useEffect(() => {
-    setVisible(visible.visible);
-  }, [visible.visible]);
+    setVisible(visible);
+  }, [visible]);
 
   return (
     <Dialog {...restProps} visible={isVisible}>
