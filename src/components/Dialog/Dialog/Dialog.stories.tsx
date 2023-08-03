@@ -18,6 +18,8 @@ export default {
   args: {
     visible: false,
     showContent: true,
+    variant: 'medium',
+    scrollable: false,
   },
   parameters: {
     design: [
