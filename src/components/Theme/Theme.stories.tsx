@@ -28,7 +28,7 @@ export const LightTheme = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 LightTheme.args = {
   theme: 'light',
-  children: <Button variant="outlined" label="Themed button" />,
+  children: <Button variant='outlined' label='Themed button' />,
 };
 
 /**
@@ -38,7 +38,7 @@ export const DarkTheme = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 DarkTheme.args = {
   theme: 'dark',
-  children: <Button variant="outlined" label="Themed button" />,
+  children: <Button variant='outlined' label='Themed button' />,
 };
 
 /**
@@ -48,5 +48,5 @@ export const CustomTheme = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 CustomTheme.args = {
   theme: lightTheme,
-  children: <Button variant="outlined" label="Themed button" />,
+  children: <Button variant='outlined' label='Themed button' />,
 };

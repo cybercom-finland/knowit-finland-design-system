@@ -206,7 +206,7 @@ export const Checkbox = ({
         <CheckboxWrapper
           id={componentId}
           size={size}
-          data-testid="checkbox"
+          data-testid='checkbox'
           disabled={disabled}
         >
           {boxChecked && !indeterminate && <MdCheckBox />}
