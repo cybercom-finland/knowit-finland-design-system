@@ -57,9 +57,7 @@ const FieldGroupComponent = styled.div<FormGroupProps>`
   display: inline-flex;
   ${changeDirection};
   border: none;
-  > * {
-    margin: 4px;
-  }
+  gap: 8px;
 `;
 
 /**
