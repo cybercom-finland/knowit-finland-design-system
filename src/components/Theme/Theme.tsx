@@ -1,10 +1,10 @@
 import React from 'react';
 import { GlobalStyle } from '../../shared/global';
 import { darkTheme, lightTheme } from '../../shared/themes';
-import { ThemeProvider } from 'styled-components';
+import { DefaultTheme, ThemeProvider } from 'styled-components';
 
 interface ThemeProps extends React.PropsWithChildren {
-  theme: 'light' | 'dark' | Record<string, unknown>;
+  theme: 'light' | 'dark' | DefaultTheme;
 }
 
 export const Theme = ({ theme = 'light', children }: ThemeProps) => {

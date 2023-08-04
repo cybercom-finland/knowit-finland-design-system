@@ -5,12 +5,11 @@ import { Decorator, Preview } from '@storybook/react';
 
 // Helper to change story bg color according to the theme
 const ThemeBlock = styled.div(
-  ({ theme }) =>
-    css`
-      padding: 1rem;
-      box-sizing: border-box;
-      background: ${theme.colors.neutral};
-    `
+  ({ theme }) => css`
+    padding: 1rem;
+    box-sizing: border-box;
+    background: ${theme.colors.neutral};
+  `
 );
 
 // Global decorator to apply the styles to all stories
@@ -22,12 +21,12 @@ const withTheme: Decorator = (Story, context) => {
     case 'both': {
       return (
         <>
-          <Theme theme="light">
+          <Theme theme='light'>
             <ThemeBlock>
               <Story />
             </ThemeBlock>
           </Theme>
-          <Theme theme="dark">
+          <Theme theme='dark'>
             <ThemeBlock>
               <Story />
             </ThemeBlock>
