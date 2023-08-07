@@ -94,8 +94,8 @@ OutlinedWithContent.parameters = Outlined.parameters;
 
 OutlinedWithContent.play = async ({ canvasElement }) => {
   const input = within(canvasElement).getByRole('textbox');
-  userEvent.type(input, 'Hello Knowit!');
-  expect(input).toHaveValue('Hello Knowit!');
+  await userEvent.type(input, 'Hello Knowit!');
+  await expect(input).toHaveValue('Hello Knowit!');
 };
 
 /**
