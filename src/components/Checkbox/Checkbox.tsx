@@ -12,14 +12,13 @@ import { MdCheckBox } from 'react-icons/md';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
 import { MdIndeterminateCheckBox } from 'react-icons/md';
 import { FormLabel } from '../Label';
-import { HelperText } from '../HelperText';
+import { HelperText, HelperTextProps } from '../HelperText';
 import { InputBaseProps } from '../Input';
 
 /**
  * Various dimensions of checkbox component
  */
 const checkboxDimensions = {
-  helperTextFontSize: pxToRem(14),
   small: {
     fontSize: pxToRem(16),
     marginLeft: pxToRem(24),
@@ -34,6 +33,8 @@ type CheckboxInputBaseProps = Omit<
   InputBaseProps,
   'error' | 'variant' | 'endIcon' | 'placeholder'
 >;
+
+type CheckboxSize = Exclude<Size, 'medium'>;
 
 /**
  * Used HTML Attributes
@@ -93,7 +94,14 @@ export interface CheckboxProps
   /**
    * Size of checkbox
    */
-  size?: Exclude<Size, 'medium'>;
+  size?: CheckboxSize;
+}
+
+/**
+ * Checkobox helper text props
+ */
+interface CheckboxHelperTextProps extends HelperTextProps {
+  size?: CheckboxSize;
 }
 
 /**
@@ -117,19 +125,6 @@ const calculateSizes = () => {
   `;
 };
 
-/**
- * calculate left margin for helper text
- * @param props mandatory checkbox props
- * @returns modified css
- */
-const calculateMargin = (props: CheckboxProps) => {
-  return css`
-    margin-left: ${props.size == 'large'
-      ? checkboxDimensions.large.marginLeft
-      : checkboxDimensions.small.marginLeft} !important;
-  `;
-};
-
 const CheckboxWrapper = styled.span<CheckboxProps>`
   ${calculateSizes}
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
@@ -149,10 +144,14 @@ const CheckboxWrapper = styled.span<CheckboxProps>`
     `}
 `;
 
-const CheckboxHelperText = styled(HelperText)`
-  ${calculateMargin}
-  font-size: ${checkboxDimensions.helperTextFontSize};
-  margin: 0;
+/**
+ * Checkbox helper text props
+ */
+const CheckboxHelperText = styled(HelperText)<CheckboxHelperTextProps>`
+  margin-left: ${(props) =>
+    props.size == 'large'
+      ? checkboxDimensions.large.marginLeft
+      : checkboxDimensions.small.marginLeft};
 `;
 
 const CheckboxComponentWrapper = styled.span`

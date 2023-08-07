@@ -1,4 +1,4 @@
-import { darkTheme, lightTheme } from '../../shared/themes';
+import { DefaultTheme } from 'styled-components';
 import { ComponentState } from '../../shared/types';
 
 /**
@@ -9,7 +9,7 @@ import { ComponentState } from '../../shared/types';
  */
 export const LoadingIndicatorColor = (
   style: ComponentState,
-  theme: typeof darkTheme | typeof lightTheme
+  theme: DefaultTheme
 ): string => {
   switch (style) {
     case 'success':

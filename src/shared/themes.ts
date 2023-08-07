@@ -1,4 +1,6 @@
-export const lightTheme = {
+import { DefaultTheme } from 'styled-components';
+
+export const lightTheme: DefaultTheme = {
   colors: {
     neutral: '#FFFFFF',
     grayScale: {
@@ -41,7 +43,7 @@ export const lightTheme = {
   },
 };
 
-export const darkTheme = {
+export const darkTheme: DefaultTheme = {
   colors: {
     neutral: '#18090E',
     grayScale: {

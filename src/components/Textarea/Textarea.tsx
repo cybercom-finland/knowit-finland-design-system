@@ -16,7 +16,7 @@ import {
 /**
  * Internal component styling
  */
-const TextareaBase = styled.textarea`
+const TextareaBase = styled.textarea<TextareaProps>`
   ${baseInputStyles}
 `;
 
