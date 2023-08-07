@@ -32,8 +32,8 @@ const InnerHelperText = styled.span<HelperTextProps>`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   pointer-events: none;
   display: block;
-  font-size: ${typography.size.paragraph2};
-  line-height: ${typography.lineHeight.paragraph2};
+  font-size: ${typography.size.label};
+  line-height: ${typography.lineHeight.label};
   font-weight: ${typography.weight.regular};
   ${({ disabled, error }) =>
     error
