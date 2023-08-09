@@ -1,6 +1,5 @@
 import React, { HTMLProps, ReactNode } from 'react';
 import { generateRandomString, pxToRem } from '../../../shared';
-import { DialogVariant, ModalConsumer } from '../Dialog/Dialog';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import { IconButton } from '../../IconButton';
@@ -11,11 +10,6 @@ import { IconButton } from '../../IconButton';
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#additional_attributes
  */
 export interface DialogProps {
-  /**
-   * Show or hide the modal
-   */
-  setVisible: any;
-
   /**
    * Show or hide the modal
    */
@@ -38,8 +32,6 @@ export interface ModalContentProps
 
 interface InternalModalContentProps extends ModalContentProps {
   id?: string;
-  modalVariant: DialogVariant;
-  scrollable: boolean;
 }
 
 const NativeDialogHeader = ({
@@ -61,30 +53,16 @@ const Wrapper = styled.div`
 /**
  * Checkbox component
  */
-export const DialogHeader = ({ id, children, setVisible }: DialogProps) => {
+export const DialogHeader = ({ id, children }: DialogProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <ModalConsumer>
-      {({ focusTitleOnOpen, titleRef, variant, scrollable }) => (
-        <Wrapper>
-          <NativeDialogHeader
-            id={componentId}
-            modalVariant={variant}
-            scrollable={scrollable}
-          >
-            {children}
-          </NativeDialogHeader>
-          <IconButton
-            onClick={() => {
-              setVisible(false);
-            }}
-          >
-            <MdClose />
-          </IconButton>
-        </Wrapper>
-      )}
-    </ModalConsumer>
+    <Wrapper>
+      <NativeDialogHeader id={componentId}>{children}</NativeDialogHeader>
+      <IconButton>
+        <MdClose />
+      </IconButton>
+    </Wrapper>
   );
 };

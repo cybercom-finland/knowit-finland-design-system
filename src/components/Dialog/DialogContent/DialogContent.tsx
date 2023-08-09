@@ -31,8 +31,6 @@ export interface ModalContentProps
 
 interface InternalModalContentProps extends ModalContentProps {
   id?: string;
-  modalVariant: DialogVariant;
-  scrollable: boolean;
 }
 
 const NativeModalContent = ({
@@ -54,17 +52,5 @@ export const DialogContent = ({ id, children }: DialogProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
 
-  return (
-    <ModalConsumer>
-      {({ variant, scrollable }) => (
-        <ModalContent
-          id={componentId}
-          modalVariant={variant}
-          scrollable={scrollable}
-        >
-          {children}
-        </ModalContent>
-      )}
-    </ModalConsumer>
-  );
+  return <ModalContent id={componentId}>{children}</ModalContent>;
 };

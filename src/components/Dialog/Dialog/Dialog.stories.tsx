@@ -42,27 +42,18 @@ export default {
  * Example Button story with React Hooks.
  * See note below related to this example.
  */
-const DialogWithHooks = ({ visible, ...restProps }: DialogProps) => {
-  const [isVisible, setVisible] = useState(visible);
-
-  useEffect(() => {
-    setVisible(visible);
-  }, [visible]);
-
+const DialogWithHooks = ({ ...restProps }: DialogProps) => {
   return (
-    <>
-      <Button onClick={() => setVisible(true)} label={'Open dialog'} />
-      <Dialog {...restProps} visible={isVisible}>
-        <DialogHeader setVisible={setVisible}>Header</DialogHeader>
-        <DialogContent>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          et odio sed est pellentesque gravida sit amet at orci.
-        </DialogContent>
-        <DialogFooter>
-          <Button onClick={() => setVisible(false)} label={'Close'} />
-        </DialogFooter>
-      </Dialog>
-    </>
+    <Dialog {...restProps}>
+      <DialogHeader>Header</DialogHeader>
+      <DialogContent>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
+        odio sed est pellentesque gravida sit amet at orci.
+      </DialogContent>
+      <DialogFooter>
+        <Button label={'Close'} />
+      </DialogFooter>
+    </Dialog>
   );
 };
 

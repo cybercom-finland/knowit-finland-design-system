@@ -50,12 +50,8 @@ export const DialogFooter = ({ id, children, ...restProps }: DialogProps) => {
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <ModalConsumer>
-      {({ variant, scrollable }) => (
-        <NativeDialogFooter id={componentId}>
-          <Wrapper>{children}</Wrapper>
-        </NativeDialogFooter>
-      )}
-    </ModalConsumer>
+    <NativeDialogFooter id={componentId}>
+      <Wrapper>{children}</Wrapper>
+    </NativeDialogFooter>
   );
 };

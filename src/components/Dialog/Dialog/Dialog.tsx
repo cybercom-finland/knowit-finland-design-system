@@ -1,6 +1,5 @@
 import React, { ReactNode, createRef } from 'react';
 import { generateRandomString, pxToRem } from '../../../shared';
-import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { variant } from 'styled-system';
 
@@ -30,11 +29,6 @@ export interface DialogProps {
   /**
    * Show or hide the modal
    */
-  visible: boolean;
-
-  /**
-   * Show or hide the modal
-   */
   id: string;
 
   /**
@@ -46,14 +40,6 @@ export interface DialogProps {
    * Show content
    */
   showContent: boolean;
-
-  /**
-   * Variant
-   */
-  variant: DialogVariant;
-
-  /** Focusable element ref when modal is opened. If not provided, modal title is focused. */
-  focusOnOpenRef?: React.RefObject<any>;
 
   /**
    * Show vertical scroll bar if needed and show horizontal divider between content and footer.
@@ -82,7 +68,7 @@ const defaultProviderValue: ModalProviderState = {
 const { Provider: ModalProvider, Consumer: ModalConsumer } =
   React.createContext(defaultProviderValue);
 
-const StyledModal = styled.div<DialogProps | any>`
+const StyledModal = styled.div<DialogProps>`
   ${variant({
     prop: 'variant',
     variants: {
@@ -102,48 +88,17 @@ const StyledModal = styled.div<DialogProps | any>`
   padding: 0 !important;
 `;
 
-const StyledOverlay = styled.div<DialogProps | any>``;
+const StyledOverlay = styled.div<DialogProps>``;
 
 /**
  * Checkbox component
  */
-const Dialog = ({
-  id,
-  visible,
-  focusOnOpenRef,
-  scrollable = true,
-  variant = 'mobile',
-  children,
-  ...restProps
-}: DialogProps) => {
+const Dialog = ({ id, children, ...restProps }: DialogProps) => {
   // Use Id form props or create randomized string
   const componentId = id ?? generateRandomString(5);
   const titleRef = createRef<HTMLHeadElement>();
 
-  return (
-    <ReactModal
-      isOpen={visible}
-      contentElement={(props, children) => (
-        <StyledModal {...props} variant={variant}>
-          {children}
-        </StyledModal>
-      )}
-      overlayElement={(props, contentElement) => (
-        <StyledOverlay {...props}>{contentElement}</StyledOverlay>
-      )}
-    >
-      <ModalProvider
-        value={{
-          focusTitleOnOpen: !focusOnOpenRef,
-          titleRef: titleRef,
-          variant,
-          scrollable,
-        }}
-      >
-        {children}
-      </ModalProvider>
-    </ReactModal>
-  );
+  return children;
 };
 
 export { Dialog, ModalConsumer };
