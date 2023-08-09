@@ -73,8 +73,6 @@ const NavBarToggle = styled.span`
   
 `;
 const ToggleItemsContainer = styled.div`
-  position: absolute;
-  right: 0;
 `
 export const NavBar = ({
   id,
