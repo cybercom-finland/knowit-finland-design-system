@@ -1,5 +1,3 @@
-import { darkTheme, lightTheme } from './themes';
-
 // 1rem = 16px
 export const baseSize = 16;
 // 1 spacing unit = 8px
@@ -57,7 +55,8 @@ export const typography = {
     heading3: pxToRem(32),
     heading4: pxToRem(26),
     paragraph: pxToRem(22),
-    paragraph2: pxToRem(18),
+    paragraph2: pxToRem(16),
+    label: pxToRem(18),
     caption: pxToRem(14),
   },
   lineHeight: {
@@ -66,7 +65,8 @@ export const typography = {
     heading3: pxToRem(37),
     heading4: pxToRem(30),
     paragraph: pxToRem(25),
-    paragraph2: pxToRem(21),
+    paragraph2: pxToRem(18),
+    label: pxToRem(21),
     caption: pxToRem(16),
   },
 };

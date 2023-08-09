@@ -104,7 +104,7 @@ export const LinearLoadingIndicator = ({
           progress={progress}
           determinate={determinate}
           aria-label={ariaLabelText}
-          role="status"
+          role='status'
           {...restProps}
         >
           &nbsp;
