@@ -70,7 +70,12 @@ const NavBarToggle = styled.span`
   height: ${pxToRem(20)};
   cursor: pointer;
   color: #18090e;
+  
 `;
+const ToggleItemsContainer = styled.div`
+  position: absolute;
+  right: 0;
+`
 export const NavBar = ({
   id,
   size = 'small',
@@ -97,7 +102,7 @@ const Brand = ({ id, children, ...restProps }: NavBarChildProps) => {
 NavBar.Brand = Brand;
 
 const Toggle = ({ id, children, ...restProps }: NavBarChildProps) => {
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const componentId = id ?? generateRandomString(5);
   return (
     <NavBarToggle
@@ -106,7 +111,9 @@ const Toggle = ({ id, children, ...restProps }: NavBarChildProps) => {
       onClick={() => setShowMenu(!showMenu)}
     >
       <GiHamburgerMenu />
-      {showMenu ?? children}
+      <ToggleItemsContainer>
+        {showMenu && children}
+      </ToggleItemsContainer>
     </NavBarToggle>
   );
 };

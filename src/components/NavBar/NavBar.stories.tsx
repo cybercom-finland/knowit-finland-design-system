@@ -70,6 +70,10 @@ const Template: StoryFn<typeof NavBar> = (args) => {
         </svg>
       </NavBar.Brand>
       <NavBar.Toggle>
+        <ul>
+          <li>Test</li>
+          <li>Test 2</li>
+        </ul>
       </NavBar.Toggle>
     </NavBar>
   );
