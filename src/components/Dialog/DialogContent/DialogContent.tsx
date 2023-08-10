@@ -13,8 +13,5 @@ const ModalContent = styled(NativeModalContent)`
 `;
 
 export const DialogContent = ({ id, children }: DialogProps) => {
-  // Use Id form props or create randomized string
-  const componentId = id ?? generateRandomString(5);
-
-  return <ModalContent id={componentId}>{children}</ModalContent>;
+  return <ModalContent>{children}</ModalContent>;
 };
