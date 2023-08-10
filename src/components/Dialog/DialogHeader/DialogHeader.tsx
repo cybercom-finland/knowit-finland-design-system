@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   gap: ${pxToRem(32)};
 `;
 
-export const DialogHeader = ({ id, children }: DialogProps) => {
+export const DialogHeader = ({ children }: DialogProps) => {
   return (
     <Wrapper>
       <div>{children}</div>

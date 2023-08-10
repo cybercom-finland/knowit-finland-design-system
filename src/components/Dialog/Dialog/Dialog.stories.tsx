@@ -2,16 +2,15 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Dialog } from './Dialog';
+import { Label } from '../../Label/Label';
 import { DialogHeader } from '../DialogHeader/DialogHeader';
 import { DialogContent } from '../DialogContent/DialogContent';
 import { DialogFooter } from '../DialogFooter/DialogFooter';
 import { Button } from '../../Button';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/Dialog',
   component: Dialog,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     onChange: { action: true },
   },
@@ -21,12 +20,12 @@ export default {
       {
         name: 'light',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=799%3A13731&t=aZ3vwdu5JAJD0sQm-1',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=771%3A13438&mode=design&t=4sawDFpjAz0GxS0z-1',
       },
       {
         name: 'dark',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?type=design&node-id=1533%3A85558&t=aZ3vwdu5JAJD0sQm-1',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=1533%3A87059&mode=design&t=4sawDFpjAz0GxS0z-1',
       },
     ],
   },
@@ -39,13 +38,16 @@ export default {
 const ExampleDialog = () => {
   return (
     <Dialog>
-      <DialogHeader>Header</DialogHeader>
+      <DialogHeader>
+        <Label>Title</Label>
+      </DialogHeader>
       <DialogContent>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
         odio sed est pellentesque gravida sit amet at orci.
       </DialogContent>
       <DialogFooter>
-        <Button label={'Close'} />
+        <Button size={'small'} label={'Button'} />
+        <Button variant={'text'} size={'small'} label={'Button'} />
       </DialogFooter>
     </Dialog>
   );
