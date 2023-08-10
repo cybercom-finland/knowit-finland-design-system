@@ -1,5 +1,5 @@
 import React from 'react';
-import { generateRandomString, pxToRem } from '../../../shared';
+import { pxToRem } from '../../../shared';
 import styled from 'styled-components';
 import { DialogProps } from '../Dialog/Dialog';
 
