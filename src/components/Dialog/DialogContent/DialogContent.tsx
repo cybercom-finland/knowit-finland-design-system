@@ -12,6 +12,6 @@ const ModalContent = styled(NativeModalContent)`
   gap: ${pxToRem(32)};
 `;
 
-export const DialogContent = ({ id, children }: DialogProps) => {
+export const DialogContent = ({ children }: DialogProps) => {
   return <ModalContent>{children}</ModalContent>;
 };
