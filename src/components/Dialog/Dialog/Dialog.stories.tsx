@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Dialog, DialogProps } from './Dialog';
+import { Dialog } from './Dialog';
 import { DialogHeader } from '../DialogHeader/DialogHeader';
 import { DialogContent } from '../DialogContent/DialogContent';
 import { DialogFooter } from '../DialogFooter/DialogFooter';
@@ -15,12 +15,7 @@ export default {
   argTypes: {
     onChange: { action: true },
   },
-  args: {
-    visible: false,
-    showContent: true,
-    variant: 'medium',
-    scrollable: false,
-  },
+  args: {},
   parameters: {
     design: [
       {
@@ -39,12 +34,11 @@ export default {
 } as Meta<typeof Dialog>;
 
 /*
- * Example Button story with React Hooks.
- * See note below related to this example.
+ * Example Dialog story
  */
-const DialogWithHooks = ({ ...restProps }: DialogProps) => {
+const ExampleDialog = () => {
   return (
-    <Dialog {...restProps}>
+    <Dialog>
       <DialogHeader>Header</DialogHeader>
       <DialogContent>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
@@ -59,7 +53,7 @@ const DialogWithHooks = ({ ...restProps }: DialogProps) => {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Dialog> = (args) => (
-  <DialogWithHooks {...args}></DialogWithHooks>
+  <ExampleDialog {...args}></ExampleDialog>
 );
 
 /**
