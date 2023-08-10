@@ -3,11 +3,7 @@ import { pxToRem } from '../../../shared';
 import styled from 'styled-components';
 import { DialogProps } from '../Dialog/Dialog';
 
-const NativeModalContent = ({ children, ...passProps }: DialogProps) => {
-  return <div {...passProps}>{children}</div>;
-};
-
-const ModalContent = styled(NativeModalContent)`
+const ModalContent = styled.div`
   padding: ${pxToRem(32)};
   gap: ${pxToRem(32)};
 `;
