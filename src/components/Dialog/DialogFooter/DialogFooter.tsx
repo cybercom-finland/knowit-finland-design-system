@@ -9,6 +9,7 @@ import { DialogProps } from '../Dialog/Dialog';
 const dialogHeaderDimensions = {
   padding: `${pxToRem(24)} ${pxToRem(32)} ${pxToRem(55)} ${pxToRem(16)}`,
   gap: pxToRem(20),
+  mobileBreakPoint: '375px',
 };
 
 const InnerDialogFooter = styled.div`
@@ -17,6 +18,9 @@ const InnerDialogFooter = styled.div`
   display: flex;
   justify-content: right;
   gap: ${dialogHeaderDimensions.gap};
+  @media (max-width: ${dialogHeaderDimensions.mobileBreakPoint}) {
+    flex-direction: column;
+  }
 `;
 
 export const DialogFooter = ({ children }: DialogProps) => {
