@@ -3,11 +3,17 @@ import { pxToRem } from '../../../shared';
 import styled from 'styled-components';
 import { DialogProps } from '../Dialog/Dialog';
 
-const ModalContent = styled.div`
-  padding: ${pxToRem(32)};
-  gap: ${pxToRem(32)};
+/**
+ * Dimensions of dialog content component
+ */
+const dialogContentDimensions = {
+  padding: pxToRem(32),
+};
+
+const InnerDialogContent = styled.div`
+  padding: ${dialogContentDimensions.padding};
 `;
 
 export const DialogContent = ({ children }: DialogProps) => {
-  return <ModalContent>{children}</ModalContent>;
+  return <InnerDialogContent>{children}</InnerDialogContent>;
 };

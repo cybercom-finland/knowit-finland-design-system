@@ -1,7 +1,8 @@
+import React from 'react';
 import { HTMLProps } from 'react';
 
-export type DialogProps = Omit<HTMLProps<HTMLDivElement>, 'ref' | 'as'>;
+export type DialogProps = HTMLProps<HTMLDivElement>;
 
 export const Dialog = ({ children }: DialogProps) => {
-  return children;
+  return <div role={'dialog'}>{children}</div>;
 };
