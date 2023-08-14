@@ -24,7 +24,7 @@ export const DialogHeader = ({ children }: DialogProps) => {
   return (
     <DialogHeaderWrapper>
       <div>{children}</div>
-      <IconButton size={'large'}>
+      <IconButton size='large'>
         <MdClose />
       </IconButton>
     </DialogHeaderWrapper>

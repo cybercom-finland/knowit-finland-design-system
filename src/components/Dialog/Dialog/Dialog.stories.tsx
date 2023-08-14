@@ -11,10 +11,6 @@ import { Button } from '../../Button';
 export default {
   title: 'Components/Dialog',
   component: Dialog,
-  argTypes: {
-    onChange: { action: true },
-  },
-  args: {},
   parameters: {
     design: [
       {
@@ -46,8 +42,8 @@ const ExampleDialog = () => {
         odio sed est pellentesque gravida sit amet at orci.
       </DialogContent>
       <DialogFooter>
-        <Button size={'small'} label={'Button'} />
-        <Button variant={'text'} size={'small'} label={'Button'} />
+        <Button size='small' label='Button' />
+        <Button variant='text' size='small' label='Button' />
       </DialogFooter>
     </Dialog>
   );
