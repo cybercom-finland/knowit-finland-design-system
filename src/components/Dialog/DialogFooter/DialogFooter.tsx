@@ -20,6 +20,7 @@ const InnerDialogFooter = styled.div`
   gap: ${dialogHeaderDimensions.gap};
   @media (max-width: ${dialogHeaderDimensions.mobileBreakPoint}) {
     flex-direction: column;
+    align-items: end;
   }
 `;
 
