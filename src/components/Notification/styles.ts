@@ -34,23 +34,3 @@ export const notificationIconSpacing = 16;
  * Minimum width of the notification area
  */
 export const notificationMinWidth = 564;
-
-/**
- * Size of the notification title font
- */
-export const notificationTitleFontSize = 22;
-
-/**
- * Line height of the notification title
- */
-export const notificationTitleLineHeight = 25.3;
-
-/**
- * Size of the notification message font
- */
-export const notificationMessageFontSize = 18;
-
-/**
- * Line height of the notification message
- */
-export const notificationMessageLineHeight = 20.7;

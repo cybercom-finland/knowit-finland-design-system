@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ComponentBaseProps, ComponentState } from '../../shared';
+import {
+  ComponentBaseProps,
+  ComponentState,
+  pxToRem,
+  typography,
+} from '../../shared';
 import { IconButton } from '../IconButton/IconButton';
 import {
   MdClose,
@@ -13,11 +18,7 @@ import { LinearLoadingIndicator } from '../LinearLoadingIndicator';
 import {
   NotificationIconColor,
   notificationIconSpacing,
-  notificationMessageFontSize,
-  notificationMessageLineHeight,
   notificationMinWidth,
-  notificationTitleFontSize,
-  notificationTitleLineHeight,
 } from './styles';
 import { Wrapper, WrapperProps } from '../Wrapper';
 
@@ -100,8 +101,7 @@ const NotificationIcon = ({ notificationStyle }: NotificationProps) => {
 const NotificationIconDiv = styled.div<NotificationProps>`
   color: ${(props) =>
     NotificationIconColor(props.notificationStyle || 'default', props.theme)};
-  float: left;
-  padding-right: ${notificationIconSpacing}px;
+  padding-right: ${pxToRem(notificationIconSpacing)};
 `;
 
 /**
@@ -109,8 +109,8 @@ const NotificationIconDiv = styled.div<NotificationProps>`
  */
 const NotificationTitleParagraph = styled.p<NotificationProps>`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
-  font-size: ${notificationTitleFontSize}px;
-  line-height: ${notificationTitleLineHeight}px;
+  font-size: ${typography.size.paragraph};
+  line-height: ${typography.lineHeight.paragraph};
   margin-top: 0;
 `;
 
@@ -119,8 +119,8 @@ const NotificationTitleParagraph = styled.p<NotificationProps>`
  */
 const NotificationMessageParagraph = styled.p<NotificationProps>`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
-  font-size: ${notificationMessageFontSize}px;
-  line-height: ${notificationMessageLineHeight}px;
+  font-size: ${typography.size.paragraph2};
+  line-height: ${typography.lineHeight.paragraph2};
   margin-top: 0;
   margin-bottom: 0;
 `;
@@ -149,60 +149,60 @@ export const Notification = ({
 
   const [hidden, setHidden] = React.useState(false);
 
-  if (hidden == true) return <div />;
-
   return (
-    <Wrapper
-      style={{
-        display: 'inline-block',
-        minWidth: notificationMinWidth,
-      }}
-    >
-      <div
+    !hidden && (
+      <Wrapper
         style={{
-          position: 'relative',
-          display: 'flex',
+          display: 'inline-block',
+          minWidth: notificationMinWidth,
         }}
       >
         <div
           style={{
-            float: 'left',
+            position: 'relative',
+            display: 'flex',
           }}
         >
-          <NotificationIcon
-            notificationStyle={props.notificationStyle}
-          ></NotificationIcon>
-        </div>
-        <div style={{ float: 'left', flex: '1' }}>
-          <NotificationTitleParagraph>{title}</NotificationTitleParagraph>
-          <NotificationMessageParagraph>{message}</NotificationMessageParagraph>
-        </div>
-        <div
-          style={{
-            float: 'right',
-            paddingLeft: notificationIconSpacing,
-          }}
-        >
-          <IconButton
-            onClick={() => setHidden(true)}
-            aria-label={
-              closeButtonAriaLabel || 'Close button for a notification'
-            }
-            size='large'
+          <div>
+            <NotificationIcon
+              notificationStyle={props.notificationStyle}
+            ></NotificationIcon>
+          </div>
+          <div style={{ flex: '1' }}>
+            <NotificationTitleParagraph>{title}</NotificationTitleParagraph>
+            <NotificationMessageParagraph>
+              {message}
+            </NotificationMessageParagraph>
+          </div>
+          <div
+            style={{
+              paddingLeft: pxToRem(notificationIconSpacing),
+            }}
           >
-            <MdClose />
-          </IconButton>
+            <IconButton
+              onClick={() => setHidden(true)}
+              aria-label={
+                closeButtonAriaLabel || 'Close button for a notification'
+              }
+              size='large'
+            >
+              <MdClose />
+            </IconButton>
+          </div>
         </div>
-      </div>
-      {props.loadingIndicator && (
-        <div
-          style={{ marginTop: notificationMessageLineHeight, marginBottom: 0 }}
-        >
-          <LinearLoadingIndicator
-            indicatorStyle={props.notificationStyle}
-          ></LinearLoadingIndicator>
-        </div>
-      )}
-    </Wrapper>
+        {props.loadingIndicator && (
+          <div
+            style={{
+              marginTop: typography.lineHeight.paragraph2,
+              marginBottom: 0,
+            }}
+          >
+            <LinearLoadingIndicator
+              indicatorStyle={props.notificationStyle}
+            ></LinearLoadingIndicator>
+          </div>
+        )}
+      </Wrapper>
+    )
   );
 };
