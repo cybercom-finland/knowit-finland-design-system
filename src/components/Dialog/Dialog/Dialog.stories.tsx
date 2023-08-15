@@ -42,8 +42,8 @@ const ExampleDialog = ({ ...restProps }: DialogProps) => {
         odio sed est pellentesque gravida sit amet at orci.
       </DialogContent>
       <DialogFooter>
-        <Button size='small' label='Button' />
-        <Button variant='text' size='small' label='Button' />
+        <Button size='large' label='Button' />
+        <Button variant='text' size='large' label='Button' />
       </DialogFooter>
     </Dialog>
   );
