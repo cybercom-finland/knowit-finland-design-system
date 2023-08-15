@@ -30,8 +30,9 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof NavBar> = (args) => {
   return (
-    <NavBar size={args.size}>
-      <NavBar.Brand>
+    <NavBar
+      size={args.size}
+      logo={
         <svg
           width='87'
           height='28'
@@ -68,18 +69,12 @@ const Template: StoryFn<typeof NavBar> = (args) => {
             fill='#333333'
           />
         </svg>
-      </NavBar.Brand>
-      <NavBar.Toggle>
-        <ul>
-          <li>Test</li>
-          <li>Test 2</li>
-        </ul>
-      </NavBar.Toggle>
-    </NavBar>
+      }
+    ></NavBar>
   );
 };
 
 /**
  * Navbar
  */
-export const navBar = Template.bind({});
+export const Navbar = Template.bind({});

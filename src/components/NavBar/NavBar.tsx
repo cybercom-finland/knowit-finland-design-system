@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { generateRandomString, pxToRem, Size } from '../../shared';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { MdMenu } from 'react-icons/md';
 
 export interface NavBarProps {
   /**
@@ -16,18 +16,15 @@ export interface NavBarProps {
   /**
    * Children
    */
-  children?: React.ReactElement;
-}
-
-export interface NavBarChildProps {
+  children?: React.ReactNode;
   /**
-   * Id
+   * Logo
    */
-  id?: string;
+  logo?: React.ReactNode;
   /**
-   * Children
+   * Menu
    */
-  children?: React.ReactElement;
+  menu?: React.ReactNode;
 }
 
 const calculateSizes = () => {
@@ -47,72 +44,46 @@ const calculateSizes = () => {
 };
 
 const Bar = styled.nav<NavBarProps>`
-  font-size: 18px;
   ${calculateSizes};
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
-
-  @media (min-width: 768px) {
-    ${calculateSizes};
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 0;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0;
+  align-items: center;
+  min-width: ${pxToRem(400)};
 `;
-const NavBrand = styled.div<NavBarChildProps>`
+const NavLogo = styled.div<NavBarProps>`
   margin-left: ${pxToRem(16)};
 `;
-const NavBarToggle = styled.span`
+const NavBarMenu = styled.span<NavBarProps>`
   margin-right: ${pxToRem(16)};
   margin-top: ${pxToRem(20)};
   margin-bottom: ${pxToRem(20)};
   width: ${pxToRem(20)};
   height: ${pxToRem(20)};
   cursor: pointer;
-  color: #18090e;
-  
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
 `;
-const ToggleItemsContainer = styled.div`
-`
 export const NavBar = ({
   id,
   size = 'small',
   children,
+  menu,
+  logo,
   ...restProps
 }: NavBarProps) => {
   // Use ID form props or create randomized string
   const componentId = id ?? generateRandomString(5);
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <Bar size={size} {...restProps} id={componentId}>
+      <NavLogo id={componentId}>{logo}</NavLogo>
       {children}
+      <NavBarMenu onClick={() => setShowMenu(!showMenu)}>
+        <MdMenu />
+        {menu}
+      </NavBarMenu>
     </Bar>
   );
 };
-const Brand = ({ id, children, ...restProps }: NavBarChildProps) => {
-  const componentId = id ?? generateRandomString(5);
-  return (
-    <NavBrand id={componentId} {...restProps}>
-      {children}
-    </NavBrand>
-  );
-};
-NavBar.Brand = Brand;
-
-const Toggle = ({ id, children, ...restProps }: NavBarChildProps) => {
-  const [showMenu, setShowMenu] = useState(false);
-  const componentId = id ?? generateRandomString(5);
-  return (
-    <NavBarToggle
-      id={componentId}
-      {...restProps}
-      onClick={() => setShowMenu(!showMenu)}
-    >
-      <GiHamburgerMenu />
-      <ToggleItemsContainer>
-        {showMenu && children}
-      </ToggleItemsContainer>
-    </NavBarToggle>
-  );
-};
-NavBar.Toggle = Toggle;
