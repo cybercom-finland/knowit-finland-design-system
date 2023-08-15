@@ -80,10 +80,12 @@ export const NavBar = ({
     <Bar size={size} {...restProps} id={componentId}>
       <NavLogo id={componentId}>{logo}</NavLogo>
       {children}
-      <NavBarMenu onClick={() => setShowMenu(!showMenu)}>
-        <MdMenu />
-        {menu}
-      </NavBarMenu>
+      {menu ? (
+        <NavBarMenu onClick={() => setShowMenu(!showMenu)}>
+          <MdMenu />
+          {showMenu && menu}
+        </NavBarMenu>
+      ) : null}
     </Bar>
   );
 };
