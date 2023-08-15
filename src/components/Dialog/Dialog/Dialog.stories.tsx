@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Dialog } from './Dialog';
+import { Dialog, DialogProps } from './Dialog';
 import { Label } from '../../Label/Label';
 import { DialogHeader } from '../DialogHeader/DialogHeader';
 import { DialogContent } from '../DialogContent/DialogContent';
@@ -31,7 +31,7 @@ export default {
 /*
  * Example Dialog story
  */
-const ExampleDialog = () => {
+const ExampleDialog = ({ ...restProps }: DialogProps) => {
   return (
     <Dialog>
       <DialogHeader>
