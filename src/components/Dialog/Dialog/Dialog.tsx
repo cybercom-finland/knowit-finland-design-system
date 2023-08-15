@@ -1,11 +1,11 @@
 import React from 'react';
-import { HTMLProps } from 'react';
+import { ComponentBaseProps } from '../../../shared';
 
 /**
  * Div component properties
  * Extends html div element attributes
  */
-export interface DialogProps extends HTMLProps<HTMLDivElement> {
+export interface DialogProps extends ComponentBaseProps<HTMLDivElement> {
   /**
    * Component children
    */
