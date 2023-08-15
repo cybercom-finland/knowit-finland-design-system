@@ -10,12 +10,13 @@ import { DialogProps } from '../Dialog/Dialog';
  */
 const dialogHeaderDimensions = {
   padding: pxToRem(32),
+  borderBottom: pxToRem(2),
 };
 
 const DialogHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: ${pxToRem(2)} solid
+  border-bottom: ${dialogHeaderDimensions.borderBottom} solid
     ${(props) => props.theme.colors.grayScale.digitalBlack100};
   padding: ${dialogHeaderDimensions.padding};
 `;
