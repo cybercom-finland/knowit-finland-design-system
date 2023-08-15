@@ -27,16 +27,25 @@ export interface NavBarProps {
   menu?: React.ReactNode;
 }
 
+const navBarDimensions = {
+  small: {
+    height: pxToRem(64),
+  },
+  medium: {
+    height: pxToRem(80),
+  },
+};
+
 const calculateSizes = () => {
   return css`
     ${variant({
       prop: 'size',
       variants: {
         small: {
-          height: `${pxToRem(64)}`,
+          height: navBarDimensions.small.height,
         },
         medium: {
-          height: `${pxToRem(80)}`,
+          height: navBarDimensions.medium.height,
         },
       },
     })};
@@ -50,7 +59,6 @@ const Bar = styled.nav<NavBarProps>`
   justify-content: space-between;
   padding-bottom: 0;
   align-items: center;
-  min-width: ${pxToRem(400)};
 `;
 const NavLogo = styled.div<NavBarProps>`
   margin-left: ${pxToRem(16)};
