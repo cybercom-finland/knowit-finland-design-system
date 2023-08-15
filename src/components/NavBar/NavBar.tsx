@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { generateRandomString, pxToRem, Size } from '../../shared';
+import {ComponentBaseProps, generateRandomString, pxToRem, Size} from '../../shared';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import { MdMenu } from 'react-icons/md';
 
-export interface NavBarProps {
-  /**
-   * Id
-   */
-  id?: string;
+export interface NavBarProps extends ComponentBaseProps<HTMLDivElement> {
   /**
    * Navbar size
    */
