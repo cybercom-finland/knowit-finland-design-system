@@ -11,7 +11,7 @@ export default {
   component: Box,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    variant: 'regular',
+    variant: 'rectangle',
   },
   parameters: {
     design: [

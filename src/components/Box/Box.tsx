@@ -58,7 +58,7 @@ const InternalBox = styled.div<BoxProps>`
  * Box component
  */
 export const Box = ({
-  variant = 'regular',
+  variant = 'rectangle',
   children,
   ...restProps
 }: BoxProps) => {
