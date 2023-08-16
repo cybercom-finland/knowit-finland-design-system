@@ -5,7 +5,7 @@ import {
   pxToRem,
   Size,
 } from '../../shared';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { LoadingIndicatorColor } from '../LinearLoadingIndicator/styles';
 
 /**
