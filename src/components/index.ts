@@ -4,6 +4,7 @@ export * from './HelperText';
 export * from './IconButton';
 export * from './Input';
 export * from './Label';
+export * from './NavBar';
 export * from './Textarea';
 export * from './Theme';
 export * from './Typography';
