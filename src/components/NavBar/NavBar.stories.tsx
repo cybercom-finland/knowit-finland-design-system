@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { NavBar } from './NavBar';
@@ -34,7 +34,7 @@ export default {
 const Template: StoryFn<typeof NavBar> = (args) => <NavBar {...args} />;
 
 /**
- * Navbar Component
+ * Default Navbar
  */
 export const Navbar = Template.bind({});
 
@@ -53,9 +53,9 @@ export const LogoAndMenu = Template.bind({});
 LogoAndMenu.args = {
   logo: <KnowitLogo />,
   menu: (
-      <IconButton>
-        <MdMenu />
-      </IconButton>
+    <IconButton size={'large'}>
+      <MdMenu />
+    </IconButton>
   ),
 };
 
@@ -73,7 +73,7 @@ Logo.args = {
 export const Menu = Template.bind({});
 Menu.args = {
   menu: (
-    <IconButton>
+    <IconButton size={'large'}>
       <MdMenu />
     </IconButton>
   ),
