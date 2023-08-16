@@ -10,7 +10,7 @@ export type BoxVariant = 'regular' | 'rounded';
  */
 const boxDimensions = {
   rounded: {
-    borderRadius: `0 ${pxToRem(32)} 0 ${pxToRem(32)}`,
+    borderRadius: pxToRem(32),
   },
 };
 
@@ -41,7 +41,7 @@ const calculateSizes = () => {
       prop: 'variant',
       variants: {
         rounded: {
-          borderRadius: boxDimensions.rounded.borderRadius,
+          borderRadius: `0 ${boxDimensions.rounded.borderRadius} 0 ${boxDimensions.rounded.borderRadius}`,
           overflow: 'hidden',
           width: 'min-content',
         },
