@@ -36,7 +36,6 @@ const exampleBoxDimensions = {
 };
 
 const ExampleBoxContents = styled.div`
-  background-color: green;
   width: ${exampleBoxDimensions.width};
   height: ${exampleBoxDimensions.height};
 `;

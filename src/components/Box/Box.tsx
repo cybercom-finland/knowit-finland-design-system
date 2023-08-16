@@ -41,9 +41,8 @@ const calculateSizes = () => {
       prop: 'variant',
       variants: {
         rounded: {
-          borderRadius: `0 ${boxDimensions.rounded.borderRadius} 0 ${boxDimensions.rounded.borderRadius}`,
           overflow: 'hidden',
-          width: 'min-content',
+          borderRadius: `0 ${boxDimensions.rounded.borderRadius} 0 ${boxDimensions.rounded.borderRadius}`,
         },
       },
     })};
@@ -52,6 +51,8 @@ const calculateSizes = () => {
 
 const InternalBox = styled.div<BoxProps>`
   ${calculateSizes}
+  width: min-content;
+  background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
 `;
 
 /**
