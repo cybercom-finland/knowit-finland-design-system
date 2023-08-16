@@ -4,6 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { NavBar } from './NavBar';
 import { KnowitLogo } from '../KnowitLogo';
 import { MdMenu } from 'react-icons/md';
+import { IconButton } from '../IconButton';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -42,7 +43,7 @@ export const Navbar = Template.bind({});
  */
 export const Medium = Template.bind({});
 Medium.args = {
-  size: "medium",
+  size: 'medium',
 };
 
 /**
@@ -51,7 +52,11 @@ Medium.args = {
 export const LogoAndMenu = Template.bind({});
 LogoAndMenu.args = {
   logo: <KnowitLogo />,
-  menu: <MdMenu />,
+  menu: (
+      <IconButton>
+        <MdMenu />
+      </IconButton>
+  ),
 };
 
 /**
@@ -67,5 +72,9 @@ Logo.args = {
  */
 export const Menu = Template.bind({});
 Menu.args = {
-  menu: <MdMenu />
+  menu: (
+    <IconButton>
+      <MdMenu />
+    </IconButton>
+  ),
 };
