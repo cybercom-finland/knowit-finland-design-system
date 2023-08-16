@@ -5,7 +5,7 @@ import { LinearLoadingIndicator } from './LinearLoadingIndicator';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/LinearLoadingIndicator',
+  title: 'Components/LoadingIndicators/LinearLoadingIndicator',
   component: LinearLoadingIndicator,
   parameters: {
     design: [
@@ -35,7 +35,7 @@ const Template: StoryFn<typeof LinearLoadingIndicator> = (args) => (
 export const DefaultVariant = Template.bind({});
 
 /**
- * Success, 33%, determinate
+ * Success, 100%, determinate
  */
 export const Success100PercentDeterminate = Template.bind({});
 Success100PercentDeterminate.args = {
