@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { NavBar } from './NavBar';
 import { KnowitLogo } from '../KnowitLogo';
+import { MdMenu } from 'react-icons/md';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -29,11 +30,34 @@ export default {
 } as Meta<typeof NavBar>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof NavBar> = (args) => {
-  return <NavBar size={args.size} logo={<KnowitLogo />}></NavBar>;
+const Template: StoryFn<typeof NavBar> = (args) => <NavBar {...args} />;
+
+/**
+ * Navbar Component
+ */
+export const Navbar = Template.bind({});
+
+/**
+ * Navbar with logo and menu
+ */
+export const LogoAndMenu = Template.bind({});
+LogoAndMenu.args = {
+  logo: <KnowitLogo />,
+  menu: <MdMenu />,
 };
 
 /**
- * Navbar
+ * Navbar with logo
  */
-export const Navbar = Template.bind({});
+export const Logo = Template.bind({});
+Logo.args = {
+  logo: <KnowitLogo />,
+};
+
+/**
+ * Navbar with menu
+ */
+export const Menu = Template.bind({});
+Menu.args = {
+  menu: <MdMenu />,
+};

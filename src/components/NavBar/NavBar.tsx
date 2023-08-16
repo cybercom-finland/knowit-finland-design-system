@@ -63,6 +63,9 @@ const Bar = styled.nav<NavBarProps>`
 const NavLogo = styled.div<NavBarProps>`
   margin-left: ${pxToRem(16)};
 `;
+const NavMenu = styled.div<NavBarProps>`
+  margin-right: ${pxToRem(16)};
+`;
 export const NavBar = ({
   id,
   size = 'small',
@@ -76,9 +79,9 @@ export const NavBar = ({
 
   return (
     <Bar size={size} {...restProps} id={componentId}>
-      <NavLogo id={componentId}>{logo}</NavLogo>
+      <NavLogo>{logo}</NavLogo>
       {children}
-      {menu}
+      <NavMenu>{menu}</NavMenu>
     </Bar>
   );
 };
