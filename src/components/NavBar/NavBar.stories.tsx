@@ -38,6 +38,14 @@ const Template: StoryFn<typeof NavBar> = (args) => <NavBar {...args} />;
 export const Navbar = Template.bind({});
 
 /**
+ * Medium Navbar
+ */
+export const Medium = Template.bind({});
+Medium.args = {
+  size: "medium",
+};
+
+/**
  * Navbar with logo and menu
  */
 export const LogoAndMenu = Template.bind({});
@@ -59,5 +67,5 @@ Logo.args = {
  */
 export const Menu = Template.bind({});
 Menu.args = {
-  menu: <MdMenu />,
+  menu: <MdMenu />
 };
