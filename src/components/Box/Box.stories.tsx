@@ -13,7 +13,7 @@ export default {
     onChange: { action: true },
   },
   args: {
-    variant: 'rounded',
+    variant: 'regular',
   },
   parameters: {
     design: [
@@ -63,3 +63,11 @@ const Template: StoryFn<typeof Box> = (args) => (
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
+
+/**
+ * Rounded variant
+ */
+export const Rounded = Template.bind({});
+Rounded.args = {
+  variant: 'rounded',
+};

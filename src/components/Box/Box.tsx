@@ -1,11 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
-import {
-  pxToRem,
-  generateRandomString,
-  ComponentBaseProps,
-} from '../../shared';
+import { pxToRem, ComponentBaseProps } from '../../shared';
 
 export type BoxVariant = 'regular' | 'rounded';
 
