@@ -6,7 +6,7 @@ import { pxToRem, ComponentBaseProps } from '../../shared';
 export type BoxVariant = 'regular' | 'rounded';
 
 /**
- * Various dimensions of checkbox component
+ * Dimensions of box component
  */
 const boxDimensions = {
   rounded: {
@@ -15,7 +15,7 @@ const boxDimensions = {
 };
 
 /**
- * Checkbox component properties
+ * Box component properties
  * Extends html div element attributes
  */
 export interface BoxProps extends ComponentBaseProps<HTMLDivElement> {
@@ -31,7 +31,7 @@ export interface BoxProps extends ComponentBaseProps<HTMLDivElement> {
 }
 
 /**
- * Helper function to calculate correct sizes for font size
+ * Helper function to calculate correct sizes
  * @param props mandatory checkbox props
  * @returns modified css
  */
