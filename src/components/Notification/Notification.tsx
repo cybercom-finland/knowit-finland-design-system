@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ComponentBaseProps, ComponentState, typography } from '../../shared';
+import { ComponentBaseProps, Severity, typography } from '../../shared';
 import { IconButton } from '../IconButton/IconButton';
 import {
   MdClose,
@@ -39,7 +39,7 @@ export interface NotificationProps
   /**
    * Style/state of the notification
    */
-  notificationStyle?: ComponentState;
+  notificationStyle?: Severity;
 
   /**
    * Has the notification a loading indicator

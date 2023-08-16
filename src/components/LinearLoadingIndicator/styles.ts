@@ -1,5 +1,5 @@
 import { DefaultTheme } from 'styled-components';
-import { ComponentState } from '../../shared/types';
+import { Severity } from '../../shared/types';
 
 /**
  * Get color for the loading indicator style and the color theme
@@ -8,7 +8,7 @@ import { ComponentState } from '../../shared/types';
  * @returns Color for the style and theme as #rrggbb string
  */
 export const LoadingIndicatorColor = (
-  style: ComponentState,
+  style: Severity,
   theme: DefaultTheme
 ): string => {
   switch (style) {

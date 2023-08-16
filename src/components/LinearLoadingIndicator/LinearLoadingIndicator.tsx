@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentBaseProps } from '../../shared';
 import { LoadingIndicatorColor, linearLoadingIndicatorHeight } from './styles';
 import { Wrapper, WrapperProps } from '../Wrapper';
-import { ComponentState } from '../../shared/types';
+import { Severity } from '../../shared/types';
 import styled from 'styled-components';
 
 /**
@@ -24,7 +24,7 @@ export interface LinearLoadingIndicatorBaseProps
   /**
    * Style (colour) of the loading indicator
    */
-  indicatorStyle?: ComponentState;
+  indicatorStyle?: Severity;
 }
 
 /**

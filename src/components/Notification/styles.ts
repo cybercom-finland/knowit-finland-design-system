@@ -1,6 +1,6 @@
 import { pxToRem } from '../../shared/styles';
 import { darkTheme, lightTheme } from '../../shared/themes';
-import { ComponentState } from '../../shared/types';
+import { Severity } from '../../shared/types';
 
 /**
  * Get color for the notification style and the color theme
@@ -9,7 +9,7 @@ import { ComponentState } from '../../shared/types';
  * @returns Color for the style and theme as #rrggbb string
  */
 export const NotificationIconColor = (
-  style: ComponentState,
+  style: Severity,
   theme: typeof darkTheme | typeof lightTheme
 ): string => {
   switch (style) {
