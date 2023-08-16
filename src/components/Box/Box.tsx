@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import { pxToRem, ComponentBaseProps } from '../../shared';
 
-export type BoxVariant = 'regular' | 'rounded';
+export type BoxVariant = 'rectangle' | 'rounded';
 
 /**
  * Dimensions of box component
