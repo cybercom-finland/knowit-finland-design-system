@@ -2,15 +2,16 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { CircularLoadingIndicator } from './CircularLoadingIndicator';
+import styled from 'styled-components';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/LoadingIndicators/CircularLoadingIndicator',
   component: CircularLoadingIndicator,
+  args: {
+    size: 'large',
+  },
   parameters: {
-    args: {
-      size: 'large',
-    },
     design: [
       {
         name: 'light',
@@ -32,10 +33,51 @@ const Template: StoryFn<typeof CircularLoadingIndicator> = (args) => (
   <CircularLoadingIndicator {...args} />
 );
 
+const ComponentWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+`;
+const SizesTemplate: StoryFn<typeof CircularLoadingIndicator> = () => (
+  <ComponentWrapper>
+    <CircularLoadingIndicator size={'large'} />
+    <CircularLoadingIndicator size={'medium'} />
+    <CircularLoadingIndicator size={'small'} />
+  </ComponentWrapper>
+);
+
+const StylesTemplate: StoryFn<typeof CircularLoadingIndicator> = (args) => (
+  <ComponentWrapper>
+    <CircularLoadingIndicator {...args} indicatorStyle={'default'} />
+    <CircularLoadingIndicator {...args} indicatorStyle={'success'} />
+    <CircularLoadingIndicator {...args} indicatorStyle={'warning'} />
+    <CircularLoadingIndicator {...args} indicatorStyle={'error'} />
+    <CircularLoadingIndicator {...args} indicatorStyle={'info'} />
+  </ComponentWrapper>
+);
+
 /**
  * Default variant
  */
 export const DefaultVariant = Template.bind({});
+DefaultVariant.args = {
+  size: 'medium'
+};
+
+/**
+ * Different indicator sizes
+ */
+export const Sizes = SizesTemplate.bind({});
+
+/**
+ * Different indicator styles
+ */
+export const IndicatorStyle = StylesTemplate.bind({});
+IndicatorStyle.args = {
+  progress: 75,
+  determinate: true,
+  size: 'large',
+};
 
 /**
  * Success, 100%, determinate
