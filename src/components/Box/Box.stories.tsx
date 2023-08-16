@@ -9,9 +9,6 @@ export default {
   title: 'Components/Box',
   component: Box,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    onChange: { action: true },
-  },
   args: {
     variant: 'regular',
   },
