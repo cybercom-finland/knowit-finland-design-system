@@ -55,7 +55,7 @@ const InternalBox = styled.div<BoxProps>`
 `;
 
 /**
- * Checkbox component
+ * Box component
  */
 export const Box = ({
   id,
