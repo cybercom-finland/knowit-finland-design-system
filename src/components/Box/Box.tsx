@@ -32,7 +32,7 @@ export interface BoxProps extends ComponentBaseProps<HTMLDivElement> {
 
 /**
  * Helper function to calculate correct sizes
- * @param props mandatory checkbox props
+ * @param props mandatory box props
  * @returns modified css
  */
 const calculateSizes = () => {
