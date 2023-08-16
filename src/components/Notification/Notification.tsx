@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  ComponentBaseProps,
-  ComponentState,
-  pxToRem,
-  typography,
-} from '../../shared';
+import { ComponentBaseProps, ComponentState, typography } from '../../shared';
 import { IconButton } from '../IconButton/IconButton';
 import {
   MdClose,
@@ -49,7 +44,7 @@ export interface NotificationProps
   /**
    * Has the notification a loading indicator
    */
-  loadingIndicator?: boolean;
+  showLoadingIndicator?: boolean;
 
   /**
    * Aria-label for the close button
@@ -87,11 +82,11 @@ const NotificationIcon = ({ notificationStyle }: NotificationProps) => {
         </NotificationIconDiv>
       );
     case undefined:
-      return <div />;
+      return;
     case 'default':
-      return <div />;
+      return;
     default:
-      return <div />;
+      return;
   }
 };
 
@@ -101,7 +96,7 @@ const NotificationIcon = ({ notificationStyle }: NotificationProps) => {
 const NotificationIconDiv = styled.div<NotificationProps>`
   color: ${(props) =>
     NotificationIconColor(props.notificationStyle || 'default', props.theme)};
-  padding-right: ${pxToRem(notificationIconSpacing)};
+  padding-right: ${notificationIconSpacing};
 `;
 
 /**
@@ -126,6 +121,30 @@ const NotificationMessageParagraph = styled.p<NotificationProps>`
 `;
 
 /**
+ * Contains and has style for the title and message area
+ */
+const NotificationMessageWrapper = styled.div`
+  flex: 1;
+`;
+
+/**
+ * Contains and has style for the close button area
+ */
+const NotificationCloseButtonWrapper = styled.div`
+  padding-left: ${notificationIconSpacing};
+`;
+
+/**
+ * Contains has style for the main notification area (icon, title, message, close button)
+ */
+const NotificationWrapper = styled.div<NotificationProps>`
+  position: relative;
+  display: flex;
+  padding: ${notificationIconSpacing};
+  background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
+`;
+
+/**
  * Notification component
  * @param props Notification props
  * @returns Notification component
@@ -134,7 +153,7 @@ export const Notification = ({
   title,
   message,
   notificationStyle,
-  loadingIndicator,
+  showLoadingIndicator,
   closeButtonAriaLabel,
   ...restProps
 }: NotificationProps) => {
@@ -142,7 +161,7 @@ export const Notification = ({
     title,
     message,
     notificationStyle,
-    loadingIndicator,
+    showLoadingIndicator,
     closeButtonAriaLabel,
     ...restProps,
   };
@@ -157,28 +176,17 @@ export const Notification = ({
           minWidth: notificationMinWidth,
         }}
       >
-        <div
-          style={{
-            position: 'relative',
-            display: 'flex',
-          }}
-        >
-          <div>
-            <NotificationIcon
-              notificationStyle={props.notificationStyle}
-            ></NotificationIcon>
-          </div>
-          <div style={{ flex: '1' }}>
+        <NotificationWrapper showLoadingIndicator={props.showLoadingIndicator}>
+          <NotificationIcon
+            notificationStyle={props.notificationStyle}
+          ></NotificationIcon>
+          <NotificationMessageWrapper>
             <NotificationTitleParagraph>{title}</NotificationTitleParagraph>
             <NotificationMessageParagraph>
               {message}
             </NotificationMessageParagraph>
-          </div>
-          <div
-            style={{
-              paddingLeft: pxToRem(notificationIconSpacing),
-            }}
-          >
+          </NotificationMessageWrapper>
+          <NotificationCloseButtonWrapper>
             <IconButton
               onClick={() => setHidden(true)}
               aria-label={
@@ -188,19 +196,12 @@ export const Notification = ({
             >
               <MdClose />
             </IconButton>
-          </div>
-        </div>
-        {props.loadingIndicator && (
-          <div
-            style={{
-              marginTop: typography.lineHeight.paragraph2,
-              marginBottom: 0,
-            }}
-          >
-            <LinearLoadingIndicator
-              indicatorStyle={props.notificationStyle}
-            ></LinearLoadingIndicator>
-          </div>
+          </NotificationCloseButtonWrapper>
+        </NotificationWrapper>
+        {props.showLoadingIndicator && (
+          <LinearLoadingIndicator
+            indicatorStyle={props.notificationStyle}
+          ></LinearLoadingIndicator>
         )}
       </Wrapper>
     )

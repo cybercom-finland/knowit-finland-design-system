@@ -1,3 +1,4 @@
+import { pxToRem } from '../../shared/styles';
 import { darkTheme, lightTheme } from '../../shared/themes';
 import { ComponentState } from '../../shared/types';
 
@@ -28,9 +29,9 @@ export const NotificationIconColor = (
 /**
  * Spacing of the notification icons from the title text (horizontally)
  */
-export const notificationIconSpacing = 16;
+export const notificationIconSpacing = pxToRem(16);
 
 /**
  * Minimum width of the notification area
  */
-export const notificationMinWidth = 564;
+export const notificationMinWidth = pxToRem(300);

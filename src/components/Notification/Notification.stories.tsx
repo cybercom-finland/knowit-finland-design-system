@@ -64,7 +64,7 @@ WithLoadingIndicator.args = {
   title: 'Notification title',
   message: 'Notification message',
   notificationStyle: 'warning',
-  loadingIndicator: true,
+  showLoadingIndicator: true,
 };
 
 /**
