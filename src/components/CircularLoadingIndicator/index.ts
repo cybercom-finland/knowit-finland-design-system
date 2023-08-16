@@ -1,1 +1,1 @@
-export * from './CircularLoadingIndicatior'
+export * from './CircularLoadingIndicator'
