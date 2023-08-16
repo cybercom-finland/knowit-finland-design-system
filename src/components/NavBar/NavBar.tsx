@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import {ComponentBaseProps, generateRandomString, pxToRem, Size} from '../../shared';
+import React from 'react';
+import {
+  ComponentBaseProps,
+  generateRandomString,
+  pxToRem,
+  Size,
+} from '../../shared';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
-import { MdMenu } from 'react-icons/md';
 
 export interface NavBarProps extends ComponentBaseProps<HTMLDivElement> {
   /**
@@ -59,15 +63,6 @@ const Bar = styled.nav<NavBarProps>`
 const NavLogo = styled.div<NavBarProps>`
   margin-left: ${pxToRem(16)};
 `;
-const NavBarMenu = styled.span<NavBarProps>`
-  margin-right: ${pxToRem(16)};
-  margin-top: ${pxToRem(20)};
-  margin-bottom: ${pxToRem(20)};
-  width: ${pxToRem(20)};
-  height: ${pxToRem(20)};
-  cursor: pointer;
-  color: ${(props) => props.theme.colors.grayScale.digitalBlack900};
-`;
 export const NavBar = ({
   id,
   size = 'small',
@@ -78,18 +73,12 @@ export const NavBar = ({
 }: NavBarProps) => {
   // Use ID form props or create randomized string
   const componentId = id ?? generateRandomString(5);
-  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <Bar size={size} {...restProps} id={componentId}>
       <NavLogo id={componentId}>{logo}</NavLogo>
       {children}
-      {menu ? (
-        <NavBarMenu onClick={() => setShowMenu(!showMenu)}>
-          <MdMenu />
-          {showMenu && menu}
-        </NavBarMenu>
-      ) : null}
+      {menu}
     </Bar>
   );
 };
