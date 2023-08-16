@@ -3,6 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Box, BoxProps } from './Box';
 import { styled } from 'styled-components';
+import { pxToRem } from '../../shared';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -30,8 +31,8 @@ export default {
 } as Meta<typeof Box>;
 
 const exampleBoxDimensions = {
-  width: '200px',
-  height: '100px',
+  width: pxToRem(200),
+  height: pxToRem(100),
 };
 
 const ExampleBoxContents = styled.div`
