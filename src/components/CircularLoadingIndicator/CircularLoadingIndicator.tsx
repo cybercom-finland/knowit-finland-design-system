@@ -76,8 +76,8 @@ const IndicatorCircle = styled.circle<CircularLoadingIndicatorBaseProps>`
 `;
 export const CircularLoadingIndicator = ({
   id,
-  progress = 100,
-  determinate = true,
+  progress = 50,
+  determinate = false,
   indicatorStyle,
   size = 'medium',
   ...restProps
