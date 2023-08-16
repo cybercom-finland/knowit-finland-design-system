@@ -51,7 +51,9 @@ const calculateSizes = () => {
     })};
   `;
 };
-
+/**
+ * Navbar component styling
+ */
 const Bar = styled.nav<NavBarProps>`
   ${calculateSizes};
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
@@ -60,12 +62,19 @@ const Bar = styled.nav<NavBarProps>`
   padding-bottom: 0;
   align-items: center;
 `;
+/**
+ * Navbar logo/brand styling
+ */
 const NavLogo = styled.div<NavBarProps>`
   margin-left: ${pxToRem(16)};
 `;
+/**
+ * Navbar menu button styling
+ */
 const NavMenu = styled.div<NavBarProps>`
   margin-right: ${pxToRem(16)};
 `;
+
 export const NavBar = ({
   id,
   size = 'small',
