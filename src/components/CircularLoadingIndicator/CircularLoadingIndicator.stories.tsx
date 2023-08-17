@@ -95,7 +95,16 @@ IndicatorStyle.args = {
   determinate: true,
   size: 'large',
 };
-
+/**
+ * Indicator title, shown on hover
+ */
+export const IndicatorTitle = Template.bind({});
+IndicatorTitle.args = {
+    progress: 100,
+    determinate: true,
+    indicatorStyle: 'success',
+    title: 'Indicator title'
+};
 /**
  * Success, 100%, determinate
  */
