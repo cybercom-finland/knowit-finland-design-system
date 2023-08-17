@@ -1,4 +1,4 @@
-import {WrapperProps} from "../components/Wrapper";
+import { WrapperProps } from '../components/Wrapper';
 
 export type Size = 'small' | 'medium' | 'large';
 export type Variant = 'filled' | 'outlined' | 'text';
@@ -49,8 +49,8 @@ export interface InputComponentBaseProps<T>
  * Base props for loading indicator
  */
 export interface LoadingIndicatorBaseProps
-    extends ComponentBaseProps<HTMLSpanElement>,
-        WrapperProps {
+  extends ComponentBaseProps<HTMLSpanElement>,
+    WrapperProps {
   /**
    * Progress (0-100)
    */
@@ -62,17 +62,12 @@ export interface LoadingIndicatorBaseProps
   determinate?: boolean;
 
   /**
-   * Style (colour) of the loading indicator
+   * Severity of the loading indicator
    */
-  indicatorStyle?: ComponentState;
+  indicatorSeverity?: Severity;
 }
 
 /**
  * State of a component (loading indicators, etc.)
  */
-export type ComponentState =
-  | 'default'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'info';
+export type Severity = 'default' | 'success' | 'warning' | 'error' | 'info';

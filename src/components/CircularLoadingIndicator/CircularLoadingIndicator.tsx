@@ -70,7 +70,7 @@ const IndicatorBase = styled.svg<CircularLoadingIndicatorBaseProps>`
 const IndicatorCircle = styled.circle<CircularLoadingIndicatorBaseProps>`
   transform-origin: center;
   stroke: ${(props) =>
-    LoadingIndicatorColor(props.indicatorStyle || 'default', props.theme)};
+    LoadingIndicatorColor(props.indicatorSeverity || 'default', props.theme)};
 
   animation: ${(props) =>
     props.determinate ? '' : 'loadingAnimation 1s linear infinite'};
@@ -91,7 +91,7 @@ export const CircularLoadingIndicator = ({
   id,
   progress = 50,
   determinate = false,
-  indicatorStyle,
+  indicatorSeverity,
   size = 'medium',
   title,
   ...restProps
@@ -119,7 +119,7 @@ export const CircularLoadingIndicator = ({
       {title && <title>{title}</title>}
       <IndicatorCircle
         determinate={determinate}
-        indicatorStyle={indicatorStyle}
+        indicatorSeverity={indicatorSeverity}
         cx={pxToRem(center)}
         cy={pxToRem(center)}
         r={pxToRem(radius)}
