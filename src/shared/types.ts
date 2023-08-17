@@ -1,3 +1,5 @@
+import {WrapperProps} from "../components/Wrapper";
+
 export type Size = 'small' | 'medium' | 'large';
 export type Variant = 'filled' | 'outlined' | 'text';
 export type InputVariant = Exclude<Variant, 'text'>;
@@ -41,6 +43,28 @@ export interface InputComponentBaseProps<T>
    * Change event handler passed from internal component
    */
   onChange?: (event: React.ChangeEvent<T>) => void;
+}
+
+/**
+ * Base props for loading indicator
+ */
+export interface LoadingIndicatorBaseProps
+    extends ComponentBaseProps<HTMLSpanElement>,
+        WrapperProps {
+  /**
+   * Progress (0-100)
+   */
+  progress?: number;
+
+  /**
+   * Is the indicator determinate (showing a specific progress bar value), or indeterminate (animated loading indicator)
+   */
+  determinate?: boolean;
+
+  /**
+   * Style (colour) of the loading indicator
+   */
+  indicatorStyle?: ComponentState;
 }
 
 /**

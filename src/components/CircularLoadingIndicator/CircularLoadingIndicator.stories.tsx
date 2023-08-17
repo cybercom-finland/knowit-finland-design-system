@@ -1,12 +1,16 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { LinearLoadingIndicator } from './LinearLoadingIndicator';
+import { CircularLoadingIndicator } from './CircularLoadingIndicator';
+import styled from 'styled-components';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/LoadingIndicators/LinearLoadingIndicator',
-  component: LinearLoadingIndicator,
+  title: 'Components/LoadingIndicators/CircularLoadingIndicator',
+  component: CircularLoadingIndicator,
+  args: {
+    size: 'large',
+  },
   parameters: {
     design: [
       {
@@ -22,18 +26,85 @@ export default {
     ],
   },
   decorators: [withDesign],
-} as Meta<typeof LinearLoadingIndicator>;
+} as Meta<typeof CircularLoadingIndicator>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof LinearLoadingIndicator> = (args) => (
-  <LinearLoadingIndicator {...args} />
+const Template: StoryFn<typeof CircularLoadingIndicator> = (args) => (
+  <CircularLoadingIndicator {...args} />
+);
+
+const ComponentWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+`;
+const SizesTemplate: StoryFn<typeof CircularLoadingIndicator> = () => (
+  <ComponentWrapper>
+    <CircularLoadingIndicator title='large' size={'large'} />
+    <CircularLoadingIndicator title='medium' size={'medium'} />
+    <CircularLoadingIndicator title='small' size={'small'} />
+  </ComponentWrapper>
+);
+
+const StylesTemplate: StoryFn<typeof CircularLoadingIndicator> = (args) => (
+  <ComponentWrapper>
+    <CircularLoadingIndicator
+      {...args}
+      title='default'
+      indicatorStyle={'default'}
+    />
+    <CircularLoadingIndicator
+      {...args}
+      title='success'
+      indicatorStyle={'success'}
+    />
+    <CircularLoadingIndicator
+      {...args}
+      title='warning'
+      indicatorStyle={'warning'}
+    />
+    <CircularLoadingIndicator
+      {...args}
+      title='error'
+      indicatorStyle={'error'}
+    />
+    <CircularLoadingIndicator {...args} title='info' indicatorStyle={'info'} />
+  </ComponentWrapper>
 );
 
 /**
- * Default variant (not specified)
+ * Default variant
  */
 export const DefaultVariant = Template.bind({});
+DefaultVariant.args = {
+  size: 'medium',
+  title: 'default variant',
+};
 
+/**
+ * Different indicator sizes
+ */
+export const Sizes = SizesTemplate.bind({});
+
+/**
+ * Different indicator styles
+ */
+export const IndicatorStyle = StylesTemplate.bind({});
+IndicatorStyle.args = {
+  progress: 75,
+  determinate: true,
+  size: 'large',
+};
+/**
+ * Indicator title, shown on hover
+ */
+export const IndicatorTitle = Template.bind({});
+IndicatorTitle.args = {
+    progress: 100,
+    determinate: true,
+    indicatorStyle: 'success',
+    title: 'Indicator title'
+};
 /**
  * Success, 100%, determinate
  */
