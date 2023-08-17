@@ -84,6 +84,9 @@ const IndicatorCircle = styled.circle<CircularLoadingIndicatorBaseProps>`
     }
   }
 `;
+/**
+ * CircularLoadingIndicator component
+ */
 export const CircularLoadingIndicator = ({
   id,
   progress = 50,
