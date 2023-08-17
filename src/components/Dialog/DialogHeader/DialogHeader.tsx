@@ -1,8 +1,6 @@
 import React from 'react';
 import { pxToRem } from '../../../shared';
 import styled from 'styled-components';
-import { MdClose } from 'react-icons/md';
-import { IconButton } from '../../IconButton';
 import { DialogProps } from '../Dialog/Dialog';
 
 /**
