@@ -54,9 +54,15 @@ const ProgressCap = (progress: number) => {
   return 0;
 };
 
+/**
+ * Wrapping svg for circle
+ */
 const IndicatorBase = styled.svg<CircularLoadingIndicatorBaseProps>`
   transform: rotate(-90deg);
 `;
+/**
+ * Indicator circle with animation and color
+ */
 const IndicatorCircle = styled.circle<CircularLoadingIndicatorBaseProps>`
   transform-origin: center;
   stroke: ${(props) =>
