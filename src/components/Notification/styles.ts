@@ -4,15 +4,15 @@ import { Severity } from '../../shared/types';
 
 /**
  * Get color for the notification style and the color theme
- * @param style Style of the notification
+ * @param severity Severity of the notification
  * @param theme Color theme that is in use
  * @returns Color for the style and theme as #rrggbb string
  */
 export const NotificationIconColor = (
-  style: Severity,
+  severity: Severity,
   theme: typeof darkTheme | typeof lightTheme
 ): string => {
-  switch (style) {
+  switch (severity) {
     case 'success':
       return theme.colors.success.success;
     case 'warning':

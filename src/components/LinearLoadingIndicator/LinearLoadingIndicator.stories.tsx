@@ -41,7 +41,7 @@ export const Success100PercentDeterminate = Template.bind({});
 Success100PercentDeterminate.args = {
   progress: 100,
   determinate: true,
-  indicatorStyle: 'success',
+  indicatorSeverity: 'success',
 };
 
 /**
@@ -51,7 +51,7 @@ export const Error33PercentDeterminate = Template.bind({});
 Error33PercentDeterminate.args = {
   progress: 33,
   determinate: true,
-  indicatorStyle: 'error',
+  indicatorSeverity: 'error',
 };
 
 /**
@@ -61,7 +61,7 @@ export const Info50PercentDeterminate = Template.bind({});
 Info50PercentDeterminate.args = {
   progress: 50,
   determinate: true,
-  indicatorStyle: 'info',
+  indicatorSeverity: 'info',
 };
 
 /**
@@ -70,7 +70,7 @@ Info50PercentDeterminate.args = {
 export const WarningIndeterminate = Template.bind({});
 WarningIndeterminate.args = {
   determinate: false,
-  indicatorStyle: 'warning',
+  indicatorSeverity: 'warning',
 };
 
 /**

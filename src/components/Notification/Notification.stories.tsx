@@ -43,7 +43,7 @@ export const SuccessNotification = Template.bind({});
 SuccessNotification.args = {
   title: 'Notification title',
   message: 'Notification message',
-  notificationStyle: 'success',
+  notificationSeverity: 'success',
 };
 
 /**
@@ -53,7 +53,7 @@ export const ErrorNotification = Template.bind({});
 ErrorNotification.args = {
   title: 'Notification title',
   message: 'Notification message',
-  notificationStyle: 'error',
+  notificationSeverity: 'error',
 };
 
 /**
@@ -63,7 +63,7 @@ export const WithLoadingIndicator = Template.bind({});
 WithLoadingIndicator.args = {
   title: 'Notification title',
   message: 'Notification message',
-  notificationStyle: 'warning',
+  notificationSeverity: 'warning',
   showLoadingIndicator: true,
 };
 
@@ -76,5 +76,5 @@ VeryLongText.args = {
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor.',
   message:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor.',
-  notificationStyle: 'info',
+  notificationSeverity: 'info',
 };

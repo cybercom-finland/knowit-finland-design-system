@@ -3,15 +3,15 @@ import { Severity } from '../../shared/types';
 
 /**
  * Get color for the loading indicator style and the color theme
- * @param style Style of the loading indicator
+ * @param severity Severity of the loading indicator
  * @param theme Color theme that is in use
  * @returns Color for the style and theme as #rrggbb string
  */
 export const LoadingIndicatorColor = (
-  style: Severity,
+  severity: Severity,
   theme: DefaultTheme
 ): string => {
-  switch (style) {
+  switch (severity) {
     case 'success':
       return theme.colors.success.success;
     case 'warning':

@@ -38,9 +38,9 @@ export interface NotificationProps
   message?: string;
 
   /**
-   * Style/state of the notification
+   * Severity of the notification
    */
-  notificationStyle?: Severity;
+  notificationSeverity?: Severity;
 
   /**
    * Has the notification a loading indicator
@@ -56,29 +56,29 @@ export interface NotificationProps
 /**
  * A style/state/theme dependent icon component, which can be used in the notification component
  */
-const NotificationIcon = ({ notificationStyle }: NotificationProps) => {
-  switch (notificationStyle) {
+const NotificationIcon = ({ notificationSeverity }: NotificationProps) => {
+  switch (notificationSeverity) {
     case 'success':
       return (
-        <NotificationIconDiv notificationStyle={notificationStyle}>
+        <NotificationIconDiv notificationSeverity={notificationSeverity}>
           <MdOutlineCheckCircle size={notificationIconSize} />
         </NotificationIconDiv>
       );
     case 'warning':
       return (
-        <NotificationIconDiv notificationStyle={notificationStyle}>
+        <NotificationIconDiv notificationSeverity={notificationSeverity}>
           <MdWarning size={notificationIconSize} />
         </NotificationIconDiv>
       );
     case 'error':
       return (
-        <NotificationIconDiv notificationStyle={notificationStyle}>
+        <NotificationIconDiv notificationSeverity={notificationSeverity}>
           <MdError size={notificationIconSize} />
         </NotificationIconDiv>
       );
     case 'info':
       return (
-        <NotificationIconDiv notificationStyle={notificationStyle}>
+        <NotificationIconDiv notificationSeverity={notificationSeverity}>
           <MdInfo size={notificationIconSize} />
         </NotificationIconDiv>
       );
@@ -96,7 +96,10 @@ const NotificationIcon = ({ notificationStyle }: NotificationProps) => {
  */
 const NotificationIconDiv = styled.div<NotificationProps>`
   color: ${(props) =>
-    NotificationIconColor(props.notificationStyle || 'default', props.theme)};
+    NotificationIconColor(
+      props.notificationSeverity || 'default',
+      props.theme
+    )};
   padding-right: ${notificationIconSpacing};
 `;
 
@@ -154,7 +157,7 @@ const NotificationWrapper = styled.div<NotificationProps>`
 export const Notification = ({
   title,
   message,
-  notificationStyle,
+  notificationSeverity,
   showLoadingIndicator,
   closeButtonAriaLabel,
   ...restProps
@@ -162,7 +165,7 @@ export const Notification = ({
   const props = {
     title,
     message,
-    notificationStyle,
+    notificationSeverity,
     showLoadingIndicator,
     closeButtonAriaLabel,
     ...restProps,
@@ -180,7 +183,7 @@ export const Notification = ({
       >
         <NotificationWrapper showLoadingIndicator={props.showLoadingIndicator}>
           <NotificationIcon
-            notificationStyle={props.notificationStyle}
+            notificationSeverity={props.notificationSeverity}
           ></NotificationIcon>
           <NotificationMessageWrapper>
             <NotificationTitleParagraph>{title}</NotificationTitleParagraph>
@@ -202,7 +205,7 @@ export const Notification = ({
         </NotificationWrapper>
         {props.showLoadingIndicator && (
           <LinearLoadingIndicator
-            indicatorStyle={props.notificationStyle}
+            indicatorSeverity={props.notificationSeverity}
           ></LinearLoadingIndicator>
         )}
       </Wrapper>

@@ -22,9 +22,9 @@ export interface LinearLoadingIndicatorBaseProps
   determinate?: boolean;
 
   /**
-   * Style (colour) of the loading indicator
+   * Severity of the loading indicator
    */
-  indicatorStyle?: Severity;
+  indicatorSeverity?: Severity;
 }
 
 /**
@@ -58,7 +58,7 @@ const Bar = styled.span<LinearLoadingIndicatorBaseProps>`
   display: inline-block;
   position: relative;
   background: ${(props) =>
-    LoadingIndicatorColor(props.indicatorStyle || 'default', props.theme)};
+    LoadingIndicatorColor(props.indicatorSeverity || 'default', props.theme)};
   @keyframes loadingAnimation {
     0% {
       width: 0%;
@@ -86,7 +86,7 @@ export const LinearLoadingIndicator = ({
   width,
   progress,
   determinate,
-  indicatorStyle,
+  indicatorSeverity,
   ...restProps
 }: LinearLoadingIndicatorBaseProps) => {
   const ariaLabelText = determinate && progress ? `${progress}%` : '';
@@ -100,7 +100,7 @@ export const LinearLoadingIndicator = ({
     >
       <BarBackground {...restProps}>
         <Bar
-          indicatorStyle={indicatorStyle}
+          indicatorSeverity={indicatorSeverity}
           progress={progress}
           determinate={determinate}
           aria-label={ariaLabelText}
