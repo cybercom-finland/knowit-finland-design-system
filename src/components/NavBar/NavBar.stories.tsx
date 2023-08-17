@@ -53,7 +53,7 @@ export const LogoAndMenu = Template.bind({});
 LogoAndMenu.args = {
   logo: <KnowitLogo />,
   menu: (
-    <IconButton size={'large'}>
+    <IconButton aria-label='navbar menu icon' size={'large'}>
       <MdMenu />
     </IconButton>
   ),
@@ -73,7 +73,7 @@ Logo.args = {
 export const Menu = Template.bind({});
 Menu.args = {
   menu: (
-    <IconButton size={'large'}>
+    <IconButton aria-label='navbar menu icon' size={'large'}>
       <MdMenu />
     </IconButton>
   ),
