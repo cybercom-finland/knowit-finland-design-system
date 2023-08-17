@@ -17,6 +17,10 @@ export interface CircularLoadingIndicatorBaseProps
    * Indicator Size
    */
   size?: Size;
+  /**
+   * Svg title
+   */
+  title?: string;
 }
 
 /**
@@ -86,6 +90,7 @@ export const CircularLoadingIndicator = ({
   determinate = false,
   indicatorStyle,
   size = 'medium',
+  title,
   ...restProps
 }: CircularLoadingIndicatorBaseProps) => {
   /**
@@ -108,6 +113,7 @@ export const CircularLoadingIndicator = ({
       fill='none'
       {...restProps}
     >
+      {title && <title>{title}</title>}
       <IndicatorCircle
         determinate={determinate}
         indicatorStyle={indicatorStyle}
