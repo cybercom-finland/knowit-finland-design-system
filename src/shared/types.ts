@@ -7,7 +7,7 @@ export type InputVariant = Exclude<Variant, 'text'>;
 /**
  * Base props for components
  */
-export interface ComponentBaseProps<T> {
+export interface ComponentBaseProps<T> extends React.AriaAttributes {
   /**
    * Component id
    */

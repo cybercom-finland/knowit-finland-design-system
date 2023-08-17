@@ -21,13 +21,6 @@ const DialogHeaderWrapper = styled.div`
   padding: ${dialogHeaderDimensions.padding};
 `;
 
-export const DialogHeader = ({ children }: DialogProps) => {
-  return (
-    <DialogHeaderWrapper>
-      <div>{children}</div>
-      <IconButton size='large'>
-        <MdClose />
-      </IconButton>
-    </DialogHeaderWrapper>
-  );
+export const DialogHeader = ({ children, ...restProps }: DialogProps) => {
+  return <DialogHeaderWrapper {...restProps}>{children}</DialogHeaderWrapper>;
 };

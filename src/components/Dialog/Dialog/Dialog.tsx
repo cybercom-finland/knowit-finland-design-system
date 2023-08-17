@@ -12,6 +12,10 @@ export interface DialogProps extends ComponentBaseProps<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export const Dialog = ({ children }: DialogProps) => {
-  return <div role='dialog'>{children}</div>;
+export const Dialog = ({ children, ...restProps }: DialogProps) => {
+  return (
+    <div role='dialog' {...restProps}>
+      {children}
+    </div>
+  );
 };
