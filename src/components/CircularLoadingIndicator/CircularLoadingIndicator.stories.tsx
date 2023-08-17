@@ -40,19 +40,35 @@ const ComponentWrapper = styled.div`
 `;
 const SizesTemplate: StoryFn<typeof CircularLoadingIndicator> = () => (
   <ComponentWrapper>
-    <CircularLoadingIndicator size={'large'} />
-    <CircularLoadingIndicator size={'medium'} />
-    <CircularLoadingIndicator size={'small'} />
+    <CircularLoadingIndicator title='large' size={'large'} />
+    <CircularLoadingIndicator title='medium' size={'medium'} />
+    <CircularLoadingIndicator title='small' size={'small'} />
   </ComponentWrapper>
 );
 
 const StylesTemplate: StoryFn<typeof CircularLoadingIndicator> = (args) => (
   <ComponentWrapper>
-    <CircularLoadingIndicator {...args} indicatorStyle={'default'} />
-    <CircularLoadingIndicator {...args} indicatorStyle={'success'} />
-    <CircularLoadingIndicator {...args} indicatorStyle={'warning'} />
-    <CircularLoadingIndicator {...args} indicatorStyle={'error'} />
-    <CircularLoadingIndicator {...args} indicatorStyle={'info'} />
+    <CircularLoadingIndicator
+      {...args}
+      title='default'
+      indicatorStyle={'default'}
+    />
+    <CircularLoadingIndicator
+      {...args}
+      title='success'
+      indicatorStyle={'success'}
+    />
+    <CircularLoadingIndicator
+      {...args}
+      title='warning'
+      indicatorStyle={'warning'}
+    />
+    <CircularLoadingIndicator
+      {...args}
+      title='error'
+      indicatorStyle={'error'}
+    />
+    <CircularLoadingIndicator {...args} title='info' indicatorStyle={'info'} />
   </ComponentWrapper>
 );
 
@@ -61,7 +77,8 @@ const StylesTemplate: StoryFn<typeof CircularLoadingIndicator> = (args) => (
  */
 export const DefaultVariant = Template.bind({});
 DefaultVariant.args = {
-  size: 'medium'
+  size: 'medium',
+  title: 'default variant',
 };
 
 /**
