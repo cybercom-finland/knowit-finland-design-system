@@ -35,3 +35,8 @@ export const notificationIconSpacing = pxToRem(16);
  * Minimum width of the notification area
  */
 export const notificationMinWidth = pxToRem(300);
+
+/**
+ * Size of notification icons
+ */
+export const notificationIconSize = pxToRem(24);

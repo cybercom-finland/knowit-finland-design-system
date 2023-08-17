@@ -12,6 +12,7 @@ import {
 import { LinearLoadingIndicator } from '../LinearLoadingIndicator';
 import {
   NotificationIconColor,
+  notificationIconSize,
   notificationIconSpacing,
   notificationMinWidth,
 } from './styles';
@@ -60,25 +61,25 @@ const NotificationIcon = ({ notificationStyle }: NotificationProps) => {
     case 'success':
       return (
         <NotificationIconDiv notificationStyle={notificationStyle}>
-          <MdOutlineCheckCircle />
+          <MdOutlineCheckCircle size={notificationIconSize} />
         </NotificationIconDiv>
       );
     case 'warning':
       return (
         <NotificationIconDiv notificationStyle={notificationStyle}>
-          <MdWarning />
+          <MdWarning size={notificationIconSize} />
         </NotificationIconDiv>
       );
     case 'error':
       return (
         <NotificationIconDiv notificationStyle={notificationStyle}>
-          <MdError />
+          <MdError size={notificationIconSize} />
         </NotificationIconDiv>
       );
     case 'info':
       return (
         <NotificationIconDiv notificationStyle={notificationStyle}>
-          <MdInfo />
+          <MdInfo size={notificationIconSize} />
         </NotificationIconDiv>
       );
     case undefined:
@@ -107,6 +108,7 @@ const NotificationTitleParagraph = styled.p<NotificationProps>`
   font-size: ${typography.size.paragraph};
   line-height: ${typography.lineHeight.paragraph};
   margin-top: 0;
+  margin-bottom: 0;
 `;
 
 /**
@@ -116,7 +118,7 @@ const NotificationMessageParagraph = styled.p<NotificationProps>`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   font-size: ${typography.size.paragraph2};
   line-height: ${typography.lineHeight.paragraph2};
-  margin-top: 0;
+  margin-top: ${typography.size.paragraph2};
   margin-bottom: 0;
 `;
 
