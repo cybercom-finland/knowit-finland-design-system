@@ -36,7 +36,7 @@ const Template: StoryFn<typeof NavBar> = (args) => <NavBar {...args} />;
 /**
  * Default Navbar
  */
-export const Navbar = Template.bind({});
+export const Default = Template.bind({});
 
 /**
  * Medium Navbar
@@ -46,17 +46,19 @@ Medium.args = {
   size: 'medium',
 };
 
+const MenuComponent = () => {
+  <IconButton size='large' aria-label='Open menu'>
+    <MdMenu />
+  </IconButton>;
+};
+
 /**
  * Navbar with logo and menu
  */
 export const LogoAndMenu = Template.bind({});
 LogoAndMenu.args = {
   logo: <KnowitLogo />,
-  menu: (
-    <IconButton aria-label='navbar menu icon' size={'large'}>
-      <MdMenu />
-    </IconButton>
-  ),
+  menu: MenuComponent,
 };
 
 /**
@@ -72,9 +74,5 @@ Logo.args = {
  */
 export const Menu = Template.bind({});
 Menu.args = {
-  menu: (
-    <IconButton aria-label='navbar menu icon' size={'large'}>
-      <MdMenu />
-    </IconButton>
-  ),
+  menu: MenuComponent,
 };

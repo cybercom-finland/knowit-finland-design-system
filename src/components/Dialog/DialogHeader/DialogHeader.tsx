@@ -1,8 +1,6 @@
 import React from 'react';
 import { pxToRem } from '../../../shared';
 import styled from 'styled-components';
-import { MdClose } from 'react-icons/md';
-import { IconButton } from '../../IconButton';
 import { DialogProps } from '../Dialog/Dialog';
 
 /**
@@ -21,13 +19,6 @@ const DialogHeaderWrapper = styled.div`
   padding: ${dialogHeaderDimensions.padding};
 `;
 
-export const DialogHeader = ({ children }: DialogProps) => {
-  return (
-    <DialogHeaderWrapper>
-      <div>{children}</div>
-      <IconButton size='large'>
-        <MdClose />
-      </IconButton>
-    </DialogHeaderWrapper>
-  );
+export const DialogHeader = ({ children, ...restProps }: DialogProps) => {
+  return <DialogHeaderWrapper {...restProps}>{children}</DialogHeaderWrapper>;
 };
