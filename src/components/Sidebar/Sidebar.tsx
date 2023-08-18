@@ -12,13 +12,22 @@ export interface SidebarProps extends ComponentBaseProps<HTMLDivElement> {
    */
   headerContent?: React.ReactNode;
   /**
-   * Sidebar Slot
+   * Sidebar Content
    */
   sidebarContent?: React.ReactNode;
   /**
    * Show overlay
    */
   overlay?: boolean;
+}
+
+/**
+ * Sidebar dimensions
+ */
+const sidebarDimensions = {
+  bodyWidth: pxToRem(400),
+  headerHeight: pxToRem(24),
+  contentWidth: pxToRem(368)
 }
 /**
  * Sidebar and overlay
@@ -40,7 +49,7 @@ const SidebarOverlay = styled.div<SidebarProps>`
  * Wrapper for sidebar
  */
 const SidebarBody = styled.div<SidebarProps>`
-  width: ${pxToRem(400)};
+  width: ${sidebarDimensions.bodyWidth};
   height: 100%;
   background-color: ${(props) => props.theme.colors.neutral};
   border-left: 1px ${(props) => props.theme.colors.grayScale.digitalBlack200};
@@ -50,8 +59,8 @@ const SidebarBody = styled.div<SidebarProps>`
  * Wrapper for sidebar header
  */
 const SidebarHeader = styled.div<SidebarProps>`
-  width: ${pxToRem(368)};
-  height: ${pxToRem(24)};
+  width: ${sidebarDimensions.contentWidth};
+  height: ${sidebarDimensions.headerHeight};
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -60,11 +69,11 @@ const SidebarHeader = styled.div<SidebarProps>`
 /**
  * Wrapper for content inside sidebar
  */
-const SidebarSlotWrapper = styled.div<SidebarProps>`
-  width: ${pxToRem(368)};
+const SidebarContentWrapper = styled.div<SidebarProps>`
+  width: ${sidebarDimensions.contentWidth};
   display: flex;
-  // Calculated height for slot content container with removed margins and height of header
-  height: calc(100% - ${pxToRem(72)});
+  // Calculated height for content container with removed margins and height of header
+  height: calc(100% - ${pxToRem(48) + sidebarDimensions.headerHeight});
   // Shorthand top right bottom left
   margin: 0 ${pxToRem(16)} ${pxToRem(16)} ${pxToRem(16)};
 `;
@@ -86,7 +95,7 @@ export const Sidebar = ({
       {overlay && <SidebarOverlay />}
       <SidebarBody>
         <SidebarHeader>{headerContent}</SidebarHeader>
-        <SidebarSlotWrapper>{sidebarContent}</SidebarSlotWrapper>
+        <SidebarContentWrapper>{sidebarContent}</SidebarContentWrapper>
       </SidebarBody>
     </SidebarWrapper>
   );
