@@ -49,8 +49,7 @@ const ListComponent = () => {
   );
 };
 const Wrapper = styled.div<SidebarProps>`
-  height: ${pxToRem(600)};
-  width: ${pxToRem(500)};
+  height: ${pxToRem(450)};
 `;
 const Template: StoryFn<typeof Sidebar> = (args) => (
   <Wrapper>
