@@ -25,10 +25,13 @@ export interface SidebarProps extends ComponentBaseProps<HTMLDivElement> {
  * Sidebar dimensions
  */
 const sidebarDimensions = {
-  bodyWidth: pxToRem(400),
-  headerHeight: pxToRem(24),
-  contentWidth: pxToRem(368)
-}
+  // Body width
+  bodyWidth: 400,
+  // Header height
+  headerHeight: 24,
+  // Header and content container width
+  contentWidth: 368,
+};
 /**
  * Sidebar and overlay
  */
@@ -49,7 +52,7 @@ const SidebarOverlay = styled.div<SidebarProps>`
  * Wrapper for sidebar
  */
 const SidebarBody = styled.div<SidebarProps>`
-  width: ${sidebarDimensions.bodyWidth};
+  width: ${pxToRem(sidebarDimensions.bodyWidth)};
   height: 100%;
   background-color: ${(props) => props.theme.colors.neutral};
   border-left: 1px ${(props) => props.theme.colors.grayScale.digitalBlack200};
@@ -59,8 +62,8 @@ const SidebarBody = styled.div<SidebarProps>`
  * Wrapper for sidebar header
  */
 const SidebarHeader = styled.div<SidebarProps>`
-  width: ${sidebarDimensions.contentWidth};
-  height: ${sidebarDimensions.headerHeight};
+  width: ${pxToRem(sidebarDimensions.contentWidth)};
+  height: ${pxToRem(sidebarDimensions.headerHeight)};
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -70,10 +73,10 @@ const SidebarHeader = styled.div<SidebarProps>`
  * Wrapper for content inside sidebar
  */
 const SidebarContentWrapper = styled.div<SidebarProps>`
-  width: ${sidebarDimensions.contentWidth};
+  width: ${pxToRem(sidebarDimensions.contentWidth)};
   display: flex;
   // Calculated height for content container with removed margins and height of header
-  height: calc(100% - ${pxToRem(48) + sidebarDimensions.headerHeight});
+  height: calc(100% - ${pxToRem(48 + sidebarDimensions.headerHeight)});
   // Shorthand top right bottom left
   margin: 0 ${pxToRem(16)} ${pxToRem(16)} ${pxToRem(16)};
 `;
