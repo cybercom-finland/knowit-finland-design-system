@@ -43,6 +43,8 @@ const SidebarBody = styled.div<SidebarProps>`
   width: ${pxToRem(400)};
   height: 100%;
   background-color: ${(props) => props.theme.colors.neutral};
+  border-left: 1px ${(props) => props.theme.colors.grayScale.digitalBlack200};
+  ${(props) => props.theme.styles.dropshadow};
 `;
 /**
  * Wrapper for sidebar header

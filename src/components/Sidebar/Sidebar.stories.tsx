@@ -65,8 +65,8 @@ export const DefaultVariant = Template.bind({});
 /**
  * Sidebar with overlay, content and icon button in header
  */
-export const OverlaySlotIcon = Template.bind({});
-OverlaySlotIcon.args = {
+export const OverlayContentIcon = Template.bind({});
+OverlayContentIcon.args = {
   overlay: true,
   sidebarContent: <ListComponent />,
   headerContent: <IconButtonComponent />,
