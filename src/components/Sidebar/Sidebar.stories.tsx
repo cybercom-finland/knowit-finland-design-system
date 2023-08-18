@@ -11,10 +11,10 @@ import { pxToRem } from '../../shared';
 export default {
   title: 'Components/Sidebar',
   component: Sidebar,
+  args: {
+    overlay: false,
+  },
   parameters: {
-    args: {
-      overlay: false,
-    },
     design: [
       {
         name: 'light',
