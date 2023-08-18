@@ -55,7 +55,7 @@ const SidebarBody = styled.div<SidebarProps>`
   width: ${pxToRem(sidebarDimensions.bodyWidth)};
   height: 100%;
   background-color: ${(props) => props.theme.colors.neutral};
-  border-left: 1px ${(props) => props.theme.colors.grayScale.digitalBlack200};
+  border-left: 1px solid ${(props) => props.theme.colors.grayScale.digitalBlack200};
   ${(props) => props.theme.styles.dropshadow};
 `;
 /**
