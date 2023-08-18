@@ -10,11 +10,11 @@ export interface SidebarProps extends ComponentBaseProps<HTMLDivElement> {
   /**
    * Header icon
    */
-  icon?: React.ReactNode;
+  headerContent?: React.ReactNode;
   /**
    * Sidebar Slot
    */
-  slot?: React.ReactNode;
+  sidebarContent?: React.ReactNode;
   /**
    * Show overlay
    */
@@ -72,8 +72,8 @@ const SidebarSlotWrapper = styled.div<SidebarProps>`
  */
 export const Sidebar = ({
   id,
-  icon,
-  slot,
+  headerContent,
+  sidebarContent,
   overlay,
   ...restProps
 }: SidebarProps) => {
@@ -83,8 +83,8 @@ export const Sidebar = ({
     <SidebarWrapper id={componentId} {...restProps}>
       {overlay && <SidebarOverlay />}
       <SidebarBody>
-        <SidebarHeader>{icon}</SidebarHeader>
-        <SidebarSlotWrapper>{slot}</SidebarSlotWrapper>
+        <SidebarHeader>{headerContent}</SidebarHeader>
+        <SidebarSlotWrapper>{sidebarContent}</SidebarSlotWrapper>
       </SidebarBody>
     </SidebarWrapper>
   );

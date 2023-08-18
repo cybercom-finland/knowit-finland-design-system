@@ -12,6 +12,9 @@ export default {
   title: 'Components/Sidebar',
   component: Sidebar,
   parameters: {
+    args: {
+      overlay: false,
+    },
     design: [
       {
         name: 'light',
@@ -65,8 +68,8 @@ export const DefaultVariant = Template.bind({});
 export const OverlaySlotIcon = Template.bind({});
 OverlaySlotIcon.args = {
   overlay: true,
-  slot: <ListComponent />,
-  icon: <IconButtonComponent />,
+  sidebarContent: <ListComponent />,
+  headerContent: <IconButtonComponent />,
 };
 /**
  * Sidebar with overlay
@@ -80,12 +83,12 @@ Overlay.args = {
  */
 export const SlotContent = Template.bind({});
 SlotContent.args = {
-  slot: <ListComponent />,
+  sidebarContent: <ListComponent />,
 };
 /**
  * Sidebar with icon button in header
  */
 export const IconContent = Template.bind({});
 IconContent.args = {
-  icon: <IconButtonComponent />,
+  headerContent: <IconButtonComponent />,
 };
