@@ -34,7 +34,7 @@ const SidebarWrapper = styled.div<SidebarProps>`
 const SidebarOverlay = styled.div<SidebarProps>`
   height: 100%;
   width: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.82);
 `;
 /**
  * Wrapper for sidebar
