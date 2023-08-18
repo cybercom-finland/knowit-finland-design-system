@@ -189,6 +189,7 @@ const TextButton = styled(ButtonBase)<{ size?: Size }>`
   border-bottom: ${pxToRem(buttonDimensions.borderWidth)} solid transparent;
   ${variant({
     prop: 'size',
+
     /* Override bottom padding */
     variants: {
       small: {

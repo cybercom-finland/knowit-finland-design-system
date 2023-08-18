@@ -99,6 +99,7 @@ IndicatorSeverity.args = {
   determinate: true,
   size: 'large',
 };
+
 /**
  * Indicator title, shown on hover
  */
@@ -109,6 +110,7 @@ IndicatorTitle.args = {
   indicatorSeverity: 'success',
   title: 'Indicator title',
 };
+
 /**
  * Success, 100%, determinate
  */

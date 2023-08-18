@@ -54,14 +54,17 @@ export interface RadioProps
    * Radio value
    */
   value?: React.InputHTMLAttributes<HTMLInputElement>['value'];
+
   /**
    * Radio is required
    */
   required?: boolean;
+
   /**
    * Size of radio
    */
   size?: Exclude<Size, 'medium'>;
+
   /**
    * Is radio checked
    */
