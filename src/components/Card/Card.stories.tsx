@@ -30,13 +30,13 @@ export default {
   decorators: [withDesign],
 } as Meta<typeof Card>;
 
-const exampleBoxDimensions = {
+const exampleCardDimensions = {
   height: pxToRem(150),
 };
 
 const ExampleCardHeader = styled.div`
   width: 100%;
-  height: ${exampleBoxDimensions.height};
+  height: ${exampleCardDimensions.height};
   background-color: blue;
 `;
 
