@@ -13,14 +13,17 @@ export interface NavBarProps extends ComponentBaseProps<HTMLDivElement> {
    * Navbar size
    */
   size?: Exclude<Size, 'large'>;
+
   /**
    * Children
    */
   children?: React.ReactNode;
+
   /**
    * Logo
    */
   logo?: React.ReactNode;
+
   /**
    * Menu
    */
@@ -51,6 +54,7 @@ const calculateSizes = () => {
     })};
   `;
 };
+
 /**
  * Navbar component styling
  */
@@ -62,12 +66,14 @@ const Bar = styled.nav<NavBarProps>`
   padding-bottom: 0;
   align-items: center;
 `;
+
 /**
  * Navbar logo/brand styling
  */
 const NavLogo = styled.div<NavBarProps>`
   margin-left: ${pxToRem(16)};
 `;
+
 /**
  * Navbar menu button styling
  */

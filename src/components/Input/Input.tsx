@@ -18,7 +18,7 @@ import { HelperText } from '../HelperText';
  * Input dimensions
  */
 const inputDimensions = {
-  verticalSpacing: 2.5,
+  verticalSpacing: 2,
   horizontalSpacing: 1.5,
   border: 1,
   boderHover: 2,
@@ -43,6 +43,7 @@ export const baseInputStyles = (inputProps: InputBaseProps) => {
     font-family: ${typography.font};
     font-size: ${typography.size.paragraph2};
     font-weight: ${typography.weight.regular};
+    line-height: ${typography.lineHeight.paragraph2};
     padding: ${spacing([
       inputDimensions.verticalSpacing - convertToSpacingUnit(1),
       inputDimensions.horizontalSpacing - convertToSpacingUnit(1),

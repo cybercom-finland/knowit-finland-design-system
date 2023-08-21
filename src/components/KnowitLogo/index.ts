@@ -1,1 +1,1 @@
-export * from './KnowitLogo'
+export * from './KnowitLogo';

@@ -18,18 +18,18 @@ const buttonDimensions = {
   borderWidth: 3,
   contentSpacing: spacing(1),
   small: {
-    fontSize: pxToRem(14),
-    lineHeight: pxToRem(16),
+    fontSize: typography.size.label.small,
+    lineHeight: typography.lineHeight.label.small,
     spacing: 1.5,
   },
   medium: {
-    fontSize: pxToRem(18),
-    lineHeight: pxToRem(21),
+    fontSize: typography.size.label.medium,
+    lineHeight: typography.lineHeight.label.medium,
     spacing: 2,
   },
   large: {
-    fontSize: pxToRem(22),
-    lineHeight: pxToRem(25),
+    fontSize: typography.size.label.large,
+    lineHeight: typography.lineHeight.label.large,
     spacing: 2,
   },
 };
@@ -189,6 +189,7 @@ const TextButton = styled(ButtonBase)<{ size?: Size }>`
   border-bottom: ${pxToRem(buttonDimensions.borderWidth)} solid transparent;
   ${variant({
     prop: 'size',
+
     /* Override bottom padding */
     variants: {
       small: {

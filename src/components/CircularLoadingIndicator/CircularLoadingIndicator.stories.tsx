@@ -16,12 +16,12 @@ export default {
       {
         name: 'light',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2158-18132&mode=design&t=WdazPvcApBl7ozFP-4',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2270-17650&mode=design&t=x4qhswzfNNGYojft-4',
       },
       {
         name: 'dark',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2168-18215&mode=design&t=WdazPvcApBl7ozFP-4',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2282-17703&mode=design&t=GVRVDuSQjIPEmCj3-4',
       },
     ],
   },
@@ -51,24 +51,28 @@ const StylesTemplate: StoryFn<typeof CircularLoadingIndicator> = (args) => (
     <CircularLoadingIndicator
       {...args}
       title='default'
-      indicatorStyle={'default'}
+      indicatorSeverity={'default'}
     />
     <CircularLoadingIndicator
       {...args}
       title='success'
-      indicatorStyle={'success'}
+      indicatorSeverity={'success'}
     />
     <CircularLoadingIndicator
       {...args}
       title='warning'
-      indicatorStyle={'warning'}
+      indicatorSeverity={'warning'}
     />
     <CircularLoadingIndicator
       {...args}
       title='error'
-      indicatorStyle={'error'}
+      indicatorSeverity={'error'}
     />
-    <CircularLoadingIndicator {...args} title='info' indicatorStyle={'info'} />
+    <CircularLoadingIndicator
+      {...args}
+      title='info'
+      indicatorSeverity={'info'}
+    />
   </ComponentWrapper>
 );
 
@@ -89,22 +93,24 @@ export const Sizes = SizesTemplate.bind({});
 /**
  * Different indicator styles
  */
-export const IndicatorStyle = StylesTemplate.bind({});
-IndicatorStyle.args = {
+export const IndicatorSeverity = StylesTemplate.bind({});
+IndicatorSeverity.args = {
   progress: 75,
   determinate: true,
   size: 'large',
 };
+
 /**
  * Indicator title, shown on hover
  */
 export const IndicatorTitle = Template.bind({});
 IndicatorTitle.args = {
-    progress: 100,
-    determinate: true,
-    indicatorStyle: 'success',
-    title: 'Indicator title'
+  progress: 100,
+  determinate: true,
+  indicatorSeverity: 'success',
+  title: 'Indicator title',
 };
+
 /**
  * Success, 100%, determinate
  */
@@ -112,7 +118,7 @@ export const Success100PercentDeterminate = Template.bind({});
 Success100PercentDeterminate.args = {
   progress: 100,
   determinate: true,
-  indicatorStyle: 'success',
+  indicatorSeverity: 'success',
 };
 
 /**
@@ -122,7 +128,7 @@ export const Error33PercentDeterminate = Template.bind({});
 Error33PercentDeterminate.args = {
   progress: 33,
   determinate: true,
-  indicatorStyle: 'error',
+  indicatorSeverity: 'error',
 };
 
 /**
@@ -132,7 +138,7 @@ export const Info50PercentDeterminate = Template.bind({});
 Info50PercentDeterminate.args = {
   progress: 50,
   determinate: true,
-  indicatorStyle: 'info',
+  indicatorSeverity: 'info',
 };
 
 /**
@@ -141,7 +147,7 @@ Info50PercentDeterminate.args = {
 export const WarningIndeterminate = Template.bind({});
 WarningIndeterminate.args = {
   determinate: false,
-  indicatorStyle: 'warning',
+  indicatorSeverity: 'warning',
 };
 
 /**

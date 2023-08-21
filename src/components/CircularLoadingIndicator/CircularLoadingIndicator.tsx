@@ -17,6 +17,7 @@ export interface CircularLoadingIndicatorBaseProps
    * Indicator Size
    */
   size?: Size;
+
   /**
    * Svg title
    */
@@ -40,6 +41,7 @@ const CalculateSize = (size: string) => {
       return { size: 16, width: 2 };
   }
 };
+
 /**
  * Helper function to keep progress between 0 and 100
  * @param progress Progress from props
@@ -64,13 +66,14 @@ const ProgressCap = (progress: number) => {
 const IndicatorBase = styled.svg<CircularLoadingIndicatorBaseProps>`
   transform: rotate(-90deg);
 `;
+
 /**
  * Indicator circle with animation and color
  */
 const IndicatorCircle = styled.circle<CircularLoadingIndicatorBaseProps>`
   transform-origin: center;
   stroke: ${(props) =>
-    LoadingIndicatorColor(props.indicatorStyle || 'default', props.theme)};
+    LoadingIndicatorColor(props.indicatorSeverity || 'default', props.theme)};
 
   animation: ${(props) =>
     props.determinate ? '' : 'loadingAnimation 1s linear infinite'};
@@ -84,6 +87,7 @@ const IndicatorCircle = styled.circle<CircularLoadingIndicatorBaseProps>`
     }
   }
 `;
+
 /**
  * CircularLoadingIndicator component
  */
@@ -91,7 +95,7 @@ export const CircularLoadingIndicator = ({
   id,
   progress = 50,
   determinate = false,
-  indicatorStyle,
+  indicatorSeverity,
   size = 'medium',
   title,
   ...restProps
@@ -119,7 +123,7 @@ export const CircularLoadingIndicator = ({
       {title && <title>{title}</title>}
       <IndicatorCircle
         determinate={determinate}
-        indicatorStyle={indicatorStyle}
+        indicatorSeverity={indicatorSeverity}
         cx={pxToRem(center)}
         cy={pxToRem(center)}
         r={pxToRem(radius)}

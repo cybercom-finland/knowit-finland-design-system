@@ -16,6 +16,7 @@ export * from './Link';
 export * from './NavBar';
 export * from './Radio';
 export * from './Search';
+export * from './Sidebar';
 export * from './Textarea';
 export * from './Theme';
 export * from './Typography';
