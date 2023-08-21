@@ -49,7 +49,7 @@ const ExampleCard = ({ ...restProps }: CardProps) => {
       {...restProps}
       header={<ExampleBoxContents />}
       category='Uutiset'
-      title='Knowitille tunnustusta Microsoft Cloud -turvallisuusratkaisujen osaajana'
+      title='Knowitille tunnustusta Microsoft Cloud - turvallisuusratkaisujen osaajana'
       content='Pilvipalveluiden suosion kasvaessa yrityksiltä ja organisaatioilta edellytetään kestäviä ja turvallisia ratkaisuja palvelun koko elinkaaren ajan. Siksi olemme erityisen iloisia saadessamme kertoa saavuttaneemme Microsoftin Cloud Security –erikoistumisen, joka kertoo kyvykkyydestämme auttaa asiakkaitamme alati kasvavien tietoturvauhkien ehkäisyssä.'
     ></Card>
   );
