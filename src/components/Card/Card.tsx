@@ -56,17 +56,28 @@ export interface CardProps extends ComponentBaseProps<HTMLDivElement> {
   content?: React.ReactNode;
 }
 
+/**
+ * Card category label wrapper
+ */
 const CardCategory = styled.div<CardProps>`
   font-size: ${cardDimensions.cardCategory.fontSize};
   line-height: ${cardDimensions.cardCategory.lineHeight};
   padding: ${cardDimensions.cardCategory.padding};
 `;
+
+/**
+ * Card title wrapper
+ */
 const CardTitle = styled.div<CardProps>`
   font-size: ${cardDimensions.cardTitle.fontSize};
   line-height: ${cardDimensions.cardTitle.lineHeight};
   padding: ${cardDimensions.cardTitle.padding};
   font-weight: ${cardDimensions.cardTitle.fontWeight};
 `;
+
+/**
+ * Card content node wrapper
+ */
 const CardContent = styled.div<CardProps>`
   font-size: ${cardDimensions.cardContent.fontSize};
   line-height: ${cardDimensions.cardContent.lineHeight};
