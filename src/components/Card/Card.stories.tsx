@@ -34,17 +34,18 @@ const exampleCardDimensions = {
   height: pxToRem(150),
 };
 
-const ExampleCardHeader = styled.div`
+const ExampleCardHeader = styled.img`
   width: 100%;
   height: ${exampleCardDimensions.height};
-  background-color: blue;
 `;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Card> = (args) => (
   <Card
     {...args}
-    header={<ExampleCardHeader />}
+    header={
+      <ExampleCardHeader src='https://www.knowit.fi/contentassets/daecdbb1dff5420689ca9951ad352cce/knowit-microsoft-solutions-partner.png' />
+    }
     category='Uutiset'
     title='Knowitille tunnustusta Microsoft Cloud - turvallisuusratkaisujen osaajana'
     content='Pilvipalveluiden suosion kasvaessa yrityksiltä ja organisaatioilta edellytetään kestäviä ja turvallisia ratkaisuja palvelun koko elinkaaren ajan. Siksi olemme erityisen iloisia saadessamme kertoa saavuttaneemme Microsoftin Cloud Security –erikoistumisen, joka kertoo kyvykkyydestämme auttaa asiakkaitamme alati kasvavien tietoturvauhkien ehkäisyssä.'
