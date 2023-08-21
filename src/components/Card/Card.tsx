@@ -1,72 +1,80 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { variant } from 'styled-system';
+import styled from 'styled-components';
 import { pxToRem, ComponentBaseProps } from '../../shared';
-import { Box } from '../Box';
-import { Label } from '../Label';
-
-export type CardVariant = 'rectangle' | 'rounded';
+import { Box, BoxVariant } from '../Box';
 
 /**
- * Dimensions of box component
+ * Dimensions of card component
  */
-const boxDimensions = {
-  rounded: {
-    borderRadius: pxToRem(32),
+const cardDimensions = {
+  cardCategory: {
+    fontSize: pxToRem(14),
+    lineHeight: pxToRem(16),
+    padding: `${pxToRem(24)} ${pxToRem(0)} ${pxToRem(16)} ${pxToRem(24)}`,
+  },
+  cardTitle: {
+    fontSize: pxToRem(24),
+    lineHeight: pxToRem(32),
+    padding: `${pxToRem(0)} ${pxToRem(24)} ${pxToRem(16)} ${pxToRem(24)}`,
+    fontWeight: 700,
+  },
+  cardContent: {
+    fontSize: pxToRem(16),
+    lineHeight: pxToRem(24),
+    padding: `${pxToRem(0)} ${pxToRem(24)} ${pxToRem(24)} ${pxToRem(24)}`,
   },
 };
 
 /**
- * Box component properties
+ * Card component properties
  * Extends html div element attributes
  */
 export interface CardProps extends ComponentBaseProps<HTMLDivElement> {
   /**
    * Box variant
    */
-  variant?: CardVariant;
+  variant?: BoxVariant;
 
   /**
-   * Children
+   * Header content node
    */
   header?: React.ReactNode;
 
   /**
-   * Children
+   * Category label
    */
   category?: React.ReactNode;
 
   /**
-   * Children
+   * Component title
    */
   title?: React.ReactNode;
 
   /**
-   * Children
+   * Component content node
    */
   content?: React.ReactNode;
 }
 
 const CardCategory = styled.div<CardProps>`
-  font-size: 14px;
-  line-height: 16px;
-  padding: 24px 0px 16px 24px;
+  font-size: ${cardDimensions.cardCategory.fontSize};
+  line-height: ${cardDimensions.cardCategory.lineHeight};
+  padding: ${cardDimensions.cardCategory.padding};
 `;
 const CardTitle = styled.div<CardProps>`
-  padding: 0px 24px 16px 24px;
-  line-height: 32px;
-  font-weight: 700;
-  font-size: 24px;
+  font-size: ${cardDimensions.cardTitle.fontSize};
+  line-height: ${cardDimensions.cardTitle.lineHeight};
+  padding: ${cardDimensions.cardTitle.padding};
+  font-weight: ${cardDimensions.cardTitle.fontWeight};
 `;
 const CardContent = styled.div<CardProps>`
-  padding: 0px 24px 24px 24px;
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
+  font-size: ${cardDimensions.cardContent.fontSize};
+  line-height: ${cardDimensions.cardContent.lineHeight};
+  padding: ${cardDimensions.cardContent.padding};
 `;
 
 /**
- * Box component
+ * Card component
  */
 export const Card = ({
   variant = 'rectangle',
