@@ -39,8 +39,8 @@ export const bodyStyles = css`
     line-height: ${typography.lineHeight.caption};
   }
   label {
-    font-size: ${typography.size.label};
-    line-height: ${typography.lineHeight.label};
+    font-size: ${typography.size.label.medium};
+    line-height: ${typography.lineHeight.label.medium};
   }
   p {
     font-size: ${typography.size.paragraph};

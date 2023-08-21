@@ -91,6 +91,7 @@ export const Small = Template.bind({});
 Small.args = {
   size: 'small',
 };
+
 /**
  * With no helper text
  */
