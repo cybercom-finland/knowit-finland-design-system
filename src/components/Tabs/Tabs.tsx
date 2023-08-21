@@ -72,6 +72,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
+  // Function to handle keyboard input
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const tabCount = tabRefs.current.length;
     if (event.key === 'ArrowLeft') {

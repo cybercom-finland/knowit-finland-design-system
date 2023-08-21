@@ -25,6 +25,7 @@ export interface TabProps extends ComponentBaseProps<HTMLDivElement> {
  */
 const TabContainer = styled.div<TabProps>`
   min-width: ${pxToRem(91)};
+  max-width: ${pxToRem(91)};
   height: ${pxToRem(56)};
   display: flex;
   align-items: center;
