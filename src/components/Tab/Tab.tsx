@@ -66,12 +66,18 @@ export const Tab = ({
   id,
   children,
   active,
-    disabled,
+  disabled,
   ...restprops
 }: TabProps) => {
   const componentId = id ?? generateRandomString(5);
   return (
-    <TabContainer value={value} disabled={disabled} id={componentId} active={active} {...restprops}>
+    <TabContainer
+      value={value}
+      disabled={disabled}
+      id={componentId}
+      active={active}
+      {...restprops}
+    >
       {children}
     </TabContainer>
   );

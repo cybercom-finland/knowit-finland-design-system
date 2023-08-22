@@ -69,7 +69,7 @@ const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => (
       <Tab>
         <div>Tab</div>
       </Tab>
-      <Tab>
+      <Tab active>
         <div>Tab</div>
       </Tab>
     </Tabs>

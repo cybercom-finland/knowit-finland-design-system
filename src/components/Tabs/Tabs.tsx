@@ -1,4 +1,4 @@
-import React, { createRef, useLayoutEffect, useRef } from 'react';
+import React, { createRef, useEffect, useLayoutEffect, useRef } from 'react';
 import { ComponentBaseProps, generateRandomString } from '../../shared';
 import styled from 'styled-components';
 import { IconButton } from '../IconButton';
@@ -23,6 +23,7 @@ export interface TabsProps extends ComponentBaseProps<HTMLDivElement> {
 const TabsComponentWrapper = styled.div<TabsProps>`
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 /**
@@ -42,6 +43,8 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
   const tabsWrapperRef = createRef<HTMLDivElement>();
   const [showArrows, setShowArrows] = React.useState(false);
   const [selectedTab, setSelectedTab] = React.useState(0);
+  const [disableRightArrow, setDisableRightArrow] = React.useState(false);
+  const [disableLeftArrow, setDisableLeftArrow] = React.useState(false);
   const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Show or hide arrows
@@ -54,6 +57,22 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
       }
     }
   }, []);
+  // Disable arrows if navigating to last tab
+  useEffect(() => {
+    const tabCount = tabRefs.current.length - 1;
+    if (selectedTab === 0) {
+      setDisableLeftArrow(true);
+    }
+    if (selectedTab === tabCount) {
+      setDisableRightArrow(true);
+    }
+    if (selectedTab > 0) {
+      setDisableLeftArrow(false);
+    }
+    if (selectedTab < tabCount) {
+      setDisableRightArrow(false);
+    }
+  }, [selectedTab]);
 
   const createNavigationTabs = React.Children.map(children, (child, i) => {
     if (!React.isValidElement<TabProps>(child)) {
@@ -77,28 +96,20 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
   };
   // Function to handle keyboard input
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    const tabCount = tabRefs.current.length;
+    const tabCount = tabRefs.current.length - 1;
     if (event.key === 'ArrowLeft') {
-      const last = tabCount;
-      const next = selectedTab - 1;
-      handleNextTab(last, next, 0);
+      const next = selectedTab === 0 ? 0 : selectedTab - 1;
+      handleNextTab(next);
     }
     if (event.key === 'ArrowRight') {
-      const first = 0;
-      const next = selectedTab + 1;
-      handleNextTab(first, next, tabCount);
+      const next = selectedTab === tabCount ? tabCount : selectedTab + 1;
+      handleNextTab(next);
     }
   };
 
-  const handleNextTab = (
-    firstTabInRound: number,
-    nextTab: number,
-    lastTabInRound: number
-  ) => {
-    const tabToSelect =
-      selectedTab === lastTabInRound ? firstTabInRound : nextTab;
-    setSelectedTab(tabToSelect);
-    tabRefs.current[tabToSelect]?.focus();
+  const handleNextTab = (nextTab: number) => {
+    setSelectedTab(nextTab);
+    tabRefs.current[nextTab]?.focus();
   };
 
   return (
@@ -106,6 +117,8 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
       <TabsComponentWrapper id={componentId} {...restprops} value={value}>
         {showArrows && (
           <IconButton
+            size='large'
+            disabled={disableLeftArrow}
             onClick={() => tabsWrapperRef.current?.scrollBy(-91, 0)}
             aria-label='Navigate left'
           >
@@ -123,6 +136,8 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
         </TabsWrapper>
         {showArrows && (
           <IconButton
+            size='large'
+            disabled={disableRightArrow}
             onClick={() => tabsWrapperRef.current?.scrollBy(91, 0)}
             aria-label='Navigate right'
           >
