@@ -27,6 +27,7 @@ export interface TabProps extends ComponentBaseProps<HTMLDivElement> {
    */
   disabled?: boolean;
 }
+
 /**
  * Tab styles
  */
@@ -56,6 +57,7 @@ const TabContainer = styled.div<TabProps>`
         ${(props) => props.theme.colors.grayScale.digitalBlack};
     `};
 `;
+
 /**
  * Exported Tab component
  */
