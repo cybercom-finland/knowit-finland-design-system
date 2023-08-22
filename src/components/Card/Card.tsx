@@ -9,18 +9,15 @@ import { Box, BoxVariant } from '../Box';
 const cardDimensions = {
   cardCategory: {
     paddingTop: 24,
-    paddingRight: 0,
     paddingBottom: 16,
     paddingLeft: 24,
   },
   cardTitle: {
-    paddingTop: 0,
     paddingRight: 24,
     paddingBottom: 16,
     paddingLeft: 24,
   },
   cardContent: {
-    paddingTop: 0,
     paddingRight: 24,
     paddingBottom: 24,
     paddingLeft: 24,
@@ -63,7 +60,6 @@ export interface CardProps extends ComponentBaseProps<HTMLDivElement> {
  */
 const CardCategory = styled.div<CardProps>`
   padding-top: ${pxToRem(cardDimensions.cardCategory.paddingTop)};
-  padding-right: ${pxToRem(cardDimensions.cardCategory.paddingRight)};
   padding-bottom: ${pxToRem(cardDimensions.cardCategory.paddingBottom)};
   padding-left: ${pxToRem(cardDimensions.cardCategory.paddingLeft)};
 `;
@@ -72,7 +68,6 @@ const CardCategory = styled.div<CardProps>`
  * Card title wrapper
  */
 const CardTitle = styled.div<CardProps>`
-  padding-top: ${pxToRem(cardDimensions.cardTitle.paddingTop)};
   padding-right: ${pxToRem(cardDimensions.cardTitle.paddingRight)};
   padding-bottom: ${pxToRem(cardDimensions.cardTitle.paddingBottom)};
   padding-left: ${pxToRem(cardDimensions.cardTitle.paddingLeft)};
@@ -84,7 +79,6 @@ const CardTitle = styled.div<CardProps>`
 const CardContent = styled.div<CardProps>`
   font-size: ${typography.size.paragraph2};
   line-height: ${typography.lineHeight.paragraph2};
-  padding-top: ${pxToRem(cardDimensions.cardContent.paddingTop)};
   padding-right: ${pxToRem(cardDimensions.cardContent.paddingRight)};
   padding-bottom: ${pxToRem(cardDimensions.cardContent.paddingBottom)};
   padding-left: ${pxToRem(cardDimensions.cardContent.paddingLeft)};
