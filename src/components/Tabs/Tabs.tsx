@@ -102,7 +102,10 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
     <>
       <TabsComponentWrapper id={componentId} {...restprops} value={value}>
         {showArrows && (
-          <IconButton onClick={() => tabsWrapperRef.current?.scrollBy(-91, 0)} aria-label='Navigate left'>
+          <IconButton
+            onClick={() => tabsWrapperRef.current?.scrollBy(-91, 0)}
+            aria-label='Navigate left'
+          >
             <MdKeyboardArrowLeft />
           </IconButton>
         )}
@@ -116,7 +119,10 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
           {createNavigationTabs}
         </TabsWrapper>
         {showArrows && (
-          <IconButton onClick={() => tabsWrapperRef.current?.scrollBy(91, 0)} aria-label='Navigate right'>
+          <IconButton
+            onClick={() => tabsWrapperRef.current?.scrollBy(91, 0)}
+            aria-label='Navigate right'
+          >
             <MdKeyboardArrowRight />
           </IconButton>
         )}

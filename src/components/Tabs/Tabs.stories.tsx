@@ -1,10 +1,10 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import {Tabs, TabsProps} from './Tabs';
+import { Tabs, TabsProps } from './Tabs';
 import { Tab } from '../Tab';
-import styled from "styled-components";
-import {pxToRem} from "../../shared";
+import styled from 'styled-components';
+import { pxToRem } from '../../shared';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -29,13 +29,30 @@ export default {
 } as Meta<typeof Tabs>;
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Tabs> = (args) => (
-    <Tabs {...args} aria-label='Example tabs component'>
-      <Tab>
-        <div>Tab</div>
-      </Tab>
-    </Tabs>
+  <Tabs {...args} aria-label='Example tabs component'>
+    <Tab>
+      <div>Tab</div>
+    </Tab>
+  </Tabs>
 );
 const ActiveTabTemplate: StoryFn<typeof Tabs> = (args) => (
+  <Tabs {...args} aria-label='Example tabs component'>
+    <Tab active>
+      <div>Tab</div>
+    </Tab>
+    <Tab>
+      <div>Tab</div>
+    </Tab>
+    <Tab>
+      <div>Tab</div>
+    </Tab>
+  </Tabs>
+);
+const Wrapper = styled.div<TabsProps>`
+  width: ${pxToRem(400)};
+`;
+const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => (
+  <Wrapper>
     <Tabs {...args} aria-label='Example tabs component'>
       <Tab active>
         <div>Tab</div>
@@ -46,34 +63,17 @@ const ActiveTabTemplate: StoryFn<typeof Tabs> = (args) => (
       <Tab>
         <div>Tab</div>
       </Tab>
+      <Tab>
+        <div>Tab</div>
+      </Tab>
+      <Tab>
+        <div>Tab</div>
+      </Tab>
+      <Tab>
+        <div>Tab</div>
+      </Tab>
     </Tabs>
-);
-const Wrapper = styled.div<TabsProps>`
-  width: ${pxToRem(400)};
-`;
-const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => (
-    <Wrapper>
-        <Tabs {...args} aria-label='Example tabs component'>
-            <Tab active>
-                <div>Tab</div>
-            </Tab>
-            <Tab>
-                <div>Tab</div>
-            </Tab>
-            <Tab>
-                <div>Tab</div>
-            </Tab>
-            <Tab>
-                <div>Tab</div>
-            </Tab>
-            <Tab>
-                <div>Tab</div>
-            </Tab>
-            <Tab>
-                <div>Tab</div>
-            </Tab>
-        </Tabs>
-    </Wrapper>
+  </Wrapper>
 );
 /**
  * Default variant (not specified)
