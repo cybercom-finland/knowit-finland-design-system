@@ -11,10 +11,12 @@ export interface SidebarProps extends ComponentBaseProps<HTMLDivElement> {
    * Header icon
    */
   headerContent?: React.ReactNode;
+
   /**
    * Sidebar Content
    */
   sidebarContent?: React.ReactNode;
+
   /**
    * Show overlay
    */
@@ -32,6 +34,7 @@ const sidebarDimensions = {
   // Header and content container width
   contentWidth: 368,
 };
+
 /**
  * Sidebar and overlay
  */
@@ -40,6 +43,7 @@ const SidebarWrapper = styled.div<SidebarProps>`
   display: flex;
   flex-direction: row;
 `;
+
 /**
  * Sidebar overlay
  */
@@ -48,6 +52,7 @@ const SidebarOverlay = styled.div<SidebarProps>`
   width: 100%;
   background-color: rgba(0, 0, 0, 0.82);
 `;
+
 /**
  * Wrapper for sidebar
  */
@@ -55,9 +60,11 @@ const SidebarBody = styled.div<SidebarProps>`
   width: ${pxToRem(sidebarDimensions.bodyWidth)};
   height: 100%;
   background-color: ${(props) => props.theme.colors.neutral};
-  border-left: 1px solid ${(props) => props.theme.colors.grayScale.digitalBlack200};
+  border-left: 1px solid
+    ${(props) => props.theme.colors.grayScale.digitalBlack200};
   ${(props) => props.theme.styles.dropshadow};
 `;
+
 /**
  * Wrapper for sidebar header
  */
@@ -69,6 +76,7 @@ const SidebarHeader = styled.div<SidebarProps>`
   justify-content: flex-end;
   margin: ${pxToRem(16)};
 `;
+
 /**
  * Wrapper for content inside sidebar
  */

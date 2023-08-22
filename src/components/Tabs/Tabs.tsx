@@ -10,6 +10,7 @@ export interface TabsProps extends ComponentBaseProps<HTMLDivElement> {
    * Tabs value
    */
   value?: string;
+
   /**
    * Children
    */
@@ -23,6 +24,7 @@ const TabsComponentWrapper = styled.div<TabsProps>`
   display: flex;
   flex-direction: row;
 `;
+
 /**
  * Wrapper for tabs
  */
@@ -31,6 +33,7 @@ const TabsWrapper = styled.div<TabsProps>`
   flex-direction: row;
   overflow: hidden;
 `;
+
 /**
  * Returned component
  */

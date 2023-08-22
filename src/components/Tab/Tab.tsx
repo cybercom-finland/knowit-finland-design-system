@@ -11,14 +11,21 @@ export interface TabProps extends ComponentBaseProps<HTMLDivElement> {
    * Tabs value
    */
   value?: string;
+
   /**
    * Children
    */
   children?: React.ReactNode;
+
   /**
    * Is tab active
    */
   active?: boolean;
+
+  /**
+   * Is tab disabled
+   */
+  disabled?: boolean;
 }
 /**
  * Tab styles
@@ -57,11 +64,12 @@ export const Tab = ({
   id,
   children,
   active,
+    disabled,
   ...restprops
 }: TabProps) => {
   const componentId = id ?? generateRandomString(5);
   return (
-    <TabContainer value={value} id={componentId} active={active} {...restprops}>
+    <TabContainer value={value} disabled={disabled} id={componentId} active={active} {...restprops}>
       {children}
     </TabContainer>
   );

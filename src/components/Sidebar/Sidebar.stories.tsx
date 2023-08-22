@@ -61,6 +61,7 @@ const Template: StoryFn<typeof Sidebar> = (args) => (
  * Default variant
  */
 export const DefaultVariant = Template.bind({});
+
 /**
  * Sidebar with overlay, content and icon button in header
  */
@@ -70,6 +71,7 @@ OverlayContentIcon.args = {
   sidebarContent: <ListComponent />,
   headerContent: <IconButtonComponent />,
 };
+
 /**
  * Sidebar with overlay
  */
@@ -77,6 +79,7 @@ export const Overlay = Template.bind({});
 Overlay.args = {
   overlay: true,
 };
+
 /**
  * Sidebar with content
  */
@@ -84,6 +87,7 @@ export const SidebarContent = Template.bind({});
 SidebarContent.args = {
   sidebarContent: <ListComponent />,
 };
+
 /**
  * Sidebar with icon button in header
  */

@@ -75,14 +75,17 @@ const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => (
     </Tabs>
   </Wrapper>
 );
+
 /**
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
+
 /**
  * Tab list with active tab
  */
 export const ActiveTab = ActiveTabTemplate.bind({});
+
 /**
  * Tab list with scroll
  */

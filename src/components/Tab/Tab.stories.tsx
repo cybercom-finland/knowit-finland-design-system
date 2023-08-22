@@ -3,6 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Tab } from './Tab';
 import { MdClose } from 'react-icons/md';
+import {IconButton} from "../IconButton";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -39,17 +40,22 @@ const ActiveTab: StoryFn<typeof Tab> = (args) => (
 );
 const WithIconTab: StoryFn<typeof Tab> = (args) => (
   <Tab active {...args}>
-    <MdClose />
+    <IconButton>
+        <MdClose />
+    </IconButton>
   </Tab>
 );
+
 /**
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
+
 /**
  * Active variant
  */
 export const ActiveVariant = ActiveTab.bind({});
+
 /**
  * With IconButton
  */
