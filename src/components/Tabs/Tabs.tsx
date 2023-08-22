@@ -1,9 +1,10 @@
-import React, { createRef, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { ComponentBaseProps, generateRandomString } from '../../shared';
 import styled from 'styled-components';
 import { IconButton } from '../IconButton';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { TabProps } from '../Tab';
+import { useTabs } from './useTabs';
 
 export interface TabsProps extends ComponentBaseProps<HTMLDivElement> {
   /**
@@ -40,12 +41,18 @@ const TabsWrapper = styled.div<TabsProps>`
  */
 export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
   const componentId = id ?? generateRandomString(5);
-  const tabsWrapperRef = createRef<HTMLDivElement>();
-  const [showArrows, setShowArrows] = React.useState(false);
-  const [selectedTab, setSelectedTab] = React.useState(0);
-  const [disableRightArrow, setDisableRightArrow] = React.useState(false);
-  const [disableLeftArrow, setDisableLeftArrow] = React.useState(false);
-  const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const {
+    tabsWrapperRef,
+    showArrows,
+    setShowArrows,
+    selectedTab,
+    setSelectedTab,
+    disableRightArrow,
+    setDisableRightArrow,
+    disableLeftArrow,
+    setDisableLeftArrow,
+    tabRefs,
+  } = useTabs();
 
   // Show or hide arrows
   useLayoutEffect(() => {
