@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { pxToRem, ComponentBaseProps } from '../../shared';
+import { pxToRem, ComponentBaseProps, typography } from '../../shared';
 import { Box, BoxVariant } from '../Box';
 
 /**
@@ -8,20 +8,22 @@ import { Box, BoxVariant } from '../Box';
  */
 const cardDimensions = {
   cardCategory: {
-    fontSize: pxToRem(14),
-    lineHeight: pxToRem(16),
-    padding: `${pxToRem(24)} ${pxToRem(0)} ${pxToRem(16)} ${pxToRem(24)}`,
+    paddingTop: 24,
+    paddingRight: 0,
+    paddingBottom: 16,
+    paddingLeft: 24,
   },
   cardTitle: {
-    fontSize: pxToRem(24),
-    lineHeight: pxToRem(32),
-    padding: `${pxToRem(0)} ${pxToRem(24)} ${pxToRem(16)} ${pxToRem(24)}`,
-    fontWeight: 700,
+    paddingTop: 0,
+    paddingRight: 24,
+    paddingBottom: 16,
+    paddingLeft: 24,
   },
   cardContent: {
-    fontSize: pxToRem(16),
-    lineHeight: pxToRem(24),
-    padding: `${pxToRem(0)} ${pxToRem(24)} ${pxToRem(24)} ${pxToRem(24)}`,
+    paddingTop: 0,
+    paddingRight: 24,
+    paddingBottom: 24,
+    paddingLeft: 24,
   },
 };
 
@@ -43,12 +45,12 @@ export interface CardProps extends ComponentBaseProps<HTMLDivElement> {
   /**
    * Category label
    */
-  category?: React.ReactNode;
+  category?: string;
 
   /**
    * Component title
    */
-  title?: React.ReactNode;
+  title?: string;
 
   /**
    * Component content node
@@ -60,28 +62,32 @@ export interface CardProps extends ComponentBaseProps<HTMLDivElement> {
  * Card category label wrapper
  */
 const CardCategory = styled.div<CardProps>`
-  font-size: ${cardDimensions.cardCategory.fontSize};
-  line-height: ${cardDimensions.cardCategory.lineHeight};
-  padding: ${cardDimensions.cardCategory.padding};
+  padding-top: ${pxToRem(cardDimensions.cardCategory.paddingTop)};
+  padding-right: ${pxToRem(cardDimensions.cardCategory.paddingRight)};
+  padding-bottom: ${pxToRem(cardDimensions.cardCategory.paddingBottom)};
+  padding-left: ${pxToRem(cardDimensions.cardCategory.paddingLeft)};
 `;
 
 /**
  * Card title wrapper
  */
 const CardTitle = styled.div<CardProps>`
-  font-size: ${cardDimensions.cardTitle.fontSize};
-  line-height: ${cardDimensions.cardTitle.lineHeight};
-  padding: ${cardDimensions.cardTitle.padding};
-  font-weight: ${cardDimensions.cardTitle.fontWeight};
+  padding-top: ${pxToRem(cardDimensions.cardTitle.paddingTop)};
+  padding-right: ${pxToRem(cardDimensions.cardTitle.paddingRight)};
+  padding-bottom: ${pxToRem(cardDimensions.cardTitle.paddingBottom)};
+  padding-left: ${pxToRem(cardDimensions.cardTitle.paddingLeft)};
 `;
 
 /**
  * Card content node wrapper
  */
 const CardContent = styled.div<CardProps>`
-  font-size: ${cardDimensions.cardContent.fontSize};
-  line-height: ${cardDimensions.cardContent.lineHeight};
-  padding: ${cardDimensions.cardContent.padding};
+  font-size: ${typography.size.paragraph2};
+  line-height: ${typography.lineHeight.paragraph2};
+  padding-top: ${pxToRem(cardDimensions.cardContent.paddingTop)};
+  padding-right: ${pxToRem(cardDimensions.cardContent.paddingRight)};
+  padding-bottom: ${pxToRem(cardDimensions.cardContent.paddingBottom)};
+  padding-left: ${pxToRem(cardDimensions.cardContent.paddingLeft)};
 `;
 
 /**
@@ -98,8 +104,12 @@ export const Card = ({
   return (
     <Box variant={variant} {...restProps}>
       {header}
-      <CardCategory>{category}</CardCategory>
-      <CardTitle>{title}</CardTitle>
+      <CardCategory>
+        <caption>{category}</caption>
+      </CardCategory>
+      <CardTitle>
+        <h4>{title}</h4>
+      </CardTitle>
       <CardContent>{content}</CardContent>
     </Box>
   );

@@ -12,6 +12,11 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
     variant: 'rectangle',
+    category: 'Uutiset',
+    title:
+      'Knowitille tunnustusta Microsoft Cloud - turvallisuusratkaisujen osaajana',
+    content:
+      'Pilvipalveluiden suosion kasvaessa yrityksiltä ja organisaatioilta edellytetään kestäviä ja turvallisia ratkaisuja palvelun koko elinkaaren ajan. Siksi olemme erityisen iloisia saadessamme kertoa saavuttaneemme Microsoftin Cloud Security –erikoistumisen, joka kertoo kyvykkyydestämme auttaa asiakkaitamme alati kasvavien tietoturvauhkien ehkäisyssä.',
   },
   parameters: {
     design: [
@@ -46,9 +51,6 @@ const Template: StoryFn<typeof Card> = (args) => (
     header={
       <ExampleCardHeader src='https://www.knowit.fi/contentassets/daecdbb1dff5420689ca9951ad352cce/knowit-microsoft-solutions-partner.png' />
     }
-    category='Uutiset'
-    title='Knowitille tunnustusta Microsoft Cloud - turvallisuusratkaisujen osaajana'
-    content='Pilvipalveluiden suosion kasvaessa yrityksiltä ja organisaatioilta edellytetään kestäviä ja turvallisia ratkaisuja palvelun koko elinkaaren ajan. Siksi olemme erityisen iloisia saadessamme kertoa saavuttaneemme Microsoftin Cloud Security –erikoistumisen, joka kertoo kyvykkyydestämme auttaa asiakkaitamme alati kasvavien tietoturvauhkien ehkäisyssä.'
   />
 );
 
