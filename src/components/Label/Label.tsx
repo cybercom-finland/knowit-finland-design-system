@@ -20,6 +20,7 @@ export interface LabelProps
    * Disabled state
    */
   disabled?: boolean;
+
   /**
    * Error state
    */

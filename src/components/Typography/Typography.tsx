@@ -61,6 +61,7 @@ interface TypographyProps
    * Typography content
    */
   children: React.ReactNode;
+
   /**
    * Text variant
    */

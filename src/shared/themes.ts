@@ -41,6 +41,9 @@ export const lightTheme: DefaultTheme = {
       info800: '#001C64',
     },
   },
+  styles: {
+    dropshadow: 'box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.15);',
+  },
 };
 
 export const darkTheme: DefaultTheme = {
@@ -83,5 +86,8 @@ export const darkTheme: DefaultTheme = {
       info200: '#001C64',
       info800: '#B5C9FF',
     },
+  },
+  styles: {
+    dropshadow: 'box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.25);',
   },
 };

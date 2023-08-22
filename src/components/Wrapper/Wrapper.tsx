@@ -9,10 +9,12 @@ export interface WrapperProps {
    * Wrapper margins for custom positioning, using 0.5rem as base unit
    */
   margin?: number | number[];
+
   /**
    * Wrapper width in px, if undefined the component takes width of containing element
    */
   width?: number;
+
   /**
    * Wrapper height in px, if undefined the component takes height of containing element
    */

@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ComponentBaseProps, Severity, typography } from '../../shared';
+import {
+  ComponentBaseProps,
+  Severity,
+  pxToRem,
+  typography,
+} from '../../shared';
 import { IconButton } from '../IconButton/IconButton';
 import {
   MdClose,
@@ -108,8 +113,9 @@ const NotificationIconDiv = styled.div<NotificationProps>`
  */
 const NotificationTitleParagraph = styled.p<NotificationProps>`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
-  font-size: ${typography.size.paragraph};
-  line-height: ${typography.lineHeight.paragraph};
+  font-size: ${typography.size.label.large};
+  line-height: ${typography.lineHeight.label.large};
+  font-weight: ${typography.weight.bold};
   margin-top: 0;
   margin-bottom: 0;
 `;
@@ -119,9 +125,9 @@ const NotificationTitleParagraph = styled.p<NotificationProps>`
  */
 const NotificationMessageParagraph = styled.p<NotificationProps>`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
-  font-size: ${typography.size.paragraph2};
-  line-height: ${typography.lineHeight.paragraph2};
-  margin-top: ${typography.size.paragraph2};
+  font-size: ${typography.size.paragraph};
+  line-height: ${typography.lineHeight.paragraph};
+  margin-top: ${pxToRem(16)};
   margin-bottom: 0;
 `;
 
