@@ -81,6 +81,17 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
     }
   }, [selectedTab]);
 
+  const handleButtonPress = (direction: 'left' | 'right') => {
+    if (direction === 'left') {
+      tabsWrapperRef.current?.scrollBy(-91, 0)
+    }
+    if (direction === 'right') {
+      tabsWrapperRef.current?.scrollBy(91, 0)
+    }
+    setDisableLeftArrow(false);
+    setDisableRightArrow(false);
+  }
+
   const createNavigationTabs = React.Children.map(children, (child, i) => {
     if (!React.isValidElement<TabProps>(child)) {
       return child;
@@ -126,7 +137,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
           <IconButton
             size='large'
             disabled={disableLeftArrow}
-            onClick={() => tabsWrapperRef.current?.scrollBy(-91, 0)}
+            onClick={() => handleButtonPress('left')}
             aria-label='Navigate left'
           >
             <MdKeyboardArrowLeft />
@@ -145,7 +156,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
           <IconButton
             size='large'
             disabled={disableRightArrow}
-            onClick={() => tabsWrapperRef.current?.scrollBy(91, 0)}
+            onClick={() => handleButtonPress('right')}
             aria-label='Navigate right'
           >
             <MdKeyboardArrowRight />
