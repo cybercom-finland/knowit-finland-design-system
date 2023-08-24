@@ -3,7 +3,7 @@ import styled, { DefaultTheme, css } from 'styled-components';
 import { borderBottom, variant } from 'styled-system';
 import { pxToRem, ComponentBaseProps, typography } from '../../shared';
 
-export type ArrowVariant = 'none' | 'up' | 'right' | 'down' | 'left';
+export type ArrowVariant = 'none' | 'top' | 'right' | 'down' | 'left';
 
 /**
  * Dimensions of Popup component
@@ -22,7 +22,7 @@ export interface PopupProps extends ComponentBaseProps<HTMLDivElement> {
   /**
    * Popup arrow variant
    */
-  arrowVariant?: ArrowVariant;
+  arrow?: ArrowVariant;
 
   /**
    * Title
@@ -40,12 +40,12 @@ export interface PopupProps extends ComponentBaseProps<HTMLDivElement> {
  * @param props mandatory checkbox props
  * @returns modified css
  */
-const arrowStyles = (props: DefaultTheme) => {
+const arrowStyles = (props: DefaultTheme & { popupHeight: number }) => {
   return css`
     ${variant({
-      prop: 'arrowVariant',
+      prop: 'arrow',
       variants: {
-        up: {
+        top: {
           borderLeft: '8px solid transparent',
           borderRight: '8px solid transparent',
           borderBottom: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
@@ -109,7 +109,7 @@ const Arrow = styled.div<PopupProps & { popupHeight: number }>`
  * Popup component
  */
 export const Popup = ({
-  arrowVariant = 'none',
+  arrow: arrowVariant = 'none',
   children,
   title,
   ...restProps
@@ -123,7 +123,7 @@ export const Popup = ({
 
   return (
     <InternalPopup ref={ref} {...restProps}>
-      <Arrow arrowVariant={arrowVariant} popupHeight={popupHeight} />
+      <Arrow arrow={arrowVariant} popupHeight={popupHeight} />
       <PopupTitle>{title}</PopupTitle>
       <PopupContents>{children}</PopupContents>
     </InternalPopup>
