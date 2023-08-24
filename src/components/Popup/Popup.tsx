@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
+import styled, { DefaultTheme, css } from 'styled-components';
 import { borderBottom, variant } from 'styled-system';
 import { pxToRem, ComponentBaseProps, typography } from '../../shared';
 
@@ -40,30 +40,37 @@ export interface PopupProps extends ComponentBaseProps<HTMLDivElement> {
  * @param props mandatory checkbox props
  * @returns modified css
  */
-const arrowStyles = () => {
+const arrowStyles = (props: DefaultTheme) => {
   return css`
     ${variant({
       prop: 'arrowVariant',
       variants: {
         up: {
-          borderLeft: '50px solid transparent',
-          borderRight: '50px solid transparent',
-          borderBottom: '50px solid black',
+          borderLeft: '8px solid transparent',
+          borderRight: '8px solid transparent',
+          borderBottom: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
+          right: '148px',
+          top: '-8px',
         },
         right: {
-          borderTop: '50px solid transparent',
-          borderBottom: '50px solid transparent',
-          borderLeft: '50px solid black',
+          borderTop: '8px solid transparent',
+          borderBottom: '8px solid transparent',
+          borderLeft: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
+          top: `${props.popupHeight / 2 - 4}px`,
         },
         down: {
-          borderLeft: '50px solid transparent',
-          borderRight: '50px solid transparent',
-          borderTop: '50px solid black',
+          borderLeft: '8px solid transparent',
+          borderRight: '8px solid transparent',
+          borderTop: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
+          bottom: '-8px',
+          right: '148px',
         },
         left: {
-          borderTop: '50px solid transparent',
-          borderBottom: '50px solid transparent',
-          borderRight: '50px solid black',
+          borderTop: '8px solid transparent',
+          borderBottom: '8px solid transparent',
+          borderRight: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
+          top: `${props.popupHeight / 2 - 4}px`,
+          left: '-8px',
         },
       },
     })};
@@ -72,7 +79,6 @@ const arrowStyles = () => {
 
 const InternalPopup = styled.div<PopupProps>`
   position: relative;
-  margin-top: -3.7px;
   width: 300px;
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
 `;
@@ -90,12 +96,12 @@ const PopupContents = styled.div<PopupProps>`
   flex-direction: column;
 `;
 
-const ArrowTop = styled.div<PopupProps>`
+const Arrow = styled.div<PopupProps & { popupHeight: number }>`
   width: 0;
   height: 0;
   position: absolute;
-  right: -50px;
-  top: 50px;
+  right: -8px;
+
   ${arrowStyles};
 `;
 
@@ -108,10 +114,17 @@ export const Popup = ({
   title,
   ...restProps
 }: PopupProps) => {
+  const [popupHeight, setPopupHeight] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setPopupHeight(ref.current?.clientHeight ?? 0);
+  });
+
   return (
     <>
-      <InternalPopup {...restProps}>
-        <ArrowTop arrowVariant={arrowVariant} />
+      <InternalPopup ref={ref} {...restProps}>
+        <Arrow arrowVariant={arrowVariant} popupHeight={popupHeight} />
         <PopupTitle>{title}</PopupTitle>
         <PopupContents>{children}</PopupContents>
       </InternalPopup>
