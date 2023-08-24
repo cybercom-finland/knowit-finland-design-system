@@ -32,10 +32,9 @@ export default {
   decorators: [withDesign],
 } as Meta<typeof Popup>;
 
-const examplePopupDimensions = {
-  width: pxToRem(200),
-  height: pxToRem(100),
-};
+const RightButton = styled(Button)<PopupProps>`
+  align-self: end;
+`;
 
 /*
  * Example Dialog story
@@ -44,7 +43,7 @@ const ExamplePopup = ({ children, ...restProps }: PopupProps) => {
   return (
     <Popup {...restProps}>
       {children}
-      <Button label='Button' />
+      <RightButton label='Button' />
     </Popup>
   );
 };
