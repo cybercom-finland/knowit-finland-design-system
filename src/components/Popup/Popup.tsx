@@ -71,6 +71,7 @@ const arrowStyles = () => {
 };
 
 const InternalPopup = styled.div<PopupProps>`
+  position: relative;
   margin-top: -3.7px;
   width: 300px;
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
@@ -92,7 +93,10 @@ const PopupContents = styled.div<PopupProps>`
 const ArrowTop = styled.div<PopupProps>`
   width: 0;
   height: 0;
-  ${arrowStyles}
+  position: absolute;
+  right: -50px;
+  top: 50px;
+  ${arrowStyles};
 `;
 
 /**
@@ -106,8 +110,8 @@ export const Popup = ({
 }: PopupProps) => {
   return (
     <>
-      <ArrowTop arrowVariant={arrowVariant} />
       <InternalPopup {...restProps}>
+        <ArrowTop arrowVariant={arrowVariant} />
         <PopupTitle>{title}</PopupTitle>
         <PopupContents>{children}</PopupContents>
       </InternalPopup>
