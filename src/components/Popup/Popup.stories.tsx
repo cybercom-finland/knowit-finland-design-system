@@ -4,6 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { Popup, PopupProps } from './Popup';
 import { styled } from 'styled-components';
 import { pxToRem } from '../../shared';
+import { Button } from '../Button/Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -11,7 +12,8 @@ export default {
   component: Popup,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    variant: 'rectangle',
+    arrowVariant: 'up',
+    title: 'Title',
   },
   parameters: {
     design: [
@@ -35,25 +37,24 @@ const examplePopupDimensions = {
   height: pxToRem(100),
 };
 
-const ExamplePopupContents = styled.div`
-  width: ${examplePopupDimensions.width};
-  height: ${examplePopupDimensions.height};
-`;
-
 /*
  * Example Dialog story
  */
-const ExamplePopup = ({ ...restProps }: PopupProps) => {
+const ExamplePopup = ({ children, ...restProps }: PopupProps) => {
   return (
     <Popup {...restProps}>
-      <ExamplePopupContents />
+      {children}
+      <Button label='Button' />
     </Popup>
   );
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Popup> = (args) => (
-  <ExamplePopup {...args}></ExamplePopup>
+  <ExamplePopup {...args}>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
+    odio sed est pellentesque gravida sit amet at orci.
+  </ExamplePopup>
 );
 
 /**
