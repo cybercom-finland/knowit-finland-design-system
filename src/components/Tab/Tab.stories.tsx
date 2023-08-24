@@ -40,7 +40,7 @@ const ActiveTab: StoryFn<typeof Tab> = (args) => (
 );
 const WithIconTab: StoryFn<typeof Tab> = (args) => (
   <Tab active {...args}>
-    <IconButton>
+    <IconButton aria-label='Tab button'>
       <MdClose />
     </IconButton>
   </Tab>
