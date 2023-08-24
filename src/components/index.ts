@@ -13,6 +13,7 @@ export * from './Label';
 export * from './LinearLoadingIndicator';
 export * from './Link';
 export * from './NavBar';
+export * from './Popup';
 export * from './Radio';
 export * from './Search';
 export * from './Sidebar';
