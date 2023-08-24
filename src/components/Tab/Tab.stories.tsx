@@ -30,12 +30,12 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Tab> = (args) => (
   <Tab {...args}>
-    <div>TEST</div>
+    <div>Tab</div>
   </Tab>
 );
 const ActiveTab: StoryFn<typeof Tab> = (args) => (
   <Tab active {...args}>
-    <div>TEST</div>
+    <div>Tab</div>
   </Tab>
 );
 const WithIconTab: StoryFn<typeof Tab> = (args) => (
