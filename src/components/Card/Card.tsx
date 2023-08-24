@@ -59,6 +59,8 @@ export interface CardProps extends ComponentBaseProps<HTMLDivElement> {
  * Card category label wrapper
  */
 const CardCategory = styled.div<CardProps>`
+  font-size: ${typography.size.paragraph2};
+  line-height: ${typography.lineHeight.paragraph2};
   padding-top: ${pxToRem(cardDimensions.cardCategory.paddingTop)};
   padding-bottom: ${pxToRem(cardDimensions.cardCategory.paddingBottom)};
   padding-left: ${pxToRem(cardDimensions.cardCategory.paddingLeft)};
@@ -77,8 +79,8 @@ const CardTitle = styled.div<CardProps>`
  * Card content node wrapper
  */
 const CardContent = styled.div<CardProps>`
-  font-size: ${typography.size.paragraph2};
-  line-height: ${typography.lineHeight.paragraph2};
+  font-size: ${typography.size.paragraph};
+  line-height: ${typography.lineHeight.paragraph};
   padding-right: ${pxToRem(cardDimensions.cardContent.paddingRight)};
   padding-bottom: ${pxToRem(cardDimensions.cardContent.paddingBottom)};
   padding-left: ${pxToRem(cardDimensions.cardContent.paddingLeft)};
@@ -98,9 +100,7 @@ export const Card = ({
   return (
     <Box variant={variant} {...restProps}>
       {header}
-      <CardCategory>
-        <caption>{category}</caption>
-      </CardCategory>
+      <CardCategory>{category}</CardCategory>
       <CardTitle>
         <h4>{title}</h4>
       </CardTitle>
