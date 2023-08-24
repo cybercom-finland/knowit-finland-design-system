@@ -49,7 +49,7 @@ const arrowStyles = (props: DefaultTheme) => {
           borderLeft: '8px solid transparent',
           borderRight: '8px solid transparent',
           borderBottom: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
-          right: '148px',
+          right: '146px',
           top: '-8px',
         },
         right: {
@@ -57,13 +57,14 @@ const arrowStyles = (props: DefaultTheme) => {
           borderBottom: '8px solid transparent',
           borderLeft: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
           top: `${props.popupHeight / 2 - 4}px`,
+          right: '-8px',
         },
         down: {
           borderLeft: '8px solid transparent',
           borderRight: '8px solid transparent',
           borderTop: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
           bottom: '-8px',
-          right: '148px',
+          right: '146px',
         },
         left: {
           borderTop: '8px solid transparent',
@@ -100,7 +101,6 @@ const Arrow = styled.div<PopupProps & { popupHeight: number }>`
   width: 0;
   height: 0;
   position: absolute;
-  right: -8px;
 
   ${arrowStyles};
 `;
@@ -122,12 +122,10 @@ export const Popup = ({
   });
 
   return (
-    <>
-      <InternalPopup ref={ref} {...restProps}>
-        <Arrow arrowVariant={arrowVariant} popupHeight={popupHeight} />
-        <PopupTitle>{title}</PopupTitle>
-        <PopupContents>{children}</PopupContents>
-      </InternalPopup>
-    </>
+    <InternalPopup ref={ref} {...restProps}>
+      <Arrow arrowVariant={arrowVariant} popupHeight={popupHeight} />
+      <PopupTitle>{title}</PopupTitle>
+      <PopupContents>{children}</PopupContents>
+    </InternalPopup>
   );
 };
