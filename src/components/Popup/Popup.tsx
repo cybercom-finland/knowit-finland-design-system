@@ -51,7 +51,7 @@ export interface PopupProps extends ComponentBaseProps<HTMLDivElement> {
 
 /**
  * Helper function to calculate correct sizes for font size
- * @param props mandatory checkbox props
+ * @param props theme props and popup height
  * @returns modified css
  */
 const arrowStyles = (props: DefaultTheme & { popupHeight: number }) => {
