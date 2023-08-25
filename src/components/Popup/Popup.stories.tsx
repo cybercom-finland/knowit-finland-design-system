@@ -3,7 +3,6 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Popup, PopupProps } from './Popup';
 import { styled } from 'styled-components';
-import { pxToRem } from '../../shared';
 import { Button } from '../Button/Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -37,7 +36,7 @@ const RightButton = styled(Button)<PopupProps>`
 `;
 
 /*
- * Example Dialog story
+ * Example Popup story
  */
 const ExamplePopup = ({ children, ...restProps }: PopupProps) => {
   return (
