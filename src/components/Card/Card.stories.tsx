@@ -49,7 +49,10 @@ const Template: StoryFn<typeof Card> = (args) => (
   <Card
     {...args}
     header={
-      <ExampleCardHeader src='https://www.knowit.fi/contentassets/daecdbb1dff5420689ca9951ad352cce/knowit-microsoft-solutions-partner.png' />
+      <ExampleCardHeader
+        role='presentation'
+        src='https://www.knowit.fi/contentassets/daecdbb1dff5420689ca9951ad352cce/knowit-microsoft-solutions-partner.png'
+      />
     }
   />
 );
