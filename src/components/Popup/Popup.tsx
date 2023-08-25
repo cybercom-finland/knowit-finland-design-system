@@ -1,16 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { DefaultTheme, css } from 'styled-components';
-import { borderBottom, variant } from 'styled-system';
+import { variant } from 'styled-system';
 import { pxToRem, ComponentBaseProps, typography } from '../../shared';
 
-export type ArrowVariant = 'none' | 'top' | 'right' | 'down' | 'left';
+export type ArrowVariant = 'none' | 'top' | 'right' | 'bottom' | 'left';
 
 /**
  * Dimensions of Popup component
  */
 const popupDimensions = {
-  rounded: {
-    borderRadius: pxToRem(32),
+  arrow: {
+    arrowSize: 8,
+    arrowOffset: 146,
+  },
+  innerPopup: {
+    popupWidth: 300,
+  },
+  popupTitle: {
+    paddingTop: 25.5,
+    paddingRigth: 16,
+    paddingBottom: 17.5,
+    paddingLeft: 16,
+  },
+  popupContents: {
+    padding: 16,
+    gap: 10,
   },
 };
 
@@ -46,32 +60,60 @@ const arrowStyles = (props: DefaultTheme & { popupHeight: number }) => {
       prop: 'arrow',
       variants: {
         top: {
-          borderLeft: '8px solid transparent',
-          borderRight: '8px solid transparent',
-          borderBottom: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
-          right: '146px',
-          top: '-8px',
+          borderLeft: `${pxToRem(
+            popupDimensions.arrow.arrowSize
+          )} solid transparent`,
+          borderRight: `${pxToRem(
+            popupDimensions.arrow.arrowSize
+          )} solid transparent`,
+          borderBottom: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
+            props.theme.colors.grayScale.digitalBlack100
+          }`,
+          right: pxToRem(popupDimensions.arrow.arrowOffset),
+          top: pxToRem(-popupDimensions.arrow.arrowSize),
         },
         right: {
-          borderTop: '8px solid transparent',
-          borderBottom: '8px solid transparent',
-          borderLeft: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
-          top: `${props.popupHeight / 2 - 4}px`,
-          right: '-8px',
+          borderTop: `${pxToRem(
+            popupDimensions.arrow.arrowSize
+          )} solid transparent`,
+          borderBottom: `${pxToRem(
+            popupDimensions.arrow.arrowSize
+          )} solid transparent`,
+          borderLeft: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
+            props.theme.colors.grayScale.digitalBlack100
+          }`,
+          top: pxToRem(
+            props.popupHeight / 2 - popupDimensions.arrow.arrowSize / 2
+          ),
+          right: pxToRem(-popupDimensions.arrow.arrowSize),
         },
-        down: {
-          borderLeft: '8px solid transparent',
-          borderRight: '8px solid transparent',
-          borderTop: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
-          bottom: '-8px',
-          right: '146px',
+        bottom: {
+          borderLeft: `${pxToRem(
+            popupDimensions.arrow.arrowSize
+          )} solid transparent`,
+          borderRight: `${pxToRem(
+            popupDimensions.arrow.arrowSize
+          )} solid transparent`,
+          borderTop: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
+            props.theme.colors.grayScale.digitalBlack100
+          }`,
+          bottom: pxToRem(-popupDimensions.arrow.arrowSize),
+          right: pxToRem(popupDimensions.arrow.arrowOffset),
         },
         left: {
-          borderTop: '8px solid transparent',
-          borderBottom: '8px solid transparent',
-          borderRight: `8px solid ${props.theme.colors.grayScale.digitalBlack100}`,
-          top: `${props.popupHeight / 2 - 4}px`,
-          left: '-8px',
+          borderTop: `${pxToRem(
+            popupDimensions.arrow.arrowSize
+          )} solid transparent`,
+          borderBottom: `${pxToRem(
+            popupDimensions.arrow.arrowSize
+          )} solid transparent`,
+          borderRight: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
+            props.theme.colors.grayScale.digitalBlack100
+          }`,
+          top: pxToRem(
+            props.popupHeight / 2 - popupDimensions.arrow.arrowSize / 2
+          ),
+          left: pxToRem(-popupDimensions.arrow.arrowSize),
         },
       },
     })};
@@ -80,19 +122,22 @@ const arrowStyles = (props: DefaultTheme & { popupHeight: number }) => {
 
 const InternalPopup = styled.div<PopupProps>`
   position: relative;
-  width: 300px;
+  width: ${pxToRem(popupDimensions.innerPopup.popupWidth)};
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
 `;
 const PopupTitle = styled.div<PopupProps>`
   font-weight: ${typography.weight.bold};
   font-size: ${typography.size.paragraph};
-  padding: 25.5px 16px 17.5px 16px;
+  padding: ${pxToRem(popupDimensions.popupTitle.paddingTop)}
+    ${pxToRem(popupDimensions.popupTitle.paddingRigth)}
+    ${pxToRem(popupDimensions.popupTitle.paddingBottom)}
+    ${pxToRem(popupDimensions.popupTitle.paddingLeft)};
 `;
 const PopupContents = styled.div<PopupProps>`
   font-size: ${typography.size.paragraph2};
   line-height: ${typography.lineHeight.paragraph2};
-  padding: 16px;
-  gap: 10px;
+  padding: ${pxToRem(popupDimensions.popupContents.padding)};
+  gap: ${pxToRem(popupDimensions.popupContents.gap)};
   display: flex;
   flex-direction: column;
 `;
@@ -109,7 +154,7 @@ const Arrow = styled.div<PopupProps & { popupHeight: number }>`
  * Popup component
  */
 export const Popup = ({
-  arrow: arrowVariant = 'none',
+  arrow = 'none',
   children,
   title,
   ...restProps
@@ -123,7 +168,7 @@ export const Popup = ({
 
   return (
     <InternalPopup ref={ref} {...restProps}>
-      <Arrow arrow={arrowVariant} popupHeight={popupHeight} />
+      <Arrow arrow={arrow} popupHeight={popupHeight} />
       <PopupTitle>{title}</PopupTitle>
       <PopupContents>{children}</PopupContents>
     </InternalPopup>

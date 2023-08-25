@@ -12,7 +12,7 @@ export default {
   component: Popup,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    arrowVariant: 'up',
+    arrow: 'top',
     title: 'Title',
   },
   parameters: {
@@ -20,12 +20,12 @@ export default {
       {
         name: 'light',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2873%3A3795&mode=design&t=AjKcl0zg1pKHLGEU-1',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=856%3A11867&mode=design&t=MMo35C7LdTwAtI8H-1',
       },
       {
         name: 'dark',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2876%3A3808&mode=design&t=AjKcl0zg1pKHLGEU-1',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=1537%3A93141&mode=design&t=MMo35C7LdTwAtI8H-1',
       },
     ],
   },
