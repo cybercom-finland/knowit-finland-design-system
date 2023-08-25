@@ -60,11 +60,3 @@ const Template: StoryFn<typeof Popup> = (args) => (
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
-
-/**
- * Rounded variant
- */
-export const Rounded = Template.bind({});
-Rounded.args = {
-  variant: 'rounded',
-};
