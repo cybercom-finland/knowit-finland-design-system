@@ -117,7 +117,7 @@ const arrowStyles = (props: DefaultTheme) => {
 };
 
 /**
- * Wrapper for popup
+ * Wrapper for popup component
  */
 const InternalPopup = styled.div<PopupProps>`
   position: relative;
@@ -126,7 +126,7 @@ const InternalPopup = styled.div<PopupProps>`
 `;
 
 /**
- * Wrapper for popup
+ * Popup title string styles
  */
 const PopupTitle = styled.div<PopupProps>`
   font-weight: ${typography.weight.bold};
@@ -138,7 +138,7 @@ const PopupTitle = styled.div<PopupProps>`
 `;
 
 /**
- * Wrapper for popup contents
+ * Wrapper for popup children
  */
 const PopupContents = styled.div<PopupProps>`
   font-size: ${typography.size.paragraph2};
@@ -150,7 +150,7 @@ const PopupContents = styled.div<PopupProps>`
 `;
 
 /**
- * Popup border arrow component
+ * Popup side arrow component
  */
 const Arrow = styled.div<PopupProps>`
   width: 0;
