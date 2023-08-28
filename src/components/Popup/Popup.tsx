@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import styled, { DefaultTheme, css } from 'styled-components';
 import { variant } from 'styled-system';
 import { pxToRem, ComponentBaseProps, typography } from '../../shared';
 
-export type ArrowVariant = 'none' | 'top' | 'right' | 'bottom' | 'left';
+export type ArrowDirection = 'none' | 'top' | 'right' | 'bottom' | 'left';
 
 /**
  * Dimensions of Popup component
@@ -36,7 +36,7 @@ export interface PopupProps extends ComponentBaseProps<HTMLDivElement> {
   /**
    * Popup arrow variant
    */
-  arrow?: ArrowVariant;
+  arrow?: ArrowDirection;
 
   /**
    * Title
@@ -50,8 +50,8 @@ export interface PopupProps extends ComponentBaseProps<HTMLDivElement> {
 }
 
 /**
- * Helper function to calculate correct sizes for font size
- * @param props theme props and popup height
+ * Helper function to calculate arrow styles depending on side
+ * @param props theme props
  * @returns modified css
  */
 const arrowStyles = (props: DefaultTheme) => {
@@ -116,11 +116,18 @@ const arrowStyles = (props: DefaultTheme) => {
   `;
 };
 
+/**
+ * Wrapper for popup
+ */
 const InternalPopup = styled.div<PopupProps>`
   position: relative;
   width: ${pxToRem(popupDimensions.innerPopup.popupWidth)};
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
 `;
+
+/**
+ * Wrapper for popup
+ */
 const PopupTitle = styled.div<PopupProps>`
   font-weight: ${typography.weight.bold};
   font-size: ${typography.size.paragraph};
@@ -129,6 +136,10 @@ const PopupTitle = styled.div<PopupProps>`
     ${pxToRem(popupDimensions.popupTitle.paddingBottom)}
     ${pxToRem(popupDimensions.popupTitle.paddingLeft)};
 `;
+
+/**
+ * Wrapper for popup contents
+ */
 const PopupContents = styled.div<PopupProps>`
   font-size: ${typography.size.paragraph2};
   line-height: ${typography.lineHeight.paragraph2};
@@ -138,6 +149,9 @@ const PopupContents = styled.div<PopupProps>`
   flex-direction: column;
 `;
 
+/**
+ * Popup border arrow component
+ */
 const Arrow = styled.div<PopupProps>`
   width: 0;
   height: 0;
