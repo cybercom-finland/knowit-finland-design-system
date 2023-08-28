@@ -34,7 +34,7 @@ const popupDimensions = {
  */
 export interface PopupProps extends ComponentBaseProps<HTMLDivElement> {
   /**
-   * Popup arrow variant
+   * Popup arrow direction
    */
   arrow?: ArrowDirection;
 
