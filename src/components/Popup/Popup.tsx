@@ -54,7 +54,7 @@ export interface PopupProps extends ComponentBaseProps<HTMLDivElement> {
  * @param props theme props and popup height
  * @returns modified css
  */
-const arrowStyles = (props: DefaultTheme & { popupHeight: number }) => {
+const arrowStyles = (props: DefaultTheme) => {
   return css`
     ${variant({
       prop: 'arrow',
@@ -82,9 +82,7 @@ const arrowStyles = (props: DefaultTheme & { popupHeight: number }) => {
           borderLeft: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
             props.theme.colors.grayScale.digitalBlack100
           }`,
-          top: pxToRem(
-            props.popupHeight / 2 - popupDimensions.arrow.arrowSize / 2
-          ),
+          top: `calc(50% - ${pxToRem(popupDimensions.arrow.arrowSize)})`,
           right: pxToRem(-popupDimensions.arrow.arrowSize),
         },
         bottom: {
@@ -110,9 +108,7 @@ const arrowStyles = (props: DefaultTheme & { popupHeight: number }) => {
           borderRight: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
             props.theme.colors.grayScale.digitalBlack100
           }`,
-          top: pxToRem(
-            props.popupHeight / 2 - popupDimensions.arrow.arrowSize / 2
-          ),
+          top: `calc(50% - ${pxToRem(popupDimensions.arrow.arrowSize)})`,
           left: pxToRem(-popupDimensions.arrow.arrowSize),
         },
       },
@@ -142,7 +138,7 @@ const PopupContents = styled.div<PopupProps>`
   flex-direction: column;
 `;
 
-const Arrow = styled.div<PopupProps & { popupHeight: number }>`
+const Arrow = styled.div<PopupProps>`
   width: 0;
   height: 0;
   position: absolute;
@@ -159,16 +155,9 @@ export const Popup = ({
   title,
   ...restProps
 }: PopupProps) => {
-  const [popupHeight, setPopupHeight] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setPopupHeight(ref.current?.clientHeight ?? 0);
-  });
-
   return (
-    <InternalPopup ref={ref} {...restProps}>
-      <Arrow arrow={arrow} popupHeight={popupHeight} />
+    <InternalPopup {...restProps}>
+      <Arrow arrow={arrow} />
       <PopupTitle>{title}</PopupTitle>
       <PopupContents>{children}</PopupContents>
     </InternalPopup>
