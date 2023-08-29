@@ -1,6 +1,7 @@
 export * from './Box';
 export * from './Button';
 export * from './Breadcrumb';
+export * from './Card';
 export * from './Checkbox';
 export * from './CircularLoadingIndicator';
 export * from './DatePicker';
