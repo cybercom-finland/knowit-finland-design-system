@@ -24,6 +24,7 @@ export interface BreadcrumbProps extends ComponentBaseProps<HTMLDivElement> {
  */
 const BreadcrumbWrapper = styled.div<BreadcrumbProps>`
   display: inline-flex;
+  align-items: center;
   font-size: ${typography.size.paragraph2};
 `;
 
@@ -31,14 +32,15 @@ const BreadcrumbWrapper = styled.div<BreadcrumbProps>`
  * Wrapper for breadcrumb spacer
  */
 const BreadcrumbSpacer = styled.p<BreadcrumbProps>`
-  margin: 0 ${pxToRem(8)} 0 ${pxToRem(8)};
+  margin: auto ${pxToRem(8)} auto ${pxToRem(8)};
 `;
 
 /**
  * Wrapper for breadcrumb home icon/link
  */
 const HomeLinkWrapper = styled.p<BreadcrumbProps>`
-  margin: 0 ${pxToRem(8)} 0 0};
+  display: flex;
+  margin-right: ${pxToRem(8)};
 `;
 
 /**
