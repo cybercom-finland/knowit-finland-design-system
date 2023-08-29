@@ -32,7 +32,7 @@ const BreadcrumbWrapper = styled.ol<BreadcrumbProps>`
 /**
  * Wrapper for breadcrumb spacer
  */
-const BreadcrumbSpacer = styled.p<BreadcrumbProps>`
+const BreadcrumbSpacer = styled.li<BreadcrumbProps>`
   margin: auto ${pxToRem(8)} auto ${pxToRem(8)};
 `;
 
