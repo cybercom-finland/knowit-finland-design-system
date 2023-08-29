@@ -193,9 +193,11 @@ export const Notification = ({
           ></NotificationIcon>
           <NotificationMessageWrapper>
             <NotificationTitleParagraph>{title}</NotificationTitleParagraph>
-            <NotificationMessageParagraph>
-              {message}
-            </NotificationMessageParagraph>
+            {message && (
+              <NotificationMessageParagraph>
+                {message}
+              </NotificationMessageParagraph>
+            )}
           </NotificationMessageWrapper>
           <NotificationCloseButtonWrapper>
             <IconButton
