@@ -22,9 +22,10 @@ export interface BreadcrumbProps extends ComponentBaseProps<HTMLDivElement> {
 /**
  * Wrapper for breadcrumb component
  */
-const BreadcrumbWrapper = styled.div<BreadcrumbProps>`
+const BreadcrumbWrapper = styled.ol<BreadcrumbProps>`
   display: inline-flex;
   align-items: center;
+  list-style-type: none;
   font-size: ${typography.size.paragraph2};
 `;
 
@@ -38,7 +39,7 @@ const BreadcrumbSpacer = styled.p<BreadcrumbProps>`
 /**
  * Wrapper for breadcrumb home icon/link
  */
-const HomeLinkWrapper = styled.p<BreadcrumbProps>`
+const HomeLinkWrapper = styled.li<BreadcrumbProps>`
   display: flex;
   margin-right: ${pxToRem(8)};
 `;
@@ -60,9 +61,9 @@ export const Breadcrumb = ({
     const elementChild: React.ReactElement = child;
     return (
       <>
-        {elementChild}
+        <li style={{ display: 'flex' }}>{elementChild}</li>
         {index < React.Children.count(children) - 1 && (
-          <BreadcrumbSpacer> / </BreadcrumbSpacer>
+          <BreadcrumbSpacer aria-hidden> / </BreadcrumbSpacer>
         )}
       </>
     );
