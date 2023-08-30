@@ -27,6 +27,8 @@ const BreadcrumbWrapper = styled.ol<BreadcrumbProps>`
   align-items: center;
   list-style-type: none;
   font-size: ${typography.size.paragraph2};
+  margin: 0;
+  padding: 0;
 `;
 
 /**
@@ -34,6 +36,7 @@ const BreadcrumbWrapper = styled.ol<BreadcrumbProps>`
  */
 const BreadcrumbSpacer = styled.li<BreadcrumbProps>`
   margin: auto ${pxToRem(8)} auto ${pxToRem(8)};
+  user-select: none;
 `;
 
 /**
@@ -42,6 +45,16 @@ const BreadcrumbSpacer = styled.li<BreadcrumbProps>`
 const HomeLinkWrapper = styled.li<BreadcrumbProps>`
   display: flex;
   margin-right: ${pxToRem(8)};
+`;
+
+/**
+ * Wrapper for breadcrumb item
+ */
+const BreadcrumbLi = styled.li<BreadcrumbProps>`
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 `;
 
 /**
@@ -61,7 +74,7 @@ export const Breadcrumb = ({
     const elementChild: React.ReactElement = child;
     return (
       <>
-        <li style={{ display: 'flex' }}>{elementChild}</li>
+        <BreadcrumbLi>{elementChild}</BreadcrumbLi>
         {index < React.Children.count(children) - 1 && (
           <BreadcrumbSpacer aria-hidden> / </BreadcrumbSpacer>
         )}
