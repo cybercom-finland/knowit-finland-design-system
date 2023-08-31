@@ -2,8 +2,6 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Accordion, AccordionProps } from './Accordion';
-import { styled } from 'styled-components';
-import { pxToRem } from '../../shared';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -18,12 +16,12 @@ export default {
       {
         name: 'light',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2873%3A3795&mode=design&t=AjKcl0zg1pKHLGEU-1',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=3261%3A4322&mode=design&t=nkOlaGT8Xge4iBwT-1',
       },
       {
         name: 'dark',
         type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=2876%3A3808&mode=design&t=AjKcl0zg1pKHLGEU-1',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/IZ-Design-System---%F0%9F%9A%80-Live?type=design&node-id=3407%3A10656&mode=design&t=nkOlaGT8Xge4iBwT-1',
       },
     ],
   },
@@ -58,11 +56,3 @@ const Template: StoryFn<typeof Accordion> = (args) => (
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
-
-/**
- * Rounded variant
- */
-export const Rounded = Template.bind({});
-Rounded.args = {
-  variant: 'rounded',
-};
