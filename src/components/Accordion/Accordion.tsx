@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import { pxToRem, ComponentBaseProps } from '../../shared';
@@ -22,7 +22,7 @@ export interface AccordionProps extends ComponentBaseProps<HTMLDivElement> {
   /**
    * Accordion variant
    */
-  variant?: AccordionVariant;
+  title?: React.ReactNode;
 
   /**
    * Children
@@ -51,21 +51,33 @@ const calculateSizes = () => {
 
 const InternalAccordion = styled.div<AccordionProps>`
   ${calculateSizes}
-  width: min-content;
+
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
+`;
+
+const AccordionTitle = styled.div<AccordionProps>`
+  padding: 16px 16px 16px 24px;
+`;
+const AccordionContent = styled.div<AccordionProps>`
+  padding: 0px 24px 24px 24px;
 `;
 
 /**
  * Accordion component
  */
 export const Accordion = ({
-  variant = 'rectangle',
   children,
+  title,
   ...restProps
 }: AccordionProps) => {
+  const [accordionIsOpen, setAccordionOpen] = useState(false);
   return (
-    <InternalAccordion variant={variant} {...restProps}>
-      {children}
+    <InternalAccordion
+      onClick={() => setAccordionOpen(!accordionIsOpen)}
+      {...restProps}
+    >
+      <AccordionTitle>{title}</AccordionTitle>
+      {accordionIsOpen && <AccordionContent>{children}</AccordionContent>}
     </InternalAccordion>
   );
 };
