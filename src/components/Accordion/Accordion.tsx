@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { pxToRem, ComponentBaseProps } from '../../shared';
-import { IconButton } from '../IconButton';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 /**
