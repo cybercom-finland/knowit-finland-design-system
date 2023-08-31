@@ -83,14 +83,14 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
 
   const handleButtonPress = (direction: 'left' | 'right') => {
     if (direction === 'left') {
-      tabsWrapperRef.current?.scrollBy(-91, 0)
+      tabsWrapperRef.current?.scrollBy(-91, 0);
     }
     if (direction === 'right') {
-      tabsWrapperRef.current?.scrollBy(91, 0)
+      tabsWrapperRef.current?.scrollBy(91, 0);
     }
     setDisableLeftArrow(false);
     setDisableRightArrow(false);
-  }
+  };
 
   const createNavigationTabs = React.Children.map(children, (child, i) => {
     if (!React.isValidElement<TabProps>(child)) {

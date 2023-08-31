@@ -30,22 +30,14 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Tabs> = (args) => (
   <Tabs {...args} aria-label='Example tabs component'>
-    <Tab>
-      <div>Tab</div>
-    </Tab>
+    <Tab label='Tab' />
   </Tabs>
 );
 const ActiveTabTemplate: StoryFn<typeof Tabs> = (args) => (
   <Tabs {...args} aria-label='Example tabs component'>
-    <Tab active>
-      <div>Tab</div>
-    </Tab>
-    <Tab>
-      <div>Tab</div>
-    </Tab>
-    <Tab>
-      <div>Tab</div>
-    </Tab>
+    <Tab active label='Tab' />
+    <Tab label='Tab' />
+    <Tab label='Tab' />
   </Tabs>
 );
 const Wrapper = styled.div<TabsProps>`
@@ -54,24 +46,12 @@ const Wrapper = styled.div<TabsProps>`
 const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => (
   <Wrapper>
     <Tabs {...args} aria-label='Example tabs component'>
-      <Tab active>
-        <div>Tab</div>
-      </Tab>
-      <Tab>
-        <div>Tab</div>
-      </Tab>
-      <Tab>
-        <div>Tab</div>
-      </Tab>
-      <Tab>
-        <div>Tab</div>
-      </Tab>
-      <Tab>
-        <div>Tab</div>
-      </Tab>
-      <Tab active>
-        <div>Tab</div>
-      </Tab>
+      <Tab active label='Tab' />
+      <Tab label='Tab' />
+      <Tab label='Tab' />
+      <Tab label='Tab' />
+      <Tab label='Tab' />
+      <Tab label='Tab' />
     </Tabs>
   </Wrapper>
 );

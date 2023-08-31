@@ -5,6 +5,7 @@ import {
   pxToRem,
 } from '../../shared';
 import styled, { css } from 'styled-components';
+import { Button } from '../Button';
 
 export interface TabProps extends ComponentBaseProps<HTMLDivElement> {
   /**
@@ -13,9 +14,14 @@ export interface TabProps extends ComponentBaseProps<HTMLDivElement> {
   value?: string;
 
   /**
-   * Children
+   * Label
    */
-  children?: React.ReactNode;
+  label?: string;
+
+  /**
+   * Icon
+   */
+  icon?: React.ReactNode;
 
   /**
    * Is tab active
@@ -31,23 +37,10 @@ export interface TabProps extends ComponentBaseProps<HTMLDivElement> {
 /**
  * Tab styles
  */
-const TabContainer = styled.div<TabProps>`
-  min-width: ${pxToRem(91)};
-  max-width: ${pxToRem(91)};
+const TabContainer = styled(Button)<TabProps>`
   height: ${pxToRem(56)};
-  display: flex;
-  align-items: center;
+  width: ${pxToRem(91)};
   justify-content: center;
-  // Transparent border to keep size from changing when adding bottom border
-  border-bottom: 3px solid transparent;
-
-  &:hover {
-    background-color: ${(props) =>
-      props.theme.colors.grayScale.digitalBlack100};
-    border-bottom: 3px solid
-      ${(props) => props.theme.colors.grayScale.digitalBlack400};
-  }
-
   ${({ active }) =>
     active &&
     css`
@@ -64,21 +57,24 @@ const TabContainer = styled.div<TabProps>`
 export const Tab = ({
   value,
   id,
-  children,
   active,
   disabled,
+  label,
+  icon,
   ...restprops
 }: TabProps) => {
   const componentId = id ?? generateRandomString(5);
   return (
     <TabContainer
+      size='large'
+      variant='text'
       value={value}
       disabled={disabled}
       id={componentId}
       active={active}
       {...restprops}
-    >
-      {children}
-    </TabContainer>
+      label={label}
+      endIcon={icon}
+    ></TabContainer>
   );
 };
