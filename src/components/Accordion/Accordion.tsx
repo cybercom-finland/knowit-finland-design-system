@@ -28,7 +28,7 @@ const accordionDimensions = {
  */
 export interface AccordionProps extends ComponentBaseProps<HTMLDivElement> {
   /**
-   * Accordion variant
+   * Accordion title
    */
   title?: React.ReactNode;
 
