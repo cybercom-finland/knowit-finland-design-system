@@ -20,11 +20,6 @@ export interface NotificationCarouselProps
   carouselItems?: CarouselItem[];
 
   /**
-   * Aria-label for the close buttons
-   */
-  closeButtonAriaLabel?: string;
-
-  /**
    * Maximum height of the whole carousel component, so the notifications won't cover the whole view if there are many (only most recent ones would be visible)
    */
   maxHeight?: string;
@@ -50,7 +45,7 @@ export interface CarouselItem {
   message?: string;
 
   /**
-   * Aria-label for the close buttons
+   * Aria-label for the close button
    */
   closeButtonAriaLabel?: string;
 
@@ -99,13 +94,11 @@ const TimedNotification = ({
  */
 export const NotificationCarousel = ({
   carouselItems,
-  closeButtonAriaLabel,
   maxHeight,
   ...restProps
 }: NotificationCarouselProps) => {
   const props = {
     carouselItems,
-    closeButtonAriaLabel,
     maxHeight,
     ...restProps,
   };
@@ -115,17 +108,19 @@ export const NotificationCarousel = ({
       style={{
         maxHeight: maxHeight || '100%',
         overflow: 'hidden',
+        pointerEvents: 'none',
       }}
     >
       {carouselItems &&
         carouselItems.map((item) => (
           <NotificationCarouselItemWrapper
             key={item.id || generateRandomString(5)}
+            style={{ pointerEvents: 'auto' }}
           >
             <TimedNotification
               title={item.title}
               message={item.message}
-              closeButtonAriaLabel={closeButtonAriaLabel}
+              closeButtonAriaLabel={item.closeButtonAriaLabel}
               duration={item.duration}
             />
           </NotificationCarouselItemWrapper>
