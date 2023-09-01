@@ -9,13 +9,13 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 const accordionDimensions = {
   accordionTitle: {
     paddingTop: 16,
-    paddingRigth: 16,
+    paddingRight: 16,
     paddingBottom: 16,
     paddingLeft: 24,
   },
   accordionContent: {
     paddingTop: 0,
-    paddingRigth: 24,
+    paddingRight: 24,
     paddingBottom: 24,
     paddingLeft: 24,
   },
@@ -48,13 +48,13 @@ const AccordionTitle = styled.div<AccordionProps>`
   cursor: pointer;
   user-select: none;
   padding: ${pxToRem(accordionDimensions.accordionTitle.paddingTop)}
-    ${pxToRem(accordionDimensions.accordionTitle.paddingRigth)}
+    ${pxToRem(accordionDimensions.accordionTitle.paddingRight)}
     ${pxToRem(accordionDimensions.accordionTitle.paddingBottom)}
     ${pxToRem(accordionDimensions.accordionTitle.paddingLeft)};
 `;
 const AccordionContent = styled.div<AccordionProps>`
   padding: ${pxToRem(accordionDimensions.accordionContent.paddingTop)}
-    ${pxToRem(accordionDimensions.accordionContent.paddingRigth)}
+    ${pxToRem(accordionDimensions.accordionContent.paddingRight)}
     ${pxToRem(accordionDimensions.accordionContent.paddingBottom)}
     ${pxToRem(accordionDimensions.accordionContent.paddingLeft)};
 `;
