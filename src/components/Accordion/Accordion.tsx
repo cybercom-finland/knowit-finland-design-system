@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { pxToRem, ComponentBaseProps } from '../../shared';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+import { Typography } from '../Typography';
 
 /**
  * Dimensions of accordion component
@@ -19,7 +20,10 @@ const accordionDimensions = {
     paddingBottom: 24,
     paddingLeft: 24,
   },
+  iconSize: 24,
 };
+
+type AccordionTitleSize = 'h2' | 'h3';
 
 /**
  * Accordion component properties
@@ -30,6 +34,11 @@ export interface AccordionProps extends ComponentBaseProps<HTMLDivElement> {
    * Accordion title
    */
   title?: React.ReactNode;
+
+  /**
+   * Accordion title size
+   */
+  titleSize?: AccordionTitleSize;
 
   /**
    * Children
@@ -58,8 +67,13 @@ const AccordionContent = styled.div<AccordionProps>`
     ${pxToRem(accordionDimensions.accordionContent.paddingBottom)}
     ${pxToRem(accordionDimensions.accordionContent.paddingLeft)};
 `;
+
+/**
+ * Accordion arrow icon wrapper component
+ */
 const AccordionArrow = styled.div<AccordionProps>`
   align-self: center;
+  font-size: ${pxToRem(accordionDimensions.iconSize)};
 `;
 
 /**
@@ -68,13 +82,14 @@ const AccordionArrow = styled.div<AccordionProps>`
 export const Accordion = ({
   children,
   title,
+  titleSize = 'h3',
   ...restProps
 }: AccordionProps) => {
   const [accordionIsOpen, setAccordionOpen] = useState(false);
   return (
     <InternalAccordion {...restProps}>
       <AccordionTitle onClick={() => setAccordionOpen(!accordionIsOpen)}>
-        {title}
+        <Typography variant={titleSize}>{title}</Typography>
         <AccordionArrow>
           {accordionIsOpen && <MdKeyboardArrowUp />}
           {!accordionIsOpen && <MdKeyboardArrowDown />}

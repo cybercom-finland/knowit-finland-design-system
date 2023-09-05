@@ -9,7 +9,8 @@ export default {
   component: Accordion,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    title: <h3>Accordion Title</h3>,
+    title: 'Accordion Title',
+    titleSize: 'h3',
   },
   parameters: {
     design: [
