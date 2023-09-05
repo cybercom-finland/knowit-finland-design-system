@@ -33,7 +33,7 @@ export interface AccordionProps extends ComponentBaseProps<HTMLDivElement> {
   /**
    * Accordion title
    */
-  title?: React.ReactNode;
+  title?: string;
 
   /**
    * Accordion title size
