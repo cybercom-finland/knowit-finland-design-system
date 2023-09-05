@@ -60,6 +60,7 @@ export interface CarouselItem {
  */
 const NotificationCarouselItemWrapper = styled.div`
   padding-bottom: ${notificationSpacing};
+  pointer-events: auto;
 `;
 
 /**
@@ -78,11 +79,13 @@ const TimedNotification = ({
     }, duration);
   return (
     isVisible && (
-      <Notification
-        title={title}
-        message={message}
-        closeButtonAriaLabel={closeButtonAriaLabel}
-      />
+      <NotificationCarouselItemWrapper>
+        <Notification
+          title={title}
+          message={message}
+          closeButtonAriaLabel={closeButtonAriaLabel}
+        />
+      </NotificationCarouselItemWrapper>
     )
   );
 };
@@ -113,17 +116,13 @@ export const NotificationCarousel = ({
     >
       {carouselItems &&
         carouselItems.map((item) => (
-          <NotificationCarouselItemWrapper
+          <TimedNotification
             key={item.id || generateRandomString(5)}
-            style={{ pointerEvents: 'auto' }}
-          >
-            <TimedNotification
-              title={item.title}
-              message={item.message}
-              closeButtonAriaLabel={item.closeButtonAriaLabel}
-              duration={item.duration}
-            />
-          </NotificationCarouselItemWrapper>
+            title={item.title}
+            message={item.message}
+            closeButtonAriaLabel={item.closeButtonAriaLabel}
+            duration={item.duration}
+          />
         ))}
     </Wrapper>
   );

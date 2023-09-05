@@ -8,13 +8,20 @@ export default {
   args: {
     // Shaping the stories through args composition.
     carouselItems: [
-      { title: 'First notification' },
+      {
+        title: 'First notification',
+        closeButtonAriaLabel: 'Close the first notification',
+      },
       {
         title: 'Second notification',
         message: 'Should disappear in 10 seconds',
         duration: 10000,
+        closeButtonAriaLabel: 'Close the second notification',
       },
-      { title: 'Third notification' },
+      {
+        title: 'Third notification',
+        closeButtonAriaLabel: 'Close the third notification',
+      },
     ],
   },
   parameters: {
