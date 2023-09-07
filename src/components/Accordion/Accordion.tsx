@@ -21,6 +21,7 @@ const accordionDimensions = {
     paddingLeft: 24,
   },
   iconSize: 24,
+  marginBottom: 8,
 };
 
 type AccordionTitleSize = 'h2' | 'h3';
@@ -48,6 +49,7 @@ export interface AccordionProps extends ComponentBaseProps<HTMLDivElement> {
 
 const InternalAccordion = styled.div<AccordionProps>`
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
+  margin-bottom: ${pxToRem(accordionDimensions.marginBottom)};
 `;
 
 const AccordionTitle = styled.div<AccordionProps>`
@@ -82,7 +84,7 @@ const AccordionArrow = styled.div<AccordionProps>`
 export const Accordion = ({
   children,
   title,
-  titleSize = 'h3',
+  titleSize = 'h2',
   ...restProps
 }: AccordionProps) => {
   const [accordionIsOpen, setAccordionOpen] = useState(false);

@@ -46,12 +46,59 @@ const ExampleAccordion = ({ ...restProps }: AccordionProps) => {
   );
 };
 
+/*
+ * Example Dialog story
+ */
+const ExampleMultiAccordion = ({ ...restProps }: AccordionProps) => {
+  return (
+    <>
+      <Accordion {...restProps}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </Accordion>
+      <Accordion {...restProps}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </Accordion>
+      <Accordion {...restProps}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </Accordion>
+    </>
+  );
+};
+
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Accordion> = (args) => (
   <ExampleAccordion {...args}></ExampleAccordion>
+);
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const MultiTemplate: StoryFn<typeof Accordion> = (args) => (
+  <ExampleMultiAccordion {...args}></ExampleMultiAccordion>
 );
 
 /**
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
+
+/**
+ * Multiple accordions
+ */
+export const MultipleAccordionVariant = MultiTemplate.bind({});
