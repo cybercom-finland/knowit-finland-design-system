@@ -11,6 +11,7 @@ export default {
       {
         title: 'First notification',
         closeButtonAriaLabel: 'Close the first notification',
+        hidden: false,
       },
       {
         title: 'Second notification',
@@ -23,6 +24,7 @@ export default {
         closeButtonAriaLabel: 'Close the third notification',
       },
     ],
+    maxNotifications: 2,
   },
   parameters: {
     design: [
@@ -49,7 +51,3 @@ const Template: StoryFn<typeof NotificationCarousel> = (args) => {
  * Default
  */
 export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  maxHeight: '225px', // Limit the height so that it is demonstrated how partially hidden notification becomes visible when other notification(s) disappear before it
-};

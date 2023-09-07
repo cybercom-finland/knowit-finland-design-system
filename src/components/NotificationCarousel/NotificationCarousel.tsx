@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ComponentBaseProps, generateRandomString } from '../../shared';
 import { Notification } from '../Notification/Notification';
@@ -20,9 +20,9 @@ export interface NotificationCarouselProps
   carouselItems?: CarouselItem[];
 
   /**
-   * Maximum height of the whole carousel component, so the notifications won't cover the whole view if there are many (only most recent ones would be visible)
+   * Maximum amount of notifications to be shown at once
    */
-  maxHeight?: string;
+  maxNotifications?: number;
 }
 
 /**
@@ -64,65 +64,46 @@ const NotificationCarouselItemWrapper = styled.div`
 `;
 
 /**
- * Hide a notification after specified amount of time
- */
-const TimedNotification = ({
-  title,
-  message,
-  closeButtonAriaLabel,
-  duration,
-}: CarouselItem) => {
-  const [isVisible, setIsVisible] = React.useState(true);
-  duration &&
-    setTimeout(() => {
-      setIsVisible(false);
-    }, duration);
-  return (
-    isVisible && (
-      <NotificationCarouselItemWrapper>
-        <Notification
-          title={title}
-          message={message}
-          closeButtonAriaLabel={closeButtonAriaLabel}
-        />
-      </NotificationCarouselItemWrapper>
-    )
-  );
-};
-
-/**
  * NotificationCarousel component
  * @param props NotificationCarousel props
  * @returns NotificationCarousel component
  */
 export const NotificationCarousel = ({
   carouselItems,
-  maxHeight,
-  ...restProps
+  maxNotifications,
 }: NotificationCarouselProps) => {
-  const props = {
-    carouselItems,
-    maxHeight,
-    ...restProps,
-  };
+  const [carouselItemsState, setCarouselItemsState] = useState(
+    carouselItems || []
+  );
 
   return (
     <Wrapper
       style={{
-        maxHeight: maxHeight || '100%',
         overflow: 'hidden',
         pointerEvents: 'none',
       }}
     >
-      {carouselItems &&
-        carouselItems.map((item) => (
-          <TimedNotification
+      {carouselItemsState
+        .filter((_, index) =>
+          maxNotifications ? index < maxNotifications : true
+        )
+        .map((item, index) => (
+          <NotificationCarouselItemWrapper
             key={item.id || generateRandomString(5)}
-            title={item.title}
-            message={item.message}
-            closeButtonAriaLabel={item.closeButtonAriaLabel}
-            duration={item.duration}
-          />
+          >
+            <Notification
+              title={item.title}
+              message={item.message}
+              closeButtonAriaLabel={item.closeButtonAriaLabel}
+              duration={item.duration}
+              index={index}
+              deleteNotification={(deleteIndex) => {
+                setCarouselItemsState(
+                  carouselItemsState.filter((_, index) => index !== deleteIndex)
+                );
+              }}
+            />
+          </NotificationCarouselItemWrapper>
         ))}
     </Wrapper>
   );

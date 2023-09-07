@@ -56,6 +56,21 @@ export interface NotificationProps
    * Aria-label for the close button
    */
   closeButtonAriaLabel?: string;
+
+  /**
+   * How long the notification is shown in milliseconds (indefinitely, if undefined)
+   */
+  duration?: number;
+
+  /**
+   * Function that is called when notification should be deleted from view (close button, or duration elapsed)
+   */
+  deleteNotification?: (index: number) => void;
+
+  /**
+   * Index of the notification, which can assist with deleteNotification
+   */
+  index?: number;
 }
 
 /**
@@ -166,6 +181,9 @@ export const Notification = ({
   notificationSeverity,
   showLoadingIndicator,
   closeButtonAriaLabel,
+  duration,
+  deleteNotification,
+  index,
   ...restProps
 }: NotificationProps) => {
   const props = {
@@ -174,10 +192,19 @@ export const Notification = ({
     notificationSeverity,
     showLoadingIndicator,
     closeButtonAriaLabel,
+    duration,
+    deleteNotification,
+    index,
     ...restProps,
   };
 
   const [hidden, setHidden] = React.useState(false);
+
+  duration &&
+    setTimeout(() => {
+      setHidden(true);
+      deleteNotification && deleteNotification(index || -1);
+    }, duration);
 
   return (
     !hidden && (
@@ -201,7 +228,10 @@ export const Notification = ({
           </NotificationMessageWrapper>
           <NotificationCloseButtonWrapper>
             <IconButton
-              onClick={() => setHidden(true)}
+              onClick={() => {
+                setHidden(true);
+                deleteNotification && deleteNotification(index || 0);
+              }}
               aria-label={
                 closeButtonAriaLabel || 'Close button for a notification'
               }
