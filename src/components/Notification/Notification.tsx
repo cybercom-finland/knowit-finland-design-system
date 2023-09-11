@@ -203,7 +203,7 @@ export const Notification = ({
   duration &&
     setTimeout(() => {
       setHidden(true);
-      deleteNotification && deleteNotification(index || -1);
+      deleteNotification && deleteNotification(index || 0);
     }, duration);
 
   return (

@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ComponentBaseProps, generateRandomString } from '../../shared';
+import { generateRandomString } from '../../shared';
 import { Notification } from '../Notification/Notification';
 import { Wrapper, WrapperProps } from '../Wrapper';
 import { notificationSpacing } from './styles';
 
 /**
  * Notification carousel component properties
- * Extends html label attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#attributes
  */
-export interface NotificationCarouselProps
-  extends WrapperProps,
-    ComponentBaseProps<HTMLLabelElement>,
-    React.LabelHTMLAttributes<HTMLLabelElement> {
+export interface NotificationCarouselProps extends WrapperProps {
   /**
    * List of items (notifications) to stack to each other
    */
