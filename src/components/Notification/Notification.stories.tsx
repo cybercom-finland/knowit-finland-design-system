@@ -78,3 +78,13 @@ VeryLongText.args = {
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor.',
   notificationSeverity: 'info',
 };
+
+/**
+ * Timed notification
+ */
+export const Timed = Template.bind({});
+Timed.args = {
+  message: 'Timed notification',
+  title: 'Should disappear in 10 seconds',
+  duration: 10000,
+};
