@@ -82,9 +82,11 @@ export const Breadcrumb = ({
     );
   });
   return (
-    <BreadcrumbWrapper id={componentId} {...restProps}>
-      {homeLink && <HomeLinkWrapper>{homeLink}</HomeLinkWrapper>}
-      {renderChildren}
-    </BreadcrumbWrapper>
+      <nav>
+      <BreadcrumbWrapper id={componentId} {...restProps}>
+        {homeLink && <HomeLinkWrapper>{homeLink}</HomeLinkWrapper>}
+        {renderChildren}
+      </BreadcrumbWrapper>
+      </nav>
   );
 };
