@@ -24,17 +24,17 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof List> = (args) => (
   <List>
-    <ListItem {...args} text='Berries' expandButton={true}>
+    <ListItem {...args} text='Berries' expandable expanded>
       <ListItem {...args} text='Strawberry' />
       <ListItem {...args} text='Blueberry' />
       <ListItem {...args} text='Blackberry' />
     </ListItem>
-    <ListItem {...args} text='Fruits' expandButton={true}>
-      <ListItem {...args} text='Yellow' expandButton={true}>
+    <ListItem {...args} text='Fruits' expandable>
+      <ListItem {...args} text='Yellow' expandable>
         <ListItem {...args} text='Banana' />
         <ListItem {...args} text='Pineapple' />
       </ListItem>
-      <ListItem {...args} text='Red' expandButton={true}>
+      <ListItem {...args} text='Red' expandable>
         <ListItem {...args} text='Apple' />
         <ListItem {...args} text='Peach' />
       </ListItem>
@@ -47,5 +47,3 @@ const Template: StoryFn<typeof List> = (args) => (
  * Default
  */
 export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {};

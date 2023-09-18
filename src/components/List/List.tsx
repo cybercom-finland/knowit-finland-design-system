@@ -18,9 +18,9 @@ export interface ListItemProps
   text?: string;
 
   /**
-   * Does the item have a button for expanding sub items
+   * If true, show the expand button so the sub items can be shown or hidden by user
    */
-  expandButton?: boolean;
+  expandable?: boolean;
 
   /**
    * Aria-label for the expand button
@@ -66,6 +66,7 @@ const ListItemWrapper = styled.div`
   &:hover {
     color: ${(props) => props.theme.colors.grayScale.digitalBlack400};
   }
+  cursor: pointer;
 `;
 
 /**
@@ -99,7 +100,7 @@ export const List = ({
  */
 export const ListItem = ({
   text,
-  expandButton,
+  expandable,
   expandButtonAriaLabel,
   children,
   expanded,
@@ -110,7 +111,7 @@ export const ListItem = ({
     <div>
       <ListItemWrapper>
         <TextWrapper>{text}</TextWrapper>
-        {expandButton && (
+        {expandable && (
           <ExpandButtonWrapper>
             <IconButton
               onClick={() => {
