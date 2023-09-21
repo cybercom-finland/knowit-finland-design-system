@@ -24,29 +24,28 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof List> = (args) => (
   <List {...args}>
-    <ListItem {...args} text='Berries' expandable expanded>
-      <ListItem {...args} text='Strawberry' />
-      <ListItem {...args} text='Blueberry' />
-      <ListItem {...args} text='Blackberry' />
+    <ListItem text='Berries' expandable expanded>
+      <ListItem text='Strawberry' />
+      <ListItem text='Blueberry' />
+      <ListItem text='Blackberry' />
     </ListItem>
-    <ListItem {...args} text='Fruits' expandable>
-      <ListItem {...args} text='Yellow' expandable>
-        <ListItem {...args} text='Banana' />
-        <ListItem {...args} text='Pineapple' />
+    <ListItem text='Fruits' expandable>
+      <ListItem text='Yellow' expandable>
+        <ListItem text='Banana' />
+        <ListItem text='Pineapple' />
       </ListItem>
-      <ListItem {...args} text='Red' expandable>
-        <ListItem {...args} text='Apple' />
-        <ListItem {...args} text='Peach' />
+      <ListItem text='Red' expandable>
+        <ListItem text='Apple' />
+        <ListItem text='Peach' />
       </ListItem>
     </ListItem>
-    <ListItem {...args} text='Potato' />
+    <ListItem text='Potato' />
   </List>
 );
 
 const LongTextTemplate: StoryFn<typeof List> = (args) => (
   <List {...args}>
     <ListItem
-      {...args}
       text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -57,7 +56,6 @@ const LongTextTemplate: StoryFn<typeof List> = (args) => (
       expandable
     >
       <ListItem
-        {...args}
         text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -67,7 +65,6 @@ const LongTextTemplate: StoryFn<typeof List> = (args) => (
       est laborum.'
       />
       <ListItem
-        {...args}
         text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea

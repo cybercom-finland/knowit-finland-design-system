@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { typography } from '../../shared';
+import { InputComponentBaseProps, typography } from '../../shared';
 import { MdOutlineExpandLess, MdOutlineExpandMore } from 'react-icons/md';
 import { listItemPadding } from './styles';
 
@@ -9,7 +9,7 @@ import { listItemPadding } from './styles';
  * Extends html li attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#attributes
  */
-export interface ListItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
+export interface ListItemProps extends InputComponentBaseProps<HTMLLIElement> {
   /**
    * Text of the list item
    */
@@ -24,6 +24,11 @@ export interface ListItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
    * Is the list item by default expanded (true) or unexpanded (false)
    */
   expanded?: boolean;
+
+  /**
+   * Children of the element, if any
+   */
+  children?: React.ReactNode;
 }
 
 /**
@@ -75,6 +80,7 @@ const ListSubItemWrapper = styled.ul`
  * List component's main ul-element, containing all the ListItems
  */
 export const ListWrapper = styled.ul`
+  padding-left: 0;
   display: flex;
   flex-direction: column;
   list-style-type: none;
@@ -104,7 +110,7 @@ export const ListItem = ({
             setExpandedState(!expandedState);
           }
         }}
-        tabIndex={expandable ? 0 : -1}
+        tabIndex={0}
       >
         <TextWrapper>{text}</TextWrapper>
         {expandable && (
