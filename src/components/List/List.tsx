@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { typography } from '../../shared';
-import { IconButton } from '../IconButton/IconButton';
 import { MdOutlineExpandLess, MdOutlineExpandMore } from 'react-icons/md';
 import { listItemPadding } from './styles';
 
 /**
  * ListItem component properties
- * Extends html label attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#attributes
+ * Extends html li attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#attributes
  */
-export interface ListItemProps
-  extends React.LabelHTMLAttributes<HTMLLabelElement> {
+export interface ListItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   /**
    * Text of the list item
    */
@@ -21,11 +19,6 @@ export interface ListItemProps
    * If true, show the expand button so the sub items can be shown or hidden by user
    */
   expandable?: boolean;
-
-  /**
-   * Aria-label for the expand button
-   */
-  expandButtonAriaLabel?: string;
 
   /**
    * Is the list item by default expanded (true) or unexpanded (false)
@@ -39,96 +32,101 @@ export interface ListItemProps
 const TextWrapper = styled.div`
   font-size: ${typography.size.paragraph};
   line-height: ${typography.lineHeight.paragraph};
-  flex: 1;
-  display: inline-block;
   padding: ${listItemPadding};
+  flex: 0 1 auto;
 `;
 
 /**
- * Style for the area which contains the list item's expand button
+ * Style for the area which contains the list item's expand icon
  */
-const ExpandButtonWrapper = styled.div`
-  padding-right: ${listItemPadding};
-  flex: 1;
-  display: inline-block;
+const ExpandIconWrapper = styled.div`
+  flex: 0 0 auto;
 `;
 
 /**
- * Style for the list item div, which contains the text and the expand button
+ * Style for the list item li-element, which contains the text and the expand button
  */
-const ListItemWrapper = styled.div`
+const ListItemWrapper = styled.li`
   display: flex;
+  align-items: center;
   padding: listItemSpacing;
-  align-items: flex-start;
-  justify-content: flex-start;
-  display: inline-block;
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   &:hover {
     color: ${(props) => props.theme.colors.grayScale.digitalBlack400};
+  }
+  &:focus-visible {
+    background-color: ${(props) =>
+      props.theme.colors.grayScale.digitalBlack200};
   }
   cursor: pointer;
 `;
 
 /**
- * Style for the div that contains the sub items (creates indentation)
+ * Style for the ul-element that contains the sub items (creates indentation)
  */
-const ListSubItemWrapper = styled.div`
+const ListSubItemWrapper = styled.ul`
   padding-left: ${listItemPadding};
-`;
-
-/**
- * List component's main div, containing all the ListItems
- */
-export const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  list-style-type: none;
 `;
 
 /**
- * List component (contains ListItems)
+ * List component's main ul-element, containing all the ListItems
  */
-export const List = ({
-  children,
-}: React.LabelHTMLAttributes<HTMLLabelElement>) => {
-  return <ListWrapper>{children}</ListWrapper>;
-};
+export const ListWrapper = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+`;
 
 /**
- * ListItem component (may contain other ListItems hiearchially)
+ * ListItem component (may contain other ListItems hiearchially as children)
  * @param props ListItem props
  * @returns ListItem component
  */
 export const ListItem = ({
   text,
   expandable,
-  expandButtonAriaLabel,
-  children,
   expanded,
+  children,
 }: ListItemProps) => {
   const [expandedState, setExpandedState] = React.useState(expanded);
 
   return (
-    <div>
-      <ListItemWrapper>
+    <>
+      <ListItemWrapper
+        onClick={() => {
+          expandable && setExpandedState(!expandedState);
+        }}
+        onKeyDown={(e) => {
+          if (expandable && (e.code === 'Enter' || e.code === 'Space')) {
+            setExpandedState(!expandedState);
+          }
+        }}
+        tabIndex={expandable ? 0 : -1}
+      >
         <TextWrapper>{text}</TextWrapper>
         {expandable && (
-          <ExpandButtonWrapper>
-            <IconButton
-              onClick={() => {
-                setExpandedState(!expandedState);
-              }}
-              aria-label={expandButtonAriaLabel || 'List expand button'}
-            >
-              {expandedState ? (
-                <MdOutlineExpandLess />
-              ) : (
-                <MdOutlineExpandMore />
-              )}
-            </IconButton>
-          </ExpandButtonWrapper>
+          <ExpandIconWrapper>
+            {expandedState ? <MdOutlineExpandLess /> : <MdOutlineExpandMore />}
+          </ExpandIconWrapper>
         )}
       </ListItemWrapper>
-      {expandedState && <ListSubItemWrapper>{children}</ListSubItemWrapper>}
-    </div>
+      {expandedState && (
+        <li>
+          <ListSubItemWrapper>{children}</ListSubItemWrapper>
+        </li>
+      )}
+    </>
   );
+};
+
+/**
+ * List component (contains ListItems as children)
+ * Extends html attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#attributes
+ */
+export const List = ({ children }: React.HTMLAttributes<HTMLElement>) => {
+  return <ListWrapper>{children}</ListWrapper>;
 };
