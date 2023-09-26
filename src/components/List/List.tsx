@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { InputComponentBaseProps, typography } from '../../shared';
+import { ComponentBaseProps, typography } from '../../shared';
 import { MdOutlineExpandLess, MdOutlineExpandMore } from 'react-icons/md';
 import { listItemPadding } from './styles';
 
@@ -9,7 +9,7 @@ import { listItemPadding } from './styles';
  * Extends html li attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#attributes
  */
-export interface ListItemProps extends InputComponentBaseProps<HTMLLIElement> {
+export interface ListItemProps extends ComponentBaseProps<HTMLLIElement> {
   /**
    * Text of the list item
    */
@@ -35,8 +35,8 @@ export interface ListItemProps extends InputComponentBaseProps<HTMLLIElement> {
  * Style for the area which contains the list item's text
  */
 const TextWrapper = styled.div`
-  font-size: ${typography.size.paragraph};
-  line-height: ${typography.lineHeight.paragraph};
+  font-size: ${typography.size.li};
+  line-height: ${typography.lineHeight.li};
   padding: ${listItemPadding};
   flex: 0 1 auto;
 `;
@@ -45,6 +45,7 @@ const TextWrapper = styled.div`
  * Style for the area which contains the list item's expand icon
  */
 const ExpandIconWrapper = styled.div`
+  display: flex;
   flex: 0 0 auto;
 `;
 
