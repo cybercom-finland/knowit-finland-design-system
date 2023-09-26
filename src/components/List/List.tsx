@@ -46,6 +46,7 @@ const TextWrapper = styled.div`
  */
 const ExpandIconWrapper = styled.div`
   display: flex;
+  font-size: ${typography.size.li};
   flex: 0 0 auto;
 `;
 
