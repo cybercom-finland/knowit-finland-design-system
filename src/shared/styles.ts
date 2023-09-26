@@ -62,6 +62,7 @@ export const typography = {
       large: pxToRem(22),
     },
     caption: pxToRem(14),
+    li: pxToRem(16),
   },
   lineHeight: {
     heading1: pxToRem(48),
@@ -76,5 +77,6 @@ export const typography = {
       large: pxToRem(28),
     },
     caption: pxToRem(16),
+    li: pxToRem(24),
   },
 };

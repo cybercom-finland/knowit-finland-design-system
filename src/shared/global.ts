@@ -46,6 +46,9 @@ export const bodyStyles = css`
     font-size: ${typography.size.paragraph};
     line-height: ${typography.lineHeight.paragraph};
   }
+  ul {
+    margin: 0;
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`
