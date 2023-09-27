@@ -7,7 +7,7 @@ import {
 } from '../../shared';
 import styled from 'styled-components';
 
-export interface BreadcrumbProps extends ComponentBaseProps<HTMLDivElement> {
+export interface BreadcrumbProps extends ComponentBaseProps<HTMLOListElement> {
   /**
    * Children
    */
@@ -68,25 +68,25 @@ export const Breadcrumb = ({
 }: BreadcrumbProps) => {
   const componentId = id ?? generateRandomString(5);
   const renderChildren = React.Children.map(children, (child, index) => {
-    if (!React.isValidElement(child)) {
-      return child;
+    if (React.isValidElement(child)) {
+      const elementChild: React.ReactElement = child;
+      return (
+        <>
+          <BreadcrumbLi>{elementChild}</BreadcrumbLi>
+          {index < React.Children.count(children) - 1 && (
+            <BreadcrumbSpacer aria-hidden> / </BreadcrumbSpacer>
+          )}
+        </>
+      );
     }
-    const elementChild: React.ReactElement = child;
-    return (
-      <>
-        <BreadcrumbLi>{elementChild}</BreadcrumbLi>
-        {index < React.Children.count(children) - 1 && (
-          <BreadcrumbSpacer aria-hidden> / </BreadcrumbSpacer>
-        )}
-      </>
-    );
+    return null;
   });
   return (
-      <nav>
+    <nav aria-label='Breadcrumb'>
       <BreadcrumbWrapper id={componentId} {...restProps}>
         {homeLink && <HomeLinkWrapper>{homeLink}</HomeLinkWrapper>}
         {renderChildren}
       </BreadcrumbWrapper>
-      </nav>
+    </nav>
   );
 };

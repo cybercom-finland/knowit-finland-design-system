@@ -4,7 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { Breadcrumb } from './Breadcrumb';
 import { Link } from '../Link';
 import { MdHome } from 'react-icons/md';
-import {Typography} from "../Typography";
+import { Typography } from '../Typography';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
