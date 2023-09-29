@@ -172,7 +172,7 @@ export const Popup = ({
   return (
     <InternalPopup {...restProps}>
       <Arrow arrow={arrow} />
-      <PopupTitle>{title}</PopupTitle>
+      {title && <PopupTitle>{title}</PopupTitle>}
       <PopupContents>{children}</PopupContents>
     </InternalPopup>
   );
