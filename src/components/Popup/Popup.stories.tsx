@@ -3,6 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Popup, PopupProps } from './Popup';
 import { height } from 'styled-system';
+import { Button } from '../Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -47,8 +48,7 @@ const ExamplePopup = ({ children, ...restProps }: PopupProps) => {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Popup> = (args) => (
   <ExamplePopup {...args}>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
-    odio sed est pellentesque gravida sit amet at orci.
+    <Button label='Click me' />
   </ExamplePopup>
 );
 
@@ -57,5 +57,17 @@ const Template: StoryFn<typeof Popup> = (args) => (
  */
 export const DefaultVariant = Template.bind({});
 
+/**
+ * Initially open
+ */
 export const InitiallyOpen = Template.bind({});
 InitiallyOpen.args = { initiallyOpen: true };
+
+/**
+ * Long text
+ */
+export const LongText = Template.bind({});
+LongText.args = {
+  content:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+};

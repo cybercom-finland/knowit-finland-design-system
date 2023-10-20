@@ -89,7 +89,7 @@ const StyledArrow = styled(FloatingArrow)`
  */
 const InternalPopup = styled.div<PopupProps>`
   position: relative;
-  width: ${pxToRem(popupDimensions.innerPopup.popupWidth)};
+  max-width: ${pxToRem(popupDimensions.innerPopup.popupWidth)};
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
 `;
 
