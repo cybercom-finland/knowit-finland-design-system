@@ -1,25 +1,34 @@
-import React from 'react';
-import styled, { DefaultTheme, css } from 'styled-components';
-import { variant } from 'styled-system';
+import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
 import { pxToRem, ComponentBaseProps, typography } from '../../shared';
 
-export type ArrowDirection = 'none' | 'top' | 'right' | 'bottom' | 'left';
+import {
+  useFloating,
+  useInteractions,
+  Placement,
+  offset,
+  FloatingArrow,
+  arrow,
+  useClick,
+  useHover,
+  flip,
+} from '@floating-ui/react';
 
 /**
  * Dimensions of Popup component
  */
 const popupDimensions = {
   arrow: {
-    arrowSize: 8,
-    arrowOffset: 146,
+    arrowHeight: 8,
+    arrowWidth: 20,
   },
   innerPopup: {
     popupWidth: 300,
   },
   popupTitle: {
-    paddingTop: 25.5,
-    paddingRigth: 16,
-    paddingBottom: 17.5,
+    paddingTop: 24,
+    paddingRight: 16,
+    paddingBottom: 4,
     paddingLeft: 16,
   },
   popupContents: {
@@ -34,94 +43,53 @@ const popupDimensions = {
  */
 export interface PopupProps extends ComponentBaseProps<HTMLDivElement> {
   /**
-   * Popup arrow direction
-   */
-  arrow?: ArrowDirection;
-
-  /**
    * Title
    */
   title?: string;
 
   /**
-   * Children
+   * Content
+   */
+  content?: React.ReactNode;
+
+  /**
+   * The element that has the popup
    */
   children?: React.ReactNode;
+
+  /**
+   * Placement of Popup component
+   */
+  placement?: Placement;
+
+  /**
+   * Popup arrow direction
+   */
+  showArrow?: boolean;
+
+  /**
+   * Is popup open initially
+   */
+  initiallyOpen?: boolean;
+
+  // How to open popup
+  openWith?: 'hover' | 'click' | 'both';
 }
 
 /**
- * Helper function to calculate arrow styles depending on side
- * @param props theme props
- * @returns modified css
+ * Arrow component
  */
-const arrowStyles = (props: DefaultTheme) => {
-  return css`
-    ${variant({
-      prop: 'arrow',
-      variants: {
-        top: {
-          borderLeft: `${pxToRem(
-            popupDimensions.arrow.arrowSize
-          )} solid transparent`,
-          borderRight: `${pxToRem(
-            popupDimensions.arrow.arrowSize
-          )} solid transparent`,
-          borderBottom: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
-            props.theme.colors.grayScale.digitalBlack100
-          }`,
-          right: pxToRem(popupDimensions.arrow.arrowOffset),
-          top: pxToRem(-popupDimensions.arrow.arrowSize),
-        },
-        right: {
-          borderTop: `${pxToRem(
-            popupDimensions.arrow.arrowSize
-          )} solid transparent`,
-          borderBottom: `${pxToRem(
-            popupDimensions.arrow.arrowSize
-          )} solid transparent`,
-          borderLeft: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
-            props.theme.colors.grayScale.digitalBlack100
-          }`,
-          top: `calc(50% - ${pxToRem(popupDimensions.arrow.arrowSize)})`,
-          right: pxToRem(-popupDimensions.arrow.arrowSize),
-        },
-        bottom: {
-          borderLeft: `${pxToRem(
-            popupDimensions.arrow.arrowSize
-          )} solid transparent`,
-          borderRight: `${pxToRem(
-            popupDimensions.arrow.arrowSize
-          )} solid transparent`,
-          borderTop: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
-            props.theme.colors.grayScale.digitalBlack100
-          }`,
-          bottom: pxToRem(-popupDimensions.arrow.arrowSize),
-          right: pxToRem(popupDimensions.arrow.arrowOffset),
-        },
-        left: {
-          borderTop: `${pxToRem(
-            popupDimensions.arrow.arrowSize
-          )} solid transparent`,
-          borderBottom: `${pxToRem(
-            popupDimensions.arrow.arrowSize
-          )} solid transparent`,
-          borderRight: `${pxToRem(popupDimensions.arrow.arrowSize)} solid ${
-            props.theme.colors.grayScale.digitalBlack100
-          }`,
-          top: `calc(50% - ${pxToRem(popupDimensions.arrow.arrowSize)})`,
-          left: pxToRem(-popupDimensions.arrow.arrowSize),
-        },
-      },
-    })};
-  `;
-};
+const StyledArrow = styled(FloatingArrow)`
+  fill: ${(props) =>
+    (props.fill = props.theme.colors.grayScale.digitalBlack100)};
+`;
 
 /**
  * Wrapper for popup component
  */
 const InternalPopup = styled.div<PopupProps>`
   position: relative;
-  width: ${pxToRem(popupDimensions.innerPopup.popupWidth)};
+  max-width: ${pxToRem(popupDimensions.innerPopup.popupWidth)};
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
 `;
 
@@ -131,10 +99,10 @@ const InternalPopup = styled.div<PopupProps>`
 const PopupTitle = styled.div<PopupProps>`
   font-weight: ${typography.weight.bold};
   font-size: ${typography.size.paragraph};
-  padding: ${pxToRem(popupDimensions.popupTitle.paddingTop)}
-    ${pxToRem(popupDimensions.popupTitle.paddingRigth)}
-    ${pxToRem(popupDimensions.popupTitle.paddingBottom)}
-    ${pxToRem(popupDimensions.popupTitle.paddingLeft)};
+  padding-top: ${pxToRem(popupDimensions.popupTitle.paddingTop)};
+  padding-right: ${pxToRem(popupDimensions.popupTitle.paddingRight)};
+  padding-bottom: ${pxToRem(popupDimensions.popupTitle.paddingBottom)};
+  padding-left: ${pxToRem(popupDimensions.popupTitle.paddingLeft)};
 `;
 
 /**
@@ -150,30 +118,77 @@ const PopupContents = styled.div<PopupProps>`
 `;
 
 /**
- * Popup side arrow component
- */
-const Arrow = styled.div<PopupProps>`
-  width: 0;
-  height: 0;
-  position: absolute;
-
-  ${arrowStyles};
-`;
-
-/**
  * Popup component
  */
 export const Popup = ({
-  arrow = 'none',
+  showArrow = false,
   children,
   title,
+  placement = 'top',
+  initiallyOpen,
+  openWith = 'click',
+  content,
   ...restProps
 }: PopupProps) => {
+  const [isOpen, setIsOpen] = useState(initiallyOpen);
+
+  const arrowRef = useRef(null);
+
+  const { refs, floatingStyles, context } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    placement: placement,
+    middleware: [
+      offset(10),
+      flip(),
+      arrow({
+        element: arrowRef,
+      }),
+    ],
+  });
+
+  const hover = useHover(context, {
+    enabled: openWith === 'hover',
+  });
+
+  const click = useClick(context, {
+    enabled: openWith === 'click',
+  });
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    click,
+    hover,
+  ]);
+
   return (
-    <InternalPopup {...restProps}>
-      <Arrow arrow={arrow} />
-      <PopupTitle>{title}</PopupTitle>
-      <PopupContents>{children}</PopupContents>
-    </InternalPopup>
+    <>
+      <div
+        style={{ display: 'inline-block' }}
+        ref={refs.setReference}
+        {...getReferenceProps()}
+      >
+        {children}
+      </div>
+      {isOpen && (
+        <div
+          ref={refs.setFloating}
+          style={floatingStyles}
+          {...getFloatingProps()}
+        >
+          {showArrow && (
+            <StyledArrow
+              ref={arrowRef}
+              context={context}
+              height={popupDimensions.arrow.arrowHeight}
+              width={popupDimensions.arrow.arrowWidth}
+            />
+          )}
+          <InternalPopup {...restProps}>
+            {title && <PopupTitle>{title}</PopupTitle>}
+            <PopupContents>{content}</PopupContents>
+          </InternalPopup>
+        </div>
+      )}
+    </>
   );
 };

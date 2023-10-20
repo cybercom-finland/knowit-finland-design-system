@@ -2,8 +2,8 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Popup, PopupProps } from './Popup';
-import { styled } from 'styled-components';
-import { Button } from '../Button/Button';
+import { height } from 'styled-system';
+import { Button } from '../Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -11,8 +11,11 @@ export default {
   component: Popup,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    arrow: 'top',
     title: 'Title',
+    content: 'Example Popup content',
+    showArrow: true,
+    initiallyOpen: false,
+    openWith: 'click',
   },
   parameters: {
     design: [
@@ -31,27 +34,21 @@ export default {
   decorators: [withDesign],
 } as Meta<typeof Popup>;
 
-const RightButton = styled(Button)<PopupProps>`
-  align-self: end;
-`;
-
 /*
  * Example Popup story
  */
 const ExamplePopup = ({ children, ...restProps }: PopupProps) => {
   return (
-    <Popup {...restProps}>
-      {children}
-      <RightButton label='Button' />
-    </Popup>
+    <div style={{ padding: 200 }}>
+      <Popup {...restProps}>{children}</Popup>
+    </div>
   );
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Popup> = (args) => (
   <ExamplePopup {...args}>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et
-    odio sed est pellentesque gravida sit amet at orci.
+    <Button label='Click me' />
   </ExamplePopup>
 );
 
@@ -59,3 +56,18 @@ const Template: StoryFn<typeof Popup> = (args) => (
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
+
+/**
+ * Initially open
+ */
+export const InitiallyOpen = Template.bind({});
+InitiallyOpen.args = { initiallyOpen: true };
+
+/**
+ * Long text
+ */
+export const LongText = Template.bind({});
+LongText.args = {
+  content:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+};
