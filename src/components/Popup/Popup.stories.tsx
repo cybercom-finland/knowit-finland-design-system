@@ -2,8 +2,7 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Popup, PopupProps } from './Popup';
-import { styled } from 'styled-components';
-import { Button } from '../Button/Button';
+import { height } from 'styled-system';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -11,8 +10,11 @@ export default {
   component: Popup,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   args: {
-    arrow: 'top',
     title: 'Title',
+    content: 'Example Popup content',
+    showArrow: true,
+    initiallyOpen: false,
+    openWith: 'click',
   },
   parameters: {
     design: [
@@ -31,19 +33,14 @@ export default {
   decorators: [withDesign],
 } as Meta<typeof Popup>;
 
-const RightButton = styled(Button)<PopupProps>`
-  align-self: end;
-`;
-
 /*
  * Example Popup story
  */
 const ExamplePopup = ({ children, ...restProps }: PopupProps) => {
   return (
-    <Popup {...restProps}>
-      {children}
-      <RightButton label='Button' />
-    </Popup>
+    <div style={{ padding: 200 }}>
+      <Popup {...restProps}>{children}</Popup>
+    </div>
   );
 };
 
@@ -59,3 +56,6 @@ const Template: StoryFn<typeof Popup> = (args) => (
  * Default variant (not specified)
  */
 export const DefaultVariant = Template.bind({});
+
+export const InitiallyOpen = Template.bind({});
+InitiallyOpen.args = { initiallyOpen: true };

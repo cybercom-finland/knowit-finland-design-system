@@ -5,13 +5,17 @@ import { Popup, PopupProps } from '../Popup';
  * Tooltip component properties
  * Extends PopupProps
  */
-export interface TooltipProps extends PopupProps {}
+export type TooltipProps = Omit<PopupProps, 'title' | 'openWith'>;
 
 /**
  * Tooltip component
- * @param props Tooltip props
+ * @param restProps Tooltip props
  * @returns Tooltip component
  */
-export const Tooltip = ({ arrow, children }: TooltipProps) => {
-  return <Popup arrow={arrow}>{children}</Popup>;
+export const Tooltip = ({ children, ...restProps }: TooltipProps) => {
+  return (
+    <Popup {...restProps} openWith='hover'>
+      {children}
+    </Popup>
+  );
 };
