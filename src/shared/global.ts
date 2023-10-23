@@ -45,6 +45,10 @@ export const bodyStyles = css`
   p {
     font-size: ${typography.size.paragraph};
     line-height: ${typography.lineHeight.paragraph};
+    margin: 0;
+  }
+  ul {
+    margin: 0;
   }
 `;
 
