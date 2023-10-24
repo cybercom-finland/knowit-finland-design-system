@@ -29,7 +29,7 @@ export default {
 } as Meta<typeof Tabs>;
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Tabs> = (args) => (
-  <Tabs {...args} aria-label='Example tabs component'>
+  <Tabs {...args}>
     <Tab label='Tab one' />
     <Tab label='Tab two' />
     <Tab label='Tab tree' />
@@ -37,7 +37,7 @@ const Template: StoryFn<typeof Tabs> = (args) => (
   </Tabs>
 );
 const ActiveTabTemplate: StoryFn<typeof Tabs> = (args) => (
-  <Tabs {...args} aria-label='Example tabs component'>
+  <Tabs {...args}>
     <Tab active label='Tab one' />
     <Tab label='Tab two' />
     <Tab label='Tab tree' />

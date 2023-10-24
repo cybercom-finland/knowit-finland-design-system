@@ -141,7 +141,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
             size='large'
             disabled={disableLeftArrow}
             onClick={() => handleButtonPress('left')}
-            aria-label='Navigate left'
+            aria-hidden={true}
             tabIndex={-1}
           >
             <MdKeyboardArrowLeft />
@@ -161,7 +161,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
             size='large'
             disabled={disableRightArrow}
             onClick={() => handleButtonPress('right')}
-            aria-label='Navigate right'
+            aria-hidden={true}
             tabIndex={-1}
           >
             <MdKeyboardArrowRight />
