@@ -22,9 +22,9 @@ export interface TabProps
   icon?: React.ReactNode;
 
   /**
-   * Is tab active
+   * Is tab selected
    */
-  active?: boolean;
+  selected?: boolean;
 
   /**
    * Is tab disabled
@@ -37,7 +37,7 @@ export interface TabProps
  */
 const TabContainer = styled(Button)<TabProps>`
   justify-content: center;
-  ${({ active }) =>
+  ${({ selected: active }) =>
     active &&
     css`
       background-color: ${(props) =>
@@ -52,7 +52,15 @@ const TabContainer = styled(Button)<TabProps>`
  */
 export const Tab = React.forwardRef(
   (
-    { value, id, active, disabled, label, icon, ...restprops }: TabProps,
+    {
+      value,
+      id,
+      selected: active,
+      disabled,
+      label,
+      icon,
+      ...restprops
+    }: TabProps,
     ref: TabProps['ref']
   ) => {
     const componentId = id ?? generateRandomString(5);
@@ -63,7 +71,7 @@ export const Tab = React.forwardRef(
         value={value}
         disabled={disabled}
         id={componentId}
-        active={active}
+        selected={active}
         label={label}
         endIcon={icon}
         ref={ref}

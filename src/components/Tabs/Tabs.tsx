@@ -102,7 +102,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
       tabIndex: selectedTab === i ? 0 : -1,
       onClick: () => handleClick(i),
       'aria-selected': i === selectedTab,
-      active: i === selectedTab,
+      selected: i === selectedTab,
       ref: (ref: HTMLButtonElement) => {
         tabRefs.current[i] = ref;
       },

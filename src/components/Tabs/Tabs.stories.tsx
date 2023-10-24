@@ -36,21 +36,24 @@ const Template: StoryFn<typeof Tabs> = (args) => (
     <Tab label='Tab four' />
   </Tabs>
 );
+
 const ActiveTabTemplate: StoryFn<typeof Tabs> = (args) => (
   <Tabs {...args}>
-    <Tab active label='Tab one' />
+    <Tab selected label='Tab one' />
     <Tab label='Tab two' />
     <Tab label='Tab tree' />
     <Tab label='Tab four' />
   </Tabs>
 );
+
 const Wrapper = styled.div<TabsProps>`
   width: ${pxToRem(400)};
 `;
+
 const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => (
   <Wrapper>
     <Tabs {...args} aria-label='Example tabs component'>
-      <Tab active label='Tab one' />
+      <Tab selected label='Tab one' />
       <Tab label='Tab two' />
       <Tab label='Tab tree' />
       <Tab label='Tab four' />
