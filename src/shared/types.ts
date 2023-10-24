@@ -14,9 +14,9 @@ export interface ComponentBaseProps<T> extends React.AriaAttributes {
   id?: string;
 
   /**
-   * Ref object for the native input element
+   * Ref for the native input element
    */
-  ref?: React.RefObject<T>;
+  ref?: React.Ref<T>;
 
   /**
    * Change event handler passed from internal component
