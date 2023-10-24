@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Tabs, TabsProps } from './Tabs';
-import { Tab } from '../Tab';
+import { Tab } from './Tab';
 import styled from 'styled-components';
 import { pxToRem } from '../../shared';
 
@@ -30,14 +30,18 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Tabs> = (args) => (
   <Tabs {...args} aria-label='Example tabs component'>
-    <Tab label='Tab' />
+    <Tab label='Tab one' />
+    <Tab label='Tab two' />
+    <Tab label='Tab tree' />
+    <Tab label='Tab four' />
   </Tabs>
 );
 const ActiveTabTemplate: StoryFn<typeof Tabs> = (args) => (
   <Tabs {...args} aria-label='Example tabs component'>
-    <Tab active label='Tab' />
-    <Tab label='Tab' />
-    <Tab label='Tab' />
+    <Tab active label='Tab one' />
+    <Tab label='Tab two' />
+    <Tab label='Tab tree' />
+    <Tab label='Tab four' />
   </Tabs>
 );
 const Wrapper = styled.div<TabsProps>`
@@ -46,12 +50,12 @@ const Wrapper = styled.div<TabsProps>`
 const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => (
   <Wrapper>
     <Tabs {...args} aria-label='Example tabs component'>
-      <Tab active label='Tab' />
-      <Tab label='Tab' />
-      <Tab label='Tab' />
-      <Tab label='Tab' />
-      <Tab label='Tab' />
-      <Tab label='Tab' />
+      <Tab active label='Tab one' />
+      <Tab label='Tab two' />
+      <Tab label='Tab tree' />
+      <Tab label='Tab four' />
+      <Tab label='Tab five' />
+      <Tab label='Tab six' />
     </Tabs>
   </Wrapper>
 );
