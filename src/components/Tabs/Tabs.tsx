@@ -3,7 +3,7 @@ import { ComponentBaseProps, generateRandomString } from '../../shared';
 import styled from 'styled-components';
 import { IconButton } from '../IconButton';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import { TabProps } from '../Tab';
+import { TabProps } from './Tab';
 import { useTabs } from './useTabs';
 
 export interface TabsProps extends ComponentBaseProps<HTMLDivElement> {
@@ -96,22 +96,25 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
     if (!React.isValidElement<TabProps>(child)) {
       return child;
     }
-    const elementChild: React.ReactElement<TabProps> = child;
-    return (
-      <div
-        role='tab'
-        aria-selected={i === selectedTab}
-        tabIndex={selectedTab === i ? 0 : -1}
-        onClick={() => handleClick(i)}
-        ref={(ref) => (tabRefs.current[i] = ref)}
-      >
-        {elementChild}
-      </div>
-    );
+    const elementChild = React.cloneElement(child, {
+      ...child.props,
+      role: 'tab',
+      tabIndex: selectedTab === i ? 0 : -1,
+      onClick: () => handleClick(i),
+      'aria-selected': i === selectedTab,
+      active: i === selectedTab,
+      ref: (ref: HTMLButtonElement) => {
+        tabRefs.current[i] = ref;
+      },
+    });
+
+    return elementChild;
   });
+
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
+
   // Function to handle keyboard input
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const tabCount = tabRefs.current.length - 1;
@@ -139,6 +142,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
             disabled={disableLeftArrow}
             onClick={() => handleButtonPress('left')}
             aria-label='Navigate left'
+            tabIndex={-1}
           >
             <MdKeyboardArrowLeft />
           </IconButton>
@@ -158,6 +162,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
             disabled={disableRightArrow}
             onClick={() => handleButtonPress('right')}
             aria-label='Navigate right'
+            tabIndex={-1}
           >
             <MdKeyboardArrowRight />
           </IconButton>

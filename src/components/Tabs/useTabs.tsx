@@ -6,7 +6,7 @@ export const useTabs = () => {
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [disableRightArrow, setDisableRightArrow] = React.useState(false);
   const [disableLeftArrow, setDisableLeftArrow] = React.useState(false);
-  const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const tabRefs = useRef<HTMLButtonElement[]>([]);
 
   return {
     tabsWrapperRef,
