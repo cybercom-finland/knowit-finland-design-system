@@ -189,7 +189,7 @@ export const Tabs = ({
 
   return (
     <>
-      <TabsComponentWrapper id={componentId} {...restprops} value={value}>
+      <TabsComponentWrapper id={componentId}>
         {showArrows && (
           <IconButton
             size='large'
@@ -207,6 +207,8 @@ export const Tabs = ({
           }}
           role={'tablist'}
           ref={tabsWrapperRef}
+          value={selectedTab}
+          {...restprops}
         >
           {createNavigationTabs}
         </TabsWrapper>
