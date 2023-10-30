@@ -75,7 +75,7 @@ export const Tabs = ({
   } = useTabs();
 
   /**
-   * Automatically show or hide arrows
+   * Automatically show or hide arrows on initial render
    */
   useLayoutEffect(() => {
     if (tabsWrapperRef.current != null) {
@@ -107,15 +107,25 @@ export const Tabs = ({
   }, [selectedTab]);
 
   /**
+   * Update value based on given value property
+   */
+  useEffect(() => {
+    if (value !== undefined) {
+      setSelectedTab(value);
+      tabRefs.current[value]?.focus();
+    }
+  }, [value]);
+
+  /**
    * Handle arrow button press
    * @param direction
    */
   const handleArrowButtonPress = (direction: 'left' | 'right') => {
     if (direction === 'left') {
-      tabsWrapperRef.current?.scrollBy(-91, 0);
+      tabsWrapperRef.current?.scrollBy(-tabsWrapperRef.current.clientWidth, 0);
     }
     if (direction === 'right') {
-      tabsWrapperRef.current?.scrollBy(91, 0);
+      tabsWrapperRef.current?.scrollBy(tabsWrapperRef.current.clientWidth, 0);
     }
     setDisableLeftArrow(false);
     setDisableRightArrow(false);
@@ -162,8 +172,8 @@ export const Tabs = ({
   };
 
   /**
-   *
-   * @param event
+   * Handle select tab
+   * @param event // Mouse or keyboard event
    * @param value
    */
   const handleSelectTab = (
