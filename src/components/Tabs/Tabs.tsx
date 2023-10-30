@@ -1,21 +1,35 @@
 import React, { useEffect, useLayoutEffect } from 'react';
-import { ComponentBaseProps, generateRandomString } from '../../shared';
+import { InputComponentBaseProps, generateRandomString } from '../../shared';
 import styled from 'styled-components';
 import { IconButton } from '../IconButton';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { TabProps } from './Tab';
 import { useTabs } from './useTabs';
 
-export interface TabsProps extends ComponentBaseProps<HTMLDivElement> {
+export interface TabsProps
+  extends Omit<InputComponentBaseProps<HTMLDivElement>, 'onChange' | 'value'> {
   /**
    * Tabs value
    */
-  value?: string;
+  value?: number;
 
   /**
    * Children
    */
   children?: React.ReactNode;
+
+  /**
+   * Change event
+   * @param event Mouse or Keyboard event
+   * @param value New selected value
+   * @returns
+   */
+  onChange?: (
+    event:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLDivElement>,
+    value: number
+  ) => void;
 }
 
 /**
@@ -39,7 +53,13 @@ const TabsWrapper = styled.div<TabsProps>`
 /**
  * Returned component
  */
-export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
+export const Tabs = ({
+  id,
+  value,
+  children,
+  onChange,
+  ...restprops
+}: TabsProps) => {
   const componentId = id ?? generateRandomString(5);
   const {
     tabsWrapperRef,
@@ -54,7 +74,9 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
     tabRefs,
   } = useTabs();
 
-  // Show or hide arrows
+  /**
+   * Automatically show or hide arrows
+   */
   useLayoutEffect(() => {
     if (tabsWrapperRef.current != null) {
       if (
@@ -64,7 +86,10 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
       }
     }
   }, []);
-  // Disable arrows if navigating to last tab
+
+  /**
+   * Disable arrows if navigating to last tab
+   */
   useEffect(() => {
     const tabCount = tabRefs.current.length - 1;
     if (selectedTab === 0) {
@@ -81,7 +106,11 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
     }
   }, [selectedTab]);
 
-  const handleButtonPress = (direction: 'left' | 'right') => {
+  /**
+   * Handle arrow button press
+   * @param direction
+   */
+  const handleArrowButtonPress = (direction: 'left' | 'right') => {
     if (direction === 'left') {
       tabsWrapperRef.current?.scrollBy(-91, 0);
     }
@@ -92,6 +121,9 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
     setDisableRightArrow(false);
   };
 
+  /**
+   * Create navigation tabs
+   */
   const createNavigationTabs = React.Children.map(children, (child, i) => {
     if (!React.isValidElement<TabProps>(child)) {
       return child;
@@ -100,7 +132,8 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
       ...child.props,
       role: 'tab',
       tabIndex: selectedTab === i ? 0 : -1,
-      onClick: () => handleClick(i),
+      onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+        handleSelectTab(event, i),
       'aria-selected': i === selectedTab,
       selected: i === selectedTab,
       ref: (ref: HTMLButtonElement) => {
@@ -111,26 +144,37 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
     return elementChild;
   });
 
-  const handleClick = (index: number) => {
-    setSelectedTab(index);
-  };
-
-  // Function to handle keyboard input
+  /**
+   * Handle key press
+   * Function to handle keyboard input
+   * @param event Press event
+   */
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const tabCount = tabRefs.current.length - 1;
     if (event.key === 'ArrowLeft') {
       const next = selectedTab === 0 ? 0 : selectedTab - 1;
-      handleNextTab(next);
+      handleSelectTab(event, next);
     }
     if (event.key === 'ArrowRight') {
       const next = selectedTab === tabCount ? tabCount : selectedTab + 1;
-      handleNextTab(next);
+      handleSelectTab(event, next);
     }
   };
 
-  const handleNextTab = (nextTab: number) => {
-    setSelectedTab(nextTab);
-    tabRefs.current[nextTab]?.focus();
+  /**
+   *
+   * @param event
+   * @param value
+   */
+  const handleSelectTab = (
+    event:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLDivElement>,
+    value: number
+  ) => {
+    setSelectedTab(value);
+    tabRefs.current[value]?.focus();
+    onChange && onChange(event, value);
   };
 
   return (
@@ -140,7 +184,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
           <IconButton
             size='large'
             disabled={disableLeftArrow}
-            onClick={() => handleButtonPress('left')}
+            onClick={() => handleArrowButtonPress('left')}
             aria-hidden={true}
             tabIndex={-1}
           >
@@ -160,7 +204,7 @@ export const Tabs = ({ value, children, id, ...restprops }: TabsProps) => {
           <IconButton
             size='large'
             disabled={disableRightArrow}
-            onClick={() => handleButtonPress('right')}
+            onClick={() => handleArrowButtonPress('right')}
             aria-hidden={true}
             tabIndex={-1}
           >

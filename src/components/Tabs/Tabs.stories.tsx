@@ -46,6 +46,28 @@ const ActiveTabTemplate: StoryFn<typeof Tabs> = (args) => (
   </Tabs>
 );
 
+const ControlledTemplate: StoryFn<typeof Tabs> = (args) => {
+  const [value, setValue] = React.useState(1);
+
+  const handleChange = (
+    event:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLDivElement>,
+    value: number
+  ) => {
+    setValue(value);
+  };
+
+  return (
+    <Tabs value={value} onChange={handleChange} {...args}>
+      <Tab label='Tab one' />
+      <Tab label='Tab two' />
+      <Tab label='Tab tree' />
+      <Tab label='Tab four' />
+    </Tabs>
+  );
+};
+
 const Wrapper = styled.div<TabsProps>`
   width: ${pxToRem(400)};
 `;
@@ -77,3 +99,8 @@ export const ActiveTab = ActiveTabTemplate.bind({});
  * Tab list with scroll
  */
 export const TabsWithScroll = ScrollTabTemplate.bind({});
+
+/**
+ * Controlled tabs
+ */
+export const Constrolled = ControlledTemplate.bind({});
