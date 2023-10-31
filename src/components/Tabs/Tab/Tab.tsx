@@ -37,8 +37,8 @@ export interface TabProps
  */
 const TabContainer = styled(Button)<TabProps>`
   justify-content: center;
-  ${({ selected: active }) =>
-    active &&
+  ${({ selected }) =>
+    selected &&
     css`
       background-color: ${(props) =>
         props.theme.colors.grayScale.digitalBlack200};

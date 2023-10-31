@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Tabs, TabsProps } from './Tabs';
+import { Tabs } from './Tabs';
 import { Tab } from './Tab';
 import styled from 'styled-components';
 import { pxToRem } from '../../shared';
@@ -28,38 +28,15 @@ export default {
   decorators: [withDesign],
 } as Meta<typeof Tabs>;
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Tabs> = (args) => (
-  <Tabs {...args}>
-    <Tab label='Tab one' />
-    <Tab label='Tab two' />
-    <Tab label='Tab tree' />
-    <Tab label='Tab four' />
-  </Tabs>
-);
+const Template: StoryFn<typeof Tabs> = (args) => {
+  const [value, setValue] = React.useState(0);
 
-const ActiveTabTemplate: StoryFn<typeof Tabs> = (args) => (
-  <Tabs {...args}>
-    <Tab selected label='Tab one' />
-    <Tab label='Tab two' />
-    <Tab label='Tab tree' />
-    <Tab label='Tab four' />
-  </Tabs>
-);
-
-const ControlledTemplate: StoryFn<typeof Tabs> = (args) => {
-  const [value, setValue] = React.useState(1);
-
-  const handleChange = (
-    event:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLDivElement>,
-    value: number
-  ) => {
+  const handleChange = (event: React.SyntheticEvent, value: number) => {
     setValue(value);
   };
 
   return (
-    <Tabs value={value} onChange={handleChange} {...args}>
+    <Tabs {...args} value={value} onChange={handleChange}>
       <Tab label='Tab one' />
       <Tab label='Tab two' />
       <Tab label='Tab tree' />
@@ -68,32 +45,52 @@ const ControlledTemplate: StoryFn<typeof Tabs> = (args) => {
   );
 };
 
-const Wrapper = styled.div<TabsProps>`
+const Wrapper = styled.div`
   width: ${pxToRem(400)};
 `;
 
-const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => (
-  <Wrapper>
-    <Tabs {...args} aria-label='Example tabs component'>
-      <Tab selected label='Tab one' />
-      <Tab label='Tab two' />
+const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, value: number) => {
+    setValue(value);
+  };
+
+  return (
+    <Wrapper>
+      <Tabs {...args} value={value} onChange={handleChange}>
+        <Tab selected label='Tab one' />
+        <Tab label='Tab two' />
+        <Tab label='Tab tree' />
+        <Tab label='Tab four' />
+        <Tab label='Tab five' />
+        <Tab label='Tab six' />
+      </Tabs>
+    </Wrapper>
+  );
+};
+
+const DisabledTemplate: StoryFn<typeof Tabs> = (args) => {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, value: number) => {
+    setValue(value);
+  };
+
+  return (
+    <Tabs {...args} value={value} onChange={handleChange}>
+      <Tab label='Tab one' />
+      <Tab disabled label='Tab two' />
       <Tab label='Tab tree' />
       <Tab label='Tab four' />
-      <Tab label='Tab five' />
-      <Tab label='Tab six' />
     </Tabs>
-  </Wrapper>
-);
+  );
+};
 
 /**
- * Default variant (not specified)
+ * Basic example of tabs
  */
-export const DefaultVariant = Template.bind({});
-
-/**
- * Tab list with active tab
- */
-export const ActiveTab = ActiveTabTemplate.bind({});
+export const BasicTabs = Template.bind({});
 
 /**
  * Tab list with scroll
@@ -101,6 +98,6 @@ export const ActiveTab = ActiveTabTemplate.bind({});
 export const TabsWithScroll = ScrollTabTemplate.bind({});
 
 /**
- * Controlled tabs
+ * Tabs with disabled tab
  */
-export const Constrolled = ControlledTemplate.bind({});
+export const DisabledTabs = DisabledTemplate.bind({});

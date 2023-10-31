@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect } from 'react';
-import { InputComponentBaseProps, generateRandomString } from '../../shared';
+import { ComponentBaseProps, generateRandomString } from '../../shared';
 import styled from 'styled-components';
 import { IconButton } from '../IconButton';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
@@ -7,16 +7,16 @@ import { TabProps } from './Tab';
 import { useTabs } from './useTabs';
 
 export interface TabsProps
-  extends Omit<InputComponentBaseProps<HTMLDivElement>, 'onChange' | 'value'> {
+  extends Omit<ComponentBaseProps<HTMLDivElement>, 'onChange'> {
   /**
-   * Tabs value
+   * Tabs value. Index of selected tab if any.
    */
-  value?: number;
+  value: number;
 
   /**
    * Children
    */
-  children?: React.ReactNode;
+  children: React.ReactNode;
 
   /**
    * Change event
@@ -24,18 +24,13 @@ export interface TabsProps
    * @param value New selected value
    * @returns
    */
-  onChange?: (
-    event:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLDivElement>,
-    value: number
-  ) => void;
+  onChange: (event: React.SyntheticEvent, value: number) => void;
 }
 
 /**
  * Component wrapper
  */
-const TabsComponentWrapper = styled.div<TabsProps>`
+const TabsComponentWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,7 +39,7 @@ const TabsComponentWrapper = styled.div<TabsProps>`
 /**
  * Wrapper for tabs
  */
-const TabsWrapper = styled.div<TabsProps>`
+const TabsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   overflow: hidden;
@@ -72,7 +67,7 @@ export const Tabs = ({
     disableLeftArrow,
     setDisableLeftArrow,
     tabRefs,
-  } = useTabs();
+  } = useTabs(value);
 
   /**
    * Automatically show or hide arrows on initial render
@@ -92,11 +87,9 @@ export const Tabs = ({
    */
   useEffect(() => {
     const tabCount = tabRefs.current.length - 1;
-    if (selectedTab === 0) {
+
+    if (selectedTab === 0 || selectedTab === tabCount) {
       setDisableLeftArrow(true);
-    }
-    if (selectedTab === tabCount) {
-      setDisableRightArrow(true);
     }
     if (selectedTab > 0) {
       setDisableLeftArrow(false);
@@ -110,11 +103,31 @@ export const Tabs = ({
    * Update value based on given value property
    */
   useEffect(() => {
-    if (value !== undefined) {
-      setSelectedTab(value);
-      tabRefs.current[value]?.focus();
-    }
+    setSelectedTab(value);
   }, [value]);
+
+  /**
+   * Create navigation tabs
+   */
+  const createNavigationTabs = React.Children.map(children, (child, index) => {
+    if (!React.isValidElement<TabProps>(child)) {
+      return child;
+    }
+    const elementChild = React.cloneElement(child, {
+      ...child.props,
+      role: 'tab',
+      tabIndex: selectedTab === index ? 0 : -1,
+      onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+        handleSelectTab(event, index),
+      'aria-selected': index === selectedTab,
+      selected: index === selectedTab,
+      ref: (ref: HTMLButtonElement) => {
+        tabRefs.current[index] = ref;
+      },
+    });
+
+    return elementChild;
+  });
 
   /**
    * Handle arrow button press
@@ -132,41 +145,30 @@ export const Tabs = ({
   };
 
   /**
-   * Create navigation tabs
-   */
-  const createNavigationTabs = React.Children.map(children, (child, i) => {
-    if (!React.isValidElement<TabProps>(child)) {
-      return child;
-    }
-    const elementChild = React.cloneElement(child, {
-      ...child.props,
-      role: 'tab',
-      tabIndex: selectedTab === i ? 0 : -1,
-      onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-        handleSelectTab(event, i),
-      'aria-selected': i === selectedTab,
-      selected: i === selectedTab,
-      ref: (ref: HTMLButtonElement) => {
-        tabRefs.current[i] = ref;
-      },
-    });
-
-    return elementChild;
-  });
-
-  /**
    * Handle key press
    * Function to handle keyboard input
    * @param event Press event
    */
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const tabCount = tabRefs.current.length - 1;
+
     if (event.key === 'ArrowLeft') {
-      const next = selectedTab === 0 ? 0 : selectedTab - 1;
+      let next = selectedTab === 0 ? 0 : selectedTab - 1;
+
+      // Prevent disabled tab selection
+      if (tabRefs.current[next]?.disabled && next > 0) {
+        next = next - 1;
+      }
+
       handleSelectTab(event, next);
     }
     if (event.key === 'ArrowRight') {
-      const next = selectedTab === tabCount ? tabCount : selectedTab + 1;
+      let next = selectedTab === tabCount ? tabCount : selectedTab + 1;
+
+      // Prevent disabled tab selection
+      if (tabRefs.current[next]?.disabled && next < tabCount) {
+        next = next + 1;
+      }
       handleSelectTab(event, next);
     }
   };
@@ -176,12 +178,7 @@ export const Tabs = ({
    * @param event // Mouse or keyboard event
    * @param value
    */
-  const handleSelectTab = (
-    event:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLDivElement>,
-    value: number
-  ) => {
+  const handleSelectTab = (event: React.SyntheticEvent, value: number) => {
     setSelectedTab(value);
     tabRefs.current[value]?.focus();
     onChange && onChange(event, value);
@@ -202,12 +199,11 @@ export const Tabs = ({
           </IconButton>
         )}
         <TabsWrapper
-          onKeyDown={(e) => {
-            handleKeyPress(e);
+          onKeyDown={(event) => {
+            handleKeyPress(event);
           }}
           role={'tablist'}
           ref={tabsWrapperRef}
-          value={selectedTab}
           {...restprops}
         >
           {createNavigationTabs}
