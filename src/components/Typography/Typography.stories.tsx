@@ -1,6 +1,5 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 
 import { Typography } from './Typography';
 
@@ -26,7 +25,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof Typography>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

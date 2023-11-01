@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { Card } from './Card';
 import { styled } from 'styled-components';
 import { pxToRem } from '../../shared';
@@ -32,7 +31,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof Card>;
 
 const exampleCardDimensions = {

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { within, userEvent, fireEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 
@@ -29,7 +28,6 @@ export default {
     width: 300,
     options: TemplateOptions,
   },
-  decorators: [withDesign],
 } as Meta<typeof Dropdown>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

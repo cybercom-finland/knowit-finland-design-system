@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { Box, BoxProps } from './Box';
 import { styled } from 'styled-components';
 import { pxToRem } from '../../shared';
@@ -27,7 +26,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof Box>;
 
 const exampleBoxDimensions = {

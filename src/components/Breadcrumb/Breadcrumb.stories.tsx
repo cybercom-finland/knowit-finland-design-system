@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { Breadcrumb } from './Breadcrumb';
 import { Link } from '../Link';
 import { MdHome } from 'react-icons/md';
@@ -24,7 +23,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof Breadcrumb>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

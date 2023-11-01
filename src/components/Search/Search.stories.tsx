@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+
 import { Search } from './Search';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -32,7 +32,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof Search>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

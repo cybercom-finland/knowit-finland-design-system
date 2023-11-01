@@ -7,7 +7,7 @@ module.exports = {
     '@storybook/addon-coverage',
     '@storybook/preset-create-react-app',
     '@storybook/addon-a11y',
-    'storybook-addon-designs',
+    '@storybook/addon-designs',
     '@storybook/addon-mdx-gfm',
   ],
   features: {
