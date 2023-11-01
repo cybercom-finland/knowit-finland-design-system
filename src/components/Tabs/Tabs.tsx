@@ -42,7 +42,12 @@ const TabsComponentWrapper = styled.div`
 const TabsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
+  scrollbar-width: none; // Firefox
+  &::-webkit-scrollbar {
+    display: none; // Safari + Chrome
+  }
 `;
 
 /**
@@ -70,34 +75,75 @@ export const Tabs = ({
   } = useTabs(value);
 
   /**
-   * Automatically show or hide arrows on initial render
+   * Helper for using Tab container meta info
+   * @returns Meta info
+   */
+  const getTabsMeta = () => {
+    let tabsMeta;
+    if (tabsWrapperRef.current) {
+      tabsMeta = {
+        scrollLeft: tabsWrapperRef.current.scrollLeft,
+        scrollWidth: tabsWrapperRef.current.scrollWidth,
+        clientWidth: tabsWrapperRef.current.clientWidth,
+      };
+    }
+
+    return {
+      tabsMeta,
+    };
+  };
+
+  /**
+   * Initialize Tabs.
+   * Show or hide arrows on initial render.
    */
   useLayoutEffect(() => {
-    if (tabsWrapperRef.current != null) {
-      if (
-        tabsWrapperRef.current.scrollWidth > tabsWrapperRef.current.clientWidth
-      ) {
+    const { tabsMeta } = getTabsMeta();
+
+    if (tabsMeta) {
+      if (tabsMeta.scrollWidth > tabsMeta.clientWidth) {
         setShowArrows(true);
+        updateArrows();
       }
     }
   }, []);
 
   /**
-   * Disable arrows if navigating to last tab
+   * Handle Tabs container scroll
+   * @param event
    */
-  useEffect(() => {
-    const tabCount = tabRefs.current.length - 1;
+  const handleTabsScroll = (event: React.SyntheticEvent): void => {
+    event.preventDefault();
+    updateArrows();
+  };
 
-    if (selectedTab === 0 || selectedTab === tabCount) {
-      setDisableLeftArrow(true);
+  /**
+   * Update arrows when scroll position changes
+   */
+  const updateArrows = () => {
+    const { tabsMeta } = getTabsMeta();
+
+    if (tabsMeta?.scrollLeft !== undefined) {
+      // Scrolled to the left
+      if (tabsMeta?.scrollLeft === 0) {
+        setDisableLeftArrow(true);
+        setDisableRightArrow(false);
+      }
+      if (tabsMeta?.scrollLeft > 0) {
+        setDisableLeftArrow(false);
+      }
+      if (tabsMeta.scrollWidth - tabsMeta.clientWidth > tabsMeta?.scrollLeft) {
+        setDisableRightArrow(false);
+      }
+      // Scrolled to the right
+      if (
+        tabsMeta.scrollWidth - tabsMeta.clientWidth ===
+        tabsMeta?.scrollLeft
+      ) {
+        setDisableRightArrow(true);
+      }
     }
-    if (selectedTab > 0) {
-      setDisableLeftArrow(false);
-    }
-    if (selectedTab < tabCount) {
-      setDisableRightArrow(false);
-    }
-  }, [selectedTab]);
+  };
 
   /**
    * Update value based on given value property
@@ -134,14 +180,23 @@ export const Tabs = ({
    * @param direction
    */
   const handleArrowButtonPress = (direction: 'left' | 'right') => {
-    if (direction === 'left') {
-      tabsWrapperRef.current?.scrollBy(-tabsWrapperRef.current.clientWidth, 0);
+    const { tabsMeta } = getTabsMeta();
+    const tabsContainer = tabsWrapperRef.current;
+
+    if (tabsMeta && tabsContainer) {
+      if (direction === 'left') {
+        tabsContainer.scrollBy({
+          left: -tabsMeta.clientWidth,
+          behavior: 'smooth',
+        });
+      }
+      if (direction === 'right') {
+        tabsContainer.scrollBy({
+          left: tabsMeta.clientWidth,
+          behavior: 'smooth',
+        });
+      }
     }
-    if (direction === 'right') {
-      tabsWrapperRef.current?.scrollBy(tabsWrapperRef.current.clientWidth, 0);
-    }
-    setDisableLeftArrow(false);
-    setDisableRightArrow(false);
   };
 
   /**
@@ -153,8 +208,8 @@ export const Tabs = ({
     const tabCount = tabRefs.current.length - 1;
 
     if (event.key === 'ArrowLeft') {
+      event.preventDefault();
       let next = selectedTab === 0 ? 0 : selectedTab - 1;
-
       // Prevent disabled tab selection
       if (tabRefs.current[next]?.disabled && next > 0) {
         next = next - 1;
@@ -163,6 +218,7 @@ export const Tabs = ({
       handleSelectTab(event, next);
     }
     if (event.key === 'ArrowRight') {
+      event.preventDefault();
       let next = selectedTab === tabCount ? tabCount : selectedTab + 1;
 
       // Prevent disabled tab selection
@@ -181,6 +237,10 @@ export const Tabs = ({
   const handleSelectTab = (event: React.SyntheticEvent, value: number) => {
     setSelectedTab(value);
     tabRefs.current[value]?.focus();
+    // Make sure that focused Tab is visible
+    tabRefs.current[value]?.scrollIntoView({
+      behavior: 'smooth',
+    });
     onChange && onChange(event, value);
   };
 
@@ -204,6 +264,8 @@ export const Tabs = ({
           }}
           role={'tablist'}
           ref={tabsWrapperRef}
+          // TODO: change this to onScrollEnd when it is supported
+          onScroll={handleTabsScroll}
           {...restprops}
         >
           {createNavigationTabs}
