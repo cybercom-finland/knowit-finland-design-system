@@ -185,17 +185,26 @@ export const Tabs = ({
 
     if (tabsMeta && tabsContainer) {
       if (direction === 'left') {
-        tabsContainer.scrollBy({
-          left: -tabsMeta.clientWidth,
-          behavior: 'smooth',
-        });
+        scrollBy(-tabsMeta.clientWidth);
       }
       if (direction === 'right') {
-        tabsContainer.scrollBy({
-          left: tabsMeta.clientWidth,
-          behavior: 'smooth',
-        });
+        scrollBy(tabsMeta.clientWidth);
       }
+    }
+  };
+
+  /**
+   * scrollBy helper function
+   * @param value
+   */
+  const scrollBy = (value: number) => {
+    const tabsContainer = tabsWrapperRef.current;
+
+    if (tabsContainer) {
+      tabsContainer.scrollBy({
+        left: value,
+        behavior: 'smooth',
+      });
     }
   };
 
@@ -206,26 +215,30 @@ export const Tabs = ({
    */
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const tabCount = tabRefs.current.length - 1;
+    const focusedTabIndex = tabRefs.current.indexOf(
+      document.activeElement as HTMLButtonElement
+    );
 
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
-      let next = selectedTab === 0 ? 0 : selectedTab - 1;
+      let next = focusedTabIndex === 0 ? 0 : focusedTabIndex - 1;
       // Prevent disabled tab selection
       if (tabRefs.current[next]?.disabled && next > 0) {
         next = next - 1;
       }
 
-      handleSelectTab(event, next);
+      handleFocusTab(event, next);
     }
+
     if (event.key === 'ArrowRight') {
       event.preventDefault();
-      let next = selectedTab === tabCount ? tabCount : selectedTab + 1;
+      let next = focusedTabIndex === tabCount ? tabCount : focusedTabIndex + 1;
 
       // Prevent disabled tab selection
       if (tabRefs.current[next]?.disabled && next < tabCount) {
         next = next + 1;
       }
-      handleSelectTab(event, next);
+      handleFocusTab(event, next);
     }
   };
 
@@ -237,11 +250,32 @@ export const Tabs = ({
   const handleSelectTab = (event: React.SyntheticEvent, value: number) => {
     setSelectedTab(value);
     tabRefs.current[value]?.focus();
+    // Make sure that selected Tab is visible
+    scrollIntoView(value);
+
+    onChange && onChange(event, value);
+  };
+
+  /**
+   * Handle focus tab
+   * @param event
+   * @param value
+   */
+  const handleFocusTab = (event: React.SyntheticEvent, value: number) => {
+    tabRefs.current[value]?.focus();
     // Make sure that focused Tab is visible
+    scrollIntoView(value);
+  };
+
+  /**
+   * Scroll into view helper function
+   * @param value
+   */
+  const scrollIntoView = (value: number) => {
     tabRefs.current[value]?.scrollIntoView({
       behavior: 'smooth',
+      block: 'nearest',
     });
-    onChange && onChange(event, value);
   };
 
   return (
