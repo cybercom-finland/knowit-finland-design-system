@@ -85,7 +85,6 @@
     "@storybook/addon-essentials": "^7.5.2",
     "@storybook/addon-interactions": "^7.5.2",
     "@storybook/addon-links": "^7.5.2",
-    "@storybook/addon-mdx-gfm": "^7.5.2",
     "@storybook/jest": "^0.2.3",
     "@storybook/node-logger": "^7.5.2",
     "@storybook/preset-create-react-app": "^7.5.2",
