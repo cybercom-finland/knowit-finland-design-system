@@ -20,6 +20,8 @@ export * from './Popup';
 export * from './Radio';
 export * from './Search';
 export * from './Sidebar';
+export * from './Tabs/Tab';
+export * from './Tabs';
 export * from './Textarea';
 export * from './Theme';
 export * from './Typography';

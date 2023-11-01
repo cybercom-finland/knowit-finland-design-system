@@ -34,7 +34,8 @@ const buttonDimensions = {
   },
 };
 
-type ButtonHTMLAttributes = React.ButtonHTMLAttributes<HTMLButtonElement>;
+export type ButtonHTMLAttributes =
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 /**
  * Button component properties
@@ -234,32 +235,37 @@ const TextButton = styled(ButtonBase)<{ size?: Size }>`
 /**
  * Button component
  */
-export const Button = ({
-  label,
-  startIcon,
-  endIcon,
-  variant = 'filled',
-  size = 'medium',
-  disabled = false,
-  ...restProps
-}: ButtonProps) => {
-  let ButtonComponent;
-  switch (variant) {
-    case 'filled':
-      ButtonComponent = FilledButton;
-      break;
-    case 'outlined':
-      ButtonComponent = OutlinedButton;
-      break;
-    case 'text':
-      ButtonComponent = TextButton;
-      break;
+export const Button = React.forwardRef(
+  (
+    {
+      label,
+      startIcon,
+      endIcon,
+      variant = 'filled',
+      size = 'medium',
+      disabled = false,
+      ...restProps
+    }: ButtonProps,
+    ref: ButtonProps['ref']
+  ) => {
+    let ButtonComponent;
+    switch (variant) {
+      case 'filled':
+        ButtonComponent = FilledButton;
+        break;
+      case 'outlined':
+        ButtonComponent = OutlinedButton;
+        break;
+      case 'text':
+        ButtonComponent = TextButton;
+        break;
+    }
+    return (
+      <ButtonComponent size={size} disabled={disabled} ref={ref} {...restProps}>
+        {startIcon}
+        {label}
+        {endIcon}
+      </ButtonComponent>
+    );
   }
-  return (
-    <ButtonComponent size={size} disabled={disabled} {...restProps}>
-      {startIcon}
-      {label}
-      {endIcon}
-    </ButtonComponent>
-  );
-};
+);

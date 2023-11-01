@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { Tooltip } from './Tooltip';
 import { Button } from '../Button';

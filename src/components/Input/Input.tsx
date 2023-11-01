@@ -290,54 +290,60 @@ export interface InputProps
 /**
  * Input component
  */
-export const Input = ({
-  id,
-  variant = 'outlined',
-  label,
-  helperText,
-  disabled = false,
-  error = false,
-  readOnly = false,
-  required = false,
-  width,
-  endIcon,
-  ...restProps
-}: InputProps) => {
-  let InputComponent;
-  switch (variant) {
-    case 'filled':
-      InputComponent = FilledInput;
-      break;
-    case 'outlined':
-      InputComponent = OutlinedInput;
-      break;
-  }
+export const Input = React.forwardRef(
+  (
+    {
+      id,
+      variant = 'outlined',
+      label,
+      helperText,
+      disabled = false,
+      error = false,
+      readOnly = false,
+      required = false,
+      width,
+      endIcon,
+      ...restProps
+    }: InputProps,
+    ref: InputProps['ref']
+  ) => {
+    let InputComponent;
+    switch (variant) {
+      case 'filled':
+        InputComponent = FilledInput;
+        break;
+      case 'outlined':
+        InputComponent = OutlinedInput;
+        break;
+    }
 
-  // Use Id form props or create randomized string
-  const componentId = id ?? generateRandomString(5);
+    // Use Id form props or create randomized string
+    const componentId = id ?? generateRandomString(5);
 
-  return (
-    <Wrapper width={width}>
-      <InputWrapper
-        id={componentId}
-        label={label}
-        helperText={helperText}
-        disabled={disabled}
-        error={error}
-        required={required}
-      >
-        <InputComponent
+    return (
+      <Wrapper width={width}>
+        <InputWrapper
+          id={componentId}
+          label={label}
+          helperText={helperText}
           disabled={disabled}
           error={error}
           required={required}
-          readOnly={readOnly}
-          id={`input-${componentId}`}
-          aria-labelledby={label && `label-${componentId}`}
-          aria-describedby={helperText && `helper-${componentId}`}
-          {...restProps}
-        />
-        {endIcon}
-      </InputWrapper>
-    </Wrapper>
-  );
-};
+        >
+          <InputComponent
+            disabled={disabled}
+            error={error}
+            required={required}
+            readOnly={readOnly}
+            id={`input-${componentId}`}
+            aria-labelledby={label && `label-${componentId}`}
+            aria-describedby={helperText && `helper-${componentId}`}
+            ref={ref}
+            {...restProps}
+          />
+          {endIcon}
+        </InputWrapper>
+      </Wrapper>
+    );
+  }
+);

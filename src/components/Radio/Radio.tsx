@@ -143,7 +143,6 @@ export const Radio = ({
   required = false,
   size = 'large',
   onChange,
-  checked,
   ...restProps
 }: RadioProps) => {
   // Use ID form props or create randomized string

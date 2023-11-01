@@ -82,7 +82,7 @@ export const Breadcrumb = ({
     return null;
   });
   return (
-    <nav aria-label={restProps["aria-label"]}>
+    <nav aria-label={restProps['aria-label']}>
       <BreadcrumbWrapper id={componentId} {...restProps}>
         {homeLink && <HomeLinkWrapper>{homeLink}</HomeLinkWrapper>}
         {renderChildren}
