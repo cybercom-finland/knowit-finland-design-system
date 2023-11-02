@@ -1,14 +1,30 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { CircularLoadingIndicator } from './CircularLoadingIndicator';
 import styled from 'styled-components';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/LoadingIndicators/CircularLoadingIndicator',
+const meta: Meta<typeof CircularLoadingIndicator> = {
   component: CircularLoadingIndicator,
+};
+export default meta;
+
+type Story = StoryObj<typeof CircularLoadingIndicator>;
+
+const ComponentWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+`;
+
+/**
+ * Basic Loading indicator
+ */
+export const BasicExample: Story = {
   args: {
-    size: 'large',
+    size: 'medium',
+    title: 'default variant',
+    indicatorSeverity: 'default',
+    determinate: false,
   },
   parameters: {
     design: [
@@ -24,64 +40,54 @@ export default {
       },
     ],
   },
-} as Meta<typeof CircularLoadingIndicator>;
-
-const ComponentWrapper = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  gap: 8px;
-`;
-const SizesTemplate: StoryFn<typeof CircularLoadingIndicator> = () => (
-  <ComponentWrapper>
-    <CircularLoadingIndicator title='large' size={'large'} />
-    <CircularLoadingIndicator title='medium' size={'medium'} />
-    <CircularLoadingIndicator title='small' size={'small'} />
-  </ComponentWrapper>
-);
-
-const StylesTemplate: StoryFn<typeof CircularLoadingIndicator> = (args) => (
-  <ComponentWrapper>
-    <CircularLoadingIndicator
-      {...args}
-      title='default'
-      indicatorSeverity={'default'}
-    />
-    <CircularLoadingIndicator
-      {...args}
-      title='success'
-      indicatorSeverity={'success'}
-    />
-    <CircularLoadingIndicator
-      {...args}
-      title='warning'
-      indicatorSeverity={'warning'}
-    />
-    <CircularLoadingIndicator
-      {...args}
-      title='error'
-      indicatorSeverity={'error'}
-    />
-    <CircularLoadingIndicator
-      {...args}
-      title='info'
-      indicatorSeverity={'info'}
-    />
-  </ComponentWrapper>
-);
-
-export const BasicExample = {
-  args: {
-    size: 'medium',
-    title: 'default variant',
-  },
 };
 
+/**
+ * Different siszes of Loading indicator
+ */
 export const Sizes = {
-  render: SizesTemplate,
+  render: (args) => (
+    <ComponentWrapper>
+      <CircularLoadingIndicator title='large' size={'large'} {...args} />
+      <CircularLoadingIndicator title='medium' size={'medium'} {...args} />
+      <CircularLoadingIndicator title='small' size={'small'} {...args} />
+    </ComponentWrapper>
+  ),
 };
 
+/**
+ * Loading indicator severities
+ */
 export const IndicatorSeverity = {
-  render: StylesTemplate,
+  render: (args) => (
+    <ComponentWrapper>
+      <CircularLoadingIndicator
+        {...args}
+        title='default'
+        indicatorSeverity={'default'}
+      />
+      <CircularLoadingIndicator
+        {...args}
+        title='success'
+        indicatorSeverity={'success'}
+      />
+      <CircularLoadingIndicator
+        {...args}
+        title='warning'
+        indicatorSeverity={'warning'}
+      />
+      <CircularLoadingIndicator
+        {...args}
+        title='error'
+        indicatorSeverity={'error'}
+      />
+      <CircularLoadingIndicator
+        {...args}
+        title='info'
+        indicatorSeverity={'info'}
+      />
+    </ComponentWrapper>
+  ),
 
   args: {
     progress: 75,
@@ -90,31 +96,9 @@ export const IndicatorSeverity = {
   },
 };
 
-export const IndicatorTitle = {
-  args: {
-    progress: 100,
-    determinate: true,
-    indicatorSeverity: 'success',
-    title: 'Indicator title',
-  },
-};
-
-export const Success100PercentDeterminate = {
-  args: {
-    progress: 100,
-    determinate: true,
-    indicatorSeverity: 'success',
-  },
-};
-
-export const Error33PercentDeterminate = {
-  args: {
-    progress: 33,
-    determinate: true,
-    indicatorSeverity: 'error',
-  },
-};
-
+/**
+ * Determinate
+ */
 export const Info50PercentDeterminate = {
   args: {
     progress: 50,
@@ -123,13 +107,9 @@ export const Info50PercentDeterminate = {
   },
 };
 
-export const WarningIndeterminate = {
-  args: {
-    determinate: false,
-    indicatorSeverity: 'warning',
-  },
-};
-
+/**
+ * Negative value
+ */
 export const NegativePercent = {
   args: {
     progress: -1000,
@@ -137,6 +117,9 @@ export const NegativePercent = {
   },
 };
 
+/**
+ * Value above 100
+ */
 export const Above100Percent = {
   args: {
     progress: 1000,
