@@ -1,24 +1,31 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Checkbox } from './Checkbox';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { expect, jest } from '@storybook/jest';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Checkbox',
-  component: Checkbox,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    onChange: { action: true },
-  },
+const meta: Meta<typeof Checkbox> = { component: Checkbox };
+export default meta;
+
+type Story = StoryObj<typeof Checkbox>;
+
+/**
+ * Basic example of a Checkbokx
+ */
+export const BasicExample: Story = {
   args: {
+    onChange: jest.fn(),
     checked: false,
     label: 'Label',
-    helperText: 'Helper text',
     disabled: false,
     indeterminate: false,
     size: 'large',
+    required: false,
+    value: 'Example value',
+    helperText: '',
+  },
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  argTypes: {
+    onChange: { action: true },
   },
   parameters: {
     design: [
@@ -34,12 +41,6 @@ export default {
       },
     ],
   },
-} as Meta<typeof Checkbox>;
-
-export const BasicExample = {
-  args: {
-    onChange: jest.fn(),
-  },
 
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
@@ -53,12 +54,18 @@ export const BasicExample = {
   },
 };
 
-export const Disabled = {
+/**
+ * Disabled checkbox
+ */
+export const Disabled: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     disabled: true,
   },
 
   parameters: {
+    ...BasicExample.parameters,
     a11y: {
       config: {
         // Element has disabled attribute for screen readers, so contrast can be ignored
@@ -76,14 +83,24 @@ export const Disabled = {
   },
 };
 
+/**
+ * Small Checkbox
+ */
 export const Small = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     size: 'small',
   },
 };
 
-export const NoHelperText = {
+/**
+ * With helper text
+ */
+export const HelperText = {
+  ...BasicExample,
   args: {
-    helperText: undefined,
+    ...BasicExample.args,
+    helperText: 'Helper text',
   },
 };
