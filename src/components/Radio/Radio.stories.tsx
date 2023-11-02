@@ -34,24 +34,22 @@ const Template: StoryFn<typeof Radio> = (args) => {
   return <Radio {...args} value='value' name='test' />;
 };
 
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
-
-/**
- * Small variant
- */
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
+export const BasicExample = {
+  render: Template,
 };
 
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Disabled.args = {
-  disabled: true,
+export const Small = {
+  render: Template,
+
+  args: {
+    size: 'small',
+  },
+};
+
+export const Disabled = {
+  render: Template,
+
+  args: {
+    disabled: true,
+  },
 };

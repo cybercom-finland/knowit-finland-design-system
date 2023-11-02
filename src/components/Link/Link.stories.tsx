@@ -29,24 +29,15 @@ export default {
   },
 } as Meta<typeof Link>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Link> = (args) => <Link {...args} />;
-
-/**
- * Default
- */
-export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  children: 'Link',
+export const BasicExample = {
+  args: {
+    children: 'Link',
+  },
 };
 
-/**
- * With end icon
- */
-export const EndIcon = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-EndIcon.args = {
-  children: 'Link with end icon',
-  endIcon: <MdOpenInNew />,
+export const EndIcon = {
+  args: {
+    children: 'Link with end icon',
+    endIcon: <MdOpenInNew />,
+  },
 };

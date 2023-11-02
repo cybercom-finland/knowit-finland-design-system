@@ -50,22 +50,20 @@ const Template: StoryFn<typeof Popup> = (args) => (
   </ExamplePopup>
 );
 
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};
 
-/**
- * Initially open
- */
-export const InitiallyOpen = Template.bind({});
-InitiallyOpen.args = { initiallyOpen: true };
+export const InitiallyOpen = {
+  render: Template,
+  args: { initiallyOpen: true },
+};
 
-/**
- * Long text
- */
-export const LongText = Template.bind({});
-LongText.args = {
-  content:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+export const LongText = {
+  render: Template,
+
+  args: {
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+  },
 };

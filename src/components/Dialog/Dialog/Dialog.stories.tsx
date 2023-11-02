@@ -60,7 +60,6 @@ const ExampleDialog = () => {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Dialog> = () => <ExampleDialog />;
 
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};

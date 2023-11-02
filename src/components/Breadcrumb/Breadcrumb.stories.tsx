@@ -35,7 +35,6 @@ const Template: StoryFn<typeof Breadcrumb> = () => (
   </Breadcrumb>
 );
 
-/**
- * Default variant
- */
-export const DefaultVariant = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};

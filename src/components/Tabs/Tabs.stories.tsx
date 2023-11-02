@@ -86,17 +86,14 @@ const DisabledTemplate: StoryFn<typeof Tabs> = (args) => {
   );
 };
 
-/**
- * Basic example of tabs
- */
-export const BasicTabs = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};
 
-/**
- * Tab list with scroll
- */
-export const TabsWithScroll = ScrollTabTemplate.bind({});
+export const TabsWithScroll = {
+  render: ScrollTabTemplate,
+};
 
-/**
- * Tabs with disabled tab
- */
-export const DisabledTabs = DisabledTemplate.bind({});
+export const DisabledTabs = {
+  render: DisabledTemplate,
+};

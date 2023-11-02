@@ -29,134 +29,105 @@ export default {
   },
 } as Meta<typeof Input>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Input> = (args) => <Input {...args} />;
+export const BasicExample = {};
 
-/**
- * Outlined
- */
-export const Outlined = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Outlined.args = {
-  variant: 'outlined',
+export const Outlined = {
+  args: {
+    variant: 'outlined',
+  },
+
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-69891&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-73930&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
 };
 
-Outlined.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-69891&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-73930&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
+export const OutlinedError = {
+  args: {
+    variant: 'outlined',
+    error: true,
+  },
+
+  parameters: Outlined.parameters,
 };
 
-/**
- * Outlined error
- */
-export const OutlinedError = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-OutlinedError.args = {
-  variant: 'outlined',
-  error: true,
+export const OutlinedEndIcon = {
+  args: {
+    variant: 'outlined',
+    endIcon: <MdLock size={pxToRem(24)} />,
+  },
+
+  parameters: Outlined.parameters,
 };
 
-OutlinedError.parameters = Outlined.parameters;
+export const OutlinedWithContent = {
+  args: {
+    variant: 'outlined',
+  },
 
-/**
- * Outlined end icon
- */
-export const OutlinedEndIcon = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-OutlinedEndIcon.args = {
-  variant: 'outlined',
-  endIcon: <MdLock size={pxToRem(24)} />,
+  parameters: Outlined.parameters,
+
+  play: async ({ canvasElement }) => {
+    const input = within(canvasElement).getByRole('textbox');
+    await userEvent.type(input, 'Hello Knowit!');
+    await expect(input).toHaveValue('Hello Knowit!');
+  },
 };
 
-OutlinedEndIcon.parameters = Outlined.parameters;
+export const OutlinedRequired = {
+  args: {
+    variant: 'outlined',
+    required: true,
+  },
 
-/**
- * OutlinedWithInput
- */
-export const OutlinedWithContent = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-OutlinedWithContent.args = {
-  variant: 'outlined',
+  parameters: Outlined.parameters,
 };
 
-OutlinedWithContent.parameters = Outlined.parameters;
+export const Filled = {
+  args: {
+    variant: 'filled',
+  },
 
-OutlinedWithContent.play = async ({ canvasElement }) => {
-  const input = within(canvasElement).getByRole('textbox');
-  await userEvent.type(input, 'Hello Knowit!');
-  await expect(input).toHaveValue('Hello Knowit!');
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=401-3597&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-73745&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
 };
 
-/**
- * Outlined required
- */
-export const OutlinedRequired = Template.bind({});
-OutlinedRequired.args = {
-  variant: 'outlined',
-  required: true,
+export const FilledError = {
+  args: {
+    variant: 'filled',
+    error: true,
+  },
+
+  parameters: Filled.parameters,
 };
 
-OutlinedRequired.parameters = Outlined.parameters;
+export const FilledEndIcon = {
+  args: {
+    variant: 'filled',
+    endIcon: <MdLock size={pxToRem(24)} />,
+  },
 
-/**
- * Filled
- */
-export const Filled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Filled.args = {
-  variant: 'filled',
+  parameters: Filled.parameters,
 };
-
-Filled.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=401-3597&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1406-73745&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
-};
-
-/**
- * Filled error
- */
-export const FilledError = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-FilledError.args = {
-  variant: 'filled',
-  error: true,
-};
-
-FilledError.parameters = Filled.parameters;
-
-/**
- * Filled end icon
- */
-export const FilledEndIcon = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-FilledEndIcon.args = {
-  variant: 'filled',
-  endIcon: <MdLock size={pxToRem(24)} />,
-};
-
-FilledEndIcon.parameters = Filled.parameters;
-
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});

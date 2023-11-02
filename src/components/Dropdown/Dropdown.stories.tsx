@@ -45,138 +45,135 @@ const Template: StoryFn<typeof Dropdown> = (args) => {
   );
 };
 
-/**
- * Outlined
- */
-export const Outlined = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Outlined.args = {
-  variant: 'outlined',
-};
+export const BasicExample = {};
 
-Outlined.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-80014&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-82426&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
-};
+export const Outlined = {
+  render: Template,
 
-/**
- * Outlined error
- */
-export const OutlinedError = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-OutlinedError.args = {
-  variant: 'outlined',
-  error: true,
-};
+  args: {
+    variant: 'outlined',
+  },
 
-OutlinedError.parameters = Outlined.parameters;
-
-/**
- * Outlined end icon
- */
-export const OutlinedEndIcon = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-OutlinedEndIcon.args = {
-  variant: 'outlined',
-  endIcon: <MdInfo size={pxToRem(24)} />,
-};
-
-/**
- * Filled
- */
-export const Filled = Template.bind({});
-Filled.args = {
-  variant: 'filled',
-};
-
-Filled.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=691-10867&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-77602&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
-};
-
-/**
- * Filled error
- */
-export const FilledError = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-FilledError.args = {
-  variant: 'filled',
-  error: true,
-};
-
-FilledError.parameters = Filled.parameters;
-
-/**
- * Filled end icon
- */
-export const FilledEndIcon = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-FilledEndIcon.args = {
-  variant: 'filled',
-  endIcon: <MdInfo size={pxToRem(24)} />,
-};
-
-FilledEndIcon.parameters = Filled.parameters;
-
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Disabled.args = {
-  disabled: true,
-};
-Disabled.parameters = {
-  a11y: {
-    config: {
-      // Element has disabled attribute for screen readers, so contrast can be ignored
-      rules: [{ id: 'color-contrast', enabled: false }],
-    },
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-80014&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-82426&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
   },
 };
 
-Disabled.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+export const OutlinedError = {
+  render: Template,
 
-  // Component should be disabled
-  await userEvent.click(canvas.getByTestId('dropdown'));
-  expect(canvas.getByTestId('dropdown')).toBeDisabled();
+  args: {
+    variant: 'outlined',
+    error: true,
+  },
+
+  parameters: Outlined.parameters,
 };
 
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
-DefaultVariant.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+export const OutlinedEndIcon = {
+  render: Template,
 
-  // Component should be enabled
-  await userEvent.click(canvas.getByTestId('dropdown'));
-  expect(canvas.getByTestId('dropdown')).toBeEnabled;
+  args: {
+    variant: 'outlined',
+    endIcon: <MdInfo size={pxToRem(24)} />,
+  },
+};
 
-  // Try switching between options and see that the displayed value is reflected correctly
-  fireEvent.change(canvas.getByTestId('dropdown'), { target: { value: 2 } });
-  await userEvent.click(canvas.getByDisplayValue('Two'));
-  fireEvent.change(canvas.getByTestId('dropdown'), { target: { value: 1 } });
-  await userEvent.click(canvas.getByDisplayValue('One'));
+export const Filled = {
+  render: Template,
+
+  args: {
+    variant: 'filled',
+  },
+
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=691-10867&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-77602&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
+};
+
+export const FilledError = {
+  render: Template,
+
+  args: {
+    variant: 'filled',
+    error: true,
+  },
+
+  parameters: Filled.parameters,
+};
+
+export const FilledEndIcon = {
+  render: Template,
+
+  args: {
+    variant: 'filled',
+    endIcon: <MdInfo size={pxToRem(24)} />,
+  },
+
+  parameters: Filled.parameters,
+};
+
+export const Disabled = {
+  render: Template,
+
+  args: {
+    disabled: true,
+  },
+
+  parameters: {
+    a11y: {
+      config: {
+        // Element has disabled attribute for screen readers, so contrast can be ignored
+        rules: [{ id: 'color-contrast', enabled: false }],
+      },
+    },
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Component should be disabled
+    await userEvent.click(canvas.getByTestId('dropdown'));
+    expect(canvas.getByTestId('dropdown')).toBeDisabled();
+  },
+};
+
+export const ChangeValueTest = {
+  render: Template,
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Component should be enabled
+    await userEvent.click(canvas.getByTestId('dropdown'));
+    expect(canvas.getByTestId('dropdown')).toBeEnabled;
+
+    // Try switching between options and see that the displayed value is reflected correctly
+    fireEvent.change(canvas.getByTestId('dropdown'), { target: { value: 2 } });
+    await userEvent.click(canvas.getByDisplayValue('Two'));
+    fireEvent.change(canvas.getByTestId('dropdown'), { target: { value: 1 } });
+    await userEvent.click(canvas.getByDisplayValue('One'));
+  },
 };

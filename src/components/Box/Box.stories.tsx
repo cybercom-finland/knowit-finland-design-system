@@ -54,15 +54,14 @@ const Template: StoryFn<typeof Box> = (args) => (
   <ExampleBox {...args}></ExampleBox>
 );
 
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};
 
-/**
- * Rounded variant
- */
-export const Rounded = Template.bind({});
-Rounded.args = {
-  variant: 'rounded',
+export const Rounded = {
+  render: Template,
+
+  args: {
+    variant: 'rounded',
+  },
 };

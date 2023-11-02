@@ -77,12 +77,10 @@ const LongTextTemplate: StoryFn<typeof List> = (args) => (
   </List>
 );
 
-/**
- * Default
- */
-export const Default = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};
 
-/**
- * Demonstrate how long text is wrapped
- */
-export const LongText = LongTextTemplate.bind({});
+export const LongText = {
+  render: LongTextTemplate,
+};

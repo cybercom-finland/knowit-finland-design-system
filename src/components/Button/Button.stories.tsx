@@ -21,125 +21,106 @@ export default {
   },
 } as Meta<typeof Button>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Button> = (args) => <Button {...args} />;
+export const BasicExample = {};
 
-/**
- * Outlined
- */
-export const Outlined = Template.bind({});
-Outlined.args = {
-  variant: 'outlined',
+export const Outlined = {
+  args: {
+    variant: 'outlined',
+  },
+
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-56662&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61336&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
 };
 
-Outlined.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-56662&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61336&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
+export const OutlinedWithEndIcon = {
+  args: {
+    variant: 'outlined',
+    endIcon: <MdAdd />,
+  },
+
+  parameters: Outlined.parameters,
 };
 
-/**
- * Outlined with end icon
- */
-export const OutlinedWithEndIcon = Template.bind({});
-OutlinedWithEndIcon.args = {
-  variant: 'outlined',
-  endIcon: <MdAdd />,
+export const Filled = {
+  args: {
+    variant: 'filled',
+  },
+
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-58870&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61594&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
 };
 
-OutlinedWithEndIcon.parameters = Outlined.parameters;
+export const Text = {
+  args: {
+    variant: 'text',
+  },
 
-/**
- * Filled
- */
-export const Filled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Filled.args = {
-  variant: 'filled',
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=329-2590&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61078&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
 };
 
-Filled.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-58870&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61594&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
+export const OutlinedClicked = {
+  args: {
+    variant: 'outlined',
+    onClick: jest.fn(),
+  },
+
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+    await userEvent.click(canvas.getByRole('button'));
+    await waitFor(() => expect(args.onClick).toHaveBeenCalled());
+  },
 };
 
-/**
- * Text
- */
-export const Text = Template.bind({});
-Text.args = {
-  variant: 'text',
+export const OutlinedDisabled = {
+  args: {
+    variant: 'outlined',
+    disabled: true,
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+    await userEvent.click(canvas.getByRole('button'));
+    expect(canvas.getByRole('button')).toBeDisabled();
+  },
 };
-
-Text.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=329-2590&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61078&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
-};
-
-/**
- * Outlined button clicked
- */
-export const OutlinedClicked = Template.bind({});
-OutlinedClicked.args = {
-  variant: 'outlined',
-  onClick: jest.fn(),
-};
-
-OutlinedClicked.play = async ({ args, canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('button'));
-  await waitFor(() => expect(args.onClick).toHaveBeenCalled());
-};
-
-/**
- * Outlined button disabled
- */
-export const OutlinedDisabled = Template.bind({});
-OutlinedDisabled.args = {
-  variant: 'outlined',
-  disabled: true,
-};
-
-OutlinedDisabled.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('button'));
-  expect(canvas.getByRole('button')).toBeDisabled();
-};
-
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});

@@ -35,65 +35,54 @@ export default {
   },
 } as Meta<typeof IconButton>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof IconButton> = (args) => <IconButton {...args} />;
-
-/**
- * Default
- */
-export const Default = Template.bind({});
-Default.args = {
-  children: <MdAdd />,
-};
-
-/**
- * Large
- */
-export const Large = Template.bind({});
-
-Large.args = {
-  size: 'large',
-  children: <MdAdd />,
-};
-
-/**
- * Button clicked
- */
-export const ButtonClicked = Template.bind({});
-ButtonClicked.args = {
-  children: <MdAdd />,
-  onClick: jest.fn(),
-};
-
-ButtonClicked.play = async ({ args, canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('button'));
-  await waitFor(() => expect(args.onClick).toHaveBeenCalled());
-};
-
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
-  children: <MdAdd />,
-};
-Disabled.parameters = {
-  a11y: {
-    config: {
-      // Element has disabled attribute for screen readers, so contrast can be ignored
-      rules: [{ id: 'color-contrast', enabled: false }],
-    },
+export const BasicExample = {
+  args: {
+    children: <MdAdd />,
   },
 };
 
-Disabled.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+export const Large = {
+  args: {
+    size: 'large',
+    children: <MdAdd />,
+  },
+};
 
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('button'));
-  expect(canvas.getByRole('button')).toBeDisabled();
+export const ButtonClicked = {
+  args: {
+    children: <MdAdd />,
+    onClick: jest.fn(),
+  },
+
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+    await userEvent.click(canvas.getByRole('button'));
+    await waitFor(() => expect(args.onClick).toHaveBeenCalled());
+  },
+};
+
+export const Disabled = {
+  args: {
+    disabled: true,
+    children: <MdAdd />,
+  },
+
+  parameters: {
+    a11y: {
+      config: {
+        // Element has disabled attribute for screen readers, so contrast can be ignored
+        rules: [{ id: 'color-contrast', enabled: false }],
+      },
+    },
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+    await userEvent.click(canvas.getByRole('button'));
+    expect(canvas.getByRole('button')).toBeDisabled();
+  },
 };

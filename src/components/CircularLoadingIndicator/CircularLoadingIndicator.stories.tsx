@@ -26,11 +26,6 @@ export default {
   },
 } as Meta<typeof CircularLoadingIndicator>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof CircularLoadingIndicator> = (args) => (
-  <CircularLoadingIndicator {...args} />
-);
-
 const ComponentWrapper = styled.div`
   display: inline-flex;
   flex-direction: row;
@@ -74,94 +69,77 @@ const StylesTemplate: StoryFn<typeof CircularLoadingIndicator> = (args) => (
   </ComponentWrapper>
 );
 
-/**
- * Default variant
- */
-export const DefaultVariant = Template.bind({});
-DefaultVariant.args = {
-  size: 'medium',
-  title: 'default variant',
+export const BasicExample = {
+  args: {
+    size: 'medium',
+    title: 'default variant',
+  },
 };
 
-/**
- * Different indicator sizes
- */
-export const Sizes = SizesTemplate.bind({});
-
-/**
- * Different indicator styles
- */
-export const IndicatorSeverity = StylesTemplate.bind({});
-IndicatorSeverity.args = {
-  progress: 75,
-  determinate: true,
-  size: 'large',
+export const Sizes = {
+  render: SizesTemplate,
 };
 
-/**
- * Indicator title, shown on hover
- */
-export const IndicatorTitle = Template.bind({});
-IndicatorTitle.args = {
-  progress: 100,
-  determinate: true,
-  indicatorSeverity: 'success',
-  title: 'Indicator title',
+export const IndicatorSeverity = {
+  render: StylesTemplate,
+
+  args: {
+    progress: 75,
+    determinate: true,
+    size: 'large',
+  },
 };
 
-/**
- * Success, 100%, determinate
- */
-export const Success100PercentDeterminate = Template.bind({});
-Success100PercentDeterminate.args = {
-  progress: 100,
-  determinate: true,
-  indicatorSeverity: 'success',
+export const IndicatorTitle = {
+  args: {
+    progress: 100,
+    determinate: true,
+    indicatorSeverity: 'success',
+    title: 'Indicator title',
+  },
 };
 
-/**
- * Error, 33%, determinate
- */
-export const Error33PercentDeterminate = Template.bind({});
-Error33PercentDeterminate.args = {
-  progress: 33,
-  determinate: true,
-  indicatorSeverity: 'error',
+export const Success100PercentDeterminate = {
+  args: {
+    progress: 100,
+    determinate: true,
+    indicatorSeverity: 'success',
+  },
 };
 
-/**
- * Info, 50%, determinate
- */
-export const Info50PercentDeterminate = Template.bind({});
-Info50PercentDeterminate.args = {
-  progress: 50,
-  determinate: true,
-  indicatorSeverity: 'info',
+export const Error33PercentDeterminate = {
+  args: {
+    progress: 33,
+    determinate: true,
+    indicatorSeverity: 'error',
+  },
 };
 
-/**
- * Warning, indeterminate
- */
-export const WarningIndeterminate = Template.bind({});
-WarningIndeterminate.args = {
-  determinate: false,
-  indicatorSeverity: 'warning',
+export const Info50PercentDeterminate = {
+  args: {
+    progress: 50,
+    determinate: true,
+    indicatorSeverity: 'info',
+  },
 };
 
-/**
- * Negative value (below 0%)
- */
-export const NegativePercent = Template.bind({});
-NegativePercent.args = {
-  progress: -1000,
-  determinate: true,
+export const WarningIndeterminate = {
+  args: {
+    determinate: false,
+    indicatorSeverity: 'warning',
+  },
 };
 
-/**
- * Value above 100%
- */
-export const Above100Percent = Template.bind({});
-Above100Percent.args = {
-  progress: 1000,
-  determinate: true,
+export const NegativePercent = {
+  args: {
+    progress: -1000,
+    determinate: true,
+  },
+};
+
+export const Above100Percent = {
+  args: {
+    progress: 1000,
+    determinate: true,
+  },
 };

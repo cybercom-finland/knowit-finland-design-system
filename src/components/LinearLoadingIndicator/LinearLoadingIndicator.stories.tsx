@@ -23,69 +23,49 @@ export default {
   },
 } as Meta<typeof LinearLoadingIndicator>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof LinearLoadingIndicator> = (args) => (
-  <LinearLoadingIndicator {...args} />
-);
+export const BasicExample = {};
 
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
-
-/**
- * Success, 100%, determinate
- */
-export const Success100PercentDeterminate = Template.bind({});
-Success100PercentDeterminate.args = {
-  progress: 100,
-  determinate: true,
-  indicatorSeverity: 'success',
+export const Success100PercentDeterminate = {
+  args: {
+    progress: 100,
+    determinate: true,
+    indicatorSeverity: 'success',
+  },
 };
 
-/**
- * Error, 33%, determinate
- */
-export const Error33PercentDeterminate = Template.bind({});
-Error33PercentDeterminate.args = {
-  progress: 33,
-  determinate: true,
-  indicatorSeverity: 'error',
+export const Error33PercentDeterminate = {
+  args: {
+    progress: 33,
+    determinate: true,
+    indicatorSeverity: 'error',
+  },
 };
 
-/**
- * Info, 50%, determinate
- */
-export const Info50PercentDeterminate = Template.bind({});
-Info50PercentDeterminate.args = {
-  progress: 50,
-  determinate: true,
-  indicatorSeverity: 'info',
+export const Info50PercentDeterminate = {
+  args: {
+    progress: 50,
+    determinate: true,
+    indicatorSeverity: 'info',
+  },
 };
 
-/**
- * Warning, indeterminate
- */
-export const WarningIndeterminate = Template.bind({});
-WarningIndeterminate.args = {
-  determinate: false,
-  indicatorSeverity: 'warning',
+export const WarningIndeterminate = {
+  args: {
+    determinate: false,
+    indicatorSeverity: 'warning',
+  },
 };
 
-/**
- * Negative value (below 0%)
- */
-export const NegativePercent = Template.bind({});
-NegativePercent.args = {
-  progress: -1000,
-  determinate: true,
+export const NegativePercent = {
+  args: {
+    progress: -1000,
+    determinate: true,
+  },
 };
 
-/**
- * Value above 100%
- */
-export const Above100Percent = Template.bind({});
-Above100Percent.args = {
-  progress: 1000,
-  determinate: true,
+export const Above100Percent = {
+  args: {
+    progress: 1000,
+    determinate: true,
+  },
 };

@@ -91,12 +91,10 @@ const MultiTemplate: StoryFn<typeof Accordion> = (args) => (
   <ExampleMultiAccordion {...args}></ExampleMultiAccordion>
 );
 
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};
 
-/**
- * Multiple accordions
- */
-export const MultipleAccordionVariant = MultiTemplate.bind({});
+export const MultipleAccordionVariant = {
+  render: MultiTemplate,
+};

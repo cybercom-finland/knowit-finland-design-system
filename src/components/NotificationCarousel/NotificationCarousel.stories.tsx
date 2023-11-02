@@ -47,7 +47,6 @@ const Template: StoryFn<typeof NotificationCarousel> = (args) => {
   return <NotificationCarousel {...args} />;
 };
 
-/**
- * Default
- */
-export const Default = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};

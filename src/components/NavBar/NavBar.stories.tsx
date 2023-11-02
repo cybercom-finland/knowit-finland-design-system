@@ -29,20 +29,12 @@ export default {
   },
 } as Meta<typeof NavBar>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof NavBar> = (args) => <NavBar {...args} />;
+export const BasicExample = {};
 
-/**
- * Default Navbar
- */
-export const Default = Template.bind({});
-
-/**
- * Medium Navbar
- */
-export const Medium = Template.bind({});
-Medium.args = {
-  size: 'medium',
+export const Medium = {
+  args: {
+    size: 'medium',
+  },
 };
 
 const MenuComponent = () => {
@@ -51,27 +43,21 @@ const MenuComponent = () => {
   </IconButton>;
 };
 
-/**
- * Navbar with logo and menu
- */
-export const LogoAndMenu = Template.bind({});
-LogoAndMenu.args = {
-  logo: <KnowitLogo />,
-  menu: MenuComponent,
+export const LogoAndMenu = {
+  args: {
+    logo: <KnowitLogo />,
+    menu: MenuComponent,
+  },
 };
 
-/**
- * Navbar with logo
- */
-export const Logo = Template.bind({});
-Logo.args = {
-  logo: <KnowitLogo />,
+export const Logo = {
+  args: {
+    logo: <KnowitLogo />,
+  },
 };
 
-/**
- * Navbar with menu
- */
-export const Menu = Template.bind({});
-Menu.args = {
-  menu: MenuComponent,
+export const Menu = {
+  args: {
+    menu: MenuComponent,
+  },
 };

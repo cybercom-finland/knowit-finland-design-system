@@ -36,64 +36,54 @@ export default {
   },
 } as Meta<typeof Checkbox>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Checkbox> = (args) => <Checkbox {...args} />;
+export const BasicExample = {
+  args: {
+    onChange: jest.fn(),
+  },
 
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
-DefaultVariant.args = {
-  onChange: jest.fn(),
-};
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
 
-DefaultVariant.play = async ({ args, canvasElement }) => {
-  const canvas = within(canvasElement);
+    // Check that the checkbox is enabled as it should be
+    await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeEnabled());
 
-  // Check that the checkbox is enabled as it should be
-  await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeEnabled());
-
-  // Click the checkbox to change state and test that the onChange event is working
-  await userEvent.click(canvas.getByTestId('checkbox'));
-  await waitFor(() => expect(args.onChange).toHaveBeenCalled());
-};
-
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
-};
-Disabled.parameters = {
-  a11y: {
-    config: {
-      // Element has disabled attribute for screen readers, so contrast can be ignored
-      rules: [{ id: 'color-contrast', enabled: false }],
-    },
+    // Click the checkbox to change state and test that the onChange event is working
+    await userEvent.click(canvas.getByTestId('checkbox'));
+    await waitFor(() => expect(args.onChange).toHaveBeenCalled());
   },
 };
 
-Disabled.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+export const Disabled = {
+  args: {
+    disabled: true,
+  },
 
-  // Check that the checkbox is disabled as it should be
-  await userEvent.click(canvas.getByTestId('checkbox'));
-  await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeDisabled);
+  parameters: {
+    a11y: {
+      config: {
+        // Element has disabled attribute for screen readers, so contrast can be ignored
+        rules: [{ id: 'color-contrast', enabled: false }],
+      },
+    },
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Check that the checkbox is disabled as it should be
+    await userEvent.click(canvas.getByTestId('checkbox'));
+    await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeDisabled);
+  },
 };
 
-/**
- * Small checkbox
- */
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
+export const Small = {
+  args: {
+    size: 'small',
+  },
 };
 
-/**
- * With no helper text
- */
-export const NoHelperText = Template.bind({});
-NoHelperText.args = {
-  helperText: undefined,
+export const NoHelperText = {
+  args: {
+    helperText: undefined,
+  },
 };

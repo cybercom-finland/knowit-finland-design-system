@@ -34,36 +34,22 @@ export default {
   },
 } as Meta<typeof Search>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Search> = (args) => <Search {...args} />;
+export const BasicExample = {};
 
-/**
- * Outlined
- */
-export const Outlined = Template.bind({});
-Outlined.args = {
-  variant: 'outlined',
+export const Outlined = {
+  args: {
+    variant: 'outlined',
+  },
 };
 
-/**
- * Filled
- */
-export const Filled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Filled.args = {
-  variant: 'filled',
+export const Filled = {
+  args: {
+    variant: 'filled',
+  },
 };
 
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Disabled.args = {
-  disabled: true,
+export const Disabled = {
+  args: {
+    disabled: true,
+  },
 };
-
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});

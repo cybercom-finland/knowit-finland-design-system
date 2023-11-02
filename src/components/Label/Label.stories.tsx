@@ -32,63 +32,46 @@ export default {
   },
 } as Meta<typeof Label>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Label> = (args) => <Label {...args} />;
-
-/**
- * Default
- */
-export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  children: 'Default label',
+export const BasicExample = {
+  args: {
+    children: 'Default label',
+  },
 };
 
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Disabled.args = {
-  children: 'Label for disabled input',
-  disabled: true,
-};
-Disabled.parameters = {
-  a11y: {
-    config: {
-      // Element has disabled attribute for screen readers, so contrast can be ignored
-      rules: [{ id: 'color-contrast', enabled: false }],
+export const Disabled = {
+  args: {
+    children: 'Label for disabled input',
+    disabled: true,
+  },
+
+  parameters: {
+    a11y: {
+      config: {
+        // Element has disabled attribute for screen readers, so contrast can be ignored
+        rules: [{ id: 'color-contrast', enabled: false }],
+      },
     },
   },
 };
 
-/**
- * Error
- */
-export const Error = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Error.args = {
-  children: 'Label for input with error',
-  error: true,
+export const Error = {
+  args: {
+    children: 'Label for input with error',
+    error: true,
+  },
 };
 
-/**
- * Error disabled
- */
-export const ErrorDisabled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-ErrorDisabled.args = {
-  children: 'Label for input with error',
-  error: true,
-  disabled: true,
+export const ErrorDisabled = {
+  args: {
+    children: 'Label for input with error',
+    error: true,
+    disabled: true,
+  },
 };
 
-/**
- * Required
- */
-export const Required = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Required.args = {
-  children: 'Label for input with required',
-  required: true,
+export const Required = {
+  args: {
+    children: 'Label for input with required',
+    required: true,
+  },
 };

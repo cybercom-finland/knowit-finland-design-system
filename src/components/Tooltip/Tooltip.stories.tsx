@@ -38,16 +38,15 @@ const Template: StoryFn<typeof Tooltip> = (args) => {
   );
 };
 
-/**
- * Default (no arrows)
- */
-export const Default = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};
 
-/**
- * Long text
- */
-export const LongText = Template.bind({});
-LongText.args = {
-  content:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+export const LongText = {
+  render: Template,
+
+  args: {
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+  },
 };

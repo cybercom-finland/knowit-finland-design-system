@@ -30,12 +30,10 @@ const ActiveTab: StoryFn<typeof Tab> = (args) => (
   <Tab {...args} selected label='Tab' />
 );
 
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});
+export const BasicExample = {
+  render: Template,
+};
 
-/**
- * Active variant
- */
-export const ActiveVariant = ActiveTab.bind({});
+export const ActiveVariant = {
+  render: ActiveTab,
+};

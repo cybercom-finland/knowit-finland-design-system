@@ -37,27 +37,16 @@ export default {
   },
 } as Meta<typeof DatePicker>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof DatePicker> = (args) => <DatePicker {...args} />;
+export const BasicExample = {};
 
-/**
- * Outlined
- */
-export const Outlined = Template.bind({});
-Outlined.args = {
-  variant: 'outlined',
+export const Outlined = {
+  args: {
+    variant: 'outlined',
+  },
 };
 
-/**
- * Filled
- */
-export const Filled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Filled.args = {
-  variant: 'filled',
+export const Filled = {
+  args: {
+    variant: 'filled',
+  },
 };
-
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});

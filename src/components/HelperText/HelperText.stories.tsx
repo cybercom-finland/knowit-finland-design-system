@@ -31,54 +31,39 @@ export default {
   },
 } as Meta<typeof HelperText>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof HelperText> = (args) => <HelperText {...args} />;
-
-/**
- * Default
- */
-export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  children: 'Default',
+export const BasicExample = {
+  args: {
+    children: 'Default',
+  },
 };
 
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Disabled.args = {
-  children: 'Disabled',
-  disabled: true,
-};
+export const Disabled = {
+  args: {
+    children: 'Disabled',
+    disabled: true,
+  },
 
-Disabled.parameters = {
-  a11y: {
-    config: {
-      // Element has disabled attribute for screen readers, so contrast can be ignored
-      rules: [{ id: 'color-contrast', enabled: false }],
+  parameters: {
+    a11y: {
+      config: {
+        // Element has disabled attribute for screen readers, so contrast can be ignored
+        rules: [{ id: 'color-contrast', enabled: false }],
+      },
     },
   },
 };
 
-/**
- * Error
- */
-export const Error = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Error.args = {
-  children: 'With error',
-  error: true,
+export const Error = {
+  args: {
+    children: 'With error',
+    error: true,
+  },
 };
 
-/**
- * Error disabled
- */
-export const ErrorDisabled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-ErrorDisabled.args = {
-  children: 'With error',
-  error: true,
-  disabled: true,
+export const ErrorDisabled = {
+  args: {
+    children: 'With error',
+    error: true,
+    disabled: true,
+  },
 };
