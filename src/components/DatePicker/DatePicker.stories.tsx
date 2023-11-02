@@ -1,12 +1,15 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { DatePicker } from './DatePicker';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/DatePicker',
-  component: DatePicker,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof DatePicker> = { component: DatePicker };
+export default meta;
+
+type Story = StoryObj<typeof DatePicker>;
+
+/**
+ * Filled example
+ */
+export const Filled: Story = {
   argTypes: {
     onChange: { action: true },
   },
@@ -15,7 +18,7 @@ export default {
     width: 300,
     placeholder: 'Default input',
     helperText: 'Helper text',
-    variant: 'outlined',
+    variant: 'filled',
     disabled: false,
     error: false,
     readOnly: false,
@@ -35,18 +38,15 @@ export default {
       },
     ],
   },
-} as Meta<typeof DatePicker>;
-
-export const BasicExample = {};
-
-export const Outlined = {
-  args: {
-    variant: 'outlined',
-  },
 };
 
-export const Filled = {
+/**
+ * Outlined example
+ */
+export const Outlined: Story = {
+  ...Filled,
   args: {
-    variant: 'filled',
+    ...Filled.args,
+    variant: 'outlined',
   },
 };
