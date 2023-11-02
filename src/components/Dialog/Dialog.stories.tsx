@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { Dialog } from './Dialog/Dialog';
+import { Dialog } from './Dialog';
 import { Label } from '../Label/Label';
 import { DialogHeader } from './DialogHeader/DialogHeader';
 import { DialogContent } from './DialogContent/DialogContent';

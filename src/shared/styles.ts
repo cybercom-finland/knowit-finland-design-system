@@ -73,7 +73,7 @@ export const typography = {
     paragraph2: pxToRem(24),
     label: {
       small: pxToRem(16),
-      medium: pxToRem(14),
+      medium: pxToRem(24),
       large: pxToRem(28),
     },
     caption: pxToRem(16),

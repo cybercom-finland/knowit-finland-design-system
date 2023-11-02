@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent, fireEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 
@@ -14,86 +14,36 @@ const TemplateOptions: DropdownOption[] = [
   { label: 'Four', value: 4 },
 ];
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/DropdownMenu',
-  component: Dropdown,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof Dropdown> = { component: Dropdown };
+export default meta;
+
+type Story = StoryObj<typeof Dropdown>;
+
+/**
+ * FIlled Dropdoen menu
+ */
+export const Filled: Story = {
+  render: (args) => {
+    const [current, setCurrent] = useState<number | undefined>(undefined);
+    const { options, ...props } = args;
+
+    return (
+      <Dropdown
+        {...props}
+        options={options}
+        value={current}
+        onChange={(e) => setCurrent(Number(e.target.value))}
+      />
+    );
+  },
   args: {
     placeholder: 'Default Dropdown menu',
     label: 'Label',
-    helperText: 'Helper text',
+    helperText: '',
     error: false,
     required: false,
     width: 300,
     options: TemplateOptions,
-  },
-} as Meta<typeof Dropdown>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Dropdown> = (args) => {
-  const [current, setCurrent] = useState<number | undefined>(undefined);
-  const { options, ...props } = args;
-
-  return (
-    <Dropdown
-      {...props}
-      options={options}
-      value={current}
-      onChange={(e) => setCurrent(Number(e.target.value))}
-    />
-  );
-};
-
-export const BasicExample = {};
-
-export const Outlined = {
-  render: Template,
-
-  args: {
-    variant: 'outlined',
-  },
-
-  parameters: {
-    design: [
-      {
-        name: 'light',
-        type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-80014&t=jaciSdrjiv4kZ1qN-4',
-      },
-      {
-        name: 'dark',
-        type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-82426&t=jaciSdrjiv4kZ1qN-4',
-      },
-    ],
-  },
-};
-
-export const OutlinedError = {
-  render: Template,
-
-  args: {
-    variant: 'outlined',
-    error: true,
-  },
-
-  parameters: Outlined.parameters,
-};
-
-export const OutlinedEndIcon = {
-  render: Template,
-
-  args: {
-    variant: 'outlined',
-    endIcon: <MdInfo size={pxToRem(24)} />,
-  },
-};
-
-export const Filled = {
-  render: Template,
-
-  args: {
     variant: 'filled',
   },
 
@@ -113,36 +63,66 @@ export const Filled = {
   },
 };
 
-export const FilledError = {
-  render: Template,
-
+/**
+ * Outlined Dropdown menu
+ */
+export const Outlined: Story = {
+  ...Filled,
   args: {
-    variant: 'filled',
+    ...Filled.args,
+    variant: 'outlined',
+  },
+
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-80014&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-82426&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
+};
+
+/**
+ * Dropdown menu with error
+ */
+export const Error: Story = {
+  ...Filled,
+  args: {
+    ...Filled.args,
     error: true,
   },
-
-  parameters: Filled.parameters,
 };
 
-export const FilledEndIcon = {
-  render: Template,
-
+/**
+ * Dropdown menu with end icon
+ */
+export const EndIcon: Story = {
+  ...Filled,
   args: {
-    variant: 'filled',
+    ...Filled.args,
     endIcon: <MdInfo size={pxToRem(24)} />,
   },
-
-  parameters: Filled.parameters,
 };
 
-export const Disabled = {
-  render: Template,
-
+/**
+ * Disabled Dropdown menu
+ */
+export const Disabled: Story = {
+  ...Filled,
   args: {
+    ...Filled.args,
     disabled: true,
   },
 
   parameters: {
+    ...Filled.parameters,
     a11y: {
       config: {
         // Element has disabled attribute for screen readers, so contrast can be ignored
@@ -160,8 +140,11 @@ export const Disabled = {
   },
 };
 
-export const ChangeValueTest = {
-  render: Template,
+/**
+ * Dropdown menu with interaction test
+ */
+export const ChangeValueTest: Story = {
+  ...Filled,
 
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -39,6 +39,8 @@ const InnerLabel = styled.label<LabelProps>`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   pointer-events: none;
   display: flex;
+  font-size: ${typography.size.label.medium};
+  line-height: ${typography.lineHeight.label.medium};
   font-weight: ${typography.weight.bold};
   ${({ disabled, error }) =>
     error

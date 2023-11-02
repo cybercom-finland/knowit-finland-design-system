@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentBaseProps } from '../../../shared';
+import { ComponentBaseProps } from '../../shared';
 
 /**
  * Div component properties
