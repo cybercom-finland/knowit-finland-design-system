@@ -30,6 +30,11 @@ export interface FormGroupProps {
    * Form Group direction
    */
   direction?: 'horizontal' | 'vertical';
+
+  /**
+   * Form content
+   */
+  children?: React.ReactNode;
 }
 
 const changeDirection = () => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { FormGroup } from './FormGroup';
 import { Radio } from '../Radio';
 
@@ -27,7 +26,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof FormGroup>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

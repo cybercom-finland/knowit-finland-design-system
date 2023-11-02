@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+
 import { Popup, PopupProps } from './Popup';
 import { Button } from '../Button';
 
@@ -30,7 +30,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof Popup>;
 
 /*

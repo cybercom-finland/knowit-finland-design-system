@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { Dialog } from './Dialog';
 import { Label } from '../../Label/Label';
 import { DialogHeader } from '../DialogHeader/DialogHeader';
@@ -27,7 +26,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof Dialog>;
 
 /*

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+
 import { Sidebar, SidebarProps } from './Sidebar';
 import { IconButton } from '../IconButton';
 import { MdClose } from 'react-icons/md';
@@ -28,7 +28,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof Sidebar>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

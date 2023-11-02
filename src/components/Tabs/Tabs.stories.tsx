@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+
 import { Tabs } from './Tabs';
 import { Tab } from './Tab';
 import styled from 'styled-components';
@@ -25,7 +25,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof Tabs>;
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Tabs> = (args) => {

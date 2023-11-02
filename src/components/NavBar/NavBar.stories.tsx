@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+
 import { NavBar } from './NavBar';
 import { KnowitLogo } from '../KnowitLogo';
 import { MdMenu } from 'react-icons/md';
@@ -27,7 +27,6 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
 } as Meta<typeof NavBar>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
