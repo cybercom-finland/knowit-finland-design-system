@@ -1,14 +1,38 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Card } from './Card';
 import { styled } from 'styled-components';
 import { pxToRem } from '../../shared';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Card',
-  component: Card,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof Card> = { component: Card };
+export default meta;
+
+type Story = StoryObj<typeof Card>;
+
+const exampleCardDimensions = {
+  height: pxToRem(150),
+};
+
+const ExampleCardHeader = styled.img`
+  width: 100%;
+  height: ${exampleCardDimensions.height};
+`;
+
+/**
+ * Basic example of a Card component
+ */
+export const BasicExample: Story = {
+  render: (args) => (
+    <Card
+      {...args}
+      header={
+        <ExampleCardHeader
+          role='presentation'
+          src='https://www.knowit.fi/contentassets/daecdbb1dff5420689ca9951ad352cce/knowit-microsoft-solutions-partner.png'
+        />
+      }
+    />
+  ),
   args: {
     variant: 'rectangle',
     category: 'Uutiset',
@@ -31,38 +55,16 @@ export default {
       },
     ],
   },
-} as Meta<typeof Card>;
-
-const exampleCardDimensions = {
-  height: pxToRem(150),
 };
 
-const ExampleCardHeader = styled.img`
-  width: 100%;
-  height: ${exampleCardDimensions.height};
-`;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Card> = (args) => (
-  <Card
-    {...args}
-    header={
-      <ExampleCardHeader
-        role='presentation'
-        src='https://www.knowit.fi/contentassets/daecdbb1dff5420689ca9951ad352cce/knowit-microsoft-solutions-partner.png'
-      />
-    }
-  />
-);
-
-export const BasicExample = {
-  render: Template,
-};
-
-export const Rounded = {
-  render: Template,
+/**
+ * Card component with rounded edges
+ */
+export const Rounded: Story = {
+  ...BasicExample,
 
   args: {
+    ...BasicExample.args,
     variant: 'rounded',
   },
 };
