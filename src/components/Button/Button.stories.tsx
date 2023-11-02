@@ -1,63 +1,29 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { expect, jest } from '@storybook/jest';
 
 import { Button } from './Button';
 import { MdAdd } from 'react-icons/md';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Button',
-  component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof Button> = { component: Button };
+export default meta;
+
+type Story = StoryObj<typeof Button>;
+
+/**
+ * Basic example of a filled Button component
+ */
+export const Filled: Story = {
   argTypes: {
     onClick: { action: true },
   },
   args: {
+    variant: 'filled',
     label: 'Button',
     size: 'medium',
     disabled: false,
   },
-} as Meta<typeof Button>;
-
-export const BasicExample = {};
-
-export const Outlined = {
-  args: {
-    variant: 'outlined',
-  },
-
-  parameters: {
-    design: [
-      {
-        name: 'light',
-        type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-56662&t=jaciSdrjiv4kZ1qN-4',
-      },
-      {
-        name: 'dark',
-        type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61336&t=jaciSdrjiv4kZ1qN-4',
-      },
-    ],
-  },
-};
-
-export const OutlinedWithEndIcon = {
-  args: {
-    variant: 'outlined',
-    endIcon: <MdAdd />,
-  },
-
-  parameters: Outlined.parameters,
-};
-
-export const Filled = {
-  args: {
-    variant: 'filled',
-  },
-
   parameters: {
     design: [
       {
@@ -74,11 +40,53 @@ export const Filled = {
   },
 };
 
-export const Text = {
+/**
+ * Outlined Button example
+ */
+export const Outlined: Story = {
+  ...Filled,
   args: {
+    ...Filled.args,
+    variant: 'outlined',
+  },
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-56662&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61336&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
+};
+
+/**
+ * Outlined Button with end icon
+ */
+export const OutlinedWithEndIcon: Story = {
+  ...Filled,
+  args: {
+    ...Filled.args,
+    variant: 'outlined',
+    endIcon: <MdAdd />,
+  },
+  parameters: Outlined.parameters,
+};
+
+/**
+ * Text Button example
+ */
+export const Text: Story = {
+  ...Filled,
+  args: {
+    ...Filled.args,
     variant: 'text',
   },
-
   parameters: {
     design: [
       {
@@ -95,8 +103,13 @@ export const Text = {
   },
 };
 
-export const OutlinedClicked = {
+/**
+ * Click interaction test
+ */
+export const OutlinedClicked: Story = {
+  ...Filled,
   args: {
+    ...Filled.args,
     variant: 'outlined',
     onClick: jest.fn(),
   },
@@ -110,9 +123,13 @@ export const OutlinedClicked = {
   },
 };
 
-export const OutlinedDisabled = {
+/**
+ * Disabled button with interaction test
+ */
+export const Disabled: Story = {
+  ...Filled,
   args: {
-    variant: 'outlined',
+    ...Filled.args,
     disabled: true,
   },
 

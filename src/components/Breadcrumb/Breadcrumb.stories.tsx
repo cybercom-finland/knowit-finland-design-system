@@ -10,6 +10,9 @@ export default meta;
 
 type Story = StoryObj<typeof Breadcrumb>;
 
+/**
+ * Basic example of a Breadcrumb
+ */
 export const BasicExample: Story = {
   render: (args) => (
     <Breadcrumb
