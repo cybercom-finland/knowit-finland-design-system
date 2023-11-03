@@ -1,16 +1,18 @@
 import React from 'react';
-import { generateRandomString } from '../../shared';
+import { ComponentBaseProps, generateRandomString } from '../../shared';
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 import { Label } from '../Label';
 import { HelperText } from '../HelperText';
 
 /**
- * Search component properties
+ * Form group component properties
  * Extends html input element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#additional_attributes
  */
-export interface FormGroupProps {
+export interface FormGroupProps
+  extends ComponentBaseProps<HTMLFieldSetElement>,
+    React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
   /**
    * Form Group label
    */

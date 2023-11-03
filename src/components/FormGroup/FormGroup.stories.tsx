@@ -1,16 +1,31 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { FormGroup } from './FormGroup';
 import { Radio } from '../Radio';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/FormGroup',
-  component: FormGroup,
+const meta: Meta<typeof FormGroup> = { component: FormGroup };
+export default meta;
+
+type Story = StoryObj<typeof FormGroup>;
+
+/**
+ * Basic example of Radio group
+ */
+export const BasicRadioGroup: Story = {
+  render: (args) => (
+    <FormGroup
+      label='label'
+      helperText='Helper Text'
+      direction={args.direction}
+    >
+      <Radio label='Label 1' value='value' name='test' />
+      <Radio label='Label 2' value='value2' name='test' />
+      <Radio label='Label 3' value='valu3' name='test' />
+    </FormGroup>
+  ),
   args: {
     label: 'Label',
     helperText: 'Helper text',
-    direction: 'horizontal',
   },
   parameters: {
     design: [
@@ -26,39 +41,16 @@ export default {
       },
     ],
   },
-} as Meta<typeof FormGroup>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof FormGroup> = (args) => {
-  return (
-    <FormGroup
-      label='label'
-      helperText='Helper Text'
-      direction={args.direction}
-    >
-      <Radio {...args} value='value' name='test' />
-      <Radio {...args} value='value2' name='test' />
-      <Radio {...args} value='valu3' name='test' />
-    </FormGroup>
-  );
 };
 
-export const RadioGroup = {
-  render: Template,
-};
-
-export const Vertical = {
-  render: Template,
+/**
+ * Vertical Radio group example
+ */
+export const VerticalRadioGroup: Story = {
+  ...BasicRadioGroup,
 
   args: {
+    ...BasicRadioGroup.args,
     direction: 'vertical',
-  },
-};
-
-export const Horizontal = {
-  render: Template,
-
-  args: {
-    direction: 'horizontal',
   },
 };
