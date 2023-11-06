@@ -1,17 +1,21 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { HelperText } from './HelperText';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/HelperText',
-  component: HelperText,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof HelperText> = { component: HelperText };
+export default meta;
+
+type Story = StoryObj<typeof HelperText>;
+
+/**
+ * Basic example of HelperText
+ */
+export const BasicExample: Story = {
   argTypes: {
     children: { control: 'text' },
   },
   args: {
+    children: 'Default',
     disabled: false,
     error: false,
   },
@@ -29,21 +33,21 @@ export default {
       },
     ],
   },
-} as Meta<typeof HelperText>;
-
-export const BasicExample = {
-  args: {
-    children: 'Default',
-  },
 };
 
-export const Disabled = {
+/**
+ * Disabled HelperText
+ */
+export const Disabled: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     children: 'Disabled',
     disabled: true,
   },
 
   parameters: {
+    ...BasicExample.parameters,
     a11y: {
       config: {
         // Element has disabled attribute for screen readers, so contrast can be ignored
@@ -53,15 +57,25 @@ export const Disabled = {
   },
 };
 
-export const Error = {
+/**
+ * HelperText with error state
+ */
+export const Error: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     children: 'With error',
     error: true,
   },
 };
 
-export const ErrorDisabled = {
+/**
+ * HelperText with error and disabled state
+ */
+export const ErrorDisabled: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     children: 'With error',
     error: true,
     disabled: true,
