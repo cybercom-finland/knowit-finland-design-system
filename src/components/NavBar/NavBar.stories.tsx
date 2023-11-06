@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import { NavBar } from './NavBar';
 import { KnowitLogo } from '../KnowitLogo';

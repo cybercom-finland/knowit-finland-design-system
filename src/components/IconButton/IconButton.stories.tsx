@@ -1,16 +1,20 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { expect, jest } from '@storybook/jest';
 
 import { IconButton } from './IconButton';
 import { MdAdd } from 'react-icons/md';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/IconButton',
-  component: IconButton,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof IconButton> = { component: IconButton };
+export default meta;
+
+type Story = StoryObj<typeof IconButton>;
+
+/**
+ * Basic example of IconButton
+ */
+export const BasicExample: Story = {
   argTypes: {
     onClick: { action: true },
   },
@@ -18,6 +22,7 @@ export default {
     size: 'medium',
     disabled: false,
     'aria-label': 'Add descriptive text for action',
+    children: <MdAdd />,
   },
   parameters: {
     design: [
@@ -33,24 +38,26 @@ export default {
       },
     ],
   },
-} as Meta<typeof IconButton>;
-
-export const BasicExample = {
-  args: {
-    children: <MdAdd />,
-  },
 };
 
-export const Large = {
+/**
+ * Example of Large variant
+ */
+export const Large: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     size: 'large',
-    children: <MdAdd />,
   },
 };
 
-export const ButtonClicked = {
+/**
+ * onClick interaction test
+ */
+export const ButtonClicked: Story = {
+  ...BasicExample,
   args: {
-    children: <MdAdd />,
+    ...BasicExample.args,
     onClick: jest.fn(),
   },
 
@@ -63,10 +70,14 @@ export const ButtonClicked = {
   },
 };
 
-export const Disabled = {
+/**
+ * Example of disabled button
+ */
+export const Disabled: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     disabled: true,
-    children: <MdAdd />,
   },
 
   parameters: {

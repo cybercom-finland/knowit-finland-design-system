@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import { Link } from './Link';
 import { MdOpenInNew } from 'react-icons/md';
