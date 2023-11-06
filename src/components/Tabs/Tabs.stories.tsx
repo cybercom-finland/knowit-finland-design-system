@@ -1,16 +1,37 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Tabs } from './Tabs';
 import { Tab } from './Tab';
-import styled from 'styled-components';
 import { pxToRem } from '../../shared';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Tabs/Tabs',
-  component: Tabs,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof Tabs> = { component: Tabs };
+export default meta;
+
+type Story = StoryObj<typeof Tabs>;
+
+/**
+ * Basic example of Tabs component
+ */
+export const BasicExample: Story = {
+  render: (args) => {
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event: React.SyntheticEvent, value: number) => {
+      setValue(value);
+    };
+
+    return (
+      <Tabs {...args} value={value} onChange={handleChange}>
+        <Tab label='Tab one' />
+        <Tab label='Tab two' />
+        <Tab label='Tab tree' />
+        <Tab label='Tab four' />
+        <Tab label='Tab five' />
+        <Tab label='Tab six' />
+      </Tabs>
+    );
+  },
   parameters: {
     design: [
       {
@@ -25,75 +46,30 @@ export default {
       },
     ],
   },
-} as Meta<typeof Tabs>;
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Tabs> = (args) => {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, value: number) => {
-    setValue(value);
-  };
-
-  return (
-    <Tabs {...args} value={value} onChange={handleChange}>
-      <Tab label='Tab one' />
-      <Tab label='Tab two' />
-      <Tab label='Tab tree' />
-      <Tab label='Tab four' />
-    </Tabs>
-  );
 };
 
-const Wrapper = styled.div`
-  width: ${pxToRem(400)};
-`;
+export const TabsWithScroll: Story = {
+  ...BasicExample,
+  args: {
+    style: { width: pxToRem(400) },
+  },
+};
 
-const ScrollTabTemplate: StoryFn<typeof Tabs> = (args) => {
-  const [value, setValue] = React.useState(0);
+export const DisabledTabs: Story = {
+  render: (args) => {
+    const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, value: number) => {
-    setValue(value);
-  };
+    const handleChange = (event: React.SyntheticEvent, value: number) => {
+      setValue(value);
+    };
 
-  return (
-    <Wrapper>
+    return (
       <Tabs {...args} value={value} onChange={handleChange}>
-        <Tab selected label='Tab one' />
-        <Tab label='Tab two' />
+        <Tab label='Tab one' />
+        <Tab disabled label='Tab two' />
         <Tab label='Tab tree' />
         <Tab label='Tab four' />
-        <Tab label='Tab five' />
-        <Tab label='Tab six' />
       </Tabs>
-    </Wrapper>
-  );
-};
-
-const DisabledTemplate: StoryFn<typeof Tabs> = (args) => {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, value: number) => {
-    setValue(value);
-  };
-
-  return (
-    <Tabs {...args} value={value} onChange={handleChange}>
-      <Tab label='Tab one' />
-      <Tab disabled label='Tab two' />
-      <Tab label='Tab tree' />
-      <Tab label='Tab four' />
-    </Tabs>
-  );
-};
-
-export const BasicExample = {
-  render: Template,
-};
-
-export const TabsWithScroll = {
-  render: ScrollTabTemplate,
-};
-
-export const DisabledTabs = {
-  render: DisabledTemplate,
+    );
+  },
 };
