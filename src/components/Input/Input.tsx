@@ -86,7 +86,10 @@ export const baseInputStyles = (inputProps: InputBaseProps) => {
 /**
  * Internal component styling
  */
-const InputBase = styled.input<InputBaseProps>`
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const InputBase = styled(({ error, ...restProps }: InputProps) => (
+  <input {...restProps} />
+))`
   ${baseInputStyles}
 `;
 

@@ -35,7 +35,10 @@ export interface LabelProps
 /**
  * Label inner component to wrap styles
  */
-const InnerLabel = styled.label<LabelProps>`
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const InnerLabel = styled(({ error, ...restProps }: LabelProps) => (
+  <label {...restProps} />
+))`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   pointer-events: none;
   display: flex;
