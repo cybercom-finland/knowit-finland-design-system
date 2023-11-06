@@ -11,7 +11,6 @@ import {
   InputComponentBaseProps,
 } from '../../shared';
 import { Label } from '../Label';
-import { Wrapper, WrapperProps } from '../Wrapper';
 import { HelperText } from '../HelperText';
 
 /**
@@ -261,8 +260,7 @@ type InputHTMLAttributes = Omit<
 export interface InputProps
   extends InputComponentBaseProps<HTMLInputElement>,
     InputBaseProps,
-    InputHTMLAttributes,
-    WrapperProps {
+    InputHTMLAttributes {
   /**
    * Controlled input value
    */
@@ -301,7 +299,6 @@ export const Input = React.forwardRef(
       error = false,
       readOnly = false,
       required = false,
-      width,
       endIcon,
       ...restProps
     }: InputProps,
@@ -321,29 +318,27 @@ export const Input = React.forwardRef(
     const componentId = id ?? generateRandomString(5);
 
     return (
-      <Wrapper width={width}>
-        <InputWrapper
-          id={componentId}
-          label={label}
-          helperText={helperText}
+      <InputWrapper
+        id={componentId}
+        label={label}
+        helperText={helperText}
+        disabled={disabled}
+        error={error}
+        required={required}
+      >
+        <InputComponent
           disabled={disabled}
           error={error}
           required={required}
-        >
-          <InputComponent
-            disabled={disabled}
-            error={error}
-            required={required}
-            readOnly={readOnly}
-            id={`input-${componentId}`}
-            aria-labelledby={label && `label-${componentId}`}
-            aria-describedby={helperText && `helper-${componentId}`}
-            ref={ref}
-            {...restProps}
-          />
-          {endIcon}
-        </InputWrapper>
-      </Wrapper>
+          readOnly={readOnly}
+          id={`input-${componentId}`}
+          aria-labelledby={label && `label-${componentId}`}
+          aria-describedby={helperText && `helper-${componentId}`}
+          ref={ref}
+          {...restProps}
+        />
+        {endIcon}
+      </InputWrapper>
     );
   }
 );

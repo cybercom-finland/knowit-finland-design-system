@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
@@ -8,12 +8,17 @@ import { Input } from './Input';
 import { MdLock } from 'react-icons/md';
 import { pxToRem } from '../../shared';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Input',
-  component: Input,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof Input> = { component: Input };
+export default meta;
+
+type Story = StoryObj<typeof Input>;
+
+/**
+ * Example of Outlined variant
+ */
+export const Outlined: Story = {
   args: {
+    variant: 'outlined',
     placeholder: 'Default input',
     label: 'Label',
     helperText: 'Helper text',
@@ -21,19 +26,13 @@ export default {
     error: false,
     readOnly: false,
     required: false,
-    width: 300,
     type: 'text',
+    style: {
+      width: pxToRem(300),
+    },
   },
   argTypes: {
     value: { control: 'text' },
-  },
-} as Meta<typeof Input>;
-
-export const BasicExample = {};
-
-export const Outlined = {
-  args: {
-    variant: 'outlined',
   },
 
   parameters: {
@@ -52,30 +51,33 @@ export const Outlined = {
   },
 };
 
-export const OutlinedError = {
+/**
+ * Error state example
+ */
+export const OutlinedError: Story = {
+  ...Outlined,
   args: {
-    variant: 'outlined',
+    ...Outlined.args,
     error: true,
   },
-
-  parameters: Outlined.parameters,
 };
 
-export const OutlinedEndIcon = {
+/**
+ * End icon example
+ */
+export const OutlinedEndIcon: Story = {
+  ...Outlined,
   args: {
-    variant: 'outlined',
+    ...Outlined.args,
     endIcon: <MdLock size={pxToRem(24)} />,
   },
-
-  parameters: Outlined.parameters,
 };
 
-export const OutlinedWithContent = {
-  args: {
-    variant: 'outlined',
-  },
-
-  parameters: Outlined.parameters,
+/**
+ * Interaction fill content test
+ */
+export const OutlinedWithContent: Story = {
+  ...Outlined,
 
   play: async ({ canvasElement }) => {
     const input = within(canvasElement).getByRole('textbox');
@@ -84,17 +86,24 @@ export const OutlinedWithContent = {
   },
 };
 
-export const OutlinedRequired = {
+/**
+ * Example of required field
+ */
+export const OutlinedRequired: Story = {
+  ...Outlined,
   args: {
-    variant: 'outlined',
+    ...Outlined.args,
     required: true,
   },
-
-  parameters: Outlined.parameters,
 };
 
-export const Filled = {
+/**
+ * Example of Filled variant
+ */
+export const Filled: Story = {
+  ...Outlined,
   args: {
+    ...Outlined.args,
     variant: 'filled',
   },
 
@@ -112,22 +121,4 @@ export const Filled = {
       },
     ],
   },
-};
-
-export const FilledError = {
-  args: {
-    variant: 'filled',
-    error: true,
-  },
-
-  parameters: Filled.parameters,
-};
-
-export const FilledEndIcon = {
-  args: {
-    variant: 'filled',
-    endIcon: <MdLock size={pxToRem(24)} />,
-  },
-
-  parameters: Filled.parameters,
 };
