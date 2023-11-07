@@ -131,10 +131,15 @@ export const ListItem = ({
 };
 
 /**
- * List component (contains ListItems as children)
- * Extends html attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#attributes
+ * ListProps
+ * Extends html ul attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul
  */
-export const List = ({ children }: React.HTMLAttributes<HTMLElement>) => {
+type ListProps = React.HTMLAttributes<HTMLDivElement>;
+
+/**
+ * List component
+ */
+export const List = ({ children }: ListProps) => {
   return <ListWrapper>{children}</ListWrapper>;
 };
