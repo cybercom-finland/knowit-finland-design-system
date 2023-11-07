@@ -1,12 +1,13 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Label } from './Label';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Label',
-  component: Label,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof Label> = { component: Label };
+export default meta;
+
+type Story = StoryObj<typeof Label>;
+
+export const BasicExample: Story = {
   argTypes: {
     children: { control: 'text' },
   },
@@ -14,6 +15,7 @@ export default {
     disabled: false,
     error: false,
     required: false,
+    children: 'Default label',
   },
   parameters: {
     design: [
@@ -29,21 +31,18 @@ export default {
       },
     ],
   },
-} as Meta<typeof Label>;
-
-export const BasicExample = {
-  args: {
-    children: 'Default label',
-  },
 };
 
-export const Disabled = {
+export const Disabled: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     children: 'Label for disabled input',
     disabled: true,
   },
 
   parameters: {
+    ...BasicExample.parameters,
     a11y: {
       config: {
         // Element has disabled attribute for screen readers, so contrast can be ignored
@@ -53,23 +52,29 @@ export const Disabled = {
   },
 };
 
-export const Error = {
+export const Error: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     children: 'Label for input with error',
     error: true,
   },
 };
 
-export const ErrorDisabled = {
+export const ErrorDisabled: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     children: 'Label for input with error',
     error: true,
     disabled: true,
   },
 };
 
-export const Required = {
+export const Required: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     children: 'Label for input with required',
     required: true,
   },

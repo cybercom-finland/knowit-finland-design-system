@@ -58,16 +58,19 @@ const AccordionTitle = styled.div<AccordionProps>`
   justify-content: space-between;
   cursor: pointer;
   user-select: none;
-  padding: ${pxToRem(accordionDimensions.accordionTitle.paddingTop)}
-    ${pxToRem(accordionDimensions.accordionTitle.paddingRight)}
-    ${pxToRem(accordionDimensions.accordionTitle.paddingBottom)}
-    ${pxToRem(accordionDimensions.accordionTitle.paddingLeft)};
+  padding-top: ${pxToRem(accordionDimensions.accordionTitle.paddingTop)};
+  padding-right: ${pxToRem(accordionDimensions.accordionTitle.paddingRight)};
+  padding-bottom: ${pxToRem(accordionDimensions.accordionTitle.paddingBottom)};
+  padding-left: ${pxToRem(accordionDimensions.accordionTitle.paddingLeft)};
 `;
+
 const AccordionContent = styled.div<AccordionProps>`
-  padding: ${pxToRem(accordionDimensions.accordionContent.paddingTop)}
-    ${pxToRem(accordionDimensions.accordionContent.paddingRight)}
-    ${pxToRem(accordionDimensions.accordionContent.paddingBottom)}
-    ${pxToRem(accordionDimensions.accordionContent.paddingLeft)};
+  padding-top: ${pxToRem(accordionDimensions.accordionContent.paddingTop)};
+  padding-right: ${pxToRem(accordionDimensions.accordionContent.paddingRight)};
+  padding-bottom: ${pxToRem(
+    accordionDimensions.accordionContent.paddingBottom
+  )};
+  padding-left: ${pxToRem(accordionDimensions.accordionContent.paddingLeft)};
 `;
 
 /**
