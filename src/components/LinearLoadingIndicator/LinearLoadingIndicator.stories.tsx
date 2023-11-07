@@ -1,11 +1,23 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { LinearLoadingIndicator } from './LinearLoadingIndicator';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/LoadingIndicators/LinearLoadingIndicator',
+const meta: Meta<typeof LinearLoadingIndicator> = {
   component: LinearLoadingIndicator,
+};
+export default meta;
+
+type Story = StoryObj<typeof LinearLoadingIndicator>;
+
+/**
+ * Basic example of LinearLoadingIndicator
+ */
+export const BasicExample: Story = {
+  args: {
+    indicatorSeverity: 'default',
+    determinate: false,
+    progress: 0,
+  },
   parameters: {
     design: [
       {
@@ -20,50 +32,78 @@ export default {
       },
     ],
   },
-} as Meta<typeof LinearLoadingIndicator>;
+};
 
-export const BasicExample = {};
-
-export const Success100PercentDeterminate = {
+/**
+ * LinearLoadingIndicator with determinate success state
+ */
+export const Success100PercentDeterminate: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     progress: 100,
     determinate: true,
     indicatorSeverity: 'success',
   },
 };
 
-export const Error33PercentDeterminate = {
+/**
+ * LinearLoadingIndicator with determinate error state
+ */
+export const Error33PercentDeterminate: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     progress: 33,
     determinate: true,
     indicatorSeverity: 'error',
   },
 };
 
-export const Info50PercentDeterminate = {
+/**
+ * LinearLoadingIndicator with determinate info state
+ */
+export const Info50PercentDeterminate: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     progress: 50,
     determinate: true,
     indicatorSeverity: 'info',
   },
 };
 
-export const WarningIndeterminate = {
+/**
+ * LinearLoadingIndicator with indeterminate warning state
+ */
+export const WarningIndeterminate: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     determinate: false,
     indicatorSeverity: 'warning',
   },
 };
 
-export const NegativePercent = {
+/**
+ * LinearLoadingIndicator with negative value
+ */
+export const NegativePercent: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     progress: -1000,
     determinate: true,
   },
 };
 
-export const Above100Percent = {
+/**
+ * LinearLoadingIndicator with value over 100
+ */
+export const Above100Percent: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     progress: 1000,
     determinate: true,
   },

@@ -7,6 +7,9 @@ export default meta;
 
 type Story = StoryObj<typeof Label>;
 
+/**
+ * Basics example of Label
+ */
 export const BasicExample: Story = {
   argTypes: {
     children: { control: 'text' },
@@ -33,6 +36,9 @@ export const BasicExample: Story = {
   },
 };
 
+/**
+ * Disabled Label
+ */
 export const Disabled: Story = {
   ...BasicExample,
   args: {
@@ -52,6 +58,9 @@ export const Disabled: Story = {
   },
 };
 
+/**
+ * Label error state
+ */
 export const Error: Story = {
   ...BasicExample,
   args: {
@@ -61,6 +70,9 @@ export const Error: Story = {
   },
 };
 
+/**
+ * Label with error and disabled states
+ */
 export const ErrorDisabled: Story = {
   ...BasicExample,
   args: {
@@ -71,6 +83,9 @@ export const ErrorDisabled: Story = {
   },
 };
 
+/**
+ * Required Label
+ */
 export const Required: Story = {
   ...BasicExample,
   args: {
