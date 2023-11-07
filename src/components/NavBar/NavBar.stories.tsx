@@ -1,15 +1,20 @@
 import React from 'react';
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { NavBar } from './NavBar';
 import { KnowitLogo } from '../KnowitLogo';
 import { MdMenu } from 'react-icons/md';
 import { IconButton } from '../IconButton';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/NavBar',
-  component: NavBar,
+const meta: Meta<typeof NavBar> = { component: NavBar };
+export default meta;
+
+type Story = StoryObj<typeof NavBar>;
+
+/**
+ * Basic example of NavBar
+ */
+export const BasicExample: Story = {
   args: {
     size: 'small',
   },
@@ -27,37 +32,43 @@ export default {
       },
     ],
   },
-} as Meta<typeof NavBar>;
-
-export const BasicExample = {};
-
-export const Medium = {
-  args: {
-    size: 'medium',
-  },
 };
 
 const MenuComponent = () => {
-  <IconButton size='large' aria-label='Open menu'>
-    <MdMenu />
-  </IconButton>;
+  return (
+    <IconButton size='large' aria-label='Open menu'>
+      <MdMenu />
+    </IconButton>
+  );
 };
 
-export const LogoAndMenu = {
+/**
+ * NavBar with logo
+ */
+export const Logo: Story = {
+  ...BasicExample,
   args: {
-    logo: <KnowitLogo />,
-    menu: MenuComponent,
+    logo: <KnowitLogo height={28} />,
   },
 };
 
-export const Logo = {
+/**
+ * NavBar with menu
+ */
+export const Menu: Story = {
+  ...BasicExample,
   args: {
-    logo: <KnowitLogo />,
+    menu: <MenuComponent />,
   },
 };
 
-export const Menu = {
+/**
+ * NavBar with menu and logo
+ */
+export const LogoAndMenu: Story = {
+  ...BasicExample,
   args: {
-    menu: MenuComponent,
+    logo: <KnowitLogo height={28} />,
+    menu: <MenuComponent />,
   },
 };
