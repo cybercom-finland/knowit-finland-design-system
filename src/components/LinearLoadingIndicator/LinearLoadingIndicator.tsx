@@ -43,6 +43,7 @@ const BarBackground = styled.span`
 
 /**
  * Internal Bar component
+ * Pop out the properties that should't be passed to DOM
  */
 const Bar = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

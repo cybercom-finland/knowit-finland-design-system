@@ -1,18 +1,26 @@
 import React from 'react';
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Link } from './Link';
 import { MdOpenInNew } from 'react-icons/md';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Link',
+const meta: Meta<typeof Link> = {
   component: Link,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+};
+export default meta;
+
+type Story = StoryObj<typeof Link>;
+
+/**
+ * Basic example of Link component
+ */
+export const BasicExample: Story = {
   argTypes: {
     children: { control: 'text' },
   },
-  args: {},
+  args: {
+    children: 'Link',
+  },
   parameters: {
     design: [
       {
@@ -27,16 +35,15 @@ export default {
       },
     ],
   },
-} as Meta<typeof Link>;
-
-export const BasicExample = {
-  args: {
-    children: 'Link',
-  },
 };
 
-export const EndIcon = {
+/**
+ * Link with end icon
+ */
+export const EndIcon: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     children: 'Link with end icon',
     endIcon: <MdOpenInNew />,
   },
