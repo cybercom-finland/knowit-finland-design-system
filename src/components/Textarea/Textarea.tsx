@@ -2,13 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { InputComponentBaseProps, generateRandomString } from '../../shared';
-import { Label } from '../Label';
-import { Wrapper, WrapperProps } from '../Wrapper';
-import { HelperText } from '../HelperText';
 import {
   FilledInputStyles,
   InputBaseProps,
-  InputRow,
+  InputWrapper,
   OutlinedInputStyles,
   baseInputStyles,
 } from '../Input';
@@ -16,7 +13,10 @@ import {
 /**
  * Internal component styling
  */
-const TextareaBase = styled.textarea<TextareaProps>`
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const TextareaBase = styled(({ error, ...restProps }: TextareaProps) => (
+  <textarea {...restProps} />
+))`
   ${baseInputStyles}
 `;
 
@@ -41,8 +41,7 @@ const OutlinedTextarea = styled(TextareaBase)`
  */
 export type TextareaProps = InputComponentBaseProps<HTMLTextAreaElement> &
   InputBaseProps &
-  React.TextareaHTMLAttributes<HTMLTextAreaElement> &
-  WrapperProps;
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 /**
  * Textarea component
@@ -55,7 +54,6 @@ export const Textarea = ({
   helperText,
   disabled = false,
   error = false,
-  width,
   endIcon,
   ...restProps
 }: TextareaProps) => {
@@ -73,39 +71,24 @@ export const Textarea = ({
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <Wrapper width={width}>
-      {label && (
-        <Label
-          required={required}
-          disabled={disabled}
-          error={error}
-          htmlFor={`textarea-${componentId}`}
-          id={`label-${componentId}`}
-        >
-          {label}
-        </Label>
-      )}
-      {helperText && (
-        <HelperText
-          disabled={disabled}
-          error={error}
-          id={`helper-${componentId}`}
-        >
-          {helperText}
-        </HelperText>
-      )}
-      <InputRow>
-        <TextareaComponent
-          required={required}
-          disabled={disabled}
-          error={error}
-          id={`textarea-${componentId}`}
-          aria-labelledby={label && `label-${componentId}`}
-          aria-describedby={helperText && `helper-${componentId}`}
-          {...restProps}
-        />
-        {endIcon}
-      </InputRow>
-    </Wrapper>
+    <InputWrapper
+      id={componentId}
+      label={label}
+      helperText={helperText}
+      disabled={disabled}
+      error={error}
+      required={required}
+    >
+      <TextareaComponent
+        required={required}
+        disabled={disabled}
+        error={error}
+        id={`textarea-${componentId}`}
+        aria-labelledby={label && `label-${componentId}`}
+        aria-describedby={helperText && `helper-${componentId}`}
+        {...restProps}
+      />
+      {endIcon}
+    </InputWrapper>
   );
 };

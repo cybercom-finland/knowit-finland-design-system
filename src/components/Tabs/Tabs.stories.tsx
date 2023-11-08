@@ -48,6 +48,9 @@ export const BasicExample: Story = {
   },
 };
 
+/**
+ * Scrollable Tabs
+ */
 export const TabsWithScroll: Story = {
   ...BasicExample,
   args: {
@@ -55,6 +58,9 @@ export const TabsWithScroll: Story = {
   },
 };
 
+/**
+ * Disabled Tab
+ */
 export const DisabledTabs: Story = {
   render: (args) => {
     const [value, setValue] = React.useState(0);

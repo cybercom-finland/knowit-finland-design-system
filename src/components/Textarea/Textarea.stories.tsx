@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
@@ -8,12 +8,17 @@ import { Textarea } from './Textarea';
 import { MdLock } from 'react-icons/md';
 import { pxToRem } from '../../shared';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Textarea',
-  component: Textarea,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof Textarea> = { component: Textarea };
+export default meta;
+
+type Story = StoryObj<typeof Textarea>;
+
+/**
+ * Outlined variant of Textarea
+ */
+export const Outlined: Story = {
   args: {
+    variant: 'outlined',
     placeholder: 'Default textarea',
     label: 'Label',
     helperText: 'Helper text',
@@ -24,14 +29,6 @@ export default {
   },
   argTypes: {
     value: { control: 'text' },
-  },
-} as Meta<typeof Textarea>;
-
-export const BasicExample = {};
-
-export const Outlined = {
-  args: {
-    variant: 'outlined',
   },
 
   parameters: {
@@ -50,30 +47,33 @@ export const Outlined = {
   },
 };
 
-export const OutlinedError = {
+/**
+ * Textarea error state
+ */
+export const OutlinedError: Story = {
+  ...Outlined,
   args: {
-    variant: 'outlined',
+    ...Outlined.args,
     error: true,
   },
-
-  parameters: Outlined.parameters,
 };
 
-export const OutlinedEndIcon = {
+/**
+ * Textarea with end icon
+ */
+export const OutlinedEndIcon: Story = {
+  ...Outlined,
   args: {
-    variant: 'outlined',
+    ...Outlined.args,
     endIcon: <MdLock size={pxToRem(24)} />,
   },
-
-  parameters: Outlined.parameters,
 };
 
-export const OutlinedWithContent = {
-  args: {
-    variant: 'outlined',
-  },
-
-  parameters: Outlined.parameters,
+/**
+ * Interaction fill content test
+ */
+export const OutlinedWithContent: Story = {
+  ...Outlined,
 
   play: async ({ canvasElement }) => {
     const textarea = within(canvasElement).getByRole('textbox');
@@ -82,8 +82,13 @@ export const OutlinedWithContent = {
   },
 };
 
-export const Filled = {
+/**
+ * Filled variant of Textarea
+ */
+export const Filled: Story = {
+  ...Outlined,
   args: {
+    ...Outlined.args,
     variant: 'filled',
   },
 
@@ -101,22 +106,4 @@ export const Filled = {
       },
     ],
   },
-};
-
-export const FilledError = {
-  args: {
-    variant: 'filled',
-    error: true,
-  },
-
-  parameters: Filled.parameters,
-};
-
-export const FilledEndIcon = {
-  args: {
-    variant: 'filled',
-    endIcon: <MdLock size={pxToRem(24)} />,
-  },
-
-  parameters: Filled.parameters,
 };
