@@ -257,7 +257,7 @@ type InputHTMLAttributes = Omit<
 
 /**
  * Input component properties
- *  Extends html input element attributes
+ * Extends html input element attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
  */
 export interface InputProps

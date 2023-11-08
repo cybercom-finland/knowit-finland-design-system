@@ -1,12 +1,17 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Search } from './Search';
+import { pxToRem } from '../../shared';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Search',
-  component: Search,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+const meta: Meta<typeof Search> = { component: Search };
+export default meta;
+
+type Story = StoryObj<typeof Search>;
+
+/**
+ * Outlined variant of Search field
+ */
+export const Outlined: Story = {
   argTypes: {
     onChange: { action: true },
   },
@@ -15,7 +20,11 @@ export default {
     helperText: 'Helper text',
     placeholder: 'Search...',
     disabled: false,
-    width: 300,
+    variant: 'outlined',
+    style: {
+      width: pxToRem(300),
+    },
+    required: false,
   },
   parameters: {
     design: [
@@ -31,24 +40,15 @@ export default {
       },
     ],
   },
-} as Meta<typeof Search>;
-
-export const BasicExample = {};
-
-export const Outlined = {
-  args: {
-    variant: 'outlined',
-  },
 };
 
+/**
+ * Filled variant of Search field
+ */
 export const Filled = {
+  ...Outlined,
   args: {
+    ...Outlined.args,
     variant: 'filled',
-  },
-};
-
-export const Disabled = {
-  args: {
-    disabled: true,
   },
 };
