@@ -1,7 +1,7 @@
 import React from 'react';
 import { pxToRem } from '../../../shared';
 import styled from 'styled-components';
-import { DialogProps } from '../Dialog/Dialog';
+import { DialogProps } from '../Dialog';
 
 /**
  * Dimensions of dialog content component

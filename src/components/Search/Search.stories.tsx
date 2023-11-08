@@ -1,13 +1,10 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Search } from './Search';
+import { pxToRem } from '../../shared';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Search',
+const meta: Meta<typeof Search> = {
   component: Search,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     onChange: { action: true },
   },
@@ -16,7 +13,11 @@ export default {
     helperText: 'Helper text',
     placeholder: 'Search...',
     disabled: false,
-    width: 300,
+    variant: 'outlined',
+    style: {
+      width: pxToRem(300),
+    },
+    required: false,
   },
   parameters: {
     design: [
@@ -32,38 +33,21 @@ export default {
       },
     ],
   },
-} as Meta<typeof Search>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Search> = (args) => <Search {...args} />;
-
-/**
- * Outlined
- */
-export const Outlined = Template.bind({});
-Outlined.args = {
-  variant: 'outlined',
 };
+export default meta;
+
+type Story = StoryObj<typeof Search>;
 
 /**
- * Filled
+ * Outlined variant of Search field
  */
-export const Filled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Filled.args = {
-  variant: 'filled',
+export const Outlined: Story = {};
+
+/**
+ * Filled variant of Search field
+ */
+export const Filled = {
+  args: {
+    variant: 'filled',
+  },
 };
-
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Disabled.args = {
-  disabled: true,
-};
-
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});

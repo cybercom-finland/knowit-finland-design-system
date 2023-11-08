@@ -12,38 +12,36 @@ interface TextProps {
   align?: 'center' | 'inherit' | 'justify' | 'left' | 'right';
 }
 
-const typographyCommonStyles = (typographyProps: TextProps) => {
-  return css`
-    color: ${(props) => props.theme.colors.grayScale.digitalBlack};
-    text-align: ${typographyProps.align};
-  `;
-};
-
 /**
  * Internal component styling
  */
-const CaptionComponent = styled.caption<TextProps>`
-  ${typographyCommonStyles};
-`;
-const HeaderComponent1 = styled.h1<TextProps>`
-  ${typographyCommonStyles};
-`;
-const HeaderComponent2 = styled.h2<TextProps>`
-  ${typographyCommonStyles};
-`;
-const HeaderComponent3 = styled.h3<TextProps>`
-  ${typographyCommonStyles};
-`;
-const HeaderComponent4 = styled.h4<TextProps>`
-  ${typographyCommonStyles};
-`;
-const ParagraphComponent1 = styled.p<TextProps>`
-  ${typographyCommonStyles};
-`;
-const ParagraphComponent2 = styled.p<TextProps>`
-  ${typographyCommonStyles};
-  font-size: ${typography.size.paragraph2};
-  line-height: ${typography.lineHeight.paragraph2};
+const StyledTypography = styled(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ({ align, variant, ...restProps }: TypographyProps) => {
+    switch (variant) {
+      case 'h1':
+        return <h1 {...restProps} />;
+      case 'h2':
+        return <h2 {...restProps} />;
+      case 'h3':
+        return <h3 {...restProps} />;
+      case 'h4':
+        return <h4 {...restProps} />;
+      case 'p1':
+        return <p {...restProps} />;
+      case 'p2':
+        return <p {...restProps} />;
+    }
+  }
+)`
+  color: ${(props) => props.theme.colors.grayScale.digitalBlack};
+  text-align: ${(props) => props.align};
+  ${({ variant }) =>
+    variant === 'p2' &&
+    css`
+      font-size: ${typography.size.paragraph2};
+      line-height: ${typography.lineHeight.paragraph2};
+    `}
 `;
 
 /**
@@ -65,7 +63,7 @@ interface TypographyProps
   /**
    * Text variant
    */
-  variant: 'caption' | 'h1' | 'h2' | 'h3' | 'h4' | 'p1' | 'p2';
+  variant: 'h1' | 'h2' | 'h3' | 'h4' | 'p1' | 'p2';
 }
 
 /**
@@ -78,21 +76,5 @@ export const Typography = ({
   ...restProps
 }: TypographyProps) => {
   const props = { variant, align, ...restProps };
-
-  switch (variant) {
-    case 'caption':
-      return <CaptionComponent {...props}>{children}</CaptionComponent>;
-    case 'h1':
-      return <HeaderComponent1 {...props}>{children}</HeaderComponent1>;
-    case 'h2':
-      return <HeaderComponent2 {...props}>{children}</HeaderComponent2>;
-    case 'h3':
-      return <HeaderComponent3 {...props}>{children}</HeaderComponent3>;
-    case 'h4':
-      return <HeaderComponent4 {...props}>{children}</HeaderComponent4>;
-    case 'p1':
-      return <ParagraphComponent1 {...props}>{children}</ParagraphComponent1>;
-    case 'p2':
-      return <ParagraphComponent2 {...props}>{children}</ParagraphComponent2>;
-  }
+  return <StyledTypography {...props}>{children}</StyledTypography>;
 };

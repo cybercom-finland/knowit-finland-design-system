@@ -1,14 +1,24 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Breadcrumb } from './Breadcrumb';
 import { Link } from '../Link';
 import { MdHome } from 'react-icons/md';
 import { Typography } from '../Typography';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Breadcrumbs',
+const meta: Meta<typeof Breadcrumb> = {
   component: Breadcrumb,
+  render: (args) => (
+    <Breadcrumb
+      aria-label='breadcrumbs-component'
+      homeLink={<MdHome />}
+      {...args}
+    >
+      <Link>Link</Link>
+      <Link>Link</Link>
+      <Link>Link</Link>
+      <Typography variant='p2'>Current page</Typography>
+    </Breadcrumb>
+  ),
   parameters: {
     design: [
       {
@@ -23,19 +33,12 @@ export default {
       },
     ],
   },
-} as Meta<typeof Breadcrumb>;
+};
+export default meta;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Breadcrumb> = () => (
-  <Breadcrumb aria-label='breadcrumbs-component' homeLink={<MdHome />}>
-    <Link>Link</Link>
-    <Link>Link</Link>
-    <Link>Link</Link>
-    <Typography variant='p2'>Current page</Typography>
-  </Breadcrumb>
-);
+type Story = StoryObj<typeof Breadcrumb>;
 
 /**
- * Default variant
+ * Basic example of a Breadcrumb
  */
-export const DefaultVariant = Template.bind({});
+export const BasicExample: Story = {};

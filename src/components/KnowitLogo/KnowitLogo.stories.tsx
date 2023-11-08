@@ -1,17 +1,12 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { KnowitLogo } from './KnowitLogo';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/KnowitLogo',
-  component: KnowitLogo,
-} as Meta<typeof KnowitLogo>;
+const meta: Meta<typeof KnowitLogo> = { component: KnowitLogo };
+export default meta;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof KnowitLogo> = () => <KnowitLogo />;
+type Story = StoryObj<typeof KnowitLogo>;
 
 /**
- * Knowit Logo
+ * Logo example
  */
-export const Logo = Template.bind({});
+export const Logo: Story = {};

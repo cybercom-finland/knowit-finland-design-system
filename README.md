@@ -39,7 +39,7 @@ npm run test
 To get the test coverage, use the following command:
 
 ```bash
-npm run test-storybook -- --coverage
+npm run test-storybook --coverage
 ```
 
 ## Publishing Storybook

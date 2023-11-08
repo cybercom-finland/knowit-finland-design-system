@@ -1,13 +1,14 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Tab } from './Tab';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Tabs/Tab',
+const meta: Meta<typeof Tab> = {
   component: Tab,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  args: {
+    label: 'Tab',
+    selected: false,
+    disabled: false,
+  },
   parameters: {
     design: [
       {
@@ -22,20 +23,30 @@ export default {
       },
     ],
   },
-} as Meta<typeof Tab>;
+};
+export default meta;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Tab> = (args) => <Tab {...args} label='Tab' />;
-const ActiveTab: StoryFn<typeof Tab> = (args) => (
-  <Tab {...args} selected label='Tab' />
-);
+type Story = StoryObj<typeof Tab>;
 
 /**
- * Default variant (not specified)
+ * Basic example of Tab component
  */
-export const DefaultVariant = Template.bind({});
+export const BasicExample: Story = {};
 
 /**
- * Active variant
+ * Example of selected Tab
  */
-export const ActiveVariant = ActiveTab.bind({});
+export const Selected: Story = {
+  args: {
+    selected: true,
+  },
+};
+
+/**
+ * Example of disabled Tab
+ */
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};

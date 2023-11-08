@@ -1,14 +1,20 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Tooltip } from './Tooltip';
 import { Button } from '../Button';
 
-export default {
-  title: 'Components/Tooltip',
+const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
+  render: (args) => (
+    <div style={{ padding: 200 }}>
+      <Tooltip {...args}>
+        <Button label='Hover over this button to show a tooltip' />
+      </Tooltip>
+    </div>
+  ),
   args: {
-    // Shaping the stories through args composition.
     showArrow: true,
+    initiallyOpen: false,
     content: 'Example Tooltip content',
   },
   parameters: {
@@ -25,29 +31,22 @@ export default {
       },
     ],
   },
-} as Meta<typeof Tooltip>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Tooltip> = (args) => {
-  return (
-    <div style={{ padding: 200 }}>
-      <Tooltip {...args}>
-        <Button label='Hover over this button to show a tooltip' />
-      </Tooltip>
-    </div>
-  );
 };
+export default meta;
+
+type Story = StoryObj<typeof Tooltip>;
 
 /**
- * Default (no arrows)
+ * Basic example of Tooltip
  */
-export const Default = Template.bind({});
+export const BasicExample: Story = {};
 
 /**
- * Long text
+ * Tooltip with long text
  */
-export const LongText = Template.bind({});
-LongText.args = {
-  content:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+export const LongText: Story = {
+  args: {
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+  },
 };

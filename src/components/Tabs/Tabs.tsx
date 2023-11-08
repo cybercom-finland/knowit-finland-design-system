@@ -7,7 +7,8 @@ import { TabProps } from './Tab';
 import { useTabs } from './useTabs';
 
 export interface TabsProps
-  extends Omit<ComponentBaseProps<HTMLDivElement>, 'onChange'> {
+  extends Omit<ComponentBaseProps<HTMLDivElement>, 'onChange'>,
+    Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
    * Tabs value. Index of selected tab if any.
    */
@@ -280,7 +281,7 @@ export const Tabs = ({
 
   return (
     <>
-      <TabsComponentWrapper id={componentId}>
+      <TabsComponentWrapper id={componentId} {...restprops}>
         {showArrows && (
           <IconButton
             size='large'
@@ -300,7 +301,6 @@ export const Tabs = ({
           ref={tabsWrapperRef}
           // TODO: change this to onScrollEnd when it is supported
           onScroll={handleTabsScroll}
-          {...restprops}
         >
           {createNavigationTabs}
         </TabsWrapper>

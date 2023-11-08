@@ -1,145 +1,133 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { expect, jest } from '@storybook/jest';
 
 import { Button } from './Button';
 import { MdAdd } from 'react-icons/md';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Button',
+const meta: Meta<typeof Button> = {
   component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     onClick: { action: true },
   },
   args: {
+    variant: 'filled',
     label: 'Button',
     size: 'medium',
     disabled: false,
   },
-} as Meta<typeof Button>;
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-58870&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61594&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
+};
+export default meta;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Button> = (args) => <Button {...args} />;
+type Story = StoryObj<typeof Button>;
 
 /**
- * Outlined
+ * Basic example of a filled Button component
  */
-export const Outlined = Template.bind({});
-Outlined.args = {
-  variant: 'outlined',
-};
-
-Outlined.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-56662&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61336&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
-};
+export const Filled: Story = {};
 
 /**
- * Outlined with end icon
+ * Outlined Button example
  */
-export const OutlinedWithEndIcon = Template.bind({});
-OutlinedWithEndIcon.args = {
-  variant: 'outlined',
-  endIcon: <MdAdd />,
-};
-
-OutlinedWithEndIcon.parameters = Outlined.parameters;
-
-/**
- * Filled
- */
-export const Filled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Filled.args = {
-  variant: 'filled',
-};
-
-Filled.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-58870&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61594&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
+export const Outlined: Story = {
+  args: {
+    variant: 'outlined',
+  },
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-56662&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61336&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
 };
 
 /**
- * Text
+ * Outlined Button with end icon
  */
-export const Text = Template.bind({});
-Text.args = {
-  variant: 'text',
-};
-
-Text.parameters = {
-  design: [
-    {
-      name: 'light',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=329-2590&t=jaciSdrjiv4kZ1qN-4',
-    },
-    {
-      name: 'dark',
-      type: 'figma',
-      url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61078&t=jaciSdrjiv4kZ1qN-4',
-    },
-  ],
+export const OutlinedWithEndIcon: Story = {
+  args: {
+    variant: 'outlined',
+    endIcon: <MdAdd />,
+  },
 };
 
 /**
- * Outlined button clicked
+ * Text Button example
  */
-export const OutlinedClicked = Template.bind({});
-OutlinedClicked.args = {
-  variant: 'outlined',
-  onClick: jest.fn(),
-};
-
-OutlinedClicked.play = async ({ args, canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('button'));
-  await waitFor(() => expect(args.onClick).toHaveBeenCalled());
+export const Text: Story = {
+  args: {
+    variant: 'text',
+  },
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=329-2590&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1356-61078&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
+  },
 };
 
 /**
- * Outlined button disabled
+ * Click interaction test
  */
-export const OutlinedDisabled = Template.bind({});
-OutlinedDisabled.args = {
-  variant: 'outlined',
-  disabled: true,
-};
+export const OutlinedClicked: Story = {
+  args: {
+    variant: 'outlined',
+    onClick: jest.fn(),
+  },
 
-OutlinedDisabled.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
 
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('button'));
-  expect(canvas.getByRole('button')).toBeDisabled();
+    // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+    await userEvent.click(canvas.getByRole('button'));
+    await waitFor(() => expect(args.onClick).toHaveBeenCalled());
+  },
 };
 
 /**
- * Default variant (not specified)
+ * Disabled button with interaction test
  */
-export const DefaultVariant = Template.bind({});
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+    await userEvent.click(canvas.getByRole('button'));
+    expect(canvas.getByRole('button')).toBeDisabled();
+  },
+};

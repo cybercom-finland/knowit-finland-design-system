@@ -49,7 +49,10 @@ const calculateSizes = () => {
   `;
 };
 
-const InternalBox = styled.div<BoxProps>`
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const InternalBox = styled(({ variant, ...restProps }: BoxProps) => (
+  <div {...restProps} />
+))`
   ${calculateSizes}
   width: min-content;
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};

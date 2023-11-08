@@ -1,9 +1,7 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { NotificationCarousel } from './NotificationCarousel';
 
-export default {
-  title: 'Components/NotificationCarousel',
+const meta: Meta<typeof NotificationCarousel> = {
   component: NotificationCarousel,
   args: {
     // Shaping the stories through args composition.
@@ -11,7 +9,6 @@ export default {
       {
         title: 'First notification',
         closeButtonAriaLabel: 'Close the first notification',
-        hidden: false,
       },
       {
         title: 'Second notification',
@@ -40,14 +37,12 @@ export default {
       },
     ],
   },
-} as Meta<typeof NotificationCarousel>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof NotificationCarousel> = (args) => {
-  return <NotificationCarousel {...args} />;
 };
+export default meta;
+
+type Story = StoryObj<typeof NotificationCarousel>;
 
 /**
- * Default
+ * Basic example of NotificationCrousel
  */
-export const Default = Template.bind({});
+export const BasicExample: Story = {};

@@ -1,14 +1,26 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { Box, BoxProps } from './Box';
+import { Meta, StoryObj } from '@storybook/react';
+import { Box } from './Box';
 import { styled } from 'styled-components';
 import { pxToRem } from '../../shared';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Box',
+const exampleBoxDimensions = {
+  width: pxToRem(200),
+  height: pxToRem(100),
+};
+
+const ExampleBoxContents = styled.div`
+  width: ${exampleBoxDimensions.width};
+  height: ${exampleBoxDimensions.height};
+`;
+
+const meta: Meta<typeof Box> = {
   component: Box,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  render: (args) => (
+    <Box {...args}>
+      <ExampleBoxContents />
+    </Box>
+  ),
   args: {
     variant: 'rectangle',
   },
@@ -26,43 +38,21 @@ export default {
       },
     ],
   },
-} as Meta<typeof Box>;
-
-const exampleBoxDimensions = {
-  width: pxToRem(200),
-  height: pxToRem(100),
 };
+export default meta;
 
-const ExampleBoxContents = styled.div`
-  width: ${exampleBoxDimensions.width};
-  height: ${exampleBoxDimensions.height};
-`;
-
-/*
- * Example Dialog story
- */
-const ExampleBox = ({ ...restProps }: BoxProps) => {
-  return (
-    <Box {...restProps}>
-      <ExampleBoxContents />
-    </Box>
-  );
-};
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Box> = (args) => (
-  <ExampleBox {...args}></ExampleBox>
-);
+type Story = StoryObj<typeof Box>;
 
 /**
- * Default variant (not specified)
+ * Example of a Box with some content
  */
-export const DefaultVariant = Template.bind({});
+export const BasicExample: Story = {};
 
 /**
- * Rounded variant
+ * Example of a rounded Box
  */
-export const Rounded = Template.bind({});
-Rounded.args = {
-  variant: 'rounded',
+export const Rounded = {
+  args: {
+    variant: 'rounded',
+  },
 };

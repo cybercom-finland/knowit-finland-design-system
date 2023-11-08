@@ -148,11 +148,11 @@ export const Popup = ({
   });
 
   const hover = useHover(context, {
-    enabled: openWith === 'hover',
+    enabled: openWith === 'hover' || openWith === 'both',
   });
 
   const click = useClick(context, {
-    enabled: openWith === 'click',
+    enabled: openWith === 'click' || openWith === 'both',
   });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([

@@ -1,16 +1,18 @@
 import React from 'react';
 import { ComponentBaseProps } from '../../shared';
 import { LoadingIndicatorColor, linearLoadingIndicatorHeight } from './styles';
-import { Wrapper, WrapperProps } from '../Wrapper';
+import { Wrapper } from '../Wrapper';
 import { Severity } from '../../shared/types';
 import styled from 'styled-components';
+
+type LinearLoadingIndicatorAttributes = React.HTMLAttributes<HTMLDivElement>;
 
 /**
  * Linear loading indicator component properties
  */
-export interface LinearLoadingIndicatorBaseProps
-  extends ComponentBaseProps<HTMLSpanElement>,
-    WrapperProps {
+export interface LinearLoadingIndicatorProps
+  extends ComponentBaseProps<HTMLDivElement>,
+    LinearLoadingIndicatorAttributes {
   /**
    * Progress (0-100)
    */
@@ -30,7 +32,7 @@ export interface LinearLoadingIndicatorBaseProps
 /**
  * BarBackground component, which represents 100% width of the whole loading indicator / progress bar
  */
-const BarBackground = styled.span<LinearLoadingIndicatorBaseProps>`
+const BarBackground = styled.span`
   background: ${(props) => props.theme.colors.grayScale.digitalBlack100};
   top: 0;
   left: 0;
@@ -40,10 +42,22 @@ const BarBackground = styled.span<LinearLoadingIndicatorBaseProps>`
 `;
 
 /**
+ * Internal Bar component
+ * Pop out the properties that should't be passed to DOM
+ */
+const Bar = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  determinate,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  indicatorSeverity,
+  ...restProps
+}: LinearLoadingIndicatorProps) => <span {...restProps} />;
+
+/**
  * Bar component, which represents the visible progress % of the bar, or the loading animation.
  * The percent will be limited between 0-100%. If it is undefined, it will be zero.
  */
-const Bar = styled.span<LinearLoadingIndicatorBaseProps>`
+const StyledBar = styled(Bar)`
   top: 0;
   left: 0;
   width: ${(props) =>
@@ -82,33 +96,29 @@ const Bar = styled.span<LinearLoadingIndicatorBaseProps>`
  * LinearLoadingIndicator component
  */
 export const LinearLoadingIndicator = ({
-  margin,
-  width,
-  progress,
-  determinate,
-  indicatorSeverity,
+  progress = 0,
+  determinate = false,
+  indicatorSeverity = 'default',
   ...restProps
-}: LinearLoadingIndicatorBaseProps) => {
+}: LinearLoadingIndicatorProps) => {
   const ariaLabelText = determinate && progress ? `${progress}%` : '';
 
   return (
     <Wrapper
-      margin={margin}
-      width={width}
       height={linearLoadingIndicatorHeight}
       style={{ display: 'flex' }}
+      {...restProps}
     >
-      <BarBackground {...restProps}>
-        <Bar
+      <BarBackground>
+        <StyledBar
           indicatorSeverity={indicatorSeverity}
           progress={progress}
           determinate={determinate}
           aria-label={ariaLabelText}
           role='status'
-          {...restProps}
         >
           &nbsp;
-        </Bar>
+        </StyledBar>
       </BarBackground>
     </Wrapper>
   );

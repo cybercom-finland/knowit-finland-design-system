@@ -1,14 +1,22 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Card } from './Card';
 import { styled } from 'styled-components';
 import { pxToRem } from '../../shared';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Card',
+const meta: Meta<typeof Card> = {
   component: Card,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  render: (args) => (
+    <Card
+      {...args}
+      header={
+        <ExampleCardHeader
+          role='presentation'
+          src='https://www.knowit.fi/contentassets/daecdbb1dff5420689ca9951ad352cce/knowit-microsoft-solutions-partner.png'
+        />
+      }
+    />
+  ),
   args: {
     variant: 'rectangle',
     category: 'Uutiset',
@@ -31,7 +39,10 @@ export default {
       },
     ],
   },
-} as Meta<typeof Card>;
+};
+export default meta;
+
+type Story = StoryObj<typeof Card>;
 
 const exampleCardDimensions = {
   height: pxToRem(150),
@@ -42,28 +53,16 @@ const ExampleCardHeader = styled.img`
   height: ${exampleCardDimensions.height};
 `;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Card> = (args) => (
-  <Card
-    {...args}
-    header={
-      <ExampleCardHeader
-        role='presentation'
-        src='https://www.knowit.fi/contentassets/daecdbb1dff5420689ca9951ad352cce/knowit-microsoft-solutions-partner.png'
-      />
-    }
-  />
-);
+/**
+ * Basic example of a Card component
+ */
+export const BasicExample: Story = {};
 
 /**
- * Default variant (not specified)
+ * Card component with rounded edges
  */
-export const DefaultVariant = Template.bind({});
-
-/**
- * Rounded variant
- */
-export const Rounded = Template.bind({});
-Rounded.args = {
-  variant: 'rounded',
+export const Rounded: Story = {
+  args: {
+    variant: 'rounded',
+  },
 };

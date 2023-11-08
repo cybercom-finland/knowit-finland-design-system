@@ -1,12 +1,14 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { LinearLoadingIndicator } from './LinearLoadingIndicator';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/LoadingIndicators/LinearLoadingIndicator',
+const meta: Meta<typeof LinearLoadingIndicator> = {
   component: LinearLoadingIndicator,
+  args: {
+    indicatorSeverity: 'default',
+    determinate: false,
+    progress: 0,
+  },
   parameters: {
     design: [
       {
@@ -21,71 +23,75 @@ export default {
       },
     ],
   },
-} as Meta<typeof LinearLoadingIndicator>;
+};
+export default meta;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof LinearLoadingIndicator> = (args) => (
-  <LinearLoadingIndicator {...args} />
-);
+type Story = StoryObj<typeof LinearLoadingIndicator>;
 
 /**
- * Default variant (not specified)
+ * Basic example of LinearLoadingIndicator
  */
-export const DefaultVariant = Template.bind({});
+export const BasicExample: Story = {};
 
 /**
- * Success, 100%, determinate
+ * LinearLoadingIndicator with determinate success state
  */
-export const Success100PercentDeterminate = Template.bind({});
-Success100PercentDeterminate.args = {
-  progress: 100,
-  determinate: true,
-  indicatorSeverity: 'success',
+export const Success100PercentDeterminate: Story = {
+  args: {
+    progress: 100,
+    determinate: true,
+    indicatorSeverity: 'success',
+  },
 };
 
 /**
- * Error, 33%, determinate
+ * LinearLoadingIndicator with determinate error state
  */
-export const Error33PercentDeterminate = Template.bind({});
-Error33PercentDeterminate.args = {
-  progress: 33,
-  determinate: true,
-  indicatorSeverity: 'error',
+export const Error33PercentDeterminate: Story = {
+  args: {
+    progress: 33,
+    determinate: true,
+    indicatorSeverity: 'error',
+  },
 };
 
 /**
- * Info, 50%, determinate
+ * LinearLoadingIndicator with determinate info state
  */
-export const Info50PercentDeterminate = Template.bind({});
-Info50PercentDeterminate.args = {
-  progress: 50,
-  determinate: true,
-  indicatorSeverity: 'info',
+export const Info50PercentDeterminate: Story = {
+  args: {
+    progress: 50,
+    determinate: true,
+    indicatorSeverity: 'info',
+  },
 };
 
 /**
- * Warning, indeterminate
+ * LinearLoadingIndicator with indeterminate warning state
  */
-export const WarningIndeterminate = Template.bind({});
-WarningIndeterminate.args = {
-  determinate: false,
-  indicatorSeverity: 'warning',
+export const WarningIndeterminate: Story = {
+  args: {
+    determinate: false,
+    indicatorSeverity: 'warning',
+  },
 };
 
 /**
- * Negative value (below 0%)
+ * LinearLoadingIndicator with negative value
  */
-export const NegativePercent = Template.bind({});
-NegativePercent.args = {
-  progress: -1000,
-  determinate: true,
+export const NegativePercent: Story = {
+  args: {
+    progress: -1000,
+    determinate: true,
+  },
 };
 
 /**
- * Value above 100%
+ * LinearLoadingIndicator with value over 100
  */
-export const Above100Percent = Template.bind({});
-Above100Percent.args = {
-  progress: 1000,
-  determinate: true,
+export const Above100Percent: Story = {
+  args: {
+    progress: 1000,
+    determinate: true,
+  },
 };

@@ -63,20 +63,23 @@ const ProgressCap = (progress: number) => {
 /**
  * Wrapping svg for circle
  */
-const IndicatorBase = styled.svg<CircularLoadingIndicatorBaseProps>`
+const IndicatorBase = styled.svg`
   transform: rotate(-90deg);
 `;
 
 /**
  * Indicator circle with animation and color
  */
-const IndicatorCircle = styled.circle<CircularLoadingIndicatorBaseProps>`
+const IndicatorCircle = styled.circle<{
+  $indicatorSeverity: CircularLoadingIndicatorBaseProps['indicatorSeverity'];
+  $determinate: CircularLoadingIndicatorBaseProps['determinate'];
+}>`
   transform-origin: center;
   stroke: ${(props) =>
-    LoadingIndicatorColor(props.indicatorSeverity || 'default', props.theme)};
+    LoadingIndicatorColor(props.$indicatorSeverity || 'default', props.theme)};
 
   animation: ${(props) =>
-    props.determinate ? '' : 'loadingAnimation 1s linear infinite'};
+    props.$determinate ? '' : 'loadingAnimation 1s linear infinite'};
 
   @keyframes loadingAnimation {
     0% {
@@ -93,12 +96,11 @@ const IndicatorCircle = styled.circle<CircularLoadingIndicatorBaseProps>`
  */
 export const CircularLoadingIndicator = ({
   id,
-  progress = 50,
+  progress = 0,
   determinate = false,
   indicatorSeverity,
   size = 'medium',
   title,
-  ...restProps
 }: CircularLoadingIndicatorBaseProps) => {
   /**
    * Math for circle
@@ -118,12 +120,11 @@ export const CircularLoadingIndicator = ({
       height={calculatedSize.size}
       viewBox={`0 0 ${calculatedSize.size} ${calculatedSize.size}`}
       fill='none'
-      {...restProps}
     >
       {title && <title>{title}</title>}
       <IndicatorCircle
-        determinate={determinate}
-        indicatorSeverity={indicatorSeverity}
+        $determinate={determinate}
+        $indicatorSeverity={indicatorSeverity}
         cx={pxToRem(center)}
         cy={pxToRem(center)}
         r={pxToRem(radius)}

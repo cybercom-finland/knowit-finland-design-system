@@ -1,25 +1,24 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { DatePicker } from './DatePicker';
+import { pxToRem } from '../../shared';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/DatePicker',
+const meta: Meta<typeof DatePicker> = {
   component: DatePicker,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     onChange: { action: true },
   },
   args: {
     label: 'Label',
-    width: 300,
     placeholder: 'Default input',
     helperText: 'Helper text',
-    variant: 'outlined',
+    variant: 'filled',
     disabled: false,
     error: false,
     readOnly: false,
     required: false,
+    style: {
+      width: pxToRem(300),
+    },
   },
   parameters: {
     design: [
@@ -35,29 +34,21 @@ export default {
       },
     ],
   },
-} as Meta<typeof DatePicker>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof DatePicker> = (args) => <DatePicker {...args} />;
-
-/**
- * Outlined
- */
-export const Outlined = Template.bind({});
-Outlined.args = {
-  variant: 'outlined',
 };
+export default meta;
+
+type Story = StoryObj<typeof DatePicker>;
 
 /**
- * Filled
+ * Filled example
  */
-export const Filled = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Filled.args = {
-  variant: 'filled',
+export const Filled: Story = {};
+
+/**
+ * Outlined example
+ */
+export const Outlined: Story = {
+  args: {
+    variant: 'outlined',
+  },
 };
-
-/**
- * Default variant (not specified)
- */
-export const DefaultVariant = Template.bind({});

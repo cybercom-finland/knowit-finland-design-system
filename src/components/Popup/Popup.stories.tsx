@@ -1,14 +1,18 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { Popup, PopupProps } from './Popup';
+import { Popup } from './Popup';
 import { Button } from '../Button';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Popup',
+const meta: Meta<typeof Popup> = {
   component: Popup,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  render: (args) => (
+    <div style={{ padding: 200 }}>
+      <Popup {...args}>
+        <Button label='Click me' />
+      </Popup>
+    </div>
+  ),
   args: {
     title: 'Title',
     content: 'Example Popup content',
@@ -30,42 +34,31 @@ export default {
       },
     ],
   },
-} as Meta<typeof Popup>;
+};
+export default meta;
 
-/*
- * Example Popup story
+type Story = StoryObj<typeof Popup>;
+
+/**
+ * Basic example of Popup component
  */
-const ExamplePopup = ({ children, ...restProps }: PopupProps) => {
-  return (
-    <div style={{ padding: 200 }}>
-      <Popup {...restProps}>{children}</Popup>
-    </div>
-  );
+export const BasicExample: Story = {};
+
+/**
+ * Example of initially open Popup
+ */
+export const InitiallyOpen: Story = {
+  args: {
+    initiallyOpen: true,
+  },
 };
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Popup> = (args) => (
-  <ExamplePopup {...args}>
-    <Button label='Click me' />
-  </ExamplePopup>
-);
-
 /**
- * Default variant (not specified)
+ * Popup with long text
  */
-export const DefaultVariant = Template.bind({});
-
-/**
- * Initially open
- */
-export const InitiallyOpen = Template.bind({});
-InitiallyOpen.args = { initiallyOpen: true };
-
-/**
- * Long text
- */
-export const LongText = Template.bind({});
-LongText.args = {
-  content:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+export const LongText: Story = {
+  args: {
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
+  },
 };

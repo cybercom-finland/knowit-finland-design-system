@@ -21,17 +21,15 @@ import {
   notificationIconSpacing,
   notificationMinWidth,
 } from './styles';
-import { Wrapper, WrapperProps } from '../Wrapper';
 
 /**
  * Notification component properties
- * Extends html label attributes
- * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#attributes
+ * Extends html div attributes
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#attributes
  */
 export interface NotificationProps
-  extends WrapperProps,
-    ComponentBaseProps<HTMLLabelElement>,
-    React.LabelHTMLAttributes<HTMLLabelElement> {
+  extends ComponentBaseProps<HTMLDivElement>,
+    React.HTMLAttributes<HTMLDivElement> {
   /**
    * Title text, shown in the notification
    */
@@ -80,27 +78,27 @@ const NotificationIcon = ({ notificationSeverity }: NotificationProps) => {
   switch (notificationSeverity) {
     case 'success':
       return (
-        <NotificationIconDiv notificationSeverity={notificationSeverity}>
+        <NotificationIconContainer $notificationSeverity={notificationSeverity}>
           <MdOutlineCheckCircle size={notificationIconSize} />
-        </NotificationIconDiv>
+        </NotificationIconContainer>
       );
     case 'warning':
       return (
-        <NotificationIconDiv notificationSeverity={notificationSeverity}>
+        <NotificationIconContainer $notificationSeverity={notificationSeverity}>
           <MdWarning size={notificationIconSize} />
-        </NotificationIconDiv>
+        </NotificationIconContainer>
       );
     case 'error':
       return (
-        <NotificationIconDiv notificationSeverity={notificationSeverity}>
+        <NotificationIconContainer $notificationSeverity={notificationSeverity}>
           <MdError size={notificationIconSize} />
-        </NotificationIconDiv>
+        </NotificationIconContainer>
       );
     case 'info':
       return (
-        <NotificationIconDiv notificationSeverity={notificationSeverity}>
+        <NotificationIconContainer $notificationSeverity={notificationSeverity}>
           <MdInfo size={notificationIconSize} />
-        </NotificationIconDiv>
+        </NotificationIconContainer>
       );
     case undefined:
       return;
@@ -114,10 +112,12 @@ const NotificationIcon = ({ notificationSeverity }: NotificationProps) => {
 /**
  * The div that contains the notification icon. Applies padding and proper color.
  */
-const NotificationIconDiv = styled.div<NotificationProps>`
+const NotificationIconContainer = styled.div<{
+  $notificationSeverity: Severity;
+}>`
   color: ${(props) =>
     NotificationIconColor(
-      props.notificationSeverity || 'default',
+      props.$notificationSeverity || 'default',
       props.theme
     )};
   padding-right: ${notificationIconSpacing};
@@ -126,7 +126,7 @@ const NotificationIconDiv = styled.div<NotificationProps>`
 /**
  * The paragraph that contains the title text. Applies proper color, padding and font.
  */
-const NotificationTitleParagraph = styled.p<NotificationProps>`
+const NotificationTitleParagraph = styled.p`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   font-size: ${typography.size.label.large};
   line-height: ${typography.lineHeight.label.large};
@@ -138,7 +138,7 @@ const NotificationTitleParagraph = styled.p<NotificationProps>`
 /**
  * The paragraph that contains the message text. Applies proper color, padding and font.
  */
-const NotificationMessageParagraph = styled.p<NotificationProps>`
+const NotificationMessageParagraph = styled.p`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   font-size: ${typography.size.paragraph};
   line-height: ${typography.lineHeight.paragraph};
@@ -163,7 +163,7 @@ const NotificationCloseButtonWrapper = styled.div`
 /**
  * Contains has style for the main notification area (icon, title, message, close button)
  */
-const NotificationWrapper = styled.div<NotificationProps>`
+const NotificationWrapper = styled.div`
   position: relative;
   display: flex;
   padding: ${notificationIconSpacing};
@@ -178,26 +178,14 @@ const NotificationWrapper = styled.div<NotificationProps>`
 export const Notification = ({
   title,
   message,
-  notificationSeverity,
-  showLoadingIndicator,
+  notificationSeverity = 'default',
+  showLoadingIndicator = false,
   closeButtonAriaLabel,
   duration,
   deleteNotification,
   index,
   ...restProps
 }: NotificationProps) => {
-  const props = {
-    title,
-    message,
-    notificationSeverity,
-    showLoadingIndicator,
-    closeButtonAriaLabel,
-    duration,
-    deleteNotification,
-    index,
-    ...restProps,
-  };
-
   const [hidden, setHidden] = React.useState(false);
 
   duration &&
@@ -208,15 +196,16 @@ export const Notification = ({
 
   return (
     !hidden && (
-      <Wrapper
+      <div
         style={{
           display: 'inline-block',
           minWidth: notificationMinWidth,
         }}
+        {...restProps}
       >
-        <NotificationWrapper showLoadingIndicator={props.showLoadingIndicator}>
+        <NotificationWrapper>
           <NotificationIcon
-            notificationSeverity={props.notificationSeverity}
+            notificationSeverity={notificationSeverity}
           ></NotificationIcon>
           <NotificationMessageWrapper>
             <NotificationTitleParagraph>{title}</NotificationTitleParagraph>
@@ -241,12 +230,12 @@ export const Notification = ({
             </IconButton>
           </NotificationCloseButtonWrapper>
         </NotificationWrapper>
-        {props.showLoadingIndicator && (
+        {showLoadingIndicator && (
           <LinearLoadingIndicator
-            indicatorSeverity={props.notificationSeverity}
+            indicatorSeverity={notificationSeverity}
           ></LinearLoadingIndicator>
         )}
-      </Wrapper>
+      </div>
     )
   );
 };

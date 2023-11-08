@@ -29,7 +29,10 @@ export interface HelperTextProps
 /**
  * Helper text inner component to wrap styles
  */
-const InnerHelperText = styled.span<HelperTextProps>`
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const InnerHelperText = styled(({ error, ...props }: HelperTextProps) => (
+  <span {...props} />
+))`
   color: ${(props) => props.theme.colors.grayScale.digitalBlack};
   pointer-events: none;
   display: block;

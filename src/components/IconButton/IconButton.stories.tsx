@@ -1,16 +1,13 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { expect, jest } from '@storybook/jest';
 
 import { IconButton } from './IconButton';
 import { MdAdd } from 'react-icons/md';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/IconButton',
+const meta: Meta<typeof IconButton> = {
   component: IconButton,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     onClick: { action: true },
   },
@@ -18,6 +15,7 @@ export default {
     size: 'medium',
     disabled: false,
     'aria-label': 'Add descriptive text for action',
+    children: <MdAdd />,
   },
   parameters: {
     design: [
@@ -33,67 +31,64 @@ export default {
       },
     ],
   },
-} as Meta<typeof IconButton>;
+};
+export default meta;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof IconButton> = (args) => <IconButton {...args} />;
+type Story = StoryObj<typeof IconButton>;
 
 /**
- * Default
+ * Basic example of IconButton
  */
-export const Default = Template.bind({});
-Default.args = {
-  children: <MdAdd />,
-};
+export const BasicExample: Story = {};
 
 /**
- * Large
+ * Example of Large variant
  */
-export const Large = Template.bind({});
-
-Large.args = {
-  size: 'large',
-  children: <MdAdd />,
-};
-
-/**
- * Button clicked
- */
-export const ButtonClicked = Template.bind({});
-ButtonClicked.args = {
-  children: <MdAdd />,
-  onClick: jest.fn(),
-};
-
-ButtonClicked.play = async ({ args, canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('button'));
-  await waitFor(() => expect(args.onClick).toHaveBeenCalled());
-};
-
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
-  children: <MdAdd />,
-};
-Disabled.parameters = {
-  a11y: {
-    config: {
-      // Element has disabled attribute for screen readers, so contrast can be ignored
-      rules: [{ id: 'color-contrast', enabled: false }],
-    },
+export const Large: Story = {
+  args: {
+    size: 'large',
   },
 };
 
-Disabled.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+/**
+ * onClick interaction test
+ */
+export const ButtonClicked: Story = {
+  args: {
+    onClick: jest.fn(),
+  },
 
-  // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-  await userEvent.click(canvas.getByRole('button'));
-  expect(canvas.getByRole('button')).toBeDisabled();
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+    await userEvent.click(canvas.getByRole('button'));
+    await waitFor(() => expect(args.onClick).toHaveBeenCalled());
+  },
+};
+
+/**
+ * Example of disabled button
+ */
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+
+  parameters: {
+    a11y: {
+      config: {
+        // Element has disabled attribute for screen readers, so contrast can be ignored
+        rules: [{ id: 'color-contrast', enabled: false }],
+      },
+    },
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+    await userEvent.click(canvas.getByRole('button'));
+    expect(canvas.getByRole('button')).toBeDisabled();
+  },
 };

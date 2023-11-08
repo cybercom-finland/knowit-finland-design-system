@@ -1,14 +1,12 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { NavBar } from './NavBar';
 import { KnowitLogo } from '../KnowitLogo';
 import { MdMenu } from 'react-icons/md';
 import { IconButton } from '../IconButton';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/NavBar',
+const meta: Meta<typeof NavBar> = {
   component: NavBar,
   args: {
     size: 'small',
@@ -27,51 +25,48 @@ export default {
       },
     ],
   },
-} as Meta<typeof NavBar>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof NavBar> = (args) => <NavBar {...args} />;
-
-/**
- * Default Navbar
- */
-export const Default = Template.bind({});
-
-/**
- * Medium Navbar
- */
-export const Medium = Template.bind({});
-Medium.args = {
-  size: 'medium',
 };
+export default meta;
+
+type Story = StoryObj<typeof NavBar>;
+
+/**
+ * Basic example of NavBar
+ */
+export const BasicExample: Story = {};
 
 const MenuComponent = () => {
-  <IconButton size='large' aria-label='Open menu'>
-    <MdMenu />
-  </IconButton>;
+  return (
+    <IconButton size='large' aria-label='Open menu'>
+      <MdMenu />
+    </IconButton>
+  );
 };
 
 /**
- * Navbar with logo and menu
+ * NavBar with logo
  */
-export const LogoAndMenu = Template.bind({});
-LogoAndMenu.args = {
-  logo: <KnowitLogo />,
-  menu: MenuComponent,
+export const Logo: Story = {
+  args: {
+    logo: <KnowitLogo height={28} />,
+  },
 };
 
 /**
- * Navbar with logo
+ * NavBar with menu
  */
-export const Logo = Template.bind({});
-Logo.args = {
-  logo: <KnowitLogo />,
+export const Menu: Story = {
+  args: {
+    menu: <MenuComponent />,
+  },
 };
 
 /**
- * Navbar with menu
+ * NavBar with menu and logo
  */
-export const Menu = Template.bind({});
-Menu.args = {
-  menu: MenuComponent,
+export const LogoAndMenu: Story = {
+  args: {
+    logo: <KnowitLogo height={28} />,
+    menu: <MenuComponent />,
+  },
 };

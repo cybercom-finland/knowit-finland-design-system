@@ -1,24 +1,24 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Checkbox } from './Checkbox';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { expect, jest } from '@storybook/jest';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Checkbox',
+const meta: Meta<typeof Checkbox> = {
   component: Checkbox,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    onChange: { action: true },
-  },
   args: {
+    onChange: jest.fn(),
     checked: false,
     label: 'Label',
-    helperText: 'Helper text',
     disabled: false,
     indeterminate: false,
     size: 'large',
+    required: false,
+    value: 'Example value',
+    helperText: '',
+  },
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  argTypes: {
+    onChange: { action: true },
   },
   parameters: {
     design: [
@@ -34,66 +34,67 @@ export default {
       },
     ],
   },
-} as Meta<typeof Checkbox>;
+};
+export default meta;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Checkbox> = (args) => <Checkbox {...args} />;
+type Story = StoryObj<typeof Checkbox>;
 
 /**
- * Default variant (not specified)
+ * Basic example of a Checkbokx
  */
-export const DefaultVariant = Template.bind({});
-DefaultVariant.args = {
-  onChange: jest.fn(),
-};
+export const BasicExample: Story = {
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
 
-DefaultVariant.play = async ({ args, canvasElement }) => {
-  const canvas = within(canvasElement);
+    // Check that the checkbox is enabled as it should be
+    await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeEnabled());
 
-  // Check that the checkbox is enabled as it should be
-  await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeEnabled());
-
-  // Click the checkbox to change state and test that the onChange event is working
-  await userEvent.click(canvas.getByTestId('checkbox'));
-  await waitFor(() => expect(args.onChange).toHaveBeenCalled());
-};
-
-/**
- * Disabled
- */
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
-};
-Disabled.parameters = {
-  a11y: {
-    config: {
-      // Element has disabled attribute for screen readers, so contrast can be ignored
-      rules: [{ id: 'color-contrast', enabled: false }],
-    },
+    // Click the checkbox to change state and test that the onChange event is working
+    await userEvent.click(canvas.getByTestId('checkbox'));
+    await waitFor(() => expect(args.onChange).toHaveBeenCalled());
   },
 };
 
-Disabled.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+/**
+ * Disabled checkbox
+ */
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
 
-  // Check that the checkbox is disabled as it should be
-  await userEvent.click(canvas.getByTestId('checkbox'));
-  await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeDisabled);
+  parameters: {
+    a11y: {
+      config: {
+        // Element has disabled attribute for screen readers, so contrast can be ignored
+        rules: [{ id: 'color-contrast', enabled: false }],
+      },
+    },
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Check that the checkbox is disabled as it should be
+    await userEvent.click(canvas.getByTestId('checkbox'));
+    await waitFor(() => expect(canvas.getByTestId('checkbox')).toBeDisabled);
+  },
 };
 
 /**
- * Small checkbox
+ * Small Checkbox
  */
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
+export const Small = {
+  args: {
+    size: 'small',
+  },
 };
 
 /**
- * With no helper text
+ * With helper text
  */
-export const NoHelperText = Template.bind({});
-NoHelperText.args = {
-  helperText: undefined,
+export const HelperText = {
+  args: {
+    helperText: 'Helper text',
+  },
 };

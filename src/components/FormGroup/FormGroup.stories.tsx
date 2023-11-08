@@ -1,16 +1,24 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { FormGroup } from './FormGroup';
 import { Radio } from '../Radio';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/FormGroup',
+const meta: Meta<typeof FormGroup> = {
   component: FormGroup,
+  render: (args) => (
+    <FormGroup
+      label='label'
+      helperText='Helper Text'
+      direction={args.direction}
+    >
+      <Radio label='Label 1' value='value' name='test' />
+      <Radio label='Label 2' value='value2' name='test' />
+      <Radio label='Label 3' value='valu3' name='test' />
+    </FormGroup>
+  ),
   args: {
     label: 'Label',
     helperText: 'Helper text',
-    direction: 'horizontal',
   },
   parameters: {
     design: [
@@ -26,40 +34,21 @@ export default {
       },
     ],
   },
-} as Meta<typeof FormGroup>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof FormGroup> = (args) => {
-  return (
-    <FormGroup
-      label='label'
-      helperText='Helper Text'
-      direction={args.direction}
-    >
-      <Radio {...args} value='value' name='test' />
-      <Radio {...args} value='value2' name='test' />
-      <Radio {...args} value='valu3' name='test' />
-    </FormGroup>
-  );
 };
+export default meta;
+
+type Story = StoryObj<typeof FormGroup>;
 
 /**
- * Radio Form group
+ * Basic example of Radio group
  */
-export const RadioGroup = Template.bind({});
+export const BasicRadioGroup: Story = {};
 
 /**
- * Vertical Radio group
+ * Vertical Radio group example
  */
-export const Vertical = Template.bind({});
-Vertical.args = {
-  direction: 'vertical',
-};
-
-/**
- * Horizontal Radio group
- */
-export const Horizontal = Template.bind({});
-Horizontal.args = {
-  direction: 'horizontal',
+export const VerticalRadioGroup: Story = {
+  args: {
+    direction: 'vertical',
+  },
 };

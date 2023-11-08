@@ -1,5 +1,3 @@
-import { WrapperProps } from '../components/Wrapper';
-
 export type Size = 'small' | 'medium' | 'large';
 export type Variant = 'filled' | 'outlined' | 'text';
 export type InputVariant = Exclude<Variant, 'text'>;
@@ -49,8 +47,7 @@ export interface InputComponentBaseProps<T>
  * Base props for loading indicator
  */
 export interface LoadingIndicatorBaseProps
-  extends ComponentBaseProps<HTMLSpanElement>,
-    WrapperProps {
+  extends ComponentBaseProps<HTMLSpanElement> {
   /**
    * Progress (0-100)
    */

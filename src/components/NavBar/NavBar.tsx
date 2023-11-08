@@ -57,8 +57,12 @@ const calculateSizes = () => {
 
 /**
  * Navbar component styling
+ * Pop out size property
  */
-const Bar = styled.nav<NavBarProps>`
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Bar = styled(({ size, ...restProps }: NavBarProps) => (
+  <nav {...restProps} />
+))`
   ${calculateSizes};
   background-color: ${(props) => props.theme.colors.grayScale.digitalBlack100};
   display: flex;

@@ -1,10 +1,14 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Notification } from './Notification';
 
-export default {
-  title: 'Components/Notification',
+const meta: Meta<typeof Notification> = {
   component: Notification,
+  args: {
+    message: 'Notification message',
+    title: 'Notification title',
+    notificationSeverity: 'default',
+    showLoadingIndicator: false,
+  },
   parameters: {
     design: [
       {
@@ -19,72 +23,70 @@ export default {
       },
     ],
   },
-} as Meta<typeof Notification>;
+};
+export default meta;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Notification> = (args) => (
-  <Notification {...args} />
-);
+type Story = StoryObj<typeof Notification>;
 
 /**
- * Default
+ * Basic example of Notification component
  */
-export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  message: 'Notification message',
-  title: 'Notification title',
+export const BasicExample: Story = {};
+
+/**
+ * Notification with success state
+ */
+export const SuccessNotification: Story = {
+  args: {
+    title: 'Notification title',
+    message: 'Notification message',
+    notificationSeverity: 'success',
+  },
 };
 
 /**
- * Success notification
+ * Notification with error state
  */
-export const SuccessNotification = Template.bind({});
-SuccessNotification.args = {
-  title: 'Notification title',
-  message: 'Notification message',
-  notificationSeverity: 'success',
+export const ErrorNotification: Story = {
+  args: {
+    title: 'Notification title',
+    message: 'Notification message',
+    notificationSeverity: 'error',
+  },
 };
 
 /**
- * Error notification
+ * Notification with warning state and loading indicator
  */
-export const ErrorNotification = Template.bind({});
-ErrorNotification.args = {
-  title: 'Notification title',
-  message: 'Notification message',
-  notificationSeverity: 'error',
+export const WithLoadingIndicator: Story = {
+  args: {
+    title: 'Notification title',
+    message: 'Notification message',
+    notificationSeverity: 'warning',
+    showLoadingIndicator: true,
+  },
 };
 
 /**
- * With loading indicator
+ * Notification with long text
  */
-export const WithLoadingIndicator = Template.bind({});
-WithLoadingIndicator.args = {
-  title: 'Notification title',
-  message: 'Notification message',
-  notificationSeverity: 'warning',
-  showLoadingIndicator: true,
+export const VeryLongText: Story = {
+  args: {
+    title:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor.',
+    message:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor.',
+    notificationSeverity: 'info',
+  },
 };
 
 /**
- * Very long text
+ * Notification with timed disappear
  */
-export const VeryLongText = Template.bind({});
-VeryLongText.args = {
-  title:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor.',
-  message:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor.',
-  notificationSeverity: 'info',
-};
-
-/**
- * Timed notification
- */
-export const Timed = Template.bind({});
-Timed.args = {
-  message: 'Timed notification',
-  title: 'Should disappear in 10 seconds',
-  duration: 10000,
+export const Timed: Story = {
+  args: {
+    message: 'Timed notification',
+    title: 'Should disappear in 10 seconds',
+    duration: 10000,
+  },
 };
