@@ -1,15 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { DatePicker } from './DatePicker';
 
-const meta: Meta<typeof DatePicker> = { component: DatePicker };
-export default meta;
-
-type Story = StoryObj<typeof DatePicker>;
-
-/**
- * Filled example
- */
-export const Filled: Story = {
+const meta: Meta<typeof DatePicker> = {
+  component: DatePicker,
   argTypes: {
     onChange: { action: true },
   },
@@ -39,14 +32,20 @@ export const Filled: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof DatePicker>;
+
+/**
+ * Filled example
+ */
+export const Filled: Story = {};
 
 /**
  * Outlined example
  */
 export const Outlined: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     variant: 'outlined',
   },
 };

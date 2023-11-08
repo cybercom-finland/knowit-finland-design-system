@@ -8,15 +8,8 @@ import { Textarea } from './Textarea';
 import { MdLock } from 'react-icons/md';
 import { pxToRem } from '../../shared';
 
-const meta: Meta<typeof Textarea> = { component: Textarea };
-export default meta;
-
-type Story = StoryObj<typeof Textarea>;
-
-/**
- * Outlined variant of Textarea
- */
-export const Outlined: Story = {
+const meta: Meta<typeof Textarea> = {
+  component: Textarea,
   args: {
     variant: 'outlined',
     placeholder: 'Default textarea',
@@ -46,14 +39,20 @@ export const Outlined: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Textarea>;
+
+/**
+ * Outlined variant of Textarea
+ */
+export const Outlined: Story = {};
 
 /**
  * Textarea error state
  */
 export const OutlinedError: Story = {
-  ...Outlined,
   args: {
-    ...Outlined.args,
     error: true,
   },
 };
@@ -62,9 +61,7 @@ export const OutlinedError: Story = {
  * Textarea with end icon
  */
 export const OutlinedEndIcon: Story = {
-  ...Outlined,
   args: {
-    ...Outlined.args,
     endIcon: <MdLock size={pxToRem(24)} />,
   },
 };
@@ -73,8 +70,6 @@ export const OutlinedEndIcon: Story = {
  * Interaction fill content test
  */
 export const OutlinedWithContent: Story = {
-  ...Outlined,
-
   play: async ({ canvasElement }) => {
     const textarea = within(canvasElement).getByRole('textbox');
     await userEvent.type(textarea, 'Hello Knowit!');
@@ -86,9 +81,7 @@ export const OutlinedWithContent: Story = {
  * Filled variant of Textarea
  */
 export const Filled: Story = {
-  ...Outlined,
   args: {
-    ...Outlined.args,
     variant: 'filled',
   },
 

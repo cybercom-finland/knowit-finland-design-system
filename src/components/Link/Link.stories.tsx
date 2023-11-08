@@ -6,15 +6,6 @@ import { MdOpenInNew } from 'react-icons/md';
 
 const meta: Meta<typeof Link> = {
   component: Link,
-};
-export default meta;
-
-type Story = StoryObj<typeof Link>;
-
-/**
- * Basic example of Link component
- */
-export const BasicExample: Story = {
   argTypes: {
     children: { control: 'text' },
   },
@@ -36,14 +27,20 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Link>;
+
+/**
+ * Basic example of Link component
+ */
+export const BasicExample: Story = {};
 
 /**
  * Link with end icon
  */
 export const EndIcon: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     children: 'Link with end icon',
     endIcon: <MdOpenInNew />,
   },

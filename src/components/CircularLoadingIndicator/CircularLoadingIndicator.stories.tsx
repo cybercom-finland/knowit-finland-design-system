@@ -5,21 +5,6 @@ import styled from 'styled-components';
 
 const meta: Meta<typeof CircularLoadingIndicator> = {
   component: CircularLoadingIndicator,
-};
-export default meta;
-
-type Story = StoryObj<typeof CircularLoadingIndicator>;
-
-const ComponentWrapper = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  gap: 8px;
-`;
-
-/**
- * Basic Loading indicator
- */
-export const BasicExample: Story = {
   args: {
     size: 'medium',
     title: 'Loading indicator',
@@ -41,6 +26,20 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof CircularLoadingIndicator>;
+
+const ComponentWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+`;
+
+/**
+ * Basic Loading indicator
+ */
+export const BasicExample: Story = {};
 
 /**
  * Different siszes of Loading indicator
@@ -100,9 +99,7 @@ export const IndicatorSeverity = {
  * Determinate
  */
 export const Info50PercentDeterminate = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     progress: 50,
     determinate: true,
     indicatorSeverity: 'info',
@@ -113,9 +110,7 @@ export const Info50PercentDeterminate = {
  * Negative value
  */
 export const NegativePercent = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     progress: -1000,
     determinate: true,
   },
@@ -125,9 +120,7 @@ export const NegativePercent = {
  * Value above 100
  */
 export const Above100Percent = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     progress: 1000,
     determinate: true,
   },

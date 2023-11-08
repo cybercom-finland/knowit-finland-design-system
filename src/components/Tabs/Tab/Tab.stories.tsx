@@ -2,15 +2,8 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { Tab } from './Tab';
 
-const meta: Meta<typeof Tab> = { component: Tab };
-export default meta;
-
-type Story = StoryObj<typeof Tab>;
-
-/**
- * Basic example of Tab component
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Tab> = {
+  component: Tab,
   args: {
     label: 'Tab',
     selected: false,
@@ -31,14 +24,20 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Tab>;
+
+/**
+ * Basic example of Tab component
+ */
+export const BasicExample: Story = {};
 
 /**
  * Example of selected Tab
  */
 export const Selected: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     selected: true,
   },
 };
@@ -47,9 +46,7 @@ export const Selected: Story = {
  * Example of disabled Tab
  */
 export const Disabled: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     disabled: true,
   },
 };

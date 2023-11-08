@@ -6,15 +6,8 @@ import { expect, jest } from '@storybook/jest';
 import { IconButton } from './IconButton';
 import { MdAdd } from 'react-icons/md';
 
-const meta: Meta<typeof IconButton> = { component: IconButton };
-export default meta;
-
-type Story = StoryObj<typeof IconButton>;
-
-/**
- * Basic example of IconButton
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof IconButton> = {
+  component: IconButton,
   argTypes: {
     onClick: { action: true },
   },
@@ -39,14 +32,20 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof IconButton>;
+
+/**
+ * Basic example of IconButton
+ */
+export const BasicExample: Story = {};
 
 /**
  * Example of Large variant
  */
 export const Large: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     size: 'large',
   },
 };
@@ -55,9 +54,7 @@ export const Large: Story = {
  * onClick interaction test
  */
 export const ButtonClicked: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     onClick: jest.fn(),
   },
 
@@ -74,9 +71,7 @@ export const ButtonClicked: Story = {
  * Example of disabled button
  */
 export const Disabled: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     disabled: true,
   },
 

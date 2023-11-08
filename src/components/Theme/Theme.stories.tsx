@@ -8,15 +8,6 @@ import { lightTheme } from '../../shared';
 const meta: Meta<typeof Theme> = {
   title: 'Utils/Theme',
   component: Theme,
-};
-export default meta;
-
-type Story = StoryObj<typeof Theme>;
-
-/**
- * Light theme example
- */
-export const LightTheme: Story = {
   argTypes: {
     theme: {
       options: ['light', 'dark'],
@@ -28,15 +19,21 @@ export const LightTheme: Story = {
     children: <Button variant='outlined' label='Themed button' />,
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Theme>;
+
+/**
+ * Light theme example
+ */
+export const LightTheme: Story = {};
 
 /**
  * Dark theme example
  */
 export const DarkTheme: Story = {
-  ...LightTheme,
   args: {
     theme: 'dark',
-    children: <Button variant='outlined' label='Themed button' />,
   },
 };
 
@@ -44,9 +41,7 @@ export const DarkTheme: Story = {
  * Custom theme example
  */
 export const CustomTheme: Story = {
-  ...LightTheme,
   args: {
     theme: lightTheme,
-    children: <Button variant='outlined' label='Themed button' />,
   },
 };

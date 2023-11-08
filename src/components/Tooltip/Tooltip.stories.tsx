@@ -5,15 +5,6 @@ import { Button } from '../Button';
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
-};
-export default meta;
-
-type Story = StoryObj<typeof Tooltip>;
-
-/**
- * Basic example of Tooltip
- */
-export const BasicExample: Story = {
   render: (args) => (
     <div style={{ padding: 200 }}>
       <Tooltip {...args}>
@@ -41,15 +32,20 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Tooltip>;
+
+/**
+ * Basic example of Tooltip
+ */
+export const BasicExample: Story = {};
 
 /**
  * Tooltip with long text
  */
 export const LongText: Story = {
-  ...BasicExample,
-
   args: {
-    ...BasicExample.args,
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
   },

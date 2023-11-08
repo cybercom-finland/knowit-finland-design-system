@@ -6,15 +6,8 @@ import { expect, jest } from '@storybook/jest';
 import { Button } from './Button';
 import { MdAdd } from 'react-icons/md';
 
-const meta: Meta<typeof Button> = { component: Button };
-export default meta;
-
-type Story = StoryObj<typeof Button>;
-
-/**
- * Basic example of a filled Button component
- */
-export const Filled: Story = {
+const meta: Meta<typeof Button> = {
+  component: Button,
   argTypes: {
     onClick: { action: true },
   },
@@ -39,14 +32,20 @@ export const Filled: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Button>;
+
+/**
+ * Basic example of a filled Button component
+ */
+export const Filled: Story = {};
 
 /**
  * Outlined Button example
  */
 export const Outlined: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     variant: 'outlined',
   },
   parameters: {
@@ -69,22 +68,17 @@ export const Outlined: Story = {
  * Outlined Button with end icon
  */
 export const OutlinedWithEndIcon: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     variant: 'outlined',
     endIcon: <MdAdd />,
   },
-  parameters: Outlined.parameters,
 };
 
 /**
  * Text Button example
  */
 export const Text: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     variant: 'text',
   },
   parameters: {
@@ -107,9 +101,7 @@ export const Text: Story = {
  * Click interaction test
  */
 export const OutlinedClicked: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     variant: 'outlined',
     onClick: jest.fn(),
   },
@@ -127,9 +119,7 @@ export const OutlinedClicked: Story = {
  * Disabled button with interaction test
  */
 export const Disabled: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     disabled: true,
   },
 

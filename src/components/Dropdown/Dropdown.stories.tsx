@@ -14,28 +14,8 @@ const TemplateOptions: DropdownOption[] = [
   { label: 'Four', value: 4 },
 ];
 
-const meta: Meta<typeof Dropdown> = { component: Dropdown };
-export default meta;
-
-type Story = StoryObj<typeof Dropdown>;
-
-/**
- * FIlled Dropdoen menu
- */
-export const Filled: Story = {
-  render: (args) => {
-    const [current, setCurrent] = useState<number | undefined>(undefined);
-    const { options, ...props } = args;
-
-    return (
-      <Dropdown
-        {...props}
-        options={options}
-        value={current}
-        onChange={(e) => setCurrent(Number(e.target.value))}
-      />
-    );
-  },
+const meta: Meta<typeof Dropdown> = {
+  component: Dropdown,
   args: {
     placeholder: 'Default Dropdown menu',
     label: 'Label',
@@ -62,14 +42,34 @@ export const Filled: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Dropdown>;
+
+/**
+ * FIlled Dropdoen menu
+ */
+export const Filled: Story = {
+  render: (args) => {
+    const [current, setCurrent] = useState<number | undefined>(undefined);
+    const { options, ...props } = args;
+
+    return (
+      <Dropdown
+        {...props}
+        options={options}
+        value={current}
+        onChange={(e) => setCurrent(Number(e.target.value))}
+      />
+    );
+  },
+};
 
 /**
  * Outlined Dropdown menu
  */
 export const Outlined: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     variant: 'outlined',
   },
 
@@ -93,9 +93,7 @@ export const Outlined: Story = {
  * Dropdown menu with error
  */
 export const Error: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     error: true,
   },
 };
@@ -104,9 +102,7 @@ export const Error: Story = {
  * Dropdown menu with end icon
  */
 export const EndIcon: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     endIcon: <MdInfo size={pxToRem(24)} />,
   },
 };
@@ -115,14 +111,11 @@ export const EndIcon: Story = {
  * Disabled Dropdown menu
  */
 export const Disabled: Story = {
-  ...Filled,
   args: {
-    ...Filled.args,
     disabled: true,
   },
 
   parameters: {
-    ...Filled.parameters,
     a11y: {
       config: {
         // Element has disabled attribute for screen readers, so contrast can be ignored
@@ -144,8 +137,6 @@ export const Disabled: Story = {
  * Dropdown menu with interaction test
  */
 export const ChangeValueTest: Story = {
-  ...Filled,
-
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

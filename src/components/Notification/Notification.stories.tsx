@@ -1,15 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Notification } from './Notification';
 
-const meta: Meta<typeof Notification> = { component: Notification };
-export default meta;
-
-type Story = StoryObj<typeof Notification>;
-
-/**
- * Basic example of Notification component
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Notification> = {
+  component: Notification,
   args: {
     message: 'Notification message',
     title: 'Notification title',
@@ -31,14 +24,20 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Notification>;
+
+/**
+ * Basic example of Notification component
+ */
+export const BasicExample: Story = {};
 
 /**
  * Notification with success state
  */
 export const SuccessNotification: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     title: 'Notification title',
     message: 'Notification message',
     notificationSeverity: 'success',
@@ -49,9 +48,7 @@ export const SuccessNotification: Story = {
  * Notification with error state
  */
 export const ErrorNotification: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     title: 'Notification title',
     message: 'Notification message',
     notificationSeverity: 'error',
@@ -62,9 +59,7 @@ export const ErrorNotification: Story = {
  * Notification with warning state and loading indicator
  */
 export const WithLoadingIndicator: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     title: 'Notification title',
     message: 'Notification message',
     notificationSeverity: 'warning',
@@ -76,9 +71,7 @@ export const WithLoadingIndicator: Story = {
  * Notification with long text
  */
 export const VeryLongText: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     title:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque non lacus vitae tempus. Nullam at vehicula erat. Aliquam erat volutpat. Pellentesque et fringilla purus, ac blandit odio. Ut volutpat, mauris sed luctus hendrerit, dui nunc sodales erat, non volutpat nisi lorem eu dolor.',
     message:
@@ -91,9 +84,7 @@ export const VeryLongText: Story = {
  * Notification with timed disappear
  */
 export const Timed: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     message: 'Timed notification',
     title: 'Should disappear in 10 seconds',
     duration: 10000,

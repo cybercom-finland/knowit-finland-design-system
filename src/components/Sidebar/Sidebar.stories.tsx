@@ -7,12 +7,6 @@ import { MdClose } from 'react-icons/md';
 import styled from 'styled-components';
 import { pxToRem } from '../../shared';
 
-const meta: Meta<typeof Sidebar> = { component: Sidebar };
-export default meta;
-
-type Story = StoryObj<typeof Sidebar>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const IconButtonComponent = () => {
   return (
     <IconButton size='large' aria-label='Close menu'>
@@ -41,10 +35,8 @@ const Template: StoryFn<typeof Sidebar> = (args) => (
   </Wrapper>
 );
 
-/**
- * Basic example of Sidebar
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Sidebar> = {
+  component: Sidebar,
   render: Template,
   args: {
     overlay: false,
@@ -66,12 +58,17 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Sidebar>;
+
+/**
+ * Basic example of Sidebar
+ */
+export const BasicExample: Story = {};
 
 export const Overlay: Story = {
-  ...BasicExample,
-
   args: {
-    ...BasicExample.args,
     overlay: true,
   },
 };

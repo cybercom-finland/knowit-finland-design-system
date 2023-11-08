@@ -2,15 +2,8 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { Accordion } from './Accordion';
 
-const meta: Meta<typeof Accordion> = { component: Accordion };
-export default meta;
-
-type Story = StoryObj<typeof Accordion>;
-
-/**
- * Example with one Accordion component
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Accordion> = {
+  component: Accordion,
   render: (args) => (
     <Accordion {...args}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -41,12 +34,19 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Accordion>;
+
+/**
+ * Example with one Accordion component
+ */
+export const BasicExample: Story = {};
 
 /**
  * Example with multiple Accordion components
  */
 export const MultipleAccordionVariant: Story = {
-  ...BasicExample,
   render: (args) => (
     <>
       <Accordion {...args}>

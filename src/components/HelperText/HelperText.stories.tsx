@@ -2,15 +2,8 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { HelperText } from './HelperText';
 
-const meta: Meta<typeof HelperText> = { component: HelperText };
-export default meta;
-
-type Story = StoryObj<typeof HelperText>;
-
-/**
- * Basic example of HelperText
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof HelperText> = {
+  component: HelperText,
   argTypes: {
     children: { control: 'text' },
   },
@@ -34,20 +27,25 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof HelperText>;
+
+/**
+ * Basic example of HelperText
+ */
+export const BasicExample: Story = {};
 
 /**
  * Disabled HelperText
  */
 export const Disabled: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     children: 'Disabled',
     disabled: true,
   },
 
   parameters: {
-    ...BasicExample.parameters,
     a11y: {
       config: {
         // Element has disabled attribute for screen readers, so contrast can be ignored
@@ -61,9 +59,7 @@ export const Disabled: Story = {
  * HelperText with error state
  */
 export const Error: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     children: 'With error',
     error: true,
   },
@@ -73,9 +69,7 @@ export const Error: Story = {
  * HelperText with error and disabled state
  */
 export const ErrorDisabled: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     children: 'With error',
     error: true,
     disabled: true,

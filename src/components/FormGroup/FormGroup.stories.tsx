@@ -3,15 +3,8 @@ import { Meta, StoryObj } from '@storybook/react';
 import { FormGroup } from './FormGroup';
 import { Radio } from '../Radio';
 
-const meta: Meta<typeof FormGroup> = { component: FormGroup };
-export default meta;
-
-type Story = StoryObj<typeof FormGroup>;
-
-/**
- * Basic example of Radio group
- */
-export const BasicRadioGroup: Story = {
+const meta: Meta<typeof FormGroup> = {
+  component: FormGroup,
   render: (args) => (
     <FormGroup
       label='label'
@@ -42,15 +35,20 @@ export const BasicRadioGroup: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof FormGroup>;
+
+/**
+ * Basic example of Radio group
+ */
+export const BasicRadioGroup: Story = {};
 
 /**
  * Vertical Radio group example
  */
 export const VerticalRadioGroup: Story = {
-  ...BasicRadioGroup,
-
   args: {
-    ...BasicRadioGroup.args,
     direction: 'vertical',
   },
 };

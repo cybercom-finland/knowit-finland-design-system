@@ -4,24 +4,8 @@ import { Card } from './Card';
 import { styled } from 'styled-components';
 import { pxToRem } from '../../shared';
 
-const meta: Meta<typeof Card> = { component: Card };
-export default meta;
-
-type Story = StoryObj<typeof Card>;
-
-const exampleCardDimensions = {
-  height: pxToRem(150),
-};
-
-const ExampleCardHeader = styled.img`
-  width: 100%;
-  height: ${exampleCardDimensions.height};
-`;
-
-/**
- * Basic example of a Card component
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Card> = {
+  component: Card,
   render: (args) => (
     <Card
       {...args}
@@ -56,15 +40,29 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Card>;
+
+const exampleCardDimensions = {
+  height: pxToRem(150),
+};
+
+const ExampleCardHeader = styled.img`
+  width: 100%;
+  height: ${exampleCardDimensions.height};
+`;
+
+/**
+ * Basic example of a Card component
+ */
+export const BasicExample: Story = {};
 
 /**
  * Card component with rounded edges
  */
 export const Rounded: Story = {
-  ...BasicExample,
-
   args: {
-    ...BasicExample.args,
     variant: 'rounded',
   },
 };

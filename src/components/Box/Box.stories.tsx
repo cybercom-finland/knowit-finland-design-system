@@ -14,15 +14,8 @@ const ExampleBoxContents = styled.div`
   height: ${exampleBoxDimensions.height};
 `;
 
-const meta: Meta<typeof Box> = { component: Box };
-export default meta;
-
-type Story = StoryObj<typeof Box>;
-
-/**
- * Example of a Box with some content
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Box> = {
+  component: Box,
   render: (args) => (
     <Box {...args}>
       <ExampleBoxContents />
@@ -46,13 +39,19 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Box>;
+
+/**
+ * Example of a Box with some content
+ */
+export const BasicExample: Story = {};
 
 /**
  * Example of a rounded Box
  */
 export const Rounded = {
-  ...BasicExample,
-
   args: {
     variant: 'rounded',
   },

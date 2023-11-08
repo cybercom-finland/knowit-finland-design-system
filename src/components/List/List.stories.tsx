@@ -4,15 +4,6 @@ import { List, ListItem } from './List';
 
 const meta: Meta<typeof List> = {
   component: List,
-};
-export default meta;
-
-type Story = StoryObj<typeof List>;
-
-/**
- * Badic example of List component
- */
-export const BasicExample: Story = {
   render: (args) => (
     <List {...args}>
       <ListItem text='Berries' expandable expanded>
@@ -53,3 +44,11 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof List>;
+
+/**
+ * Badic example of List component
+ */
+export const BasicExample: Story = {};

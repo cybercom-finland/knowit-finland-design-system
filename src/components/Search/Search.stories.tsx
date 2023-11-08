@@ -3,15 +3,8 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Search } from './Search';
 import { pxToRem } from '../../shared';
 
-const meta: Meta<typeof Search> = { component: Search };
-export default meta;
-
-type Story = StoryObj<typeof Search>;
-
-/**
- * Outlined variant of Search field
- */
-export const Outlined: Story = {
+const meta: Meta<typeof Search> = {
+  component: Search,
   argTypes: {
     onChange: { action: true },
   },
@@ -41,14 +34,20 @@ export const Outlined: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Search>;
+
+/**
+ * Outlined variant of Search field
+ */
+export const Outlined: Story = {};
 
 /**
  * Filled variant of Search field
  */
 export const Filled = {
-  ...Outlined,
   args: {
-    ...Outlined.args,
     variant: 'filled',
   },
 };

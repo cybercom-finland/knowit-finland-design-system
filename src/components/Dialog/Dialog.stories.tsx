@@ -9,15 +9,8 @@ import { Button } from '../Button';
 import { IconButton } from '../IconButton';
 import { MdClose } from 'react-icons/md';
 
-const meta: Meta<typeof Dialog> = { component: Dialog };
-export default meta;
-
-type Story = StoryObj<typeof Dialog>;
-
-/*
- * Example Dialog story
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Dialog> = {
+  component: Dialog,
   render: (args) => (
     <Dialog aria-label='Example dialog' {...args}>
       <DialogHeader>
@@ -56,3 +49,11 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Dialog>;
+
+/*
+ * Example Dialog story
+ */
+export const BasicExample: Story = {};

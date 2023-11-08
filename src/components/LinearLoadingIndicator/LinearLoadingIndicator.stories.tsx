@@ -4,15 +4,6 @@ import { LinearLoadingIndicator } from './LinearLoadingIndicator';
 
 const meta: Meta<typeof LinearLoadingIndicator> = {
   component: LinearLoadingIndicator,
-};
-export default meta;
-
-type Story = StoryObj<typeof LinearLoadingIndicator>;
-
-/**
- * Basic example of LinearLoadingIndicator
- */
-export const BasicExample: Story = {
   args: {
     indicatorSeverity: 'default',
     determinate: false,
@@ -33,14 +24,20 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof LinearLoadingIndicator>;
+
+/**
+ * Basic example of LinearLoadingIndicator
+ */
+export const BasicExample: Story = {};
 
 /**
  * LinearLoadingIndicator with determinate success state
  */
 export const Success100PercentDeterminate: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     progress: 100,
     determinate: true,
     indicatorSeverity: 'success',
@@ -51,9 +48,7 @@ export const Success100PercentDeterminate: Story = {
  * LinearLoadingIndicator with determinate error state
  */
 export const Error33PercentDeterminate: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     progress: 33,
     determinate: true,
     indicatorSeverity: 'error',
@@ -64,9 +59,7 @@ export const Error33PercentDeterminate: Story = {
  * LinearLoadingIndicator with determinate info state
  */
 export const Info50PercentDeterminate: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     progress: 50,
     determinate: true,
     indicatorSeverity: 'info',
@@ -77,9 +70,7 @@ export const Info50PercentDeterminate: Story = {
  * LinearLoadingIndicator with indeterminate warning state
  */
 export const WarningIndeterminate: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     determinate: false,
     indicatorSeverity: 'warning',
   },
@@ -89,9 +80,7 @@ export const WarningIndeterminate: Story = {
  * LinearLoadingIndicator with negative value
  */
 export const NegativePercent: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     progress: -1000,
     determinate: true,
   },
@@ -101,9 +90,7 @@ export const NegativePercent: Story = {
  * LinearLoadingIndicator with value over 100
  */
 export const Above100Percent: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     progress: 1000,
     determinate: true,
   },

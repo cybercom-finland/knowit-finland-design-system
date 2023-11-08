@@ -5,15 +5,8 @@ import { Link } from '../Link';
 import { MdHome } from 'react-icons/md';
 import { Typography } from '../Typography';
 
-const meta: Meta<typeof Breadcrumb> = { component: Breadcrumb };
-export default meta;
-
-type Story = StoryObj<typeof Breadcrumb>;
-
-/**
- * Basic example of a Breadcrumb
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Breadcrumb> = {
+  component: Breadcrumb,
   render: (args) => (
     <Breadcrumb
       aria-label='breadcrumbs-component'
@@ -41,3 +34,11 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Breadcrumb>;
+
+/**
+ * Basic example of a Breadcrumb
+ */
+export const BasicExample: Story = {};

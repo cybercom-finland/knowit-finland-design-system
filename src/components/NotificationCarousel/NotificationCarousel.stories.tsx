@@ -3,15 +3,6 @@ import { NotificationCarousel } from './NotificationCarousel';
 
 const meta: Meta<typeof NotificationCarousel> = {
   component: NotificationCarousel,
-};
-export default meta;
-
-type Story = StoryObj<typeof NotificationCarousel>;
-
-/**
- * Basic example of NotificationCrousel
- */
-export const BasicExample: Story = {
   args: {
     // Shaping the stories through args composition.
     carouselItems: [
@@ -47,3 +38,11 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof NotificationCarousel>;
+
+/**
+ * Basic example of NotificationCrousel
+ */
+export const BasicExample: Story = {};

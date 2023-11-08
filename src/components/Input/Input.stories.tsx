@@ -8,15 +8,8 @@ import { Input } from './Input';
 import { MdLock } from 'react-icons/md';
 import { pxToRem } from '../../shared';
 
-const meta: Meta<typeof Input> = { component: Input };
-export default meta;
-
-type Story = StoryObj<typeof Input>;
-
-/**
- * Example of Outlined variant
- */
-export const Outlined: Story = {
+const meta: Meta<typeof Input> = {
+  component: Input,
   args: {
     variant: 'outlined',
     placeholder: 'Default input',
@@ -50,14 +43,20 @@ export const Outlined: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Input>;
+
+/**
+ * Example of Outlined variant
+ */
+export const Outlined: Story = {};
 
 /**
  * Error state example
  */
 export const OutlinedError: Story = {
-  ...Outlined,
   args: {
-    ...Outlined.args,
     error: true,
   },
 };
@@ -66,9 +65,7 @@ export const OutlinedError: Story = {
  * End icon example
  */
 export const OutlinedEndIcon: Story = {
-  ...Outlined,
   args: {
-    ...Outlined.args,
     endIcon: <MdLock size={pxToRem(24)} />,
   },
 };
@@ -77,8 +74,6 @@ export const OutlinedEndIcon: Story = {
  * Interaction fill content test
  */
 export const OutlinedWithContent: Story = {
-  ...Outlined,
-
   play: async ({ canvasElement }) => {
     const input = within(canvasElement).getByRole('textbox');
     await userEvent.type(input, 'Hello Knowit!');
@@ -90,9 +85,7 @@ export const OutlinedWithContent: Story = {
  * Example of required field
  */
 export const OutlinedRequired: Story = {
-  ...Outlined,
   args: {
-    ...Outlined.args,
     required: true,
   },
 };
@@ -101,9 +94,7 @@ export const OutlinedRequired: Story = {
  * Example of Filled variant
  */
 export const Filled: Story = {
-  ...Outlined,
   args: {
-    ...Outlined.args,
     variant: 'filled',
   },
 

@@ -5,15 +5,8 @@ import { Tabs } from './Tabs';
 import { Tab } from './Tab';
 import { pxToRem } from '../../shared';
 
-const meta: Meta<typeof Tabs> = { component: Tabs };
-export default meta;
-
-type Story = StoryObj<typeof Tabs>;
-
-/**
- * Basic example of Tabs component
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Tabs> = {
+  component: Tabs,
   render: (args) => {
     const [value, setValue] = React.useState(0);
 
@@ -47,12 +40,19 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Tabs>;
+
+/**
+ * Basic example of Tabs component
+ */
+export const BasicExample: Story = {};
 
 /**
  * Scrollable Tabs
  */
 export const TabsWithScroll: Story = {
-  ...BasicExample,
   args: {
     style: { width: pxToRem(400) },
   },

@@ -4,15 +4,8 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Popup } from './Popup';
 import { Button } from '../Button';
 
-const meta: Meta<typeof Popup> = { component: Popup };
-export default meta;
-
-type Story = StoryObj<typeof Popup>;
-
-/**
- * Basic example of Popup component
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Popup> = {
+  component: Popup,
   render: (args) => (
     <div style={{ padding: 200 }}>
       <Popup {...args}>
@@ -42,14 +35,20 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Popup>;
+
+/**
+ * Basic example of Popup component
+ */
+export const BasicExample: Story = {};
 
 /**
  * Example of initially open Popup
  */
 export const InitiallyOpen: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     initiallyOpen: true,
   },
 };
@@ -58,10 +57,7 @@ export const InitiallyOpen: Story = {
  * Popup with long text
  */
 export const LongText: Story = {
-  ...BasicExample,
-
   args: {
-    ...BasicExample.args,
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
   },

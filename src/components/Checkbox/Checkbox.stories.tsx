@@ -3,15 +3,8 @@ import { Checkbox } from './Checkbox';
 import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { expect, jest } from '@storybook/jest';
 
-const meta: Meta<typeof Checkbox> = { component: Checkbox };
-export default meta;
-
-type Story = StoryObj<typeof Checkbox>;
-
-/**
- * Basic example of a Checkbokx
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Checkbox> = {
+  component: Checkbox,
   args: {
     onChange: jest.fn(),
     checked: false,
@@ -41,7 +34,15 @@ export const BasicExample: Story = {
       },
     ],
   },
+};
+export default meta;
 
+type Story = StoryObj<typeof Checkbox>;
+
+/**
+ * Basic example of a Checkbokx
+ */
+export const BasicExample: Story = {
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -58,14 +59,11 @@ export const BasicExample: Story = {
  * Disabled checkbox
  */
 export const Disabled: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     disabled: true,
   },
 
   parameters: {
-    ...BasicExample.parameters,
     a11y: {
       config: {
         // Element has disabled attribute for screen readers, so contrast can be ignored
@@ -87,9 +85,7 @@ export const Disabled: Story = {
  * Small Checkbox
  */
 export const Small = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     size: 'small',
   },
 };
@@ -98,9 +94,7 @@ export const Small = {
  * With helper text
  */
 export const HelperText = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     helperText: 'Helper text',
   },
 };

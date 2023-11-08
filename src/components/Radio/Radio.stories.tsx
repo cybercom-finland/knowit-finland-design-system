@@ -2,15 +2,8 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { Radio } from './Radio';
 
-const meta: Meta<typeof Radio> = { component: Radio };
-export default meta;
-
-type Story = StoryObj<typeof Radio>;
-
-/**
- * Basic example of Radio button
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof Radio> = {
+  component: Radio,
   args: {
     label: 'Label',
     disabled: false,
@@ -32,14 +25,20 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Radio>;
+
+/**
+ * Basic example of Radio button
+ */
+export const BasicExample: Story = {};
 
 /**
  * Small variant of Radio button
  */
 export const Small: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     size: 'small',
   },
 };
@@ -48,9 +47,7 @@ export const Small: Story = {
  * Disabled Radio button
  */
 export const Disabled: Story = {
-  ...BasicExample,
   args: {
-    ...BasicExample.args,
     disabled: true,
   },
 };

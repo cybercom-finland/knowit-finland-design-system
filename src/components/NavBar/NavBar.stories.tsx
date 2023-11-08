@@ -6,15 +6,8 @@ import { KnowitLogo } from '../KnowitLogo';
 import { MdMenu } from 'react-icons/md';
 import { IconButton } from '../IconButton';
 
-const meta: Meta<typeof NavBar> = { component: NavBar };
-export default meta;
-
-type Story = StoryObj<typeof NavBar>;
-
-/**
- * Basic example of NavBar
- */
-export const BasicExample: Story = {
+const meta: Meta<typeof NavBar> = {
+  component: NavBar,
   args: {
     size: 'small',
   },
@@ -33,6 +26,14 @@ export const BasicExample: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof NavBar>;
+
+/**
+ * Basic example of NavBar
+ */
+export const BasicExample: Story = {};
 
 const MenuComponent = () => {
   return (
@@ -46,7 +47,6 @@ const MenuComponent = () => {
  * NavBar with logo
  */
 export const Logo: Story = {
-  ...BasicExample,
   args: {
     logo: <KnowitLogo height={28} />,
   },
@@ -56,7 +56,6 @@ export const Logo: Story = {
  * NavBar with menu
  */
 export const Menu: Story = {
-  ...BasicExample,
   args: {
     menu: <MenuComponent />,
   },
@@ -66,7 +65,6 @@ export const Menu: Story = {
  * NavBar with menu and logo
  */
 export const LogoAndMenu: Story = {
-  ...BasicExample,
   args: {
     logo: <KnowitLogo height={28} />,
     menu: <MenuComponent />,
