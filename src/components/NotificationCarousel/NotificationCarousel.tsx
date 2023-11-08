@@ -1,53 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { generateRandomString } from '../../shared';
-import { Notification } from '../Notification/Notification';
-import { Wrapper, WrapperProps } from '../Wrapper';
+import { ComponentBaseProps, generateRandomString } from '../../shared';
+import { Notification, NotificationProps } from '../Notification/Notification';
 import { notificationSpacing } from './styles';
 
 /**
  * Notification carousel component properties
  */
-export interface NotificationCarouselProps extends WrapperProps {
+export interface NotificationCarouselProps
+  extends ComponentBaseProps<HTMLDivElement> {
   /**
    * List of items (notifications) to stack to each other
    */
-  carouselItems?: CarouselItem[];
+  carouselItems?: NotificationProps[];
 
   /**
    * Maximum amount of notifications to be shown at once
    */
   maxNotifications?: number;
-}
-
-/**
- * Each notification shown on the carousel is specified thru CarouselItem
- */
-export interface CarouselItem {
-  /**
-   * ID for the carousel item, or randomly generated if undefined
-   */
-  id?: string;
-
-  /**
-   * Title for the notification
-   */
-  title?: string;
-
-  /**
-   * Message for the notification (optional)
-   */
-  message?: string;
-
-  /**
-   * Aria-label for the close button
-   */
-  closeButtonAriaLabel?: string;
-
-  /**
-   * How long the notification is shown (indefinitely if undefined)
-   */
-  duration?: number;
 }
 
 /**
@@ -66,17 +36,19 @@ const NotificationCarouselItemWrapper = styled.div`
 export const NotificationCarousel = ({
   carouselItems,
   maxNotifications,
+  ...restProps
 }: NotificationCarouselProps) => {
   const [carouselItemsState, setCarouselItemsState] = useState(
     carouselItems || []
   );
 
   return (
-    <Wrapper
+    <div
       style={{
         overflow: 'hidden',
         pointerEvents: 'none',
       }}
+      {...restProps}
     >
       {carouselItemsState
         .filter((_, index) =>
@@ -100,6 +72,6 @@ export const NotificationCarousel = ({
             />
           </NotificationCarouselItemWrapper>
         ))}
-    </Wrapper>
+    </div>
   );
 };

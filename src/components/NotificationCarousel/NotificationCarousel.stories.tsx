@@ -8,6 +8,9 @@ export default meta;
 
 type Story = StoryObj<typeof NotificationCarousel>;
 
+/**
+ * Basic example of NotificationCrousel
+ */
 export const BasicExample: Story = {
   args: {
     // Shaping the stories through args composition.

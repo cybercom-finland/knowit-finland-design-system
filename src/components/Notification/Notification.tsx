@@ -21,7 +21,6 @@ import {
   notificationIconSpacing,
   notificationMinWidth,
 } from './styles';
-import { Wrapper, WrapperProps } from '../Wrapper';
 
 /**
  * Notification component properties
@@ -29,8 +28,7 @@ import { Wrapper, WrapperProps } from '../Wrapper';
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#attributes
  */
 export interface NotificationProps
-  extends WrapperProps,
-    ComponentBaseProps<HTMLDivElement>,
+  extends ComponentBaseProps<HTMLDivElement>,
     React.HTMLAttributes<HTMLDivElement> {
   /**
    * Title text, shown in the notification
@@ -188,18 +186,6 @@ export const Notification = ({
   index,
   ...restProps
 }: NotificationProps) => {
-  const props = {
-    title,
-    message,
-    notificationSeverity,
-    showLoadingIndicator,
-    closeButtonAriaLabel,
-    duration,
-    deleteNotification,
-    index,
-    ...restProps,
-  };
-
   const [hidden, setHidden] = React.useState(false);
 
   duration &&
@@ -210,15 +196,16 @@ export const Notification = ({
 
   return (
     !hidden && (
-      <Wrapper
+      <div
         style={{
           display: 'inline-block',
           minWidth: notificationMinWidth,
         }}
+        {...restProps}
       >
         <NotificationWrapper>
           <NotificationIcon
-            notificationSeverity={props.notificationSeverity}
+            notificationSeverity={notificationSeverity}
           ></NotificationIcon>
           <NotificationMessageWrapper>
             <NotificationTitleParagraph>{title}</NotificationTitleParagraph>
@@ -243,12 +230,12 @@ export const Notification = ({
             </IconButton>
           </NotificationCloseButtonWrapper>
         </NotificationWrapper>
-        {props.showLoadingIndicator && (
+        {showLoadingIndicator && (
           <LinearLoadingIndicator
-            indicatorSeverity={props.notificationSeverity}
+            indicatorSeverity={notificationSeverity}
           ></LinearLoadingIndicator>
         )}
-      </Wrapper>
+      </div>
     )
   );
 };
