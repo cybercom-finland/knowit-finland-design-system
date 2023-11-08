@@ -4,9 +4,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Popup } from './Popup';
 import { Button } from '../Button';
 
-const meta: Meta<typeof Popup> = {
-  component: Popup,
-};
+const meta: Meta<typeof Popup> = { component: Popup };
 export default meta;
 
 type Story = StoryObj<typeof Popup>;

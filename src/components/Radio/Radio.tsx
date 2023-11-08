@@ -5,15 +5,9 @@ import {
   pxToRem,
   Size,
 } from '../../shared';
-import { InputBaseProps } from '../Input';
 import styled, { css } from 'styled-components';
 import { FormLabel } from '../Label';
 import { variant } from 'styled-system';
-
-type RadioInputBaseProps = Omit<
-  InputBaseProps,
-  'error' | 'endIcon' | 'variant'
->;
 
 /**
  * Used HTML Attributes
@@ -48,8 +42,12 @@ type RadioInputHTMLAttributes = Omit<
  */
 export interface RadioProps
   extends InputComponentBaseProps<HTMLInputElement>,
-    RadioInputBaseProps,
     RadioInputHTMLAttributes {
+  /**
+   * Label text
+   */
+  label?: string;
+
   /**
    * Radio value
    */

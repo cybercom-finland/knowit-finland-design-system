@@ -1,17 +1,21 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Radio } from './Radio';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Radio',
-  component: Radio,
+const meta: Meta<typeof Radio> = { component: Radio };
+export default meta;
+
+type Story = StoryObj<typeof Radio>;
+
+/**
+ * Basic example of Radio button
+ */
+export const BasicExample: Story = {
   args: {
     label: 'Label',
     disabled: false,
-    width: 300,
     size: 'large',
+    required: false,
   },
   parameters: {
     design: [
@@ -27,29 +31,26 @@ export default {
       },
     ],
   },
-} as Meta<typeof Radio>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Radio> = (args) => {
-  return <Radio {...args} value='value' name='test' />;
 };
 
-export const BasicExample = {
-  render: Template,
-};
-
-export const Small = {
-  render: Template,
-
+/**
+ * Small variant of Radio button
+ */
+export const Small: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     size: 'small',
   },
 };
 
-export const Disabled = {
-  render: Template,
-
+/**
+ * Disabled Radio button
+ */
+export const Disabled: Story = {
+  ...BasicExample,
   args: {
+    ...BasicExample.args,
     disabled: true,
   },
 };
