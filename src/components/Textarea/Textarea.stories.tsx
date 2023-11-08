@@ -19,6 +19,9 @@ const meta: Meta<typeof Textarea> = {
     error: false,
     readOnly: false,
     required: false,
+    style: {
+      width: pxToRem(300),
+    },
   },
   argTypes: {
     value: { control: 'text' },
