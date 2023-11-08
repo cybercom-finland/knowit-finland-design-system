@@ -1,14 +1,27 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { Popup, PopupProps } from './Popup';
+import { Popup } from './Popup';
 import { Button } from '../Button';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Components/Popup',
+const meta: Meta<typeof Popup> = {
   component: Popup,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+};
+export default meta;
+
+type Story = StoryObj<typeof Popup>;
+
+/**
+ * Basic example of Popup component
+ */
+export const BasicExample: Story = {
+  render: (args) => (
+    <div style={{ padding: 200 }}>
+      <Popup {...args}>
+        <Button label='Click me' />
+      </Popup>
+    </div>
+  ),
   args: {
     title: 'Title',
     content: 'Example Popup content',
@@ -30,39 +43,27 @@ export default {
       },
     ],
   },
-} as Meta<typeof Popup>;
+};
 
-/*
- * Example Popup story
+/**
+ * Example of initially open Popup
  */
-const ExamplePopup = ({ children, ...restProps }: PopupProps) => {
-  return (
-    <div style={{ padding: 200 }}>
-      <Popup {...restProps}>{children}</Popup>
-    </div>
-  );
+export const InitiallyOpen: Story = {
+  ...BasicExample,
+  args: {
+    ...BasicExample.args,
+    initiallyOpen: true,
+  },
 };
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Popup> = (args) => (
-  <ExamplePopup {...args}>
-    <Button label='Click me' />
-  </ExamplePopup>
-);
-
-export const BasicExample = {
-  render: Template,
-};
-
-export const InitiallyOpen = {
-  render: Template,
-  args: { initiallyOpen: true },
-};
-
-export const LongText = {
-  render: Template,
+/**
+ * Popup with long text
+ */
+export const LongText: Story = {
+  ...BasicExample,
 
   args: {
+    ...BasicExample.args,
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque etodio sed est pellentesque gravida sit amet at orci.',
   },
