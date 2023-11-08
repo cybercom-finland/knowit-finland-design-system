@@ -16,61 +16,33 @@ const TemplateOptions: DropdownOption[] = [
 
 const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
+  render: (args) => {
+    const [current, setCurrent] = useState<number | undefined>(undefined);
+
+    return (
+      <Dropdown
+        {...args}
+        value={current}
+        onChange={(e) => setCurrent(Number(e.target.value))}
+      >
+        {TemplateOptions.map((option, index) => (
+          <option key={index} value={option.value}>
+            {option.label || option.value}
+          </option>
+        ))}
+      </Dropdown>
+    );
+  },
   args: {
     placeholder: 'Default Dropdown menu',
     label: 'Label',
     helperText: '',
     error: false,
     required: false,
-    width: 300,
-    options: TemplateOptions,
-    variant: 'filled',
-  },
-
-  parameters: {
-    design: [
-      {
-        name: 'light',
-        type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=691-10867&t=jaciSdrjiv4kZ1qN-4',
-      },
-      {
-        name: 'dark',
-        type: 'figma',
-        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-77602&t=jaciSdrjiv4kZ1qN-4',
-      },
-    ],
-  },
-};
-export default meta;
-
-type Story = StoryObj<typeof Dropdown>;
-
-/**
- * FIlled Dropdoen menu
- */
-export const Filled: Story = {
-  render: (args) => {
-    const [current, setCurrent] = useState<number | undefined>(undefined);
-    const { options, ...props } = args;
-
-    return (
-      <Dropdown
-        {...props}
-        options={options}
-        value={current}
-        onChange={(e) => setCurrent(Number(e.target.value))}
-      />
-    );
-  },
-};
-
-/**
- * Outlined Dropdown menu
- */
-export const Outlined: Story = {
-  args: {
     variant: 'outlined',
+    style: {
+      width: pxToRem(300),
+    },
   },
 
   parameters: {
@@ -88,6 +60,14 @@ export const Outlined: Story = {
     ],
   },
 };
+export default meta;
+
+type Story = StoryObj<typeof Dropdown>;
+
+/**
+ * FIlled Dropdoen menu
+ */
+export const Outlined: Story = {};
 
 /**
  * Dropdown menu with error
@@ -149,5 +129,28 @@ export const ChangeValueTest: Story = {
     await userEvent.click(canvas.getByDisplayValue('Two'));
     fireEvent.change(canvas.getByTestId('dropdown'), { target: { value: 1 } });
     await userEvent.click(canvas.getByDisplayValue('One'));
+  },
+};
+
+/**
+ * Outlined Dropdown menu
+ */
+export const Filled: Story = {
+  args: {
+    variant: 'outlined',
+  },
+  parameters: {
+    design: [
+      {
+        name: 'light',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=691-10867&t=jaciSdrjiv4kZ1qN-4',
+      },
+      {
+        name: 'dark',
+        type: 'figma',
+        url: 'https://www.figma.com/file/qUvylGh5ubOWlpqlplVORt/%F0%9F%AA%81-Playground---IZ-Design-System?node-id=1416-77602&t=jaciSdrjiv4kZ1qN-4',
+      },
+    ],
   },
 };

@@ -8,7 +8,6 @@ import {
   generateRandomString,
   InputComponentBaseProps,
 } from '../../shared';
-import { Wrapper, WrapperProps } from '../Wrapper';
 import {
   FilledInputStyles,
   InputBaseProps,
@@ -18,9 +17,19 @@ import {
 } from '../Input';
 
 /**
+ * Base Select
+ * Popout error property
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const SelectBase = ({ error, ...restProps }: DropdownProps) => (
+  <select {...restProps} />
+);
+
+/**
  * Main component
  */
-const SelectBase = styled.select<InputBaseProps>`
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const StyledSelect = styled(SelectBase)`
   ${baseInputStyles};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   appearance: none;
@@ -31,14 +40,14 @@ const SelectBase = styled.select<InputBaseProps>`
 /**
  * Filled select
  */
-const FilledSelect = styled(SelectBase)`
+const FilledSelect = styled(StyledSelect)`
   ${FilledInputStyles};
 `;
 
 /**
  * Outlined select
  */
-const OutlinedSelect = styled(SelectBase)`
+const OutlinedSelect = styled(StyledSelect)`
   ${OutlinedInputStyles}
 `;
 
@@ -49,7 +58,6 @@ const SelectInputWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
 `;
 
 /**
@@ -97,8 +105,7 @@ type SelectHTMLAttributes = Omit<
 export interface DropdownProps
   extends InputComponentBaseProps<HTMLSelectElement>,
     InputBaseProps,
-    SelectHTMLAttributes,
-    WrapperProps {
+    SelectHTMLAttributes {
   /**
    * Controlled input value
    */
@@ -107,7 +114,7 @@ export interface DropdownProps
   /**
    * Dropdown options
    */
-  options: DropdownOption[];
+  children: React.ReactNode;
 }
 
 /**
@@ -120,11 +127,9 @@ export const Dropdown = ({
   disabled = false,
   error = false,
   required = false,
-  margin,
-  width,
-  options,
   endIcon,
   variant = 'outlined',
+  children,
   ...restProps
 }: DropdownProps) => {
   let SelectComponent;
@@ -141,36 +146,30 @@ export const Dropdown = ({
   const componentId = id ?? generateRandomString(5);
 
   return (
-    <Wrapper margin={margin} width={width}>
-      <InputWrapper
-        id={componentId}
-        label={label}
-        helperText={helperText}
-        disabled={disabled}
-        error={error}
-        required={required}
-      >
-        <SelectInputWrapper>
-          <DropdownArrow disabled={disabled} />
-          <SelectComponent
-            disabled={disabled}
-            error={error}
-            required={required}
-            id={`select-${componentId}`}
-            aria-labelledby={label && `label-${componentId}`}
-            aria-describedby={helperText && `helper-${componentId}`}
-            data-testid='dropdown'
-            {...restProps}
-          >
-            {options.map((option, index) => (
-              <DropdownOption key={index} value={option.value}>
-                {option.label || option.value}
-              </DropdownOption>
-            ))}
-          </SelectComponent>
-        </SelectInputWrapper>
-        {endIcon}
-      </InputWrapper>
-    </Wrapper>
+    <InputWrapper
+      id={componentId}
+      label={label}
+      helperText={helperText}
+      disabled={disabled}
+      error={error}
+      required={required}
+    >
+      <SelectInputWrapper>
+        <DropdownArrow disabled={disabled} />
+        <SelectComponent
+          disabled={disabled}
+          error={error}
+          required={required}
+          id={`select-${componentId}`}
+          aria-labelledby={label && `label-${componentId}`}
+          aria-describedby={helperText && `helper-${componentId}`}
+          data-testid='dropdown'
+          {...restProps}
+        >
+          {children}
+        </SelectComponent>
+      </SelectInputWrapper>
+      {endIcon}
+    </InputWrapper>
   );
 };

@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { DatePicker } from './DatePicker';
+import { pxToRem } from '../../shared';
 
 const meta: Meta<typeof DatePicker> = {
   component: DatePicker,
@@ -8,7 +9,6 @@ const meta: Meta<typeof DatePicker> = {
   },
   args: {
     label: 'Label',
-    width: 300,
     placeholder: 'Default input',
     helperText: 'Helper text',
     variant: 'filled',
@@ -16,6 +16,9 @@ const meta: Meta<typeof DatePicker> = {
     error: false,
     readOnly: false,
     required: false,
+    style: {
+      width: pxToRem(300),
+    },
   },
   parameters: {
     design: [
