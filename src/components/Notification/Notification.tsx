@@ -175,67 +175,73 @@ const NotificationWrapper = styled.div`
  * @param props Notification props
  * @returns Notification component
  */
-export const Notification = ({
-  title,
-  message,
-  notificationSeverity = 'default',
-  showLoadingIndicator = false,
-  closeButtonAriaLabel,
-  duration,
-  deleteNotification,
-  index,
-  ...restProps
-}: NotificationProps) => {
-  const [hidden, setHidden] = React.useState(false);
+export const Notification = React.forwardRef(
+  (
+    {
+      title,
+      message,
+      notificationSeverity = 'default',
+      showLoadingIndicator = false,
+      closeButtonAriaLabel,
+      duration,
+      deleteNotification,
+      index,
+      ...restProps
+    }: NotificationProps,
+    ref: NotificationProps['ref']
+  ) => {
+    const [hidden, setHidden] = React.useState(false);
 
-  duration &&
-    setTimeout(() => {
-      setHidden(true);
-      deleteNotification && deleteNotification(index || 0);
-    }, duration);
+    duration &&
+      setTimeout(() => {
+        setHidden(true);
+        deleteNotification && deleteNotification(index || 0);
+      }, duration);
 
-  return (
-    !hidden && (
-      <div
-        style={{
-          display: 'inline-block',
-          minWidth: notificationMinWidth,
-        }}
-        {...restProps}
-      >
-        <NotificationWrapper>
-          <NotificationIcon
-            notificationSeverity={notificationSeverity}
-          ></NotificationIcon>
-          <NotificationMessageWrapper>
-            <NotificationTitleParagraph>{title}</NotificationTitleParagraph>
-            {message && (
-              <NotificationMessageParagraph>
-                {message}
-              </NotificationMessageParagraph>
-            )}
-          </NotificationMessageWrapper>
-          <NotificationCloseButtonWrapper>
-            <IconButton
-              onClick={() => {
-                setHidden(true);
-                deleteNotification && deleteNotification(index || 0);
-              }}
-              aria-label={
-                closeButtonAriaLabel || 'Close button for a notification'
-              }
-              size='large'
-            >
-              <MdClose />
-            </IconButton>
-          </NotificationCloseButtonWrapper>
-        </NotificationWrapper>
-        {showLoadingIndicator && (
-          <LinearLoadingIndicator
-            indicatorSeverity={notificationSeverity}
-          ></LinearLoadingIndicator>
-        )}
-      </div>
-    )
-  );
-};
+    return (
+      !hidden && (
+        <div
+          style={{
+            display: 'inline-block',
+            minWidth: notificationMinWidth,
+          }}
+          ref={ref}
+          {...restProps}
+        >
+          <NotificationWrapper>
+            <NotificationIcon
+              notificationSeverity={notificationSeverity}
+            ></NotificationIcon>
+            <NotificationMessageWrapper>
+              <NotificationTitleParagraph>{title}</NotificationTitleParagraph>
+              {message && (
+                <NotificationMessageParagraph>
+                  {message}
+                </NotificationMessageParagraph>
+              )}
+            </NotificationMessageWrapper>
+            <NotificationCloseButtonWrapper>
+              <IconButton
+                onClick={() => {
+                  setHidden(true);
+                  deleteNotification && deleteNotification(index || 0);
+                }}
+                aria-label={
+                  closeButtonAriaLabel || 'Close button for a notification'
+                }
+                size='large'
+              >
+                <MdClose />
+              </IconButton>
+            </NotificationCloseButtonWrapper>
+          </NotificationWrapper>
+          {showLoadingIndicator && (
+            <LinearLoadingIndicator
+              indicatorSeverity={notificationSeverity}
+            ></LinearLoadingIndicator>
+          )}
+        </div>
+      )
+    );
+  }
+);

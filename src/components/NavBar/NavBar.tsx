@@ -8,7 +8,7 @@ import {
 import styled, { css } from 'styled-components';
 import { variant } from 'styled-system';
 
-export interface NavBarProps extends ComponentBaseProps<HTMLDivElement> {
+export interface NavBarProps extends ComponentBaseProps<HTMLElement> {
   /**
    * Navbar size
    */
@@ -60,7 +60,7 @@ const calculateSizes = () => {
  * Pop out size property
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Bar = styled(({ size, ...restProps }: NavBarProps) => (
+const StyledNavBar = styled(({ size, ...restProps }: NavBarProps) => (
   <nav {...restProps} />
 ))`
   ${calculateSizes};
@@ -85,22 +85,20 @@ const NavMenu = styled.div<NavBarProps>`
   margin-right: ${pxToRem(16)};
 `;
 
-export const NavBar = ({
-  id,
-  size = 'small',
-  children,
-  menu,
-  logo,
-  ...restProps
-}: NavBarProps) => {
-  // Use ID form props or create randomized string
-  const componentId = id ?? generateRandomString(5);
+export const NavBar = React.forwardRef(
+  (
+    { id, size = 'small', children, menu, logo, ...restProps }: NavBarProps,
+    ref: NavBarProps['ref']
+  ) => {
+    // Use ID form props or create randomized string
+    const componentId = id ?? generateRandomString(5);
 
-  return (
-    <Bar size={size} {...restProps} id={componentId}>
-      <NavLogo>{logo}</NavLogo>
-      {children}
-      <NavMenu>{menu}</NavMenu>
-    </Bar>
-  );
-};
+    return (
+      <StyledNavBar size={size} ref={ref} {...restProps} id={componentId}>
+        <NavLogo>{logo}</NavLogo>
+        {children}
+        <NavMenu>{menu}</NavMenu>
+      </StyledNavBar>
+    );
+  }
+);

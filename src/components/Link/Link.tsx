@@ -45,11 +45,13 @@ const InnerLink = styled.a<LinkProps>`
  * @param props Link props
  * @returns Link component
  */
-export const Link = ({ endIcon, children, ...restProps }: LinkProps) => {
-  return (
-    <InnerLink {...restProps}>
-      {children}
-      {endIcon}
-    </InnerLink>
-  );
-};
+export const Link = React.forwardRef(
+  ({ endIcon, children, ...restProps }: LinkProps, ref: LinkProps['ref']) => {
+    return (
+      <InnerLink ref={ref} {...restProps}>
+        {children}
+        {endIcon}
+      </InnerLink>
+    );
+  }
+);

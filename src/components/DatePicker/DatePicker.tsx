@@ -43,11 +43,18 @@ export interface DatePickerProps
 /**
  * DatePicker component
  */
-export const DatePicker = ({ id, ...restProps }: DatePickerProps) => {
-  // Use Id form props or create randomized string
-  const componentId = id ?? generateRandomString(5);
+export const DatePicker = React.forwardRef(
+  ({ id, ...restProps }: DatePickerProps, ref: DatePickerProps['ref']) => {
+    // Use Id form props or create randomized string
+    const componentId = id ?? generateRandomString(5);
 
-  return (
-    <Input id={`datepicker-${componentId}`} type={'date'} {...restProps} />
-  );
-};
+    return (
+      <Input
+        id={`datepicker-${componentId}`}
+        type={'date'}
+        ref={ref}
+        {...restProps}
+      />
+    );
+  }
+);

@@ -92,22 +92,21 @@ const SidebarContentWrapper = styled.div<SidebarProps>`
 /**
  * Exported sidebar component
  */
-export const Sidebar = ({
-  id,
-  headerContent,
-  sidebarContent,
-  overlay,
-  ...restProps
-}: SidebarProps) => {
-  const componentId = id ?? generateRandomString(5);
+export const Sidebar = React.forwardRef(
+  (
+    { id, headerContent, sidebarContent, overlay, ...restProps }: SidebarProps,
+    ref: SidebarProps['ref']
+  ) => {
+    const componentId = id ?? generateRandomString(5);
 
-  return (
-    <SidebarWrapper id={componentId} {...restProps}>
-      {overlay && <SidebarOverlay />}
-      <SidebarBody>
-        <SidebarHeader>{headerContent}</SidebarHeader>
-        <SidebarContentWrapper>{sidebarContent}</SidebarContentWrapper>
-      </SidebarBody>
-    </SidebarWrapper>
-  );
-};
+    return (
+      <SidebarWrapper id={componentId} ref={ref} {...restProps}>
+        {overlay && <SidebarOverlay />}
+        <SidebarBody>
+          <SidebarHeader>{headerContent}</SidebarHeader>
+          <SidebarContentWrapper>{sidebarContent}</SidebarContentWrapper>
+        </SidebarBody>
+      </SidebarWrapper>
+    );
+  }
+);

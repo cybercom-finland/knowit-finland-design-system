@@ -33,45 +33,53 @@ const NotificationCarouselItemWrapper = styled.div`
  * @param props NotificationCarousel props
  * @returns NotificationCarousel component
  */
-export const NotificationCarousel = ({
-  carouselItems,
-  maxNotifications,
-  ...restProps
-}: NotificationCarouselProps) => {
-  const [carouselItemsState, setCarouselItemsState] = useState(
-    carouselItems || []
-  );
+export const NotificationCarousel = React.forwardRef(
+  (
+    {
+      carouselItems,
+      maxNotifications,
+      ...restProps
+    }: NotificationCarouselProps,
+    ref: NotificationCarouselProps['ref']
+  ) => {
+    const [carouselItemsState, setCarouselItemsState] = useState(
+      carouselItems || []
+    );
 
-  return (
-    <div
-      style={{
-        overflow: 'hidden',
-        pointerEvents: 'none',
-      }}
-      {...restProps}
-    >
-      {carouselItemsState
-        .filter((_, index) =>
-          maxNotifications ? index < maxNotifications : true
-        )
-        .map((item, index) => (
-          <NotificationCarouselItemWrapper
-            key={item.id || generateRandomString(5)}
-          >
-            <Notification
-              title={item.title}
-              message={item.message}
-              closeButtonAriaLabel={item.closeButtonAriaLabel}
-              duration={item.duration}
-              index={index}
-              deleteNotification={(deleteIndex) => {
-                setCarouselItemsState(
-                  carouselItemsState.filter((_, index) => index !== deleteIndex)
-                );
-              }}
-            />
-          </NotificationCarouselItemWrapper>
-        ))}
-    </div>
-  );
-};
+    return (
+      <div
+        style={{
+          overflow: 'hidden',
+          pointerEvents: 'none',
+        }}
+        ref={ref}
+        {...restProps}
+      >
+        {carouselItemsState
+          .filter((_, index) =>
+            maxNotifications ? index < maxNotifications : true
+          )
+          .map((item, index) => (
+            <NotificationCarouselItemWrapper
+              key={item.id || generateRandomString(5)}
+            >
+              <Notification
+                title={item.title}
+                message={item.message}
+                closeButtonAriaLabel={item.closeButtonAriaLabel}
+                duration={item.duration}
+                index={index}
+                deleteNotification={(deleteIndex) => {
+                  setCarouselItemsState(
+                    carouselItemsState.filter(
+                      (_, index) => index !== deleteIndex
+                    )
+                  );
+                }}
+              />
+            </NotificationCarouselItemWrapper>
+          ))}
+      </div>
+    );
+  }
+);

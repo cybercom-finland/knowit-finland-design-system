@@ -120,56 +120,62 @@ export interface DropdownProps
 /**
  * Dropdown component
  */
-export const Dropdown = ({
-  id,
-  label,
-  helperText,
-  disabled = false,
-  error = false,
-  required = false,
-  endIcon,
-  variant = 'outlined',
-  children,
-  ...restProps
-}: DropdownProps) => {
-  let SelectComponent;
-  switch (variant) {
-    case 'filled':
-      SelectComponent = FilledSelect;
-      break;
-    case 'outlined':
-      SelectComponent = OutlinedSelect;
-      break;
+export const Dropdown = React.forwardRef(
+  (
+    {
+      id,
+      label,
+      helperText,
+      disabled = false,
+      error = false,
+      required = false,
+      endIcon,
+      variant = 'outlined',
+      children,
+      ...restProps
+    }: DropdownProps,
+    ref: DropdownProps['ref']
+  ) => {
+    let SelectComponent;
+    switch (variant) {
+      case 'filled':
+        SelectComponent = FilledSelect;
+        break;
+      case 'outlined':
+        SelectComponent = OutlinedSelect;
+        break;
+    }
+
+    // randomized part for id to avoid duplicates with multiple inputs
+    const componentId = id ?? generateRandomString(5);
+
+    return (
+      <InputWrapper
+        id={componentId}
+        label={label}
+        helperText={helperText}
+        disabled={disabled}
+        error={error}
+        required={required}
+      >
+        <SelectInputWrapper>
+          <DropdownArrow disabled={disabled} />
+          <SelectComponent
+            disabled={disabled}
+            error={error}
+            required={required}
+            id={`select-${componentId}`}
+            aria-labelledby={label && `label-${componentId}`}
+            aria-describedby={helperText && `helper-${componentId}`}
+            data-testid='dropdown'
+            ref={ref}
+            {...restProps}
+          >
+            {children}
+          </SelectComponent>
+        </SelectInputWrapper>
+        {endIcon}
+      </InputWrapper>
+    );
   }
-
-  // randomized part for id to avoid duplicates with multiple inputs
-  const componentId = id ?? generateRandomString(5);
-
-  return (
-    <InputWrapper
-      id={componentId}
-      label={label}
-      helperText={helperText}
-      disabled={disabled}
-      error={error}
-      required={required}
-    >
-      <SelectInputWrapper>
-        <DropdownArrow disabled={disabled} />
-        <SelectComponent
-          disabled={disabled}
-          error={error}
-          required={required}
-          id={`select-${componentId}`}
-          aria-labelledby={label && `label-${componentId}`}
-          aria-describedby={helperText && `helper-${componentId}`}
-          data-testid='dropdown'
-          {...restProps}
-        >
-          {children}
-        </SelectComponent>
-      </SelectInputWrapper>
-      {endIcon}
-    </InputWrapper>
-  );
-};
+);

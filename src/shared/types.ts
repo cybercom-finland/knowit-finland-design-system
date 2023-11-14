@@ -46,8 +46,7 @@ export interface InputComponentBaseProps<T>
 /**
  * Base props for loading indicator
  */
-export interface LoadingIndicatorBaseProps
-  extends ComponentBaseProps<HTMLSpanElement> {
+export interface LoadingIndicatorBaseProps {
   /**
    * Progress (0-100)
    */

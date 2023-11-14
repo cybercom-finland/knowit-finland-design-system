@@ -73,26 +73,25 @@ const FieldGroupComponent = styled.div<FormGroupProps>`
 /**
  * Form group component
  */
-export const FormGroup = ({
-  id,
-  label,
-  helperText,
-  direction,
-  ...restProps
-}: FormGroupProps) => {
-  // Use ID form props or create randomized string
-  const componentId = id ?? generateRandomString(5);
+export const FormGroup = React.forwardRef(
+  (
+    { id, label, helperText, direction, ...restProps }: FormGroupProps,
+    ref: FormGroupProps['ref']
+  ) => {
+    // Use ID form props or create randomized string
+    const componentId = id ?? generateRandomString(5);
 
-  return (
-    <FormGroupWrapper>
-      <Label>{label}</Label>
-      <HelperText>{helperText}</HelperText>
-      <FieldGroupComponent
-        direction={direction}
-        id={componentId}
-        data-testid='formGroup'
-        {...restProps}
-      />
-    </FormGroupWrapper>
-  );
-};
+    return (
+      <FormGroupWrapper ref={ref}>
+        <Label>{label}</Label>
+        <HelperText>{helperText}</HelperText>
+        <FieldGroupComponent
+          direction={direction}
+          id={componentId}
+          data-testid='formGroup'
+          {...restProps}
+        />
+      </FormGroupWrapper>
+    );
+  }
+);

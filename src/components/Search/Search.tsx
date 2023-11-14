@@ -50,16 +50,19 @@ export interface SearchProps
 /**
  * Exported component
  */
-export const Search = ({ id, ...restProps }: SearchProps) => {
-  // Use Id form props or create randomized string
-  const componentId = id ?? generateRandomString(5);
+export const Search = React.forwardRef(
+  ({ id, ...restProps }: SearchProps, ref: SearchProps['ref']) => {
+    // Use Id form props or create randomized string
+    const componentId = id ?? generateRandomString(5);
 
-  return (
-    <Input
-      id={`search-${componentId}`}
-      endIcon={<MdSearch size={pxToRem(24)} />}
-      type={'search'}
-      {...restProps}
-    />
-  );
-};
+    return (
+      <Input
+        id={`search-${componentId}`}
+        endIcon={<MdSearch size={pxToRem(24)} />}
+        type={'search'}
+        ref={ref}
+        {...restProps}
+      />
+    );
+  }
+);

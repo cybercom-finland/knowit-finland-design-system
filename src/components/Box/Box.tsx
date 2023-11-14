@@ -61,14 +61,15 @@ const InternalBox = styled(({ variant, ...restProps }: BoxProps) => (
 /**
  * Box component
  */
-export const Box = ({
-  variant = 'rectangle',
-  children,
-  ...restProps
-}: BoxProps) => {
-  return (
-    <InternalBox variant={variant} {...restProps}>
-      {children}
-    </InternalBox>
-  );
-};
+export const Box = React.forwardRef(
+  (
+    { variant = 'rectangle', children, ...restProps }: BoxProps,
+    ref: BoxProps['ref']
+  ) => {
+    return (
+      <InternalBox variant={variant} ref={ref} {...restProps}>
+        {children}
+      </InternalBox>
+    );
+  }
+);
