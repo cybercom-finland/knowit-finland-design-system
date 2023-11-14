@@ -56,11 +56,12 @@ const InnerHelperText = styled(({ error, ...props }: HelperTextProps) => (
  * @param props Helper text props
  * @returns Helper text component
  */
-export const HelperText = ({
-  disabled = false,
-  error = false,
-  ...restProps
-}: HelperTextProps) => {
-  const props = { disabled, error, ...restProps };
-  return <InnerHelperText {...props} />;
-};
+export const HelperText = React.forwardRef(
+  (
+    { disabled = false, error = false, ...restProps }: HelperTextProps,
+    ref: HelperTextProps['ref']
+  ) => {
+    const props = { disabled, error, ...restProps };
+    return <InnerHelperText ref={ref} {...props} />;
+  }
+);

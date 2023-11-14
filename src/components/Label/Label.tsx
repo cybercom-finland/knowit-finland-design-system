@@ -70,22 +70,27 @@ const InnerLabel = styled(({ error, ...restProps }: LabelProps) => (
  * @param props Label props
  * @returns Label component
  */
-export const Label = ({
-  disabled = false,
-  error = false,
-  required = false,
-  ...restProps
-}: LabelProps) => {
-  const props = { disabled, error, required, ...restProps };
-  return <InnerLabel {...props} />;
-};
+export const Label = React.forwardRef(
+  (
+    {
+      disabled = false,
+      error = false,
+      required = false,
+      ...restProps
+    }: LabelProps,
+    ref: LabelProps['ref']
+  ) => {
+    const props = { disabled, error, required, ...restProps };
+    return <InnerLabel ref={ref} {...props} />;
+  }
+);
 
 const formLabelDimension = {
   contentSpacing: spacing(1),
 };
 
 /**
- * Label component wrapper for components that need pointer events.
+ * Label component wrapper for components that needs pointer events.
  * E.g. checkbox and radio button
  */
 export const FormLabel = styled(Label)`

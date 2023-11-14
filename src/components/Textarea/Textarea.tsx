@@ -46,49 +46,55 @@ export type TextareaProps = InputComponentBaseProps<HTMLTextAreaElement> &
 /**
  * Textarea component
  */
-export const Textarea = ({
-  id,
-  variant = 'outlined',
-  required = false,
-  label,
-  helperText,
-  disabled = false,
-  error = false,
-  endIcon,
-  ...restProps
-}: TextareaProps) => {
-  let TextareaComponent;
-  switch (variant) {
-    case 'filled':
-      TextareaComponent = FilledTextarea;
-      break;
-    case 'outlined':
-      TextareaComponent = OutlinedTextarea;
-      break;
-  }
+export const Textarea = React.forwardRef(
+  (
+    {
+      id,
+      variant = 'outlined',
+      required = false,
+      label,
+      helperText,
+      disabled = false,
+      error = false,
+      endIcon,
+      ...restProps
+    }: TextareaProps,
+    ref: TextareaProps['ref']
+  ) => {
+    let TextareaComponent;
+    switch (variant) {
+      case 'filled':
+        TextareaComponent = FilledTextarea;
+        break;
+      case 'outlined':
+        TextareaComponent = OutlinedTextarea;
+        break;
+    }
 
-  // Use Id form props or create randomized string
-  const componentId = id ?? generateRandomString(5);
+    // Use Id form props or create randomized string
+    const componentId = id ?? generateRandomString(5);
 
-  return (
-    <InputWrapper
-      id={componentId}
-      label={label}
-      helperText={helperText}
-      disabled={disabled}
-      error={error}
-      required={required}
-    >
-      <TextareaComponent
-        required={required}
+    return (
+      <InputWrapper
+        id={componentId}
+        label={label}
+        helperText={helperText}
         disabled={disabled}
         error={error}
-        id={`textarea-${componentId}`}
-        aria-labelledby={label && `label-${componentId}`}
-        aria-describedby={helperText && `helper-${componentId}`}
-        {...restProps}
-      />
-      {endIcon}
-    </InputWrapper>
-  );
-};
+        required={required}
+      >
+        <TextareaComponent
+          required={required}
+          disabled={disabled}
+          error={error}
+          id={`textarea-${componentId}`}
+          aria-labelledby={label && `label-${componentId}`}
+          aria-describedby={helperText && `helper-${componentId}`}
+          ref={ref}
+          {...restProps}
+        />
+        {endIcon}
+      </InputWrapper>
+    );
+  }
+);

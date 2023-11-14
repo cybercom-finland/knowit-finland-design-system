@@ -89,22 +89,27 @@ const CardContent = styled.div<CardProps>`
 /**
  * Card component
  */
-export const Card = ({
-  variant = 'rectangle',
-  header,
-  category,
-  title,
-  content,
-  ...restProps
-}: CardProps) => {
-  return (
-    <Box variant={variant} {...restProps}>
-      {header}
-      <CardCategory>{category}</CardCategory>
-      <CardTitle>
-        <h4>{title}</h4>
-      </CardTitle>
-      <CardContent>{content}</CardContent>
-    </Box>
-  );
-};
+export const Card = React.forwardRef(
+  (
+    {
+      variant = 'rectangle',
+      header,
+      category,
+      title,
+      content,
+      ...restProps
+    }: CardProps,
+    ref: CardProps['ref']
+  ) => {
+    return (
+      <Box variant={variant} ref={ref} {...restProps}>
+        {header}
+        <CardCategory>{category}</CardCategory>
+        <CardTitle>
+          <h4>{title}</h4>
+        </CardTitle>
+        <CardContent>{content}</CardContent>
+      </Box>
+    );
+  }
+);

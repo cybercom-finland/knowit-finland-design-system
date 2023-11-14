@@ -7,7 +7,7 @@ import {
 } from '../../shared';
 import styled from 'styled-components';
 
-export interface BreadcrumbProps extends ComponentBaseProps<HTMLOListElement> {
+export interface BreadcrumbProps extends ComponentBaseProps<HTMLElement> {
   /**
    * Children
    */
@@ -60,33 +60,33 @@ const BreadcrumbLi = styled.li<BreadcrumbProps>`
 /**
  * Exported breadcrumbs component
  */
-export const Breadcrumb = ({
-  id,
-  children,
-  homeLink,
-  ...restProps
-}: BreadcrumbProps) => {
-  const componentId = id ?? generateRandomString(5);
-  const renderChildren = React.Children.map(children, (child, index) => {
-    if (React.isValidElement(child)) {
-      const elementChild: React.ReactElement = child;
-      return (
-        <>
-          <BreadcrumbLi>{elementChild}</BreadcrumbLi>
-          {index < React.Children.count(children) - 1 && (
-            <BreadcrumbSpacer aria-hidden> / </BreadcrumbSpacer>
-          )}
-        </>
-      );
-    }
-    return null;
-  });
-  return (
-    <nav aria-label={restProps['aria-label']}>
-      <BreadcrumbWrapper id={componentId} {...restProps}>
-        {homeLink && <HomeLinkWrapper>{homeLink}</HomeLinkWrapper>}
-        {renderChildren}
-      </BreadcrumbWrapper>
-    </nav>
-  );
-};
+export const Breadcrumb = React.forwardRef(
+  (
+    { id, children, homeLink, ...restProps }: BreadcrumbProps,
+    ref: BreadcrumbProps['ref']
+  ) => {
+    const componentId = id ?? generateRandomString(5);
+    const renderChildren = React.Children.map(children, (child, index) => {
+      if (React.isValidElement(child)) {
+        const elementChild: React.ReactElement = child;
+        return (
+          <>
+            <BreadcrumbLi>{elementChild}</BreadcrumbLi>
+            {index < React.Children.count(children) - 1 && (
+              <BreadcrumbSpacer aria-hidden> / </BreadcrumbSpacer>
+            )}
+          </>
+        );
+      }
+      return null;
+    });
+    return (
+      <nav aria-label={restProps['aria-label']} ref={ref}>
+        <BreadcrumbWrapper id={componentId} {...restProps}>
+          {homeLink && <HomeLinkWrapper>{homeLink}</HomeLinkWrapper>}
+          {renderChildren}
+        </BreadcrumbWrapper>
+      </nav>
+    );
+  }
+);

@@ -9,7 +9,9 @@ import { listItemPadding } from './styles';
  * Extends html li attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#attributes
  */
-export interface ListItemProps extends ComponentBaseProps<HTMLLIElement> {
+export interface ListItemProps
+  extends ComponentBaseProps<HTMLLIElement>,
+    React.HTMLAttributes<HTMLLIElement> {
   /**
    * Text of the list item
    */
@@ -93,53 +95,61 @@ export const ListWrapper = styled.ul`
  * @param props ListItem props
  * @returns ListItem component
  */
-export const ListItem = ({
-  text,
-  expandable,
-  expanded,
-  children,
-}: ListItemProps) => {
-  const [expandedState, setExpandedState] = React.useState(expanded);
+export const ListItem = React.forwardRef(
+  (
+    { text, expandable, expanded, children }: ListItemProps,
+    ref: ListItemProps['ref']
+  ) => {
+    const [expandedState, setExpandedState] = React.useState(expanded);
 
-  return (
-    <>
-      <ListItemWrapper
-        onClick={() => {
-          expandable && setExpandedState(!expandedState);
-        }}
-        onKeyDown={(e) => {
-          if (expandable && (e.code === 'Enter' || e.code === 'Space')) {
-            setExpandedState(!expandedState);
-          }
-        }}
-        tabIndex={0}
-      >
-        <TextWrapper>{text}</TextWrapper>
-        {expandable && (
-          <ExpandIconWrapper>
-            {expandedState ? <MdOutlineExpandLess /> : <MdOutlineExpandMore />}
-          </ExpandIconWrapper>
+    return (
+      <>
+        <ListItemWrapper
+          ref={ref}
+          onClick={() => {
+            expandable && setExpandedState(!expandedState);
+          }}
+          onKeyDown={(e) => {
+            if (expandable && (e.code === 'Enter' || e.code === 'Space')) {
+              setExpandedState(!expandedState);
+            }
+          }}
+          tabIndex={0}
+        >
+          <TextWrapper>{text}</TextWrapper>
+          {expandable && (
+            <ExpandIconWrapper>
+              {expandedState ? (
+                <MdOutlineExpandLess />
+              ) : (
+                <MdOutlineExpandMore />
+              )}
+            </ExpandIconWrapper>
+          )}
+        </ListItemWrapper>
+        {expandedState && (
+          <li>
+            <ListSubItemWrapper>{children}</ListSubItemWrapper>
+          </li>
         )}
-      </ListItemWrapper>
-      {expandedState && (
-        <li>
-          <ListSubItemWrapper>{children}</ListSubItemWrapper>
-        </li>
-      )}
-    </>
-  );
-};
+      </>
+    );
+  }
+);
 
 /**
  * ListProps
  * Extends html ul attributes
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul
  */
-type ListProps = React.HTMLAttributes<HTMLDivElement>;
+type ListProps = ComponentBaseProps<HTMLUListElement> &
+  React.HTMLAttributes<HTMLUListElement>;
 
 /**
  * List component
  */
-export const List = ({ children }: ListProps) => {
-  return <ListWrapper>{children}</ListWrapper>;
-};
+export const List = React.forwardRef(
+  ({ children }: ListProps, ref: ListProps['ref']) => {
+    return <ListWrapper ref={ref}>{children}</ListWrapper>;
+  }
+);

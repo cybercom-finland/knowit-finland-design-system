@@ -84,23 +84,23 @@ const AccordionArrow = styled.div<AccordionProps>`
 /**
  * Accordion component
  */
-export const Accordion = ({
-  children,
-  title,
-  titleSize = 'h2',
-  ...restProps
-}: AccordionProps) => {
-  const [accordionIsOpen, setAccordionOpen] = useState(false);
-  return (
-    <InternalAccordion {...restProps}>
-      <AccordionTitle onClick={() => setAccordionOpen(!accordionIsOpen)}>
-        <Typography variant={titleSize}>{title}</Typography>
-        <AccordionArrow>
-          {accordionIsOpen && <MdKeyboardArrowUp />}
-          {!accordionIsOpen && <MdKeyboardArrowDown />}
-        </AccordionArrow>
-      </AccordionTitle>
-      {accordionIsOpen && <AccordionContent>{children}</AccordionContent>}
-    </InternalAccordion>
-  );
-};
+export const Accordion = React.forwardRef(
+  (
+    { children, title, titleSize = 'h2', ...restProps }: AccordionProps,
+    ref: AccordionProps['ref']
+  ) => {
+    const [accordionIsOpen, setAccordionOpen] = useState(false);
+    return (
+      <InternalAccordion ref={ref} {...restProps}>
+        <AccordionTitle onClick={() => setAccordionOpen(!accordionIsOpen)}>
+          <Typography variant={titleSize}>{title}</Typography>
+          <AccordionArrow>
+            {accordionIsOpen && <MdKeyboardArrowUp />}
+            {!accordionIsOpen && <MdKeyboardArrowDown />}
+          </AccordionArrow>
+        </AccordionTitle>
+        {accordionIsOpen && <AccordionContent>{children}</AccordionContent>}
+      </InternalAccordion>
+    );
+  }
+);

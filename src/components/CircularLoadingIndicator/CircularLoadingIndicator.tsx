@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ComponentBaseProps,
   generateRandomString,
   LoadingIndicatorBaseProps,
   pxToRem,
@@ -11,8 +12,9 @@ import { LoadingIndicatorColor } from '../LinearLoadingIndicator/styles';
 /**
  * Linear loading indicator component properties
  */
-export interface CircularLoadingIndicatorBaseProps
-  extends LoadingIndicatorBaseProps {
+export interface CircularLoadingIndicatorProps
+  extends LoadingIndicatorBaseProps,
+    ComponentBaseProps<SVGSVGElement> {
   /**
    * Indicator Size
    */
@@ -71,8 +73,8 @@ const IndicatorBase = styled.svg`
  * Indicator circle with animation and color
  */
 const IndicatorCircle = styled.circle<{
-  $indicatorSeverity: CircularLoadingIndicatorBaseProps['indicatorSeverity'];
-  $determinate: CircularLoadingIndicatorBaseProps['determinate'];
+  $indicatorSeverity: CircularLoadingIndicatorProps['indicatorSeverity'];
+  $determinate: CircularLoadingIndicatorProps['determinate'];
 }>`
   transform-origin: center;
   stroke: ${(props) =>
@@ -94,45 +96,51 @@ const IndicatorCircle = styled.circle<{
 /**
  * CircularLoadingIndicator component
  */
-export const CircularLoadingIndicator = ({
-  id,
-  progress = 0,
-  determinate = false,
-  indicatorSeverity,
-  size = 'medium',
-  title,
-}: CircularLoadingIndicatorBaseProps) => {
-  /**
-   * Math for circle
-   */
-  const isDeterminate = !determinate ? 50 : ProgressCap(progress);
-  const componentId = id ?? generateRandomString(5);
-  const calculatedSize = CalculateSize(size);
-  const center = calculatedSize.size / 2;
-  const radius = center - calculatedSize.width;
-  const dashArray = 2 * Math.PI * radius;
-  const dashOffset = dashArray * ((100 - isDeterminate) / 100);
+export const CircularLoadingIndicator = React.forwardRef(
+  (
+    {
+      id,
+      progress = 0,
+      determinate = false,
+      indicatorSeverity,
+      size = 'medium',
+      title,
+    }: CircularLoadingIndicatorProps,
+    ref: CircularLoadingIndicatorProps['ref']
+  ) => {
+    /**
+     * Math for circle
+     */
+    const isDeterminate = !determinate ? 50 : ProgressCap(progress);
+    const componentId = id ?? generateRandomString(5);
+    const calculatedSize = CalculateSize(size);
+    const center = calculatedSize.size / 2;
+    const radius = center - calculatedSize.width;
+    const dashArray = 2 * Math.PI * radius;
+    const dashOffset = dashArray * ((100 - isDeterminate) / 100);
 
-  return (
-    <IndicatorBase
-      id={componentId}
-      width={calculatedSize.size}
-      height={calculatedSize.size}
-      viewBox={`0 0 ${calculatedSize.size} ${calculatedSize.size}`}
-      fill='none'
-    >
-      {title && <title>{title}</title>}
-      <IndicatorCircle
-        $determinate={determinate}
-        $indicatorSeverity={indicatorSeverity}
-        cx={pxToRem(center)}
-        cy={pxToRem(center)}
-        r={pxToRem(radius)}
-        fill='transparent'
-        strokeWidth={pxToRem(calculatedSize.width)}
-        strokeDasharray={pxToRem(dashArray)}
-        strokeDashoffset={pxToRem(dashOffset)}
-      ></IndicatorCircle>
-    </IndicatorBase>
-  );
-};
+    return (
+      <IndicatorBase
+        id={componentId}
+        width={calculatedSize.size}
+        height={calculatedSize.size}
+        viewBox={`0 0 ${calculatedSize.size} ${calculatedSize.size}`}
+        fill='none'
+        ref={ref}
+      >
+        {title && <title>{title}</title>}
+        <IndicatorCircle
+          $determinate={determinate}
+          $indicatorSeverity={indicatorSeverity}
+          cx={pxToRem(center)}
+          cy={pxToRem(center)}
+          r={pxToRem(radius)}
+          fill='transparent'
+          strokeWidth={pxToRem(calculatedSize.width)}
+          strokeDasharray={pxToRem(dashArray)}
+          strokeDashoffset={pxToRem(dashOffset)}
+        ></IndicatorCircle>
+      </IndicatorBase>
+    );
+  }
+);

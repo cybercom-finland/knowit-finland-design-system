@@ -95,31 +95,37 @@ const StyledBar = styled(Bar)`
 /**
  * LinearLoadingIndicator component
  */
-export const LinearLoadingIndicator = ({
-  progress = 0,
-  determinate = false,
-  indicatorSeverity = 'default',
-  ...restProps
-}: LinearLoadingIndicatorProps) => {
-  const ariaLabelText = determinate && progress ? `${progress}%` : '';
+export const LinearLoadingIndicator = React.forwardRef(
+  (
+    {
+      progress = 0,
+      determinate = false,
+      indicatorSeverity = 'default',
+      ...restProps
+    }: LinearLoadingIndicatorProps,
+    ref: LinearLoadingIndicatorProps['ref']
+  ) => {
+    const ariaLabelText = determinate && progress ? `${progress}%` : '';
 
-  return (
-    <Wrapper
-      height={linearLoadingIndicatorHeight}
-      style={{ display: 'flex' }}
-      {...restProps}
-    >
-      <BarBackground>
-        <StyledBar
-          indicatorSeverity={indicatorSeverity}
-          progress={progress}
-          determinate={determinate}
-          aria-label={ariaLabelText}
-          role='status'
-        >
-          &nbsp;
-        </StyledBar>
-      </BarBackground>
-    </Wrapper>
-  );
-};
+    return (
+      <Wrapper
+        height={linearLoadingIndicatorHeight}
+        style={{ display: 'flex' }}
+        ref={ref}
+        {...restProps}
+      >
+        <BarBackground>
+          <StyledBar
+            indicatorSeverity={indicatorSeverity}
+            progress={progress}
+            determinate={determinate}
+            aria-label={ariaLabelText}
+            role='status'
+          >
+            &nbsp;
+          </StyledBar>
+        </BarBackground>
+      </Wrapper>
+    );
+  }
+);

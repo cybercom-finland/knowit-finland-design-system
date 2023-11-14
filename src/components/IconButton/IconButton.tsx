@@ -87,13 +87,22 @@ const IconButtonWrapper = styled.button<IconButtonProps>`
 /**
  * Icon button component
  */
-export const IconButton = ({
-  children,
-  size = 'medium',
-  disabled = false,
-  ...restProps
-}: IconButtonProps) => {
-  const props = { size, disabled, ...restProps };
+export const IconButton = React.forwardRef(
+  (
+    {
+      children,
+      size = 'medium',
+      disabled = false,
+      ...restProps
+    }: IconButtonProps,
+    ref: IconButtonProps['ref']
+  ) => {
+    const props = { size, disabled, ...restProps };
 
-  return <IconButtonWrapper {...props}>{children}</IconButtonWrapper>;
-};
+    return (
+      <IconButtonWrapper ref={ref} {...props}>
+        {children}
+      </IconButtonWrapper>
+    );
+  }
+);

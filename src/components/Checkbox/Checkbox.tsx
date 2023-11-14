@@ -169,63 +169,69 @@ const NativeCheckbox = styled.input`
 /**
  * Checkbox component
  */
-export const Checkbox = ({
-  id,
-  label,
-  checked = false,
-  disabled = false,
-  indeterminate = false,
-  required = false,
-  size = 'large',
-  helperText,
-  onChange,
-  ...restProps
-}: CheckboxProps) => {
-  const [boxChecked, setChecked] = React.useState(false);
+export const Checkbox = React.forwardRef(
+  (
+    {
+      id,
+      label,
+      checked = false,
+      disabled = false,
+      indeterminate = false,
+      required = false,
+      size = 'large',
+      helperText,
+      onChange,
+      ...restProps
+    }: CheckboxProps,
+    ref: CheckboxProps['ref']
+  ) => {
+    const [boxChecked, setChecked] = React.useState(false);
 
-  // Sync checkbox to undelying input component
-  React.useEffect(() => {
-    setChecked(!!checked);
-  }, [checked]);
+    // Sync checkbox to undelying input component
+    React.useEffect(() => {
+      setChecked(!!checked);
+    }, [checked]);
 
-  // Handle onclick, sync with underlying input component
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (disabled) return;
+    // Handle onclick, sync with underlying input component
+    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (disabled) return;
 
-    setChecked(!!event.target.checked);
-    onChange && onChange(event);
-  };
+      setChecked(!!event.target.checked);
+      onChange && onChange(event);
+    };
 
-  // Use Id form props or create randomized string
-  const componentId = id ?? generateRandomString(5);
+    // Use Id form props or create randomized string
+    const componentId = id ?? generateRandomString(5);
 
-  return (
-    <CheckboxComponentWrapper>
-      <FormLabel disabled={disabled} required={required}>
-        <CheckboxWrapper
-          id={componentId}
-          size={size}
-          data-testid='checkbox'
-          disabled={disabled}
-        >
-          {boxChecked && !indeterminate && <MdCheckBox />}
-          {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
-          {indeterminate && <MdIndeterminateCheckBox />}
-        </CheckboxWrapper>
-        <NativeCheckbox
-          id={`checkbox-${componentId}`}
-          aria-labelledby={label && `label-${componentId}`}
-          aria-describedby={helperText && `helper-${componentId}`}
-          type={'checkbox'}
-          checked={boxChecked}
-          onChange={onChangeHandler}
-          {...restProps}
-        />
-        {label}
-      </FormLabel>
-      <CheckboxHelperText size={size} disabled={disabled}>
-        {helperText}
-      </CheckboxHelperText>
-    </CheckboxComponentWrapper>
-  );
-};
+    return (
+      <CheckboxComponentWrapper>
+        <FormLabel disabled={disabled} required={required}>
+          <CheckboxWrapper
+            id={componentId}
+            size={size}
+            data-testid='checkbox'
+            disabled={disabled}
+          >
+            {boxChecked && !indeterminate && <MdCheckBox />}
+            {!boxChecked && !indeterminate && <MdOutlineCheckBoxOutlineBlank />}
+            {indeterminate && <MdIndeterminateCheckBox />}
+          </CheckboxWrapper>
+          <NativeCheckbox
+            id={`checkbox-${componentId}`}
+            aria-labelledby={label && `label-${componentId}`}
+            aria-describedby={helperText && `helper-${componentId}`}
+            type={'checkbox'}
+            checked={boxChecked}
+            onChange={onChangeHandler}
+            ref={ref}
+            {...restProps}
+          />
+          {label}
+        </FormLabel>
+        <CheckboxHelperText size={size} disabled={disabled}>
+          {helperText}
+        </CheckboxHelperText>
+      </CheckboxComponentWrapper>
+    );
+  }
+);

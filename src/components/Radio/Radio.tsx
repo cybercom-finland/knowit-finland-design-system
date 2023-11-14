@@ -133,55 +133,61 @@ const RadioInput = styled.input`
 /**
  * Exported component
  */
-export const Radio = ({
-  id,
-  label,
-  value,
-  disabled = false,
-  required = false,
-  size = 'large',
-  onChange,
-  ...restProps
-}: RadioProps) => {
-  // Use ID form props or create randomized string
-  const componentId = id ?? generateRandomString(5);
+export const Radio = React.forwardRef(
+  (
+    {
+      id,
+      label,
+      value,
+      disabled = false,
+      required = false,
+      size = 'large',
+      onChange,
+      ...restProps
+    }: RadioProps,
+    ref: RadioProps['ref']
+  ) => {
+    // Use ID form props or create randomized string
+    const componentId = id ?? generateRandomString(5);
 
-  const isChecked = function (checked: boolean) {
-    if (checked) {
-      return checked;
-    }
-    return null;
-  };
+    const isChecked = function (checked: boolean) {
+      if (checked) {
+        return checked;
+      }
+      return null;
+    };
 
-  return (
-    <RadioComponentWrapper id={componentId} size={size} data-testid='radio'>
-      <FormLabel disabled={disabled} required={required}>
-        <RadioInput
-          id={`radio-${componentId}`}
-          type='radio'
-          value={value}
-          disabled={disabled}
-          onChange={onChange}
-          {...isChecked}
-          {...restProps}
-        />
-        <RadioSvgButton
-          size={size}
-          preserveAspectRatio='xMidYMid meet'
-          viewBox='0 0 24 24'
-        >
-          <RadioCircle
-            cx='12'
-            cy='12'
-            r='10'
-            fill='none'
-            strokeWidth='2'
+    return (
+      <RadioComponentWrapper id={componentId} size={size} data-testid='radio'>
+        <FormLabel disabled={disabled} required={required}>
+          <RadioInput
+            id={`radio-${componentId}`}
+            type='radio'
+            value={value}
             disabled={disabled}
+            onChange={onChange}
+            ref={ref}
+            {...isChecked}
+            {...restProps}
           />
-          <RadioDot cx='12' cy='12' r='6' disabled={disabled} />
-        </RadioSvgButton>
-        {label}
-      </FormLabel>
-    </RadioComponentWrapper>
-  );
-};
+          <RadioSvgButton
+            size={size}
+            preserveAspectRatio='xMidYMid meet'
+            viewBox='0 0 24 24'
+          >
+            <RadioCircle
+              cx='12'
+              cy='12'
+              r='10'
+              fill='none'
+              strokeWidth='2'
+              disabled={disabled}
+            />
+            <RadioDot cx='12' cy='12' r='6' disabled={disabled} />
+          </RadioSvgButton>
+          {label}
+        </FormLabel>
+      </RadioComponentWrapper>
+    );
+  }
+);

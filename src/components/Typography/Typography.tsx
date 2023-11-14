@@ -3,16 +3,6 @@ import styled, { css } from 'styled-components';
 import { ComponentBaseProps, typography } from '../../shared';
 
 /**
- * Internal properties for styles
- */
-interface TextProps {
-  /**
-   * Alignment of text
-   */
-  align?: 'center' | 'inherit' | 'justify' | 'left' | 'right';
-}
-
-/**
  * Internal component styling
  */
 const StyledTypography = styled(
@@ -52,8 +42,7 @@ const StyledTypography = styled(
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption#attributes
  */
 interface TypographyProps
-  extends TextProps,
-    ComponentBaseProps<HTMLHeadingElement>,
+  extends ComponentBaseProps<HTMLHeadingElement>,
     React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Typography content
@@ -64,17 +53,26 @@ interface TypographyProps
    * Text variant
    */
   variant: 'h1' | 'h2' | 'h3' | 'h4' | 'p1' | 'p2';
+
+  /**
+   * Alignment of text
+   */
+  align?: 'center' | 'inherit' | 'justify' | 'left' | 'right';
 }
 
 /**
  * Exported component
  */
-export const Typography = ({
-  children,
-  variant = 'p1',
-  align = 'left',
-  ...restProps
-}: TypographyProps) => {
-  const props = { variant, align, ...restProps };
-  return <StyledTypography {...props}>{children}</StyledTypography>;
-};
+export const Typography = React.forwardRef(
+  (
+    { children, variant = 'p1', align = 'left', ...restProps }: TypographyProps,
+    ref: TypographyProps['ref']
+  ) => {
+    const props = { variant, align, ...restProps };
+    return (
+      <StyledTypography ref={ref} {...props}>
+        {children}
+      </StyledTypography>
+    );
+  }
+);
