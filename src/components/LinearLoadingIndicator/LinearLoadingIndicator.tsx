@@ -64,10 +64,10 @@ const StyledBar = styled(Bar)`
     props.progress == undefined
       ? 0
       : props.progress < 0
-      ? 0
-      : props.progress > 100
-      ? 100
-      : props.progress}%;
+        ? 0
+        : props.progress > 100
+          ? 100
+          : props.progress}%;
   height: ${linearLoadingIndicatorHeight}px;
   display: inline-block;
   position: relative;

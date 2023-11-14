@@ -45,10 +45,10 @@ const InnerHelperText = styled(({ error, ...props }: HelperTextProps) => (
           color: ${(props) => props.theme.colors.danger.danger800};
         `
       : disabled
-      ? css`
-          color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
-        `
-      : ''}
+        ? css`
+            color: ${(props) => props.theme.colors.grayScale.digitalBlack300};
+          `
+        : ''}
 `;
 
 /**
