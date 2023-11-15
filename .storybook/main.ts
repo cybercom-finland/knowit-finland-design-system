@@ -13,7 +13,10 @@ const config: StorybookConfig = {
   core: {
     builder: '@storybook/builder-vite',
   },
-  framework: '@storybook/react-vite',
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
   docs: {
     autodocs: true,
   },
