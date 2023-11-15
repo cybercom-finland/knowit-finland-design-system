@@ -28,7 +28,7 @@
     "lint:eslint": "eslint --fix src",
     "lint:prettier": "prettier --write \"src/**/*.tsx\" --loglevel warn ",
     "storybook": "storybook dev -p 6006 -s ./",
-    "build-storybook": "storybook build -s public",
+    "build-storybook": "storybook build",
     "test-storybook": "test-storybook",
     "chromatic": "chromatic --exit-zero-on-changes",
     "prepare": "husky install",
