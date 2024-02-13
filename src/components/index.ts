@@ -12,6 +12,7 @@ export * from './FormGroup';
 export * from './HelperText';
 export * from './IconButton';
 export * from './Input';
+export * from './KnowitLogo';
 export * from './Label';
 export * from './LinearLoadingIndicator';
 export * from './Link';
